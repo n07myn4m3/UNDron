@@ -1,0 +1,7 @@
+INFILE=/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Modulos/SPI/SPI_M/build/project_r.ncd
+OUTFILE=/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Modulos/SPI/SPI_M/build/project_r.bit
+FAMILY=Spartan6
+PART=xc6slx16-2csg324
+WORKINGDIR=/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Modulos/SPI/SPI_M/build
+LICENSE=WebPack
+USER_INFO=210656542_0_0_533

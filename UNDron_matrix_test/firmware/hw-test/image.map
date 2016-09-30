@@ -1,0 +1,191 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+isr_table           0x80              soc-hw.o
+tic_msec            0x4               soc-hw.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ram              0x00000000         0x00004000
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00000000                __DYNAMIC = 0x0
+                0x00000000                _RAM_START = 0x0
+                0x00004000                _RAM_SIZE = 0x4000
+                0x00004000                _RAM_END = (_RAM_START + _RAM_SIZE)
+
+.text           0x00000000     0x2490
+                0x00000000                _ftext = .
+ *(.text .stub .text.* .gnu.linkonce.t.*)
+ .text          0x00000000      0x208 crt0ram.o
+                0x00000200                get_gp
+                0x000001f8                get_sp
+                0x00000140                irq_enable
+                0x00000160                irq_get_mask
+                0x00000000                _start
+                0x00000168                jump
+                0x00000158                irq_set_mask
+                0x0000014c                irq_disable
+                0x0000016c                halt
+ .text          0x00000208      0x1a8 main.o
+                0x00000208                main
+ .text          0x000003b0      0x2e0 soc-hw.o
+                0x000004f4                tic_isr
+                0x000005ec                basicIO_init
+                0x000005b4                uart_putstr
+                0x00000454                isr_unregister
+                0x000004b0                nsleep
+                0x0000056c                uart_getchar
+                0x00000568                uart_init
+                0x0000043c                isr_register
+                0x0000066c                basicIO_leds
+                0x0000063c                basicIO_leds_off
+                0x00000610                basicIO_leds_on
+                0x00000418                isr_init
+                0x000003b4                irq_handler
+                0x000003b0                isr_null
+                0x00000520                tic_init
+                0x00000474                msleep
+                0x00000590                uart_putchar
+ .text          0x00000690     0x1e00 softfloat.o
+                0x00000c9c                float32_to_int32_round_to_zero
+                0x0000238c                float32_artan
+                0x00001544                float32_div
+                0x00001254                float32_add
+                0x0000080c                float32_is_signaling_nan
+                0x000007f8                float32_is_nan
+                0x00002004                float32_lt
+                0x00001b8c                float32_sqrt
+                0x000020bc                float32_eq_signaling
+                0x00000d84                float32_round_to_int
+                0x000007e0                float_raise
+                0x00000b5c                float32_to_int32
+                0x0000215c                float32_le_quiet
+                0x000023ec                float32_pow2
+                0x0000186c                float32_rem
+                0x00000b0c                int32_to_float32
+                0x000012cc                float32_mul
+                0x00001e60                float32_eq
+                0x00002264                float32_lt_quiet
+                0x0000235c                float32_abs
+                0x00002408                float32_filterKom
+                0x00001290                float32_sub
+                0x00001f44                float32_le
+                0x00002490                _etext = .
+
+.rodata         0x00002490      0x440
+                0x00002490                . = ALIGN (0x4)
+                0x00002490                _frodata = .
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata        0x00002490      0x440 softfloat.o
+ *(.rodata1)
+                0x000028d0                _erodata = .
+
+.data           0x000028d0       0x14
+                0x000028d0                . = ALIGN (0x4)
+                0x000028d0                _fdata = .
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x000028d0        0x0 crt0ram.o
+ .data          0x000028d0        0x0 main.o
+ .data          0x000028d0       0x14 soc-hw.o
+                0x000028d0                uart0
+                0x000028d4                timer0
+                0x000028d8                gpio0
+                0x000028e0                basicIO0
+                0x000028dc                spi0
+ .data          0x000028e4        0x0 softfloat.o
+ *(.data1)
+                0x000028f0                _gp = ALIGN (0x10)
+ *(.sdata .sdata.* .gnu.linkonce.s.*)
+                0x000028e4                _edata = .
+
+.bss            0x000028e4       0x94
+                0x000028e4                . = ALIGN (0x4)
+                0x000028e4                _fbss = .
+ *(.dynsbss)
+ *(.sbss .sbss.* .gnu.linkonce.sb.*)
+ *(.scommon)
+ *(.dynbss)
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x000028e4        0x0 crt0ram.o
+ .bss           0x000028e4        0x0 main.o
+ .bss           0x000028e4        0x4 soc-hw.o
+ .bss           0x000028e8        0xc softfloat.o
+                0x000028f0                float_detect_tininess
+                0x000028ec                float_exception_flags
+                0x000028e8                float_rounding_mode
+ *(COMMON)
+ COMMON         0x000028f4       0x84 soc-hw.o
+                0x000028f4                isr_table
+                0x00002974                tic_msec
+                0x00002978                _ebss = .
+                0x00002978                _end = .
+                0x00003ffc                PROVIDE (_fstack, 0x3ffc)
+LOAD crt0ram.o
+LOAD main.o
+LOAD soc-hw.o
+LOAD softfloat.o
+OUTPUT(image elf32-lm32)
+
+.debug_abbrev   0x00000000      0x54d
+ .debug_abbrev  0x00000000       0x7a main.o
+ .debug_abbrev  0x0000007a      0x1c4 soc-hw.o
+ .debug_abbrev  0x0000023e      0x30f softfloat.o
+
+.debug_info     0x00000000     0x248a
+ .debug_info    0x00000000       0x8b main.o
+ .debug_info    0x0000008b      0x586 soc-hw.o
+ .debug_info    0x00000611     0x1e79 softfloat.o
+
+.debug_line     0x00000000     0x221a
+ .debug_line    0x00000000      0x1e9 main.o
+ .debug_line    0x000001e9      0x3a7 soc-hw.o
+ .debug_line    0x00000590     0x1c8a softfloat.o
+
+.debug_frame    0x00000000      0x320
+ .debug_frame   0x00000000       0x20 main.o
+ .debug_frame   0x00000020      0x120 soc-hw.o
+ .debug_frame   0x00000140      0x1e0 softfloat.o
+
+.debug_loc      0x00000000     0x2019
+ .debug_loc     0x00000000       0x13 main.o
+ .debug_loc     0x00000013       0xfd soc-hw.o
+ .debug_loc     0x00000110     0x1f09 softfloat.o
+
+.debug_pubnames
+                0x00000000      0x3a3
+ .debug_pubnames
+                0x00000000       0x1b main.o
+ .debug_pubnames
+                0x0000001b      0x16a soc-hw.o
+ .debug_pubnames
+                0x00000185      0x21e softfloat.o
+
+.debug_aranges  0x00000000       0x60
+ .debug_aranges
+                0x00000000       0x20 main.o
+ .debug_aranges
+                0x00000020       0x20 soc-hw.o
+ .debug_aranges
+                0x00000040       0x20 softfloat.o
+
+.debug_str      0x00000000      0x860
+ .debug_str     0x00000000       0x8a main.o
+                                 0xa3 (size before relaxing)
+ .debug_str     0x0000008a      0x1bd soc-hw.o
+                                0x26d (size before relaxing)
+ .debug_str     0x00000247      0x619 softfloat.o
+                                0x6bc (size before relaxing)
+
+.comment        0x00000000       0x36
+ .comment       0x00000000       0x12 main.o
+ .comment       0x00000012       0x12 soc-hw.o
+ .comment       0x00000024       0x12 softfloat.o
+
+.debug_ranges   0x00000000      0xa28
+ .debug_ranges  0x00000000       0x20 soc-hw.o
+ .debug_ranges  0x00000020      0xa08 softfloat.o

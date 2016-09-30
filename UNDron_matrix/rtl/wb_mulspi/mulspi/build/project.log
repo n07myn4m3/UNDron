@@ -1,0 +1,480 @@
+Release 14.6 - xst P.68d (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "project.src"
+Input Format                       : mixed
+
+---- Target Parameters
+Target Device                      : xc6slx16-csg324-2
+Output File Name                   : "project.ngc"
+Output Format                      : NGC
+
+---- Source Options
+Top Module Name                    : spi_master
+
+---- General Options
+Optimization Goal                  : Area
+Optimization Effort                : 1
+RTL Output                         : yes
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Modulos/SPI/SPI_M/spi_master.v" into library work
+Parsing module <spi_master>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating module <spi_master>.
+WARNING:HDLCompiler:413 - "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Modulos/SPI/SPI_M/spi_master.v" Line 92: Result of 32-bit expression is truncated to fit in 17-bit target.
+WARNING:HDLCompiler:413 - "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Modulos/SPI/SPI_M/spi_master.v" Line 109: Result of 19-bit expression is truncated to fit in 18-bit target.
+WARNING:HDLCompiler:413 - "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Modulos/SPI/SPI_M/spi_master.v" Line 126: Result of 32-bit expression is truncated to fit in 18-bit target.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <spi_master>.
+    Related source file is "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Modulos/SPI/SPI_M/spi_master.v".
+        slaves = 4
+        d_width = 8
+        ready = 2'b01
+        execute = 2'b10
+    Found 1-bit register for signal <ss_n<3>>.
+    Found 1-bit register for signal <ss_n<2>>.
+    Found 1-bit register for signal <ss_n<1>>.
+    Found 1-bit register for signal <ss_n<0>>.
+    Found 1-bit register for signal <busy>.
+    Found 8-bit register for signal <rx_data>.
+    Found 2-bit register for signal <state>.
+    Found 1-bit register for signal <state[1]_clk_DFF_6_q>.
+    Found 1-bit register for signal <state[1]_clk_DFF_87>.
+    Found 1-bit register for signal <continue>.
+    Found 32-bit register for signal <slave>.
+    Found 32-bit register for signal <clk_ratio>.
+    Found 32-bit register for signal <count>.
+    Found 1-bit register for signal <sclk>.
+    Found 1-bit register for signal <assert_data>.
+    Found 8-bit register for signal <tx_buffer>.
+    Found 18-bit register for signal <clk_toggles>.
+    Found 17-bit register for signal <last_bit_rx>.
+    Found 8-bit register for signal <rx_buffer>.
+    Found finite state machine <FSM_0> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 2                                              |
+    | Transitions        | 6                                              |
+    | Inputs             | 5                                              |
+    | Outputs            | 2                                              |
+    | Clock              | clk (rising_edge)                              |
+    | Reset              | rst (positive)                                 |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 01                                             |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 7-bit subtractor for signal <GND_1_o_GND_1_o_sub_7_OUT> created at line 92.
+    Found 18-bit subtractor for signal <GND_1_o_GND_1_o_sub_35_OUT> created at line 126.
+    Found 6-bit adder for signal <n0216[5:0]> created at line 92.
+    Found 18-bit adder for signal <clk_toggles[17]_GND_1_o_add_18_OUT> created at line 109.
+    Found 18-bit adder for signal <n0199> created at line 115.
+    Found 32-bit adder for signal <n0164> created at line 126.
+    Found 32-bit adder for signal <count[31]_GND_1_o_add_44_OUT> created at line 148.
+    Found 1-bit 4-to-1 multiplexer for signal <slave[1]_ss_n[3]_Mux_21_o> created at line 111.
+    Found 1-bit tristate buffer for signal <mosi> created at line 58
+    Found 32-bit comparator lessequal for signal <addr[31]_GND_1_o_LessThan_1_o> created at line 76
+    Found 32-bit comparator lessequal for signal <n0016> created at line 102
+    Found 32-bit comparator equal for signal <count[31]_clk_ratio[31]_equal_17_o> created at line 103
+    Found 18-bit comparator lessequal for signal <n0031> created at line 111
+    Found 18-bit comparator greater for signal <clk_toggles[17]_BUS_0003_LessThan_26_o> created at line 115
+    Found 18-bit comparator greater for signal <clk_toggles[17]_GND_1_o_LessThan_31_o> created at line 119
+    Found 18-bit comparator equal for signal <clk_toggles[17]_GND_1_o_equal_33_o> created at line 124
+    Summary:
+	inferred   7 Adder/Subtractor(s).
+	inferred 165 D-type flip-flop(s).
+	inferred   7 Comparator(s).
+	inferred  29 Multiplexer(s).
+	inferred   1 Tristate(s).
+	inferred   1 Finite State Machine(s).
+Unit <spi_master> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 7
+ 18-bit adder                                          : 2
+ 18-bit subtractor                                     : 1
+ 32-bit adder                                          : 2
+ 6-bit adder                                           : 1
+ 7-bit subtractor                                      : 1
+# Registers                                            : 18
+ 1-bit register                                        : 10
+ 17-bit register                                       : 1
+ 18-bit register                                       : 1
+ 32-bit register                                       : 3
+ 8-bit register                                        : 3
+# Comparators                                          : 7
+ 18-bit comparator equal                               : 1
+ 18-bit comparator greater                             : 2
+ 18-bit comparator lessequal                           : 1
+ 32-bit comparator equal                               : 1
+ 32-bit comparator lessequal                           : 2
+# Multiplexers                                         : 29
+ 1-bit 2-to-1 multiplexer                              : 15
+ 1-bit 4-to-1 multiplexer                              : 1
+ 18-bit 2-to-1 multiplexer                             : 4
+ 32-bit 2-to-1 multiplexer                             : 3
+ 4-bit 2-to-1 multiplexer                              : 2
+ 8-bit 2-to-1 multiplexer                              : 4
+# Tristates                                            : 1
+ 1-bit tristate buffer                                 : 1
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 5
+ 18-bit adder                                          : 3
+ 32-bit adder                                          : 1
+ 7-bit adder                                           : 1
+# Registers                                            : 165
+ Flip-Flops                                            : 165
+# Comparators                                          : 7
+ 18-bit comparator equal                               : 1
+ 18-bit comparator greater                             : 2
+ 18-bit comparator lessequal                           : 1
+ 32-bit comparator equal                               : 1
+ 32-bit comparator lessequal                           : 2
+# Multiplexers                                         : 29
+ 1-bit 2-to-1 multiplexer                              : 15
+ 1-bit 4-to-1 multiplexer                              : 1
+ 18-bit 2-to-1 multiplexer                             : 4
+ 32-bit 2-to-1 multiplexer                             : 3
+ 4-bit 2-to-1 multiplexer                              : 2
+ 8-bit 2-to-1 multiplexer                              : 4
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+INFO:Xst:2261 - The FF/Latch <last_bit_rx_6> in Unit <spi_master> is equivalent to the following 10 FFs/Latches, which will be removed : <last_bit_rx_7> <last_bit_rx_8> <last_bit_rx_9> <last_bit_rx_10> <last_bit_rx_11> <last_bit_rx_12> <last_bit_rx_13> <last_bit_rx_14> <last_bit_rx_15> <last_bit_rx_16> 
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <state[1:1]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ 01    | 0
+ 10    | 1
+-------------------
+WARNING:Xst:1293 - FF/Latch <last_bit_rx_5> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <last_bit_rx_6> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <last_bit_rx_0> in Unit <spi_master> is equivalent to the following 3 FFs/Latches, which will be removed : <last_bit_rx_1> <last_bit_rx_2> <last_bit_rx_3> 
+WARNING:Xst:2041 - Unit spi_master: 1 internal tristate is replaced by logic (pull-up yes): N7.
+
+Optimizing unit <spi_master> ...
+WARNING:Xst:1293 - FF/Latch <slave_31> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_30> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_29> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_28> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_27> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_26> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_25> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_24> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_23> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_22> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_21> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_20> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_19> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_18> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_17> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_16> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_15> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_14> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_13> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_12> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_11> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_10> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_9> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_8> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_7> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_6> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_5> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_4> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_3> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <slave_2> has a constant value of 0 in block <spi_master>. This FF/Latch will be trimmed during the optimization process.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 0) on block spi_master, actual ratio is 3.
+FlipFlop ss_n_3 has been replicated 1 time(s) to handle iob=true attribute.
+FlipFlop ss_n_2 has been replicated 1 time(s) to handle iob=true attribute.
+FlipFlop ss_n_1 has been replicated 1 time(s) to handle iob=true attribute.
+FlipFlop ss_n_0 has been replicated 1 time(s) to handle iob=true attribute.
+FlipFlop sclk has been replicated 1 time(s) to handle iob=true attribute.
+FlipFlop mosi has been replicated 1 time(s) to handle iob=true attribute.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 127
+ Flip-Flops                                            : 127
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : project.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 339
+#      GND                         : 1
+#      INV                         : 7
+#      LUT1                        : 49
+#      LUT2                        : 6
+#      LUT3                        : 11
+#      LUT4                        : 17
+#      LUT5                        : 38
+#      LUT6                        : 77
+#      MUXCY                       : 82
+#      VCC                         : 1
+#      XORCY                       : 50
+# FlipFlops/Latches                : 127
+#      FDC                         : 3
+#      FDCE                        : 9
+#      FDE                         : 104
+#      FDP                         : 9
+#      FDRE                        : 2
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 93
+#      IBUF                        : 78
+#      OBUF                        : 14
+#      OBUFT                       : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx16csg324-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             109  out of  18224     0%  
+ Number of Slice LUTs:                  205  out of   9112     2%  
+    Number used as Logic:               205  out of   9112     2%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    227
+   Number with an unused Flip Flop:     118  out of    227    51%  
+   Number with an unused LUT:            22  out of    227     9%  
+   Number of fully used LUT-FF pairs:    87  out of    227    38%  
+   Number of unique control sets:         7
+
+IO Utilization: 
+ Number of IOs:                          94
+ Number of bonded IOBs:                  94  out of    232    40%  
+    IOB Flip Flops/Latches:              18
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clk                                | BUFGP                  | 127   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 6.925ns (Maximum Frequency: 144.404MHz)
+   Minimum input arrival time before clock: 6.590ns
+   Maximum output required time after clock: 5.098ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 6.925ns (frequency: 144.404MHz)
+  Total number of paths / destination ports: 13260 / 145
+-------------------------------------------------------------------------
+Delay:               6.925ns (Levels of Logic = 5)
+  Source:            clk_toggles_16 (FF)
+  Destination:       clk_toggles_0 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: clk_toggles_16 to clk_toggles_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              7   0.525   1.365  clk_toggles_16 (clk_toggles_16)
+     LUT6:I0->O            1   0.254   0.790  GND_1_o_GND_1_o_equal_40_o<17>12 (GND_1_o_GND_1_o_equal_40_o<17>12)
+     LUT3:I1->O            2   0.250   0.726  GND_1_o_GND_1_o_equal_40_o<17>13 (GND_1_o_GND_1_o_equal_40_o<17>1)
+     LUT6:I5->O            8   0.254   0.944  GND_1_o_GND_1_o_equal_40_o<17>2 (GND_1_o_GND_1_o_equal_40_o)
+     LUT5:I4->O           18   0.254   1.235  state[1]_clk_toggles[17]_select_65_OUT<4>31 (state[1]_clk_toggles[17]_select_65_OUT<4>3)
+     LUT6:I5->O            1   0.254   0.000  state[1]_clk_toggles[17]_select_65_OUT<1>1 (state[1]_clk_toggles[17]_select_65_OUT<1>)
+     FDE:D                     0.074          clk_toggles_1
+    ----------------------------------------
+    Total                      6.925ns (1.865ns logic, 5.060ns route)
+                                       (26.9% logic, 73.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 569 / 250
+-------------------------------------------------------------------------
+Offset:              6.590ns (Levels of Logic = 9)
+  Source:            addr<3> (PAD)
+  Destination:       slave_0 (FF)
+  Destination Clock: clk rising
+
+  Data Path: addr<3> to slave_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             2   1.328   1.156  addr_3_IBUF (addr_3_IBUF)
+     LUT5:I0->O            1   0.254   0.000  Mcompar__n0238_lut<0> (Mcompar__n0238_lut<0>)
+     MUXCY:S->O            1   0.215   0.000  Mcompar__n0238_cy<0> (Mcompar__n0238_cy<0>)
+     MUXCY:CI->O           1   0.023   0.000  Mcompar__n0238_cy<1> (Mcompar__n0238_cy<1>)
+     MUXCY:CI->O           1   0.023   0.000  Mcompar__n0238_cy<2> (Mcompar__n0238_cy<2>)
+     MUXCY:CI->O           1   0.023   0.000  Mcompar__n0238_cy<3> (Mcompar__n0238_cy<3>)
+     MUXCY:CI->O           1   0.235   0.682  Mcompar__n0238_cy<4> (Mcompar__n0238_cy<4>)
+     LUT6:I5->O            1   0.254   0.958  Mcompar__n0238_cy<5> (_n0238)
+     LUT4:I0->O            2   0.254   0.725  _n02441 (_n0244)
+     FDRE:R                    0.459          slave_0
+    ----------------------------------------
+    Total                      6.590ns (3.069ns logic, 3.521ns route)
+                                       (46.6% logic, 53.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 16 / 15
+-------------------------------------------------------------------------
+Offset:              5.098ns (Levels of Logic = 2)
+  Source:            state[1]_clk_DFF_87 (FF)
+  Destination:       mosi (PAD)
+  Source Clock:      clk rising
+
+  Data Path: state[1]_clk_DFF_87 to mosi
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             2   0.525   0.725  state[1]_clk_DFF_87 (state[1]_clk_DFF_87)
+     INV:I->O              1   0.255   0.681  state[1]_clk_DFF_87_inv1_INV_0 (state[1]_clk_DFF_87_inv)
+     OBUFT:T->O                2.912          mosi_OBUFT (mosi)
+    ----------------------------------------
+    Total                      5.098ns (3.692ns logic, 1.406ns route)
+                                       (72.4% logic, 27.6% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |    6.925|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 26.00 secs
+Total CPU time to Xst completion: 21.24 secs
+ 
+--> 
+
+
+Total memory usage is 382528 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   36 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
+
