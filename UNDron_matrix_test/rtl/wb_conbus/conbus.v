@@ -1,6 +1,16 @@
 /* -----------------------------------------------------
    CONBUS DE PRUEBAS
    -----------------------------------------------------
+	██╗   ██╗███╗   ██╗██████╗ ██████╗  ██████╗ ███╗   ██╗    
+	██║   ██║████╗  ██║██╔══██╗██╔══██╗██╔═══██╗████╗  ██║    
+	██║   ██║██╔██╗ ██║██║  ██║██████╔╝██║   ██║██╔██╗ ██║    
+	██║   ██║██║╚██╗██║██║  ██║██╔══██╗██║   ██║██║╚██╗██║    
+	╚██████╔╝██║ ╚████║██████╔╝██║  ██║╚██████╔╝██║ ╚████║    
+	 ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    
+   Convenciones
+   * lin_mod_slv = Linea que debe ser modificada para agregar un esclavo    
+   * lin_mod_mst = Linea que debe ser modificada para agregar un maestro                                                       
+   -----------------------------------------------------
  * Wishbone Arbiter and Address Decoder
  * Copyright (C) 2008, 2009, 2010 Sebastien Bourdeauducq
  * Copyright (C) 2000 Johny Chi - chisuhua@yahoo.com.cn
@@ -201,11 +211,11 @@ module conbus #(
 // + cyc + we + stb
 `define mbusw_ls  32 + 3 + 32 + 4 + 3
 
-wire [5:0] slave_sel;
-wire [5:0] gnt;
+wire [7:0] slave_sel;           //lin_mod_slv
+wire [5:0] gnt;                 //lin_mod_mst
 wire [`mbusw_ls -1:0] i_bus_m;	// internal shared bus, master data and control to slave
-wire [31:0] i_dat_s;		// internal shared bus, slave data to master
-wire i_bus_ack;			// internal shared bus, ack signal
+wire [31:0] i_dat_s;		    // internal shared bus, slave data to master
+wire i_bus_ack;			        // internal shared bus, ack signal
 
 // master 0
 assign m0_dat_o = i_dat_s;
@@ -231,7 +241,7 @@ assign m4_ack_o = i_bus_ack & gnt[4];
 assign m5_dat_o = i_dat_s;
 assign m5_ack_o = i_bus_ack & gnt[5];
 
-assign i_bus_ack = s0_ack_i | s1_ack_i | s2_ack_i | s3_ack_i | s4_ack_i | s5_ack_i;
+assign i_bus_ack = s0_ack_i | s1_ack_i | s2_ack_i | s3_ack_i | s4_ack_i | s6_ack_i  | s7_ack_i; //lin_mod_slv
 
 // slave 0
 assign {s0_adr_o, s0_cti_o, s0_sel_o, s0_dat_o, s0_we_o, s0_cyc_o} = i_bus_m[`mbusw_ls -1:1];
@@ -257,13 +267,21 @@ assign s4_stb_o = i_bus_m[1] & i_bus_m[0] & slave_sel[4];
 assign {s5_adr_o, s5_cti_o, s5_sel_o, s5_dat_o, s5_we_o, s5_cyc_o} = i_bus_m[`mbusw_ls -1:1];
 assign s5_stb_o = i_bus_m[1] & i_bus_m[0] & slave_sel[5];
 
+// slave 6
+assign {s6_adr_o, s6_cti_o, s6_sel_o, s6_dat_o, s6_we_o, s6_cyc_o} = i_bus_m[`mbusw_ls -1:1];
+assign s6_stb_o = i_bus_m[1] & i_bus_m[0] & slave_sel[6];
+
+// slave 7
+assign {s7_adr_o, s7_cti_o, s7_sel_o, s7_dat_o, s7_we_o, s7_cyc_o} = i_bus_m[`mbusw_ls -1:1];
+assign s7_stb_o = i_bus_m[1] & i_bus_m[0] & slave_sel[7];
+
 assign i_bus_m =
 	 ({`mbusw_ls{gnt[0]}} & {m0_adr_i, m0_cti_i, m0_sel_i, m0_dat_i, m0_we_i, m0_cyc_i, m0_stb_i})
 	|({`mbusw_ls{gnt[1]}} & {m1_adr_i, m1_cti_i, m1_sel_i, m1_dat_i, m1_we_i, m1_cyc_i, m1_stb_i})
 	|({`mbusw_ls{gnt[2]}} & {m2_adr_i, m2_cti_i, m2_sel_i, m2_dat_i, m2_we_i, m2_cyc_i, m2_stb_i})
 	|({`mbusw_ls{gnt[3]}} & {m3_adr_i, m3_cti_i, m3_sel_i, m3_dat_i, m3_we_i, m3_cyc_i, m3_stb_i})
-	|({`mbusw_ls{gnt[4]}} & {m4_adr_i, m4_cti_i, m4_sel_i, m4_dat_i, m4_we_i, m4_cyc_i, m4_stb_i})
-	|({`mbusw_ls{gnt[5]}} & {m5_adr_i, m5_cti_i, m5_sel_i, m5_dat_i, m5_we_i, m5_cyc_i, m5_stb_i});
+	|({`mbusw_ls{gnt[4]}} & {m4_adr_i, m4_cti_i, m4_sel_i, m4_dat_i, m4_we_i, m4_cyc_i, m4_stb_i}) 
+	|({`mbusw_ls{gnt[5]}} & {m5_adr_i, m5_cti_i, m5_sel_i, m5_dat_i, m5_we_i, m5_cyc_i, m5_stb_i}); //lin_mod_mst
 
 assign i_dat_s =
 		 ({32{slave_sel[ 0]}} & s0_dat_i)
@@ -271,7 +289,9 @@ assign i_dat_s =
 		|({32{slave_sel[ 2]}} & s2_dat_i)
 		|({32{slave_sel[ 3]}} & s3_dat_i)
 		|({32{slave_sel[ 4]}} & s4_dat_i)
-		|({32{slave_sel[ 5]}} & s5_dat_i);
+		|({32{slave_sel[ 5]}} & s5_dat_i)
+		|({32{slave_sel[ 6]}} & s6_dat_i)
+		|({32{slave_sel[ 7]}} & s7_dat_i); //lin_mod_slv
 
 wire [5:0] req = {m5_cyc_i, m4_cyc_i, m3_cyc_i, m2_cyc_i, m1_cyc_i, m0_cyc_i};
 
@@ -288,5 +308,7 @@ assign slave_sel[2] = (i_bus_m[`mbusw_ls-1 : `mbusw_ls-s_addr_w] == s2_addr);
 assign slave_sel[3] = (i_bus_m[`mbusw_ls-1 : `mbusw_ls-s_addr_w] == s3_addr);
 assign slave_sel[4] = (i_bus_m[`mbusw_ls-1 : `mbusw_ls-s_addr_w] == s4_addr);
 assign slave_sel[5] = (i_bus_m[`mbusw_ls-1 : `mbusw_ls-s_addr_w] == s5_addr);
+assign slave_sel[6] = (i_bus_m[`mbusw_ls-1 : `mbusw_ls-s_addr_w] == s6_addr);
+assign slave_sel[7] = (i_bus_m[`mbusw_ls-1 : `mbusw_ls-s_addr_w] == s7_addr); //lin_mod_slv
 
 endmodule

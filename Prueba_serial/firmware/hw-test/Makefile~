@@ -1,8 +1,7 @@
-LM32_PATH=/opt/lm32
-LM32_CC=LD_LIBRARY_PATH=$(LM32_PATH)/lib $(LM32_PATH)/bin/lm32-elf-gcc
-LM32_LD=$(LM32_PATH)/bin/lm32-elf-ld
-LM32_OBJCOPY=$(LM32_PATH)/bin/lm32-elf-objcopy
-LM32_OBJDUMP=$(LM32_PATH)/bin/lm32-elf-objdump
+LM32_CC=lm32-linux-gcc
+LM32_LD=lm32-linux-ld
+LM32_OBJCOPY=lm32-linux-objcopy
+LM32_OBJDUMP=lm32-linux-objdump
 
 SREC2VRAM ?= ../../tools/srec2vram/srec2vram
 VRAMFILE=image.ram

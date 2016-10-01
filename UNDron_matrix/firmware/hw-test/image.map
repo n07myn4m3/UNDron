@@ -173,13 +173,13 @@ OUTPUT(image elf32-lm32)
  .debug_aranges
                 0x00000040       0x20 softfloat.o
 
-.debug_str      0x00000000      0x860
- .debug_str     0x00000000       0x8a main.o
-                                 0xa3 (size before relaxing)
- .debug_str     0x0000008a      0x1bd soc-hw.o
-                                0x26d (size before relaxing)
- .debug_str     0x00000247      0x619 softfloat.o
-                                0x6bc (size before relaxing)
+.debug_str      0x00000000      0x859
+ .debug_str     0x00000000       0x83 main.o
+                                 0x9c (size before relaxing)
+ .debug_str     0x00000083      0x1bd soc-hw.o
+                                0x266 (size before relaxing)
+ .debug_str     0x00000240      0x619 softfloat.o
+                                0x6b5 (size before relaxing)
 
 .comment        0x00000000       0x36
  .comment       0x00000000       0x12 main.o
