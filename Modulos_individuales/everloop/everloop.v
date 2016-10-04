@@ -1,16 +1,3 @@
-/* -----------------------------------------------------
-   Modulo everloop
-   -----------------------------------------------------  
-
-   CONVENCIONES      
-   * clk: Entrada de reloj del modulo. 
-   * rst: Entrada reset del modulo.
-   * data_RGB: entrada para la lemoria RAM donde se indica la 
-     informacion de los colores. 
-   * everloop_d: Salida hacia el everloop.
-   * address: Sirve para notificar a la memoria ram cual sera 
-     siguiente direccion de lectura.
-*/
 module everloop (
   input clk,rst,
   // Memory signals
@@ -19,18 +6,6 @@ module everloop (
   // Led control signal
   output reg everloop_d
 );
-
-/*
-                          ____________
- clk            -------->|            |--------> everloop_d                         
- rst            -------->|            |--------> address                       
-                         |            |                                        
-                         |  everloop  |
-                         |            |
-                         |            |
- data_RGB       -------->|____________|
-
-*/
 
 reg [14:0]clk_cnt;
 
