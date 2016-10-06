@@ -8,9 +8,7 @@
 	╚██████╔╝██║ ╚████║██████╔╝██║  ██║╚██████╔╝██║ ╚████║    
 	 ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝  
    DESCRIPCIÓN DE LOS REGISTROS
-   0x00 BasicIO_Leds
-   0x04 BasicIO_Switches
-   0x08 BasicIO_Buttons  
+   0x00 everloop_ram
 
    FUNCIONAMIENTO
    * La direccion adr_a de la memoria RAM depende de la direccion escrita presente en el wishbone
@@ -70,7 +68,7 @@ wire wr_fallingedge = (swr[2:1]==2'b10);
 everloop everloop0(
   .clk(clk),
   .rst(reset),
-  .address(adr_b),  // Se conecta a la memoria RAM de doble puerto 
+  .address(adr_b),           // Se conecta a la memoria RAM de doble puerto 
   .data_RGB(data_b),
   .everloop_d(led_ctl)
 );
@@ -86,7 +84,7 @@ everloop_ram #(
   .dat_a(data_a[7:0]),
   .we_a (wb_wr | add_adr_a), // Solo escribe si el wishbone esta en modo de escritura y si el habilitador esta disponible
   .clk_b(clk),
-  .en_b (1'b1), //Por defecto se dejo habilitado la lectura de la memoria RAM
+  .en_b (1'b1),              //Por defecto se dejo habilitado la lectura de la memoria RAM
   .adr_b(adr_b),
   .dat_b(data_b)	
 );
