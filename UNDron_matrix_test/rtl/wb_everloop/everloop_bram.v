@@ -23,6 +23,10 @@
    CONVENCIONES      
    * --- 
    * ---
+   INDICADORES
+   * PENDIENTE: Situacion que debe revisarse y completarse.
+   * PROBLEMA:  Situacion que genera conflicto y debe corregirse.
+   * NPI:       Declaracion que no se conoce.
  * Copyright 2016 <Admobilize>
  * MATRIX Labs  [http://creator.matrix.one]
  * This file is part of MATRIX Creator HDL for Spartan 6

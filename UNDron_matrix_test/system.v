@@ -1,8 +1,21 @@
-//---------------------------------------------------------------------------
-// LatticeMico32 System On A Chip
-//
-// 
-//---------------------------------------------------------------------------
+/*---------------------------------------------------------------------------
+
+	██╗   ██╗███╗   ██╗██████╗ ██████╗  ██████╗ ███╗   ██╗    
+	██║   ██║████╗  ██║██╔══██╗██╔══██╗██╔═══██╗████╗  ██║    
+	██║   ██║██╔██╗ ██║██║  ██║██████╔╝██║   ██║██╔██╗ ██║    
+	██║   ██║██║╚██╗██║██║  ██║██╔══██╗██║   ██║██║╚██╗██║    
+	╚██████╔╝██║ ╚████║██████╔╝██║  ██║╚██████╔╝██║ ╚████║    
+	 ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    
+
+	LatticeMico32 System On A Chip
+
+	Top Level Design for the matrix creator spartan 6
+
+   INDICADORES
+   * PENDIENTE: Situacion que debe revisarse y completarse.
+   * PROBLEMA:  Situacion que genera conflicto y debe corregirse.
+   * NPI:       Declaracion que no se conoce.
+---------------------------------------------------------------------------*/
 
 module system
 #(
@@ -28,7 +41,8 @@ module system
 	// 12c
 //	inout             i2c_sda, 
 //	inout             i2c_scl
-	
+	// everloop
+	// PENDIENTE: Debe indicarse los pines de salida
 
 );
 
@@ -55,7 +69,9 @@ wire [31:0]  lm32i_adr,
              gpio0_adr,
              ddr0_adr,
              bram0_adr,
-             sram0_adr;
+             sram0_adr,
+             // EVERLOOP
+             everloop0_adr; 
 
 
 wire [31:0]  lm32i_dat_r,
@@ -77,7 +93,10 @@ wire [31:0]  lm32i_dat_r,
              sram0_dat_w,
              sram0_dat_r,
              ddr0_dat_w,
-             ddr0_dat_r;
+             ddr0_dat_r,
+             // EVERLOOP
+             everloop0_dat_r,
+             everloop0_dat_w;
 
 wire [3:0]   lm32i_sel,
              lm32d_sel,
@@ -88,7 +107,9 @@ wire [3:0]   lm32i_sel,
              gpio0_sel,
              bram0_sel,
              sram0_sel,
-             ddr0_sel;
+             ddr0_sel,
+             // EVERLOOP
+             everloop0_sel;
 
 wire         lm32i_we,
              lm32d_we,
@@ -99,7 +120,9 @@ wire         lm32i_we,
              gpio0_we,
              bram0_we,
              sram0_we,
-             ddr0_we;
+             ddr0_we,
+             // EVERLOOP
+             everloop0_we;
 
 
 wire         lm32i_cyc,
@@ -111,7 +134,9 @@ wire         lm32i_cyc,
              gpio0_cyc,
              bram0_cyc,
              sram0_cyc,
-             ddr0_cyc;
+             ddr0_cyc,
+             // EVERLOOP
+             everloop0_cyc;
 
 
 wire         lm32i_stb,
@@ -123,7 +148,9 @@ wire         lm32i_stb,
              gpio0_stb,
              bram0_stb,
              sram0_stb,
-             ddr0_stb;
+             ddr0_stb,
+             // EVERLOOP
+             everloop0_stb;
 
 wire         lm32i_ack,
              lm32d_ack,
@@ -134,7 +161,9 @@ wire         lm32i_ack,
              gpio0_ack,
              bram0_ack,
              sram0_ack,
-             ddr0_ack;
+             ddr0_ack,
+             // EVERLOOP
+             everloop0_ack;
 
 
 wire         lm32i_rty,
@@ -173,6 +202,7 @@ conbus #(
 	.s3_addr(4'h4), // gpio     0x40000000 
 	.s4_addr(4'h5), // spi      0x50000000 
 	.s5_addr(4'h6)  // i2c      0x60000000 
+	.s6_addr(4'h7)  // everloop 0x70000000 // PENDIENTE
 ) conbus0(
 	.sys_clk( clk ),
 	.sys_rst( ~rst ),
