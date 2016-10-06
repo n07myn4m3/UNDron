@@ -43,24 +43,21 @@
 
 module everloop_ram #(
   parameter mem_file_name = "none",
-  parameter adr_width = 7,
-  parameter dat_width = 7
+	parameter adr_width = 7,
+	parameter dat_width = 7
 ) (
-  // Write port a: Este es el empleado por el wishbone
-  input             clk_a,  
-  input             en_a,   
-  input      [9:0]  adr_a, 
-  input      [7:0]  dat_a,  
-  input             we_a,
-  output reg [7:0]  dat_a_out, // Al parecer no se usa, CORREGIR
-  // Read port b: Este es el empleado por el everloop
-  input             clk_b,
-  input             en_b,
-  input      [9:0]  adr_b,
-  output reg [7:0]  dat_b,
-  output reg        ack_b,
-
-
+	// Write port a: Este es el empleado por el wishbone 
+	input      clk_a,
+	input      we_a,
+	input      en_a,
+	input      [9:0] adr_a,
+	input 	   [7:0] dat_a,
+	output reg [7:0] dat_a_out, // Al parecer no se usa, CORREGIR
+	// Read port b: Este es el empleado por el everloop
+	input      clk_b,
+	input      en_b,
+	input      [7:0] adr_b,
+	output reg [7:0] dat_b
 );
 
 /*
@@ -86,10 +83,8 @@ reg [dat_width-1:0] ram [0:depth-1];
 //------------------------------------------------------------------
 always @(posedge clk_b)
 begin
-  ack_b <= 0;
-  if (en_b)  
-  ack_b <= 1'b1;
-  dat_b <= ram[adr_b];
+  if (en_b)
+    dat_b <= ram[adr_b];
 end
 
 //------------------------------------------------------------------
@@ -98,7 +93,7 @@ end
 always @(posedge clk_a)
 begin
   if (en_a) begin
-    if (we_a) begin  //Parece ser una habilitacion del wishbone
+    if (we_a) begin
       ram[adr_a] <= dat_a;
     end 
   end 
@@ -108,8 +103,7 @@ end
 //------------------------------------------------------------------
 initial 
 begin
-  if (mem_file_name != "none")
-  begin
+  if (mem_file_name != "none") begin
     $readmemh(mem_file_name, ram);
   end
 end

@@ -37,7 +37,7 @@ module wb_everloop#(
 
    // Everloop interface
    output led_ctl, // Es la salida que va conectada al everloop fisico
-   input  led_fb,  // Esta entrada no es utilizada NPI
+   //input  led_fb,  // Esta entrada no es utilizada NPI
 );
 
 reg  ack;

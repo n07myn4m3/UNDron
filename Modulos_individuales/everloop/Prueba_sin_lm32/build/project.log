@@ -66,11 +66,6 @@ WARNING:HDLCompiler:1016 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modul
 Elaborating module <led_test>.
 
 Elaborating module <everloop>.
-WARNING:HDLCompiler:413 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 145: Result of 5-bit expression is truncated to fit in 4-bit target.
-WARNING:HDLCompiler:413 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 165: Result of 9-bit expression is truncated to fit in 8-bit target.
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 66: Assignment to start_send ignored, since the identifier is never used
-WARNING:HDLCompiler:413 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 280: Result of 17-bit expression is truncated to fit in 16-bit target.
-WARNING:HDLCompiler:413 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 293: Result of 17-bit expression is truncated to fit in 16-bit target.
 WARNING:HDLCompiler:189 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/led_test.v" Line 27: Size mismatch in connection of port <address>. Formal port size is 8-bit while actual signal size is 11-bit.
 
 Elaborating module <everloop_ram(adr_width=11,dat_width=8,mem_file_name="image.ram")>.
@@ -92,7 +87,7 @@ Unit <led_test> synthesized.
 
 Synthesizing Unit <everloop>.
     Related source file is "/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v".
-        input_clk_MHz = 50
+        input_clk_MHz = 5
         INIT = 4'b0000
         LD_DATA = 4'b0001
         CHECK = 4'b0010
@@ -115,10 +110,10 @@ Synthesizing Unit <everloop>.
     Found 4-bit register for signal <state>.
     Found 1-bit register for signal <finish_send>.
     Found 2-bit register for signal <send_state>.
-    Found 16-bit register for signal <clk_cnt>.
+    Found 12-bit register for signal <clk_cnt>.
     Found 1-bit register for signal <everloop_d>.
-    Found 9-bit register for signal <ones_count>.
-    Found 16-bit register for signal <zeros_count>.
+    Found 5-bit register for signal <ones_count>.
+    Found 12-bit register for signal <zeros_count>.
     Found 1-bit register for signal <send_hi>.
     Found finite state machine <FSM_0> for signal <state>.
     -----------------------------------------------------------------------
@@ -147,15 +142,15 @@ Synthesizing Unit <everloop>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 4-bit adder for signal <bit_count[3]_GND_2_o_add_2_OUT> created at line 145.
-    Found 8-bit adder for signal <address[7]_GND_2_o_add_7_OUT> created at line 165.
-    Found 16-bit adder for signal <clk_cnt[15]_GND_2_o_add_42_OUT> created at line 293.
-    Found 16-bit 4-to-1 multiplexer for signal <send_state[1]_GND_2_o_wide_mux_49_OUT> created at line 246.
-    Found 16-bit comparator equal for signal <clk_cnt[15]_GND_2_o_equal_40_o> created at line 281
-    Found 16-bit comparator equal for signal <clk_cnt[15]_zeros_count[15]_equal_44_o> created at line 294
+    Found 4-bit adder for signal <bit_count[3]_GND_2_o_add_2_OUT> created at line 137.
+    Found 8-bit adder for signal <address[7]_GND_2_o_add_7_OUT> created at line 156.
+    Found 12-bit adder for signal <clk_cnt[11]_GND_2_o_add_42_OUT> created at line 280.
+    Found 12-bit 4-to-1 multiplexer for signal <send_state[1]_GND_2_o_wide_mux_49_OUT> created at line 233.
+    Found 12-bit comparator equal for signal <clk_cnt[11]_GND_2_o_equal_40_o> created at line 268
+    Found 12-bit comparator equal for signal <clk_cnt[11]_zeros_count[11]_equal_44_o> created at line 281
     Summary:
 	inferred   3 Adder/Subtractor(s).
-	inferred  66 D-type flip-flop(s).
+	inferred  54 D-type flip-flop(s).
 	inferred   2 Comparator(s).
 	inferred  10 Multiplexer(s).
 	inferred   2 Finite State Machine(s).
@@ -181,20 +176,20 @@ Macro Statistics
 # RAMs                                                 : 1
  2048x8-bit dual-port RAM                              : 1
 # Adders/Subtractors                                   : 3
- 16-bit adder                                          : 1
+ 12-bit adder                                          : 1
  4-bit adder                                           : 1
  8-bit adder                                           : 1
 # Registers                                            : 12
  1-bit register                                        : 5
- 16-bit register                                       : 2
+ 12-bit register                                       : 2
  4-bit register                                        : 1
+ 5-bit register                                        : 1
  8-bit register                                        : 3
- 9-bit register                                        : 1
 # Comparators                                          : 2
- 16-bit comparator equal                               : 2
+ 12-bit comparator equal                               : 2
 # Multiplexers                                         : 10
- 16-bit 2-to-1 multiplexer                             : 2
- 16-bit 4-to-1 multiplexer                             : 1
+ 12-bit 2-to-1 multiplexer                             : 2
+ 12-bit 4-to-1 multiplexer                             : 1
  4-bit 2-to-1 multiplexer                              : 2
  8-bit 2-to-1 multiplexer                              : 5
 # FSMs                                                 : 2
@@ -205,12 +200,10 @@ Macro Statistics
 *                       Advanced HDL Synthesis                          *
 =========================================================================
 
-INFO:Xst:2261 - The FF/Latch <ones_count_3> in Unit <everloop0> is equivalent to the following 2 FFs/Latches, which will be removed : <ones_count_5> <ones_count_8> 
-INFO:Xst:2261 - The FF/Latch <zeros_count_9> in Unit <everloop0> is equivalent to the following 4 FFs/Latches, which will be removed : <zeros_count_10> <zeros_count_11> <zeros_count_12> <zeros_count_15> 
-INFO:Xst:2261 - The FF/Latch <zeros_count_6> in Unit <everloop0> is equivalent to the following 4 FFs/Latches, which will be removed : <zeros_count_7> <ones_count_1> <ones_count_4> <ones_count_7> 
-INFO:Xst:2261 - The FF/Latch <zeros_count_0> in Unit <everloop0> is equivalent to the following 5 FFs/Latches, which will be removed : <zeros_count_4> <zeros_count_13> <zeros_count_14> <ones_count_0> <ones_count_6> 
-INFO:Xst:2261 - The FF/Latch <zeros_count_2> in Unit <everloop0> is equivalent to the following 2 FFs/Latches, which will be removed : <zeros_count_3> <zeros_count_5> 
-WARNING:Xst:1710 - FF/Latch <zeros_count_0> (without init value) has a constant value of 0 in block <everloop0>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <zeros_count_4> in Unit <everloop0> is equivalent to the following FF/Latch, which will be removed : <ones_count_4> 
+INFO:Xst:2261 - The FF/Latch <zeros_count_6> in Unit <everloop0> is equivalent to the following 5 FFs/Latches, which will be removed : <zeros_count_7> <zeros_count_8> <zeros_count_9> <zeros_count_10> <zeros_count_11> 
+INFO:Xst:2261 - The FF/Latch <zeros_count_2> in Unit <everloop0> is equivalent to the following 3 FFs/Latches, which will be removed : <ones_count_1> <ones_count_2> <ones_count_3> 
+INFO:Xst:2261 - The FF/Latch <zeros_count_0> in Unit <everloop0> is equivalent to the following FF/Latch, which will be removed : <zeros_count_5> 
 
 Synthesizing (advanced) Unit <led_test>.
 INFO:Xst:3226 - The RAM <everloopram0/Mram_ram> will be implemented as a BLOCK RAM, absorbing the following register(s): <everloopram0/dat_b>
@@ -245,16 +238,16 @@ Macro Statistics
 # RAMs                                                 : 1
  2048x8-bit dual-port block RAM                        : 1
 # Adders/Subtractors                                   : 3
- 16-bit adder                                          : 1
+ 12-bit adder                                          : 1
  4-bit adder                                           : 1
  8-bit adder                                           : 1
-# Registers                                            : 66
- Flip-Flops                                            : 66
+# Registers                                            : 54
+ Flip-Flops                                            : 54
 # Comparators                                          : 2
- 16-bit comparator equal                               : 2
+ 12-bit comparator equal                               : 2
 # Multiplexers                                         : 10
- 16-bit 2-to-1 multiplexer                             : 2
- 16-bit 4-to-1 multiplexer                             : 1
+ 12-bit 2-to-1 multiplexer                             : 2
+ 12-bit 4-to-1 multiplexer                             : 1
  4-bit 2-to-1 multiplexer                              : 2
  8-bit 2-to-1 multiplexer                              : 5
 # FSMs                                                 : 2
@@ -264,16 +257,10 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-WARNING:Xst:1710 - FF/Latch <everloop0/zeros_count_0> (without init value) has a constant value of 0 in block <led_test>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <everloop0/zeros_count_4> (without init value) has a constant value of 0 in block <led_test>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <everloop0/zeros_count_13> (without init value) has a constant value of 0 in block <led_test>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <everloop0/zeros_count_14> (without init value) has a constant value of 0 in block <led_test>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <everloop0/ones_count_0> (without init value) has a constant value of 0 in block <led_test>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <everloop0/ones_count_6> (without init value) has a constant value of 0 in block <led_test>. This FF/Latch will be trimmed during the optimization process.
-INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_6> in Unit <led_test> is equivalent to the following 4 FFs/Latches, which will be removed : <everloop0/zeros_count_7> <everloop0/ones_count_1> <everloop0/ones_count_4> <everloop0/ones_count_7> 
-INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_2> in Unit <led_test> is equivalent to the following 2 FFs/Latches, which will be removed : <everloop0/zeros_count_3> <everloop0/zeros_count_5> 
-INFO:Xst:2261 - The FF/Latch <everloop0/ones_count_3> in Unit <led_test> is equivalent to the following 2 FFs/Latches, which will be removed : <everloop0/ones_count_5> <everloop0/ones_count_8> 
-INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_9> in Unit <led_test> is equivalent to the following 4 FFs/Latches, which will be removed : <everloop0/zeros_count_10> <everloop0/zeros_count_11> <everloop0/zeros_count_12> <everloop0/zeros_count_15> 
+INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_2> in Unit <led_test> is equivalent to the following 3 FFs/Latches, which will be removed : <everloop0/ones_count_1> <everloop0/ones_count_2> <everloop0/ones_count_3> 
+INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_0> in Unit <led_test> is equivalent to the following FF/Latch, which will be removed : <everloop0/zeros_count_5> 
+INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_4> in Unit <led_test> is equivalent to the following FF/Latch, which will be removed : <everloop0/ones_count_4> 
+INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_6> in Unit <led_test> is equivalent to the following 5 FFs/Latches, which will be removed : <everloop0/zeros_count_7> <everloop0/zeros_count_8> <everloop0/zeros_count_9> <everloop0/zeros_count_10> <everloop0/zeros_count_11> 
 Analyzing FSM <MFsm> for best encoding.
 Optimizing FSM <FSM_0> on signal <state[1:4]> with user encoding.
 -------------------
@@ -313,8 +300,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 54
- Flip-Flops                                            : 54
+# Registers                                            : 50
+ Flip-Flops                                            : 50
 
 =========================================================================
 
@@ -337,21 +324,21 @@ Top Level Output File Name         : project.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 122
+# BELS                             : 107
 #      GND                         : 1
-#      INV                         : 2
-#      LUT1                        : 15
-#      LUT2                        : 3
+#      INV                         : 3
+#      LUT1                        : 11
+#      LUT2                        : 4
 #      LUT3                        : 15
-#      LUT4                        : 7
-#      LUT5                        : 33
-#      LUT6                        : 14
-#      MUXCY                       : 15
+#      LUT4                        : 5
+#      LUT5                        : 27
+#      LUT6                        : 17
+#      MUXCY                       : 11
 #      VCC                         : 1
-#      XORCY                       : 16
-# FlipFlops/Latches                : 54
+#      XORCY                       : 12
+# FlipFlops/Latches                : 50
 #      FDR                         : 7
-#      FDR_1                       : 20
+#      FDR_1                       : 16
 #      FDRE                        : 20
 #      FDRE_1                      : 7
 # RAMS                             : 1
@@ -369,15 +356,15 @@ Selected Device : 6slx4tqg144-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              53  out of   4800     1%  
- Number of Slice LUTs:                   89  out of   2400     3%  
-    Number used as Logic:                89  out of   2400     3%  
+ Number of Slice Registers:              49  out of   4800     1%  
+ Number of Slice LUTs:                   82  out of   2400     3%  
+    Number used as Logic:                82  out of   2400     3%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:     89
-   Number with an unused Flip Flop:      36  out of     89    40%  
-   Number with an unused LUT:             0  out of     89     0%  
-   Number of fully used LUT-FF pairs:    53  out of     89    59%  
+ Number of LUT Flip Flop pairs used:     82
+   Number with an unused Flip Flop:      33  out of     82    40%  
+   Number with an unused LUT:             0  out of     82     0%  
+   Number of fully used LUT-FF pairs:    49  out of     82    59%  
    Number of unique control sets:         4
 
 IO Utilization: 
@@ -411,7 +398,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 55    |
+clk                                | BUFGP                  | 51    |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -423,7 +410,7 @@ Timing Summary:
 Speed Grade: -2
 
    Minimum period: 6.350ns (Maximum Frequency: 157.480MHz)
-   Minimum input arrival time before clock: 3.638ns
+   Minimum input arrival time before clock: 4.543ns
    Maximum output required time after clock: 4.118ns
    Maximum combinational path delay: No path found
 
@@ -434,43 +421,44 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 6.350ns (frequency: 157.480MHz)
-  Total number of paths / destination ports: 1340 / 89
+  Total number of paths / destination ports: 1004 / 85
 -------------------------------------------------------------------------
 Delay:               3.175ns (Levels of Logic = 1)
   Source:            everloop0/send_hi (FF)
-  Destination:       everloop0/zeros_count_1 (FF)
+  Destination:       everloop0/zeros_count_0 (FF)
   Source Clock:      clk rising
   Destination Clock: clk falling
 
-  Data Path: everloop0/send_hi to everloop0/zeros_count_1
+  Data Path: everloop0/send_hi to everloop0/zeros_count_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDR:C->Q              9   0.525   1.204  everloop0/send_hi (everloop0/send_hi)
      LUT5:I2->O            7   0.235   0.909  everloop0/_n0224_inv1 (everloop0/_n0224_inv)
-     FDRE_1:CE                 0.302          everloop0/zeros_count_1
+     FDRE_1:CE                 0.302          everloop0/zeros_count_0
     ----------------------------------------
     Total                      3.175ns (1.062ns logic, 2.113ns route)
                                        (33.4% logic, 66.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 54 / 54
+  Total number of paths / destination ports: 50 / 50
 -------------------------------------------------------------------------
-Offset:              3.638ns (Levels of Logic = 1)
+Offset:              4.543ns (Levels of Logic = 2)
   Source:            rst (PAD)
-  Destination:       everloop0/zeros_count_1 (FF)
+  Destination:       everloop0/zeros_count_0 (FF)
   Destination Clock: clk falling
 
-  Data Path: rst to everloop0/zeros_count_1
+  Data Path: rst to everloop0/zeros_count_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            54   1.328   1.851  rst_IBUF (rst_IBUF)
-     FDRE_1:R                  0.459          everloop0/zeros_count_1
+     IBUF:I->O             1   1.328   0.681  rst_IBUF (rst_IBUF)
+     INV:I->O             50   0.255   1.820  rst_INV_8_o1_INV_0 (rst_INV_8_o)
+     FDRE_1:R                  0.459          everloop0/zeros_count_0
     ----------------------------------------
-    Total                      3.638ns (1.787ns logic, 1.851ns route)
-                                       (49.1% logic, 50.9% route)
+    Total                      4.543ns (2.042ns logic, 2.501ns route)
+                                       (44.9% logic, 55.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
@@ -501,21 +489,21 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    4.046|    2.915|    5.388|         |
+clk            |    4.046|    2.915|    5.189|         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 8.00 secs
-Total CPU time to Xst completion: 5.18 secs
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 4.56 secs
  
 --> 
 
 
-Total memory usage is 381900 kilobytes
+Total memory usage is 381836 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   17 (   0 filtered)
-Number of infos    :   11 (   0 filtered)
+Number of warnings :    5 (   0 filtered)
+Number of infos    :   10 (   0 filtered)
 

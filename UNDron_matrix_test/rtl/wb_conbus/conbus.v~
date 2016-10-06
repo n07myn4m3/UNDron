@@ -182,7 +182,7 @@ module conbus #(
 	output		s5_we_o,
 	output		s5_cyc_o,
 	output		s5_stb_o,
-	input		s5_ack_i
+	input		s5_ack_i,
 
 	// Slave 6 Interface
 	input	[31:0]	s6_dat_i,
@@ -193,7 +193,7 @@ module conbus #(
 	output		s6_we_o,
 	output		s6_cyc_o,
 	output		s6_stb_o,
-	input		s6_ack_i
+	input		s6_ack_i,
 
 	// Slave 7 Interface
 	input	[31:0]	s7_dat_i,

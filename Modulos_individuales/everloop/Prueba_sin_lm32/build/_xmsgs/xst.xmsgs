@@ -8,21 +8,6 @@
 <msg type="warning" file="HDLCompiler" num="1016" delta="new" >"/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/led_test.v" Line 32: Port <arg fmt="%s" index="1">dat_a_out</arg> is not connected to this instance
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="413" delta="new" >"/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 145: Result of <arg fmt="%d" index="1">5</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">4</arg>-bit target.
-</msg>
-
-<msg type="warning" file="HDLCompiler" num="413" delta="new" >"/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 165: Result of <arg fmt="%d" index="1">9</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">8</arg>-bit target.
-</msg>
-
-<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 66: Assignment to <arg fmt="%s" index="1">start_send</arg> ignored, since the identifier is never used
-</msg>
-
-<msg type="warning" file="HDLCompiler" num="413" delta="new" >"/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 280: Result of <arg fmt="%d" index="1">17</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">16</arg>-bit target.
-</msg>
-
-<msg type="warning" file="HDLCompiler" num="413" delta="new" >"/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/everloop.v" Line 293: Result of <arg fmt="%d" index="1">17</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">16</arg>-bit target.
-</msg>
-
 <msg type="warning" file="HDLCompiler" num="189" delta="new" >"/home/nixtropy/Documentos/Digital_II_NC/UNDron/Modulos_individuales/everloop/Prueba_sin_lm32/led_test.v" Line 27: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">address</arg>&gt;. Formal port size is <arg fmt="%d" index="2">8</arg>-bit while actual signal size is <arg fmt="%d" index="1">11</arg>-bit.
 </msg>
 
@@ -38,54 +23,30 @@
 <msg type="warning" file="Xst" num="653" delta="new" >Signal &lt;<arg fmt="%s" index="1">dat_a_out</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
 </msg>
 
-<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">ones_count_3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">everloop0</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;ones_count_5&gt; &lt;ones_count_8&gt; </arg>
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">zeros_count_4</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">everloop0</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;ones_count_4&gt; </arg>
 </msg>
 
-<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">zeros_count_9</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">everloop0</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">4 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;zeros_count_10&gt; &lt;zeros_count_11&gt; &lt;zeros_count_12&gt; &lt;zeros_count_15&gt; </arg>
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">zeros_count_6</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">everloop0</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">5 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;zeros_count_7&gt; &lt;zeros_count_8&gt; &lt;zeros_count_9&gt; &lt;zeros_count_10&gt; &lt;zeros_count_11&gt; </arg>
 </msg>
 
-<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">zeros_count_6</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">everloop0</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">4 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;zeros_count_7&gt; &lt;ones_count_1&gt; &lt;ones_count_4&gt; &lt;ones_count_7&gt; </arg>
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">zeros_count_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">everloop0</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">3 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;ones_count_1&gt; &lt;ones_count_2&gt; &lt;ones_count_3&gt; </arg>
 </msg>
 
-<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">zeros_count_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">everloop0</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">5 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;zeros_count_4&gt; &lt;zeros_count_13&gt; &lt;zeros_count_14&gt; &lt;ones_count_0&gt; &lt;ones_count_6&gt; </arg>
-</msg>
-
-<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">zeros_count_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">everloop0</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;zeros_count_3&gt; &lt;zeros_count_5&gt; </arg>
-</msg>
-
-<msg type="warning" file="Xst" num="1710" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">zeros_count_0</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">everloop0</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">zeros_count_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">everloop0</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;zeros_count_5&gt; </arg>
 </msg>
 
 <msg type="info" file="Xst" num="3226" delta="new" >The RAM &lt;<arg fmt="%s" index="1">everloopram0/Mram_ram</arg>&gt; will be implemented as a BLOCK RAM, absorbing the following register(s):</msg>
 
-<msg type="warning" file="Xst" num="1710" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_0</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">led_test</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">led_test</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">3 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;everloop0/ones_count_1&gt; &lt;everloop0/ones_count_2&gt; &lt;everloop0/ones_count_3&gt; </arg>
 </msg>
 
-<msg type="warning" file="Xst" num="1895" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_4</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">led_test</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">led_test</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;everloop0/zeros_count_5&gt; </arg>
 </msg>
 
-<msg type="warning" file="Xst" num="1895" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_13</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">led_test</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_4</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">led_test</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;everloop0/ones_count_4&gt; </arg>
 </msg>
 
-<msg type="warning" file="Xst" num="1895" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_14</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">led_test</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
-</msg>
-
-<msg type="warning" file="Xst" num="1895" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">everloop0/ones_count_0</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">led_test</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
-</msg>
-
-<msg type="warning" file="Xst" num="1895" delta="new" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">everloop0/ones_count_6</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">led_test</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
-</msg>
-
-<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_6</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">led_test</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">4 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;everloop0/zeros_count_7&gt; &lt;everloop0/ones_count_1&gt; &lt;everloop0/ones_count_4&gt; &lt;everloop0/ones_count_7&gt; </arg>
-</msg>
-
-<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">led_test</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;everloop0/zeros_count_3&gt; &lt;everloop0/zeros_count_5&gt; </arg>
-</msg>
-
-<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">everloop0/ones_count_3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">led_test</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;everloop0/ones_count_5&gt; &lt;everloop0/ones_count_8&gt; </arg>
-</msg>
-
-<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_9</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">led_test</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">4 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;everloop0/zeros_count_10&gt; &lt;everloop0/zeros_count_11&gt; &lt;everloop0/zeros_count_12&gt; &lt;everloop0/zeros_count_15&gt; </arg>
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">everloop0/zeros_count_6</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">led_test</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">5 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;everloop0/zeros_count_7&gt; &lt;everloop0/zeros_count_8&gt; &lt;everloop0/zeros_count_9&gt; &lt;everloop0/zeros_count_10&gt; &lt;everloop0/zeros_count_11&gt; </arg>
 </msg>
 
 </messages>

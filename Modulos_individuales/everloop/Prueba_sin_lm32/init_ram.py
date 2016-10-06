@@ -5,7 +5,7 @@ f = open('image.ram', 'w')
 
 
 for j in range(0,2048/4):
-  RGB=[30,255,60,25]
+  RGB=[255,0,0,0]
      
   for i in range(0,4):
     line = RGB[i]

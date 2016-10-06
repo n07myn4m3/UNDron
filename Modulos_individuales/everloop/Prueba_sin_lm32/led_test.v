@@ -23,7 +23,7 @@ wire  [10:0] adr_b;
 
 everloop everloop0(
   .clk(clk),
-  .rst(rst),
+  .rst(~rst),
   .address(adr_b),
   .data_RGB(data_b),
   .everloop_d(led_ctl)

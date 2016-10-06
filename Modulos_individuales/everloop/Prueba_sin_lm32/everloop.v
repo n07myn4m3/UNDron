@@ -28,7 +28,7 @@ module everloop (
 );
 
 //----------------------------------------------------------------
-	parameter   input_clk_MHz   = 50;  
+	parameter   input_clk_MHz   = 5;  
 	localparam   three_us       = input_clk_MHz*3;
 	localparam   six_us         = input_clk_MHz*6; 
 	localparam   nine_us        = input_clk_MHz*9;

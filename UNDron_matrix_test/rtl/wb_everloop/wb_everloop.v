@@ -6,14 +6,21 @@
 	██║   ██║██╔██╗ ██║██║  ██║██████╔╝██║   ██║██╔██╗ ██║    
 	██║   ██║██║╚██╗██║██║  ██║██╔══██╗██║   ██║██║╚██╗██║    
 	╚██████╔╝██║ ╚████║██████╔╝██║  ██║╚██████╔╝██║ ╚████║    
-	 ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    
+	 ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝  
+   DESCRIPCIÓN DE LOS REGISTROS
+   0x00 BasicIO_Leds
+   0x04 BasicIO_Switches
+   0x08 BasicIO_Buttons  
+
    FUNCIONAMIENTO
    * La direccion adr_a de la memoria RAM depende de la direccion escrita presente en el wishbone
      y de un valor de uno o cero 
    * ---   
+
    CONVENCIONES      
    * --- 
    * ---
+
    INDICADORES
    * PROBLEMA: Situacion que genera conflicto y debe corregirse
    * NPI: Declaracion que no se conoce
@@ -37,7 +44,7 @@ module wb_everloop#(
 
    // Everloop interface
    output led_ctl, // Es la salida que va conectada al everloop fisico
-   input  led_fb,  // Esta entrada no es utilizada NPI
+   //input  led_fb,  // Esta entrada no es utilizada NPI
 );
 
 reg  ack;
