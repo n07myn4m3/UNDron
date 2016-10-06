@@ -1,0 +1,39 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Wed Oct 05 19:16:19 2016
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "led_ctl" LOCATE = SITE "P56" LEVEL 1;
+COMP "clk" LOCATE = SITE "P84" LEVEL 1;
+COMP "rst" LOCATE = SITE "P105" LEVEL 1;
+PIN everloopram0/Mram_ram_pins<22> = BEL "everloopram0/Mram_ram" PINNAME CLKA;
+PIN everloopram0/Mram_ram_pins<23> = BEL "everloopram0/Mram_ram" PINNAME CLKB;
+TIMEGRP sys_clk = BEL "everloop0/zeros_count_2" BEL "everloop0/zeros_count_3"
+        BEL "everloop0/zeros_count_4" BEL "everloop0/zeros_count_5" BEL
+        "everloop0/zeros_count_6" BEL "everloop0/zeros_count_8" BEL
+        "everloop0/ones_count_2" BEL "everloop0/everloop_d" BEL
+        "everloop0/address_0" BEL "everloop0/address_1" BEL
+        "everloop0/address_2" BEL "everloop0/address_3" BEL
+        "everloop0/address_4" BEL "everloop0/address_5" BEL
+        "everloop0/address_6" BEL "everloop0/address_7" BEL
+        "everloop0/finish_send" BEL "everloop0/clk_cnt_0" BEL
+        "everloop0/clk_cnt_1" BEL "everloop0/clk_cnt_2" BEL
+        "everloop0/clk_cnt_3" BEL "everloop0/clk_cnt_4" BEL
+        "everloop0/clk_cnt_5" BEL "everloop0/clk_cnt_6" BEL
+        "everloop0/clk_cnt_7" BEL "everloop0/clk_cnt_8" BEL
+        "everloop0/clk_cnt_9" BEL "everloop0/clk_cnt_10" BEL
+        "everloop0/clk_cnt_11" BEL "everloop0/clk_cnt_12" BEL
+        "everloop0/clk_cnt_13" BEL "everloop0/clk_cnt_14" BEL
+        "everloop0/data_0" BEL "everloop0/data_1" BEL "everloop0/data_2" BEL
+        "everloop0/data_3" BEL "everloop0/data_4" BEL "everloop0/data_5" BEL
+        "everloop0/data_6" BEL "everloop0/data_7" BEL "everloop0/send_hi" BEL
+        "everloop0/send_rst" BEL "everloop0/send_low" BEL
+        "everloop0/bit_count_0" BEL "everloop0/bit_count_1" BEL
+        "everloop0/bit_count_2" BEL "everloop0/bit_count_3" BEL
+        "everloop0/state_FSM_FFd4" BEL "everloop0/state_FSM_FFd1" BEL
+        "everloop0/state_FSM_FFd3" BEL "everloop0/state_FSM_FFd2" BEL
+        "everloop0/send_state_FSM_FFd2" BEL "everloop0/send_state_FSM_FFd1"
+        BEL "clk_BUFGP/BUFG" PIN "everloopram0/Mram_ram_pins<22>" PIN
+        "everloopram0/Mram_ram_pins<23>";
+SCHEMATIC END;
+

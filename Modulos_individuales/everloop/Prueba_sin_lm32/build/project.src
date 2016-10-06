@@ -1,0 +1,3 @@
+verilog work ../led_test.v
+verilog work ../everloop.v
+verilog work ../everloop_ram.v
