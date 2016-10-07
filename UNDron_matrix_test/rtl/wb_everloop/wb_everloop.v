@@ -41,7 +41,7 @@ module wb_everloop#(
    output reg  [31:0] wb_dat_o,
 
    // Everloop interface
-   output led_ctl, // Es la salida que va conectada al everloop fisico
+   output everloop_led_ctl // Es la salida que va conectada al everloop fisico
    //input  led_fb,  // Esta entrada no es utilizada NPI
 );
 
@@ -70,7 +70,7 @@ everloop everloop0(
   .rst(reset),
   .address(adr_b),           // Se conecta a la memoria RAM de doble puerto 
   .data_RGB(data_b),
-  .everloop_d(led_ctl)
+  .everloop_d(everloop_led_ctl)
 );
 
 everloop_ram #(

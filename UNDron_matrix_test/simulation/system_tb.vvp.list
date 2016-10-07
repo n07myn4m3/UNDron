@@ -26,6 +26,9 @@
 ../rtl/wb_i2c/i2c_master_bit_ctrl.v
 ../rtl/wb_conbus/conbus.v
 ../rtl/wb_conbus/conbus_arb.v
+../rtl/wb_everloop/everloop_bram.v
+../rtl/wb_everloop/everloop.v
+../rtl/wb_everloop/wb_everloop.v
 system_tb.v
 ../sim/sram/sram16.v
 ../sim/unisims/BUFG.v

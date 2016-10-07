@@ -37,13 +37,12 @@ module system
 	// SPI
 	input             spi_miso, 
 	output            spi_mosi,
-	output            spi_clk
+	output            spi_clk,
 	// 12c
 //	inout             i2c_sda, 
 //	inout             i2c_scl
 	// everloop
-	// PENDIENTE: Debe indicarse los pines de salida
-
+    output            everloop_led_ctl
 );
 
 
@@ -201,7 +200,7 @@ conbus #(
 	.s2_addr(4'h3), // timer    0x30000000 
 	.s3_addr(4'h4), // gpio     0x40000000 
 	.s4_addr(4'h5), // spi      0x50000000 
-	.s5_addr(4'h6)  // i2c      0x60000000 
+	.s5_addr(4'h6),  // i2c      0x60000000 
 	.s6_addr(4'h7)  // everloop 0x70000000 // PENDIENTE
 ) conbus0(
 	.sys_clk( clk ),
@@ -279,7 +278,16 @@ conbus #(
 	.s5_we_o(   i2c0_we    ),
 	.s5_cyc_o(  i2c0_cyc   ),
 	.s5_stb_o(  i2c0_stb   ),
-	.s5_ack_i(  i2c0_ack   )
+	.s5_ack_i(  i2c0_ack   ),
+	// Slave6
+	.s6_dat_i(  everloop0_dat_r ),
+	.s6_dat_o(  everloop0_dat_w ),
+	.s6_adr_o(  everloop0_adr   ),
+	.s6_sel_o(  everloop0_sel   ),
+	.s6_we_o(   everloop0_we    ),
+	.s6_cyc_o(  everloop0_cyc   ),
+	.s6_stb_o(  everloop0_stb   ),
+	.s6_ack_i(  everloop0_ack   )
 	
 );
 
@@ -454,6 +462,26 @@ wb_gpio gpio0 (
 	.wb_ack_o( gpio0_ack    ), 
 	// GPIO
 	.gpio_io(gpio0_io)
+);
+
+//---------------------------------------------------------------------------
+// everloop0
+//---------------------------------------------------------------------------
+wb_everloop  everloop0 (
+	.clk( clk ),
+	.reset( ~rst ),
+	
+	.wb_adr_i( everloop0_adr   ),
+	.wb_dat_i( everloop0_dat_w ),
+	.wb_dat_o( everloop0_dat_r ),
+	.wb_stb_i( everloop0_stb   ),
+	.wb_cyc_i( everloop0_cyc   ),
+	.wb_we_i(  everloop0_we    ),
+	.wb_sel_i( everloop0_sel   ),
+	.wb_ack_o( everloop0_ack   ), 
+
+
+	.everloop_led_ctl( everloop_led_ctl )
 );
 
 //----------------------------------------------------------------------------
