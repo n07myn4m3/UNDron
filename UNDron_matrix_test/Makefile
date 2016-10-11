@@ -22,6 +22,8 @@ SIM_SRC=                                  \
 EVERLOOP_SRC = ../rtl/wb_everloop/everloop_bram.v \
                ../rtl/wb_everloop/everloop.v      \
                ../rtl/wb_everloop/wb_everloop.v 
+PWM_SRC =      ../rtl/wb_pwm/pwm.v      \
+               ../rtl/wb_pwm/wb_pwm.v 
 
 
 I2C_SRC      = ../rtl/wb_i2c/i2c_master.v         \
@@ -53,7 +55,8 @@ SRC=                                    \
 	../rtl/wb_conbus/conbus.v           \
 	../rtl/wb_conbus/conbus_arb.v       \
     $(EVERLOOP_SRC)                     \
-    $(I2C_SRC)
+    $(I2C_SRC) \
+    $(PWM_SRC)
 
 #############################################################################
 # Synthesis constants
