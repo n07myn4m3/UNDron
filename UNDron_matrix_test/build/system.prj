@@ -20,12 +20,10 @@ verilog work ../rtl/wb_uart/wb_uart.v
 verilog work ../rtl/wb_timer/wb_timer.v
 verilog work ../rtl/wb_gpio/wb_gpio.v
 verilog work ../rtl/wb_spi/wb_spi.v
-verilog work ../rtl/wb_i2c/i2c_master_wb_top.v
-verilog work ../rtl/wb_i2c/i2c_master_registers.v
-verilog work ../rtl/wb_i2c/i2c_master_byte_ctrl.v
-verilog work ../rtl/wb_i2c/i2c_master_bit_ctrl.v
 verilog work ../rtl/wb_conbus/conbus.v
 verilog work ../rtl/wb_conbus/conbus_arb.v
 verilog work ../rtl/wb_everloop/everloop_bram.v
 verilog work ../rtl/wb_everloop/everloop.v
 verilog work ../rtl/wb_everloop/wb_everloop.v
+verilog work ../rtl/wb_i2c/i2c_master.v
+verilog work ../rtl/wb_i2c/wb_i2c.v

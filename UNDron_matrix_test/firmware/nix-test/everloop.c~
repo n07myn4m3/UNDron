@@ -1,0 +1,41 @@
+#include "everloop.h"
+
+everloop_t  *everloop0 = (everloop_t *) 0x60000000; //leo y escribo datos de esa direccion
+
+/***************************************************************************
+ * everloop Functions
+ */
+static uint32_t leds;
+
+void everloop_init()
+{
+  //LEDs off
+  everloop0->leds = 0;
+  leds = 0;
+}
+
+void everloop_leds_on(uint8_t leds_on)
+{
+  //LEDs on
+  leds |= leds_on;
+  everloop0->leds = leds;
+}
+
+void everloop_leds_off(uint8_t leds_off)
+{
+  //LEDs off
+  leds &= ~leds_off;
+  everloop0->leds = leds;
+}
+
+void everloop_leds(uint8_t leds0)
+{
+  //LEDs
+  leds = leds0; //coge lo que le llega a la funcion y lo manda a los leds
+  everloop0->leds = leds0;
+}
+
+uint8_t everloop_read_sw (void)
+{
+return everloop0->switches;
+}

@@ -1,0 +1,7 @@
+INFILE=/home/julian/Semestre_VI/Digital_Lab/J1_Clase/j1_soc/hdl/i2c/i2c_master/build/project_r.ncd
+OUTFILE=/home/julian/Semestre_VI/Digital_Lab/J1_Clase/j1_soc/hdl/i2c/i2c_master/build/project_r.bit
+FAMILY=Spartan6
+PART=xc6slx16-2csg324
+WORKINGDIR=/home/julian/Semestre_VI/Digital_Lab/J1_Clase/j1_soc/hdl/i2c/i2c_master/build
+LICENSE=WebPack
+USER_INFO=211103265_0_0_858

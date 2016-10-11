@@ -8,23 +8,21 @@ Target Device  : xc6slx4
 Target Package : tqg144
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Fri Oct  7 10:24:27 2016
+Mapped Date    : Tue Oct 11 03:13:33 2016
 
-Design Summary
---------------
-Number of errors:      0
-Number of warnings:    0
+Interim Summary
+---------------
 Slice Logic Utilization:
-  Number of Slice Registers:                 1,328 out of   4,800   27%
-    Number used as Flip Flops:               1,327
-    Number used as Latches:                      0
+  Number of Slice Registers:                 1,451 out of   4,800   30%
+    Number used as Flip Flops:               1,448
+    Number used as Latches:                      2
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                1
-  Number of Slice LUTs:                      1,645 out of   2,400   68%
-    Number used as logic:                    1,561 out of   2,400   65%
-      Number using O6 output only:           1,233
-      Number using O5 output only:             105
-      Number using O5 and O6:                  223
+  Number of Slice LUTs:                      1,810 out of   2,400   75%
+    Number used as logic:                    1,739 out of   2,400   72%
+      Number using O6 output only:           1,321
+      Number using O5 output only:             114
+      Number using O5 and O6:                  304
       Number used as ROM:                        0
     Number used as Memory:                      65 out of   1,200    5%
       Number used as Dual Port RAM:             64
@@ -36,21 +34,20 @@ Slice Logic Utilization:
         Number using O6 output only:             1
         Number using O5 output only:             0
         Number using O5 and O6:                  0
-    Number used exclusively as route-thrus:     19
-      Number with same-slice register load:     14
-      Number with same-slice carry load:         5
+    Number used exclusively as route-thrus:      6
+      Number with same-slice register load:      0
+      Number with same-slice carry load:         6
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   523 out of     600   87%
-  Number of MUXCYs used:                       296 out of   1,200   24%
-  Number of LUT Flip Flop pairs used:        1,885
-    Number with an unused Flip Flop:           652 out of   1,885   34%
-    Number with an unused LUT:                 240 out of   1,885   12%
-    Number of fully used LUT-FF pairs:         993 out of   1,885   52%
-    Number of unique control sets:              48
+  Number of MUXCYs used:                       360 out of   1,200   30%
+  Number of LUT Flip Flop pairs used:        2,523
+    Number with an unused Flip Flop:         1,151 out of   2,523   45%
+    Number with an unused LUT:                 713 out of   2,523   28%
+    Number of fully used LUT-FF pairs:         659 out of   2,523   26%
+    Number of unique control sets:              58
     Number of slice register sites lost
-      to control set restrictions:              96 out of   4,800    2%
+      to control set restrictions:             117 out of   4,800    2%
 
   A LUT Flip Flop pair for this architecture represents one LUT paired with
   one Flip Flop within a slice.  A control set is a unique combination of
@@ -68,8 +65,8 @@ Specific Feature Utilization:
   Number of RAMB8BWERs:                          0 out of      24    0%
   Number of BUFIO2/BUFIO2_2CLKs:                 0 out of      32    0%
   Number of BUFIO2FB/BUFIO2FB_2CLKs:             0 out of      32    0%
-  Number of BUFG/BUFGMUXs:                       1 out of      16    6%
-    Number used as BUFGs:                        1
+  Number of BUFG/BUFGMUXs:                       2 out of      16   12%
+    Number used as BUFGs:                        2
     Number used as BUFGMUX:                      0
   Number of DCM/DCM_CLKGENs:                     0 out of       4    0%
   Number of ILOGIC2/ISERDES2s:                   1 out of     200    1%
@@ -91,44 +88,45 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                4.01
 
-Peak Memory Usage:  695 MB
-Total REAL time to MAP completion:  37 secs 
-Total CPU time to MAP completion:   33 secs 
-
-Table of Contents
------------------
-Section 1 - Errors
-Section 2 - Warnings
-Section 3 - Informational
-Section 4 - Removed Logic Summary
-Section 5 - Removed Logic
-Section 6 - IOB Properties
-Section 7 - RPMs
-Section 8 - Guide Report
-Section 9 - Area Group and Partition Summary
-Section 10 - Timing Report
-Section 11 - Configuration String Information
-Section 12 - Control Set Information
-Section 13 - Utilization by Hierarchy
+Design Summary
+--------------
+Number of errors   :   2
+Number of warnings :   0
 
 Section 1 - Errors
 ------------------
+ERROR:Place:1108 - A clock IOB / BUFGMUX clock component pair have been found
+   that are not placed at an optimal clock IOB / BUFGMUX site pair. The clock
+   IOB component <rst> is placed at site <P123>. The corresponding BUFG
+   component <i2c0/i2c0/reset_inv_BUFG> is placed at site <BUFGMUX_X2Y2>. There
+   is only a select set of IOBs that can use the fast path to the Clocker
+   buffer, and they are not being used. You may want to analyze why this problem
+   exists and correct it. If this sub optimal condition is acceptable for this
+   design, you may use the CLOCK_DEDICATED_ROUTE constraint in the .ucf file to
+   demote this message to a WARNING and allow your design to continue. However,
+   the use of this override is highly discouraged as it may lead to very poor
+   timing results. It is recommended that this error condition be corrected in
+   the design. A list of all the COMP.PINs used in this clock placement rule is
+   listed below. These examples can be used directly in the .ucf file to
+   override this clock rule.
+   < NET "rst" CLOCK_DEDICATED_ROUTE = FALSE; >
+
+ERROR:Pack:1654 - The timing-driven placement phase encountered an error.
 
 Section 2 - Warnings
 --------------------
 
 Section 3 - Informational
 -------------------------
-INFO:LIT:243 - Logical network lm0/Mram_registers40/SPO has no load.
-INFO:LIT:395 - The above info message is repeated 63 more times for the
+INFO:LIT:243 - Logical network i2c_sda has no load.
+INFO:LIT:395 - The above info message is repeated 65 more times for the
    following (max. 5 shown):
+   i2c_scl,
+   lm0/Mram_registers40/SPO,
    lm0/Mram_registers39/SPO,
    lm0/Mram_registers41/SPO,
-   lm0/Mram_registers37/SPO,
-   lm0/Mram_registers36/SPO,
-   lm0/Mram_registers38/SPO
+   lm0/Mram_registers37/SPO
    To see the details of these info messages, please use the -detail switch.
 INFO:MapLib:562 - No environment variables are currently set.
 INFO:LIT:244 - All of the single ended outputs in this design are using slew
@@ -143,7 +141,6 @@ INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
 INFO:Place:834 - Only a subset of IOs are locked. Out of 9 IOs, 3 are locked and
    6 are not locked. If you would like to print the names of these IOs, please
    set the environment variable XIL_PAR_DESIGN_CHECK_VERBOSE to 1. 
-INFO:Pack:1650 - Map created a placed design.
 
 Section 4 - Removed Logic Summary
 ---------------------------------
@@ -160,68 +157,10 @@ VCC 		XST_VCC
 To enable printing of redundant blocks removed and signals merged, set the
 detailed map report option and rerun map.
 
-Section 6 - IOB Properties
---------------------------
-
-+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| IOB Name                           | Type             | Direction | IO Standard          | Diff  | Drive    | Slew | Reg (s)      | Resistor | IOB      |
-|                                    |                  |           |                      | Term  | Strength | Rate |              |          | Delay    |
-+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| clk                                | IOB              | INPUT     | LVCMOS33             |       |          |      |              |          |          |
-| everloop_led_ctl                   | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW | OFF          |          |          |
-| led                                | IOB              | OUTPUT    | LVCMOS33             |       | 24       | SLOW |              |          |          |
-| rst                                | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLDOWN |          |
-| spi_clk                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW | OFF          |          |          |
-| spi_miso                           | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
-| spi_mosi                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW | OFF          |          |          |
-| uart_rxd                           | IOB              | INPUT     | LVCMOS25             |       |          |      | IFF          |          |          |
-| uart_txd                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW | OFF          |          |          |
-+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-Section 7 - RPMs
-----------------
-
-Section 8 - Guide Report
-------------------------
-Guide not run on this design.
-
-Section 9 - Area Group and Partition Summary
---------------------------------------------
-
-Partition Implementation Status
--------------------------------
-
-  No Partitions were found in this design.
-
--------------------------------
-
-Area Group Information
-----------------------
-
-  No area groups were found in this design.
-
-----------------------
-
-Section 10 - Timing Report
---------------------------
-A logic-level (pre-route) timing report can be generated by using Xilinx static
-timing analysis tools, Timing Analyzer (GUI) or TRCE (command line), with the
-mapped NCD and PCF files. Please note that this timing report will be generated
-using estimated delay information. For accurate numbers, please generate a
-timing report with the post Place and Route NCD file.
-
-For more information about the Timing Analyzer, consult the Xilinx Timing
-Analyzer Reference Manual; for more information about TRCE, consult the Xilinx
-Command Line Tools User Guide "TRACE" chapter.
-
-Section 11 - Configuration String Details
+Section 12 - Configuration String Details
 -----------------------------------------
 Use the "-detail" map option to print out Configuration Strings
 
-Section 12 - Control Set Information
+Section 13 - Control Set Information
 ------------------------------------
 Use the "-detail" map option to print out Control Set Information.
-
-Section 13 - Utilization by Hierarchy
--------------------------------------
-Use the "-detail" map option to print out the Utilization by Hierarchy section.

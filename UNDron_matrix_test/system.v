@@ -39,8 +39,8 @@ module system
 	output            spi_mosi,
 	output            spi_clk,
 	// 12c
-//	inout             i2c_sda, 
-//	inout             i2c_scl
+	inout             i2c_sda, 
+	inout             i2c_scl,
 	// everloop
     output            everloop_led_ctl
 );
@@ -63,12 +63,13 @@ wire [31:0]  lm32i_adr,
              lm32d_adr,
              uart0_adr,
              spi0_adr,
-             i2c0_adr,
              timer0_adr,
              gpio0_adr,
              ddr0_adr,
              bram0_adr,
              sram0_adr,
+             // I2C
+             i2c0_adr,
              // EVERLOOP
              everloop0_adr; 
 
@@ -81,8 +82,6 @@ wire [31:0]  lm32i_dat_r,
              uart0_dat_w,
              spi0_dat_r,
              spi0_dat_w,
-             i2c0_dat_r,
-             i2c0_dat_w,
              timer0_dat_r,
              timer0_dat_w,
              gpio0_dat_r,
@@ -93,6 +92,9 @@ wire [31:0]  lm32i_dat_r,
              sram0_dat_r,
              ddr0_dat_w,
              ddr0_dat_r,
+             // I2C
+             i2c0_dat_r,
+             i2c0_dat_w,
              // EVERLOOP
              everloop0_dat_r,
              everloop0_dat_w;
@@ -101,12 +103,13 @@ wire [3:0]   lm32i_sel,
              lm32d_sel,
              uart0_sel,
              spi0_sel,
-             i2c0_sel,
              timer0_sel,
              gpio0_sel,
              bram0_sel,
              sram0_sel,
              ddr0_sel,
+             // I2C
+             i2c0_sel,
              // EVERLOOP
              everloop0_sel;
 
@@ -114,12 +117,13 @@ wire         lm32i_we,
              lm32d_we,
              uart0_we,
              spi0_we,
-             i2c0_we,
              timer0_we,
              gpio0_we,
              bram0_we,
              sram0_we,
              ddr0_we,
+             // I2C
+             i2c0_we,
              // EVERLOOP
              everloop0_we;
 
@@ -128,12 +132,13 @@ wire         lm32i_cyc,
              lm32d_cyc,
              uart0_cyc,
              spi0_cyc,
-             i2c0_cyc,
              timer0_cyc,
              gpio0_cyc,
              bram0_cyc,
              sram0_cyc,
              ddr0_cyc,
+             // I2C
+             i2c0_cyc,
              // EVERLOOP
              everloop0_cyc;
 
@@ -142,12 +147,13 @@ wire         lm32i_stb,
              lm32d_stb,
              uart0_stb,
              spi0_stb,
-             i2c0_stb,
              timer0_stb,
              gpio0_stb,
              bram0_stb,
              sram0_stb,
              ddr0_stb,
+             // I2C
+             i2c0_stb,
              // EVERLOOP
              everloop0_stb;
 
@@ -155,12 +161,13 @@ wire         lm32i_ack,
              lm32d_ack,
              uart0_ack,
              spi0_ack,
-             i2c0_ack,
              timer0_ack,
              gpio0_ack,
              bram0_ack,
              sram0_ack,
              ddr0_ack,
+             // I2C
+             i2c0_ack,
              // EVERLOOP
              everloop0_ack;
 
@@ -200,8 +207,8 @@ conbus #(
 	.s2_addr(4'h3), // timer    0x30000000 
 	.s3_addr(4'h4), // gpio     0x40000000 
 	.s4_addr(4'h5), // spi      0x50000000 
-	.s5_addr(4'h6),  // i2c      0x60000000 
-	.s6_addr(4'h7)  // everloop 0x70000000 // PENDIENTE
+	.s5_addr(4'h6), // i2c      0x60000000 
+	.s6_addr(4'h7)  // everloop 0x70000000 
 ) conbus0(
 	.sys_clk( clk ),
 	.sys_rst( ~rst ),
@@ -406,21 +413,22 @@ wb_spi  spi0 (
 // wire i2c0_sda;
 // wire i2c0_scl;
 
-// TODO : interruption and asynchronous reset
-// i2c_master_wb_top  i2c0 (
-// 	.wb_clk_i( clk ),
-//	.wb_rst_i( ~rst ),
+
+wb_i2c  i2c0 (
+ 	.clk( clk ),
+	.reset( ~rst ),
 	//
-//	.wb_adr_i( i2c0_adr ),
-//	.wb_dat_i( i2c0_dat_w ),
-//	.wb_dat_o( i2c0_dat_r ),
-//	.wb_stb_i( i2c0_stb ),
-//	.wb_cyc_i( i2c0_cyc ),
-//	.wb_we_i(  i2c0_we ),
-//	.wb_ack_o( i2c0_ack ), 
-//	.scl(i2c0_scl),
-//	.sda( i2c0_sda )
-//);
+	.wb_adr_i( i2c0_adr   ),
+	.wb_dat_i( i2c0_dat_w ),
+	.wb_dat_o( i2c0_dat_r ),
+	.wb_stb_i( i2c0_stb   ),
+	.wb_cyc_i( i2c0_cyc   ),
+	.wb_we_i(  i2c0_we    ),
+	.wb_ack_o( i2c0_ack   ), 
+     //
+	.i2c_scl( i2c0_scl ),
+	.i2c_sda( i2c0_sda )
+);
 
 //---------------------------------------------------------------------------
 // timer0
@@ -470,7 +478,7 @@ wb_gpio gpio0 (
 wb_everloop  everloop0 (
 	.clk( clk ),
 	.reset( ~rst ),
-	
+	//	
 	.wb_adr_i( everloop0_adr   ),
 	.wb_dat_i( everloop0_dat_w ),
 	.wb_dat_o( everloop0_dat_r ),
@@ -479,8 +487,7 @@ wb_everloop  everloop0 (
 	.wb_we_i(  everloop0_we    ),
 	.wb_sel_i( everloop0_sel   ),
 	.wb_ack_o( everloop0_ack   ), 
-
-
+	//
 	.everloop_led_ctl( everloop_led_ctl )
 );
 

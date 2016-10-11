@@ -22,6 +22,11 @@ SIM_SRC=                                  \
 EVERLOOP_SRC = ../rtl/wb_everloop/everloop_bram.v \
                ../rtl/wb_everloop/everloop.v      \
                ../rtl/wb_everloop/wb_everloop.v 
+
+
+I2C_SRC      = ../rtl/wb_i2c/i2c_master.v         \
+               ../rtl/wb_i2c/wb_i2c.v             
+
 SRC=                                      \
 	../system.v                              \
 	../rtl/lac/lac.v                   \

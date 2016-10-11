@@ -1,0 +1,20 @@
+#ifndef everloop_h
+#define everloop_h
+
+/***************************************************************************
+ * everloop
+ */
+
+typedef struct {
+   volatile uint32_t leds; //aparecen de 4 en 4 enteros de 32 bits 
+   volatile uint32_t switches; // Tengo que colocarlas en orden para que funcione estan implicitas
+   volatile uint32_t buttons;
+} everloop_t;
+
+void everloop_init();
+void everloop_leds_on(uint8_t leds_on);
+void everloop_leds_off(uint8_t leds_off);
+void everloop_leds(uint8_t leds0);
+uint8_t everloop_read_sw (void);
+
+#endif 

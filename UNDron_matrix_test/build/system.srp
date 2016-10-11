@@ -128,14 +128,6 @@ Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_ma
 Parsing module <wb_gpio>.
 Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_spi/wb_spi.v" into library work
 Parsing module <wb_spi>.
-Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_i2c/i2c_master_wb_top.v" into library work
-Parsing module <i2c_master_wb_top>.
-Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_i2c/i2c_master_registers.v" into library work
-Parsing module <i2c_master_registers>.
-Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_i2c/i2c_master_byte_ctrl.v" into library work
-Parsing module <i2c_master_byte_ctrl>.
-Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_i2c/i2c_master_bit_ctrl.v" into library work
-Parsing module <i2c_master_bit_ctrl>.
 Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_conbus/conbus.v" into library work
 Parsing module <conbus>.
 Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_conbus/conbus_arb.v" into library work
@@ -147,12 +139,17 @@ Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_ma
 Parsing module <everloop>.
 Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_everloop/wb_everloop.v" into library work
 Parsing module <wb_everloop>.
+Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_i2c/i2c_master.v" into library work
+Parsing module <i2c_master>.
+Analyzing Verilog file "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_i2c/wb_i2c.v" into library work
+Parsing module <wb_i2c>.
 
 =========================================================================
 *                            HDL Elaboration                            *
 =========================================================================
-WARNING:HDLCompiler:1016 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 196: Port m0_cti_i is not connected to this instance
-WARNING:HDLCompiler:1016 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 387: Port spi_cs is not connected to this instance
+WARNING:HDLCompiler:1016 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 203: Port m0_cti_i is not connected to this instance
+WARNING:HDLCompiler:1016 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 394: Port spi_cs is not connected to this instance
+WARNING:HDLCompiler:1016 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 417: Port wb_sel_i is not connected to this instance
 
 Elaborating module <system>.
 
@@ -161,13 +158,8 @@ Elaborating module <conbus(s_addr_w=4,s0_addr=4'b0,s1_addr=4'b010,s2_addr=4'b011
 Elaborating module <conbus_arb>.
 WARNING:HDLCompiler:189 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_conbus/conbus.v" Line 301: Size mismatch in connection of port <req>. Formal port size is 7-bit while actual signal size is 6-bit.
 WARNING:HDLCompiler:189 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_conbus/conbus.v" Line 302: Size mismatch in connection of port <gnt>. Formal port size is 7-bit while actual signal size is 6-bit.
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 259: Assignment to gpio0_sel ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 275: Assignment to i2c0_dat_w ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 276: Assignment to i2c0_adr ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 277: Assignment to i2c0_sel ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 278: Assignment to i2c0_we ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 279: Assignment to i2c0_cyc ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 280: Assignment to i2c0_stb ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 266: Assignment to gpio0_sel ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 284: Assignment to i2c0_sel ignored, since the identifier is never used
 
 Elaborating module <lm32_cpu>.
 
@@ -198,12 +190,12 @@ Elaborating module <lm32_mc_arithmetic>.
 
 Elaborating module <lm32_interrupt>.
 WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/lm32/lm32_cpu.v" Line 1138: Assignment to x_result_sel_logic_x ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 311: Assignment to lm32i_cti ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 312: Assignment to lm32i_lock ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 313: Assignment to lm32i_bte ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 325: Assignment to lm32d_cti ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 326: Assignment to lm32d_lock ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 327: Assignment to lm32d_bte ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 318: Assignment to lm32i_cti ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 319: Assignment to lm32i_lock ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 320: Assignment to lm32i_bte ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 332: Assignment to lm32d_cti ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 333: Assignment to lm32d_lock ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 334: Assignment to lm32d_bte ignored, since the identifier is never used
 
 Elaborating module <wb_bram(adr_width=12,mem_file_name="../firmware/hw-test/image.ram")>.
 Reading initialization file \"../firmware/hw-test/image.ram\".
@@ -221,6 +213,10 @@ Elaborating module <wb_spi>.
 WARNING:HDLCompiler:413 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_spi/wb_spi.v" Line 57: Result of 9-bit expression is truncated to fit in 8-bit target.
 WARNING:HDLCompiler:413 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_spi/wb_spi.v" Line 63: Result of 4-bit expression is truncated to fit in 3-bit target.
 
+Elaborating module <wb_i2c>.
+
+Elaborating module <i2c_master>.
+
 Elaborating module <wb_timer(clk_freq=100000000)>.
 
 Elaborating module <wb_gpio>.
@@ -236,14 +232,13 @@ WARNING:HDLCompiler:189 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron
 WARNING:HDLCompiler:189 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_everloop/wb_everloop.v" Line 88: Size mismatch in connection of port <adr_b>. Formal port size is 8-bit while actual signal size is 11-bit.
 WARNING:HDLCompiler:413 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_everloop/wb_everloop.v" Line 97: Result of 32-bit expression is truncated to fit in 8-bit target.
 WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_everloop/wb_everloop.v" Line 48: Net <ack> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 84: Net <i2c0_dat_r[31]> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 158: Net <i2c0_ack> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 168: Net <lm32i_rty> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 169: Net <lm32d_rty> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 171: Net <lm32i_err> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 172: Net <lm32d_err> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 189: Net <gpio0_intr> does not have a driver.
-WARNING:HDLCompiler:552 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 205: Input port m0_cti_i[2] is not connected on this instance
+WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 175: Net <lm32i_rty> does not have a driver.
+WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 176: Net <lm32d_rty> does not have a driver.
+WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 178: Net <lm32i_err> does not have a driver.
+WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 179: Net <lm32d_err> does not have a driver.
+WARNING:HDLCompiler:634 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 196: Net <gpio0_intr> does not have a driver.
+WARNING:HDLCompiler:552 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 212: Input port m0_cti_i[2] is not connected on this instance
+WARNING:HDLCompiler:552 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" Line 417: Input port wb_sel_i[3] is not connected on this instance
 WARNING:Xst:2972 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/lm32/lm32_cpu.v" line 483. All outputs of instance <simtrace> of block <lm32_simtrace> are unconnected in block <lm32_cpu>. Underlying logic will be removed.
 
 =========================================================================
@@ -287,44 +282,38 @@ WARNING:Xst:2898 - Port 'm5_we_i', unconnected in block instance 'conbus0', is t
 WARNING:Xst:2898 - Port 'm5_cyc_i', unconnected in block instance 'conbus0', is tied to GND.
 WARNING:Xst:2898 - Port 'm5_stb_i', unconnected in block instance 'conbus0', is tied to GND.
 WARNING:Xst:2898 - Port 's7_ack_i', unconnected in block instance 'conbus0', is tied to GND.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <m2_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <m3_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <m4_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <m5_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s0_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s1_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s2_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s3_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s3_sel_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s4_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s5_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s5_adr_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s5_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s5_sel_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s6_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s7_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s7_adr_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s7_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s7_sel_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <m2_ack_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <m3_ack_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <m4_ack_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <m5_ack_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s5_we_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s5_cyc_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s5_stb_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s7_we_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s7_cyc_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 205: Output port <s7_stb_o> of the instance <conbus0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 298: Output port <I_CTI_O> of the instance <lm0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 298: Output port <I_BTE_O> of the instance <lm0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 298: Output port <D_CTI_O> of the instance <lm0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 298: Output port <D_BTE_O> of the instance <lm0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 298: Output port <I_LOCK_O> of the instance <lm0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 298: Output port <D_LOCK_O> of the instance <lm0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 387: Output port <spi_cs> of the instance <spi0> is unconnected or connected to loadless signal.
-WARNING:Xst:653 - Signal <i2c0_dat_r> is used but never assigned. This sourceless signal will be automatically connected to value GND.
-WARNING:Xst:653 - Signal <i2c0_ack> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:2898 - Port 'wb_sel_i', unconnected in block instance 'i2c0', is tied to GND.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <m2_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <m3_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <m4_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <m5_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s0_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s1_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s2_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s3_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s3_sel_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s4_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s5_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s5_sel_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s6_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s7_dat_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s7_adr_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s7_cti_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s7_sel_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <m2_ack_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <m3_ack_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <m4_ack_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <m5_ack_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s7_we_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s7_cyc_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 212: Output port <s7_stb_o> of the instance <conbus0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 305: Output port <I_CTI_O> of the instance <lm0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 305: Output port <I_BTE_O> of the instance <lm0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 305: Output port <D_CTI_O> of the instance <lm0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 305: Output port <D_BTE_O> of the instance <lm0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 305: Output port <I_LOCK_O> of the instance <lm0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 305: Output port <D_LOCK_O> of the instance <lm0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/system.v" line 394: Output port <spi_cs> of the instance <spi0> is unconnected or connected to loadless signal.
 WARNING:Xst:653 - Signal <lm32i_rty> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <lm32d_rty> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <lm32i_err> is used but never assigned. This sourceless signal will be automatically connected to value GND.
@@ -700,30 +689,30 @@ WARNING:Xst:647 - Input <wb_dat_i<31:8>> is never used. This port will be preser
     Found 1-bit register for signal <tx_wr>.
     Found 1-bit register for signal <rx_ack>.
     Found 1-bit register for signal <ack>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<19><2:2>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<17><19:19>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<12><17:17>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<23><12:12>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<18><23:23>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<29><18:18>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<28><29:29>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<27><28:28>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<26><27:27>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<25><26:26>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<21><25:25>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<20><21:21>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<15><20:20>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<13><15:15>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<10><13:13>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<9><10:10>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<30><9:9>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<31><30:30>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<24><31:31>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<22><24:24>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<16><22:22>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<20><2:2>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<28><20:20>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<24><28:28>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<26><24:24>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<9><26:26>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<29><9:9>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<30><29:29>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<12><30:30>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<31><12:12>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<27><31:31>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<25><27:27>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<23><25:25>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<19><23:23>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<16><19:19>> (without init value) have a constant value of 0 in block <wb_uart>.
     WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<14><16:16>> (without init value) have a constant value of 0 in block <wb_uart>.
     WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<11><14:14>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<8><11:11>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<10><11:11>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<22><10:10>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<21><22:22>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<18><21:21>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<17><18:18>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<15><17:17>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<13><15:15>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<8><13:13>> (without init value) have a constant value of 0 in block <wb_uart>.
     Summary:
 	inferred  11 D-type flip-flop(s).
 	inferred   1 Multiplexer(s).
@@ -785,6 +774,119 @@ WARNING:Xst:647 - Input <wb_sel_i> is never used. This port will be preserved an
 	inferred   2 Multiplexer(s).
 Unit <wb_spi> synthesized.
 
+Synthesizing Unit <wb_i2c>.
+    Related source file is "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_i2c/wb_i2c.v".
+WARNING:Xst:647 - Input <wb_adr_i<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <wb_adr_i<31:5>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <wb_sel_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <wb_dat_i<31:8>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <wb_dat_o<7>>.
+    Found 1-bit register for signal <wb_dat_o<6>>.
+    Found 1-bit register for signal <wb_dat_o<5>>.
+    Found 1-bit register for signal <wb_dat_o<4>>.
+    Found 1-bit register for signal <wb_dat_o<3>>.
+    Found 1-bit register for signal <wb_dat_o<2>>.
+    Found 1-bit register for signal <wb_dat_o<1>>.
+    Found 1-bit register for signal <wb_dat_o<0>>.
+    Found 1-bit register for signal <ena>.
+    Found 1-bit register for signal <ack>.
+    Found 8-bit register for signal <data_wr>.
+    Found 1-bit register for signal <rw>.
+    Found 7-bit register for signal <addr>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<23><2:2>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<8><23:23>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<15><8:8>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<17><15:15>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<12><17:17>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<10><12:12>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<31><10:10>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<29><31:31>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<27><29:29>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<26><27:27>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<25><26:26>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<22><25:25>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<21><22:22>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<18><21:21>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<16><18:18>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<14><16:16>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<13><14:14>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<11><13:13>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<9><11:11>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<30><9:9>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<28><30:30>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<24><28:28>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<20><24:24>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<19><20:20>> (without init value) have a constant value of 0 in block <wb_i2c>.
+    Summary:
+	inferred  26 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+Unit <wb_i2c> synthesized.
+
+Synthesizing Unit <i2c_master>.
+    Related source file is "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_i2c/i2c_master.v".
+        input_clk = 100000000
+        bus_clk = 100000
+        countWidth = 10
+        ready = 4'b0000
+        start = 4'b0001
+        command = 4'b0010
+        slv_ack1 = 4'b0011
+        wr = 4'b0100
+        rd = 4'b0101
+        slv_ack2 = 4'b0110
+        mstr_ack = 4'b0111
+        stop = 4'b1000
+    Found 1-bit register for signal <busy>.
+    Found 4-bit register for signal <state>.
+    Found 32-bit register for signal <bit_cnt>.
+    Found 8-bit register for signal <data_rd>.
+    Found 10-bit register for signal <count>.
+    Found 1-bit register for signal <scl_ena>.
+    Found 1-bit register for signal <sda_int>.
+    Found 1-bit register for signal <ack_error>.
+    Found 1-bit register for signal <data_clk_prev>.
+    Found 1-bit register for signal <scl_clk>.
+    Found 1-bit register for signal <data_clk>.
+    Found 8-bit register for signal <addr_rw>.
+    Found 8-bit register for signal <data_tx>.
+    Found 8-bit register for signal <data_rx>.
+    Found finite state machine <FSM_2> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 9                                              |
+    | Transitions        | 36                                             |
+    | Inputs             | 6                                              |
+    | Outputs            | 10                                             |
+    | Clock              | clk (falling_edge)                             |
+    | Reset              | reset (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 0000                                           |
+    | Power Up State     | 0000                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 32-bit subtractor for signal <n0160[31:0]> created at line 171.
+    Found 10-bit adder for signal <count[9]_GND_27_o_add_1_OUT> created at line 81.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[2]_addr_rw[7]_Mux_13_o> created at line 135.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[31]_addr_rw[7]_Mux_17_o> created at line 148.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[2]_data_tx[7]_Mux_20_o> created at line 155.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[31]_data_tx[7]_Mux_25_o> created at line 171.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[2]_data_wr[7]_Mux_35_o> created at line 199.
+    Found 1-bit tristate buffer for signal <sda> created at line 277
+    Found 10-bit comparator greater for signal <count[9]_GND_27_o_LessThan_4_o> created at line 82
+    Found 10-bit comparator greater for signal <count[9]_GND_27_o_LessThan_6_o> created at line 86
+    Found 10-bit comparator greater for signal <count[9]_PWR_24_o_LessThan_8_o> created at line 90
+    Found 8-bit comparator equal for signal <addr_rw[7]_addr[6]_equal_41_o> created at line 214
+    Found 32-bit comparator lessequal for signal <n0074> created at line 245
+    Found 32-bit comparator lessequal for signal <n0076> created at line 245
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  81 D-type flip-flop(s).
+	inferred   6 Comparator(s).
+	inferred  32 Multiplexer(s).
+	inferred   1 Tristate(s).
+	inferred   1 Finite State Machine(s).
+Unit <i2c_master> synthesized.
+
 Synthesizing Unit <wb_timer>.
     Related source file is "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_test/rtl/wb_timer/wb_timer.v".
         clk_freq = 100000000
@@ -804,8 +906,8 @@ WARNING:Xst:647 - Input <wb_sel_i> is never used. This port will be preserved an
     Found 1-bit register for signal <irqen0>.
     Found 1-bit register for signal <irqen1>.
     Found 1-bit register for signal <ack>.
-    Found 32-bit adder for signal <counter0[31]_GND_26_o_add_6_OUT> created at line 92.
-    Found 32-bit adder for signal <counter1[31]_GND_26_o_add_9_OUT> created at line 98.
+    Found 32-bit adder for signal <counter0[31]_GND_30_o_add_6_OUT> created at line 92.
+    Found 32-bit adder for signal <counter1[31]_GND_30_o_add_9_OUT> created at line 98.
     Found 32-bit 7-to-1 multiplexer for signal <_n0180> created at line 109.
     Found 32-bit comparator equal for signal <match0> created at line 64
     Found 32-bit comparator equal for signal <match1> created at line 65
@@ -813,7 +915,7 @@ WARNING:Xst:647 - Input <wb_sel_i> is never used. This port will be preserved an
 	inferred   2 Adder/Subtractor(s).
 	inferred 169 D-type flip-flop(s).
 	inferred   2 Comparator(s).
-	inferred  19 Multiplexer(s).
+	inferred  23 Multiplexer(s).
 Unit <wb_timer> synthesized.
 
 Synthesizing Unit <wb_gpio>.
@@ -889,7 +991,7 @@ Synthesizing Unit <everloop>.
     Found 5-bit register for signal <ones_count>.
     Found 12-bit register for signal <zeros_count>.
     Found 1-bit register for signal <send_hi>.
-    Found finite state machine <FSM_2> for signal <state>.
+    Found finite state machine <FSM_3> for signal <state>.
     -----------------------------------------------------------------------
     | States             | 10                                             |
     | Transitions        | 15                                             |
@@ -903,7 +1005,7 @@ Synthesizing Unit <everloop>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found finite state machine <FSM_3> for signal <send_state>.
+    Found finite state machine <FSM_4> for signal <send_state>.
     -----------------------------------------------------------------------
     | States             | 4                                              |
     | Transitions        | 7                                              |
@@ -916,11 +1018,11 @@ Synthesizing Unit <everloop>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 4-bit adder for signal <bit_count[3]_GND_37_o_add_2_OUT> created at line 137.
-    Found 8-bit adder for signal <address[7]_GND_37_o_add_7_OUT> created at line 156.
-    Found 12-bit adder for signal <clk_cnt[11]_GND_37_o_add_42_OUT> created at line 280.
-    Found 12-bit 4-to-1 multiplexer for signal <send_state[1]_GND_37_o_wide_mux_49_OUT> created at line 233.
-    Found 12-bit comparator equal for signal <clk_cnt[11]_GND_37_o_equal_40_o> created at line 268
+    Found 4-bit adder for signal <bit_count[3]_GND_41_o_add_2_OUT> created at line 137.
+    Found 8-bit adder for signal <address[7]_GND_41_o_add_7_OUT> created at line 156.
+    Found 12-bit adder for signal <clk_cnt[11]_GND_41_o_add_42_OUT> created at line 280.
+    Found 12-bit 4-to-1 multiplexer for signal <send_state[1]_GND_41_o_wide_mux_49_OUT> created at line 233.
+    Found 12-bit comparator equal for signal <clk_cnt[11]_GND_41_o_equal_40_o> created at line 268
     Found 12-bit comparator equal for signal <clk_cnt[11]_zeros_count[11]_equal_44_o> created at line 281
     Summary:
 	inferred   3 Adder/Subtractor(s).
@@ -953,58 +1055,65 @@ Macro Statistics
  32x32-bit dual-port RAM                               : 2
 # Multipliers                                          : 1
  32x32-bit multiplier                                  : 1
-# Adders/Subtractors                                   : 20
+# Adders/Subtractors                                   : 22
+ 10-bit adder                                          : 1
  12-bit adder                                          : 1
  16-bit subtractor                                     : 1
  3-bit adder                                           : 1
  30-bit adder                                          : 2
  32-bit adder                                          : 2
+ 32-bit subtractor                                     : 1
  33-bit adder                                          : 2
  33-bit subtractor                                     : 3
  4-bit adder                                           : 5
  6-bit subtractor                                      : 1
  8-bit adder                                           : 2
-# Registers                                            : 171
- 1-bit register                                        : 95
+# Registers                                            : 197
+ 1-bit register                                        : 113
+ 10-bit register                                       : 1
  12-bit register                                       : 2
  16-bit register                                       : 1
  2-bit register                                        : 3
  24-bit register                                       : 1
  3-bit register                                        : 4
  30-bit register                                       : 7
- 32-bit register                                       : 32
+ 32-bit register                                       : 33
  4-bit register                                        : 8
  5-bit register                                        : 4
  6-bit register                                        : 1
- 8-bit register                                        : 13
-# Comparators                                          : 13
+ 7-bit register                                        : 1
+ 8-bit register                                        : 18
+# Comparators                                          : 19
  1-bit comparator equal                                : 1
+ 10-bit comparator greater                             : 3
  12-bit comparator equal                               : 2
  32-bit comparator equal                               : 3
+ 32-bit comparator lessequal                           : 2
  5-bit comparator equal                                : 6
- 8-bit comparator equal                                : 1
-# Multiplexers                                         : 150
- 1-bit 2-to-1 multiplexer                              : 41
+ 8-bit comparator equal                                : 2
+# Multiplexers                                         : 188
+ 1-bit 2-to-1 multiplexer                              : 71
  1-bit 4-to-1 multiplexer                              : 32
- 1-bit 8-to-1 multiplexer                              : 1
+ 1-bit 8-to-1 multiplexer                              : 6
+ 10-bit 2-to-1 multiplexer                             : 1
  12-bit 2-to-1 multiplexer                             : 2
  12-bit 4-to-1 multiplexer                             : 1
  16-bit 2-to-1 multiplexer                             : 1
  2-bit 2-to-1 multiplexer                              : 1
  3-bit 2-to-1 multiplexer                              : 2
  30-bit 2-to-1 multiplexer                             : 3
- 32-bit 2-to-1 multiplexer                             : 48
+ 32-bit 2-to-1 multiplexer                             : 49
  32-bit 3-to-1 multiplexer                             : 3
  32-bit 7-to-1 multiplexer                             : 1
  4-bit 2-to-1 multiplexer                              : 2
  5-bit 2-to-1 multiplexer                              : 3
  6-bit 2-to-1 multiplexer                              : 1
- 8-bit 2-to-1 multiplexer                              : 8
+ 8-bit 2-to-1 multiplexer                              : 9
 # Logic shifters                                       : 1
  64-bit shifter logical right                          : 1
-# Tristates                                            : 8
- 1-bit tristate buffer                                 : 8
-# FSMs                                                 : 4
+# Tristates                                            : 9
+ 1-bit tristate buffer                                 : 9
+# FSMs                                                 : 5
 
 =========================================================================
 
@@ -1014,8 +1123,8 @@ Macro Statistics
 
 INFO:Xst:2261 - The FF/Latch <i_cyc_o> in Unit <instruction_unit> is equivalent to the following FF/Latch, which will be removed : <i_stb_o> 
 INFO:Xst:2261 - The FF/Latch <wb_dat_o_8> in Unit <gpio0> is equivalent to the following 23 FFs/Latches, which will be removed : <wb_dat_o_9> <wb_dat_o_10> <wb_dat_o_11> <wb_dat_o_12> <wb_dat_o_13> <wb_dat_o_14> <wb_dat_o_15> <wb_dat_o_16> <wb_dat_o_17> <wb_dat_o_18> <wb_dat_o_19> <wb_dat_o_20> <wb_dat_o_21> <wb_dat_o_22> <wb_dat_o_23> <wb_dat_o_24> <wb_dat_o_25> <wb_dat_o_26> <wb_dat_o_27> <wb_dat_o_28> <wb_dat_o_29> <wb_dat_o_30> <wb_dat_o_31> 
-INFO:Xst:2261 - The FF/Latch <zeros_count_6> in Unit <everloop0> is equivalent to the following 5 FFs/Latches, which will be removed : <zeros_count_7> <zeros_count_8> <zeros_count_9> <zeros_count_10> <zeros_count_11> 
 INFO:Xst:2261 - The FF/Latch <zeros_count_2> in Unit <everloop0> is equivalent to the following 3 FFs/Latches, which will be removed : <ones_count_1> <ones_count_2> <ones_count_3> 
+INFO:Xst:2261 - The FF/Latch <zeros_count_6> in Unit <everloop0> is equivalent to the following 5 FFs/Latches, which will be removed : <zeros_count_7> <zeros_count_8> <zeros_count_9> <zeros_count_10> <zeros_count_11> 
 INFO:Xst:2261 - The FF/Latch <zeros_count_4> in Unit <everloop0> is equivalent to the following FF/Latch, which will be removed : <ones_count_4> 
 INFO:Xst:2261 - The FF/Latch <zeros_count_0> in Unit <everloop0> is equivalent to the following FF/Latch, which will be removed : <zeros_count_5> 
 WARNING:Xst:1710 - FF/Latch <wb_dat_o_8> (without init value) has a constant value of 0 in block <gpio0>. This FF/Latch will be trimmed during the optimization process.
@@ -1077,6 +1186,10 @@ WARNING:Xst:2677 - Node <d_adr_o_25> of sequential type is unconnected in block 
 WARNING:Xst:2677 - Node <d_adr_o_26> of sequential type is unconnected in block <load_store_unit>.
 WARNING:Xst:2677 - Node <d_adr_o_27> of sequential type is unconnected in block <load_store_unit>.
 WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<31:8>> (without init value) have a constant value of 0 in block <wb_gpio>.
+
+Synthesizing (advanced) Unit <i2c_master>.
+The following registers are absorbed into counter <count>: 1 register on signal <count>.
+Unit <i2c_master> synthesized (advanced).
 
 Synthesizing (advanced) Unit <lm32_cpu>.
 INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_registers> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
@@ -1185,47 +1298,53 @@ Macro Statistics
  32x32-bit dual-port distributed RAM                   : 2
 # Multipliers                                          : 1
  32x32-bit multiplier                                  : 1
-# Adders/Subtractors                                   : 10
+# Adders/Subtractors                                   : 12
+ 10-bit adder                                          : 1
  12-bit adder                                          : 1
  30-bit adder                                          : 2
  32-bit adder                                          : 2
+ 32-bit subtractor                                     : 1
  33-bit adder carry in                                 : 1
  33-bit subtractor                                     : 1
  33-bit subtractor borrow in                           : 1
  4-bit adder                                           : 1
  8-bit adder                                           : 1
-# Counters                                             : 8
+# Counters                                             : 9
+ 10-bit up counter                                     : 1
  16-bit down counter                                   : 1
  3-bit up counter                                      : 1
  4-bit up counter                                      : 4
  6-bit down counter                                    : 1
  8-bit up counter                                      : 1
-# Registers                                            : 1460
- Flip-Flops                                            : 1460
-# Comparators                                          : 13
+# Registers                                            : 1557
+ Flip-Flops                                            : 1557
+# Comparators                                          : 19
  1-bit comparator equal                                : 1
+ 10-bit comparator greater                             : 3
  12-bit comparator equal                               : 2
  32-bit comparator equal                               : 3
+ 32-bit comparator lessequal                           : 2
  5-bit comparator equal                                : 6
- 8-bit comparator equal                                : 1
-# Multiplexers                                         : 285
- 1-bit 2-to-1 multiplexer                              : 184
+ 8-bit comparator equal                                : 2
+# Multiplexers                                         : 323
+ 1-bit 2-to-1 multiplexer                              : 214
  1-bit 4-to-1 multiplexer                              : 32
- 1-bit 8-to-1 multiplexer                              : 1
+ 1-bit 8-to-1 multiplexer                              : 6
+ 10-bit 2-to-1 multiplexer                             : 1
  12-bit 2-to-1 multiplexer                             : 2
  12-bit 4-to-1 multiplexer                             : 1
  2-bit 2-to-1 multiplexer                              : 1
  3-bit 2-to-1 multiplexer                              : 2
  30-bit 2-to-1 multiplexer                             : 3
- 32-bit 2-to-1 multiplexer                             : 44
+ 32-bit 2-to-1 multiplexer                             : 45
  32-bit 3-to-1 multiplexer                             : 3
  32-bit 7-to-1 multiplexer                             : 1
  4-bit 2-to-1 multiplexer                              : 2
  5-bit 2-to-1 multiplexer                              : 3
- 8-bit 2-to-1 multiplexer                              : 6
+ 8-bit 2-to-1 multiplexer                              : 7
 # Logic shifters                                       : 1
  64-bit shifter logical right                          : 1
-# FSMs                                                 : 4
+# FSMs                                                 : 5
 
 =========================================================================
 
@@ -1257,10 +1376,10 @@ WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_10> (witho
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_9> (without init value) has a constant value of 0 in block <wb_spi>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_8> (without init value) has a constant value of 0 in block <wb_spi>. This FF/Latch will be trimmed during the optimization process.
 INFO:Xst:2261 - The FF/Latch <i_cyc_o> in Unit <lm32_instruction_unit> is equivalent to the following FF/Latch, which will be removed : <i_stb_o> 
-INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_2> in Unit <wb_everloop> is equivalent to the following 3 FFs/Latches, which will be removed : <everloop0/ones_count_1> <everloop0/ones_count_2> <everloop0/ones_count_3> 
-INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_6> in Unit <wb_everloop> is equivalent to the following 5 FFs/Latches, which will be removed : <everloop0/zeros_count_7> <everloop0/zeros_count_8> <everloop0/zeros_count_9> <everloop0/zeros_count_10> <everloop0/zeros_count_11> 
-INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_4> in Unit <wb_everloop> is equivalent to the following FF/Latch, which will be removed : <everloop0/ones_count_4> 
 INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_0> in Unit <wb_everloop> is equivalent to the following FF/Latch, which will be removed : <everloop0/zeros_count_5> 
+INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_4> in Unit <wb_everloop> is equivalent to the following FF/Latch, which will be removed : <everloop0/ones_count_4> 
+INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_6> in Unit <wb_everloop> is equivalent to the following 5 FFs/Latches, which will be removed : <everloop0/zeros_count_7> <everloop0/zeros_count_8> <everloop0/zeros_count_9> <everloop0/zeros_count_10> <everloop0/zeros_count_11> 
+INFO:Xst:2261 - The FF/Latch <everloop0/zeros_count_2> in Unit <wb_everloop> is equivalent to the following 3 FFs/Latches, which will be removed : <everloop0/ones_count_1> <everloop0/ones_count_2> <everloop0/ones_count_3> 
 Analyzing FSM <MFsm> for best encoding.
 Optimizing FSM <conbus0/FSM_0> on signal <state[1:3]> with gray encoding.
 ---------------------
@@ -1284,7 +1403,22 @@ Optimizing FSM <lm0/mc_arithmetic/FSM_1> on signal <state[1:2]> with sequential 
  010   | 10
 -------------------
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <everloop0/FSM_2> on signal <state[1:4]> with user encoding.
+Optimizing FSM <i2c0/i2c0/FSM_2> on signal <state[1:4]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ 0000  | 0000
+ 0001  | 0001
+ 0010  | 0010
+ 0011  | 0011
+ 0101  | 0101
+ 0100  | 0100
+ 0110  | 0110
+ 0111  | 0111
+ 1000  | 1000
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <everloop0/FSM_3> on signal <state[1:4]> with user encoding.
 -------------------
  State | Encoding
 -------------------
@@ -1300,7 +1434,7 @@ Optimizing FSM <everloop0/FSM_2> on signal <state[1:4]> with user encoding.
  0101  | 0101
 -------------------
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <everloop0/FSM_3> on signal <send_state[1:2]> with user encoding.
+Optimizing FSM <everloop0/FSM_4> on signal <send_state[1:2]> with user encoding.
 -------------------
  State | Encoding
 -------------------
@@ -1314,7 +1448,34 @@ WARNING:Xst:1710 - FF/Latch <conbus_arb/state_FSM_FFd1> (without init value) has
 WARNING:Xst:1710 - FF/Latch <conbus_arb/state_FSM_FFd2> (without init value) has a constant value of 0 in block <conbus>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <i_adr_o_0> (without init value) has a constant value of 0 in block <lm32_instruction_unit>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <i_adr_o_1> (without init value) has a constant value of 0 in block <lm32_instruction_unit>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:3002 - This design contains one or more registers/latches that are directly
+   incompatible with the Spartan6 architecture. The two primary causes of this is
+   either a register or latch described with both an asynchronous set and
+   asynchronous reset, or a register or latch described with an asynchronous
+   set or reset which however has an initialization value of the opposite 
+   polarity (i.e. asynchronous reset with an initialization value of 1).
+    While this circuit can be built, it creates a sub-optimal implementation
+   in terms of area, power and performance. For a more optimal implementation
+   Xilinx highly recommends one of the following:
+
+          1) Remove either the set or reset from all registers and latches
+             if not needed for required functionality
+          2) Modify the code in order to produce a synchronous set
+             and/or reset (both is preferred)
+          3) Ensure all registers have the same initialization value as the
+             described asynchronous set or reset polarity
+          4) Use the -async_to_sync option to transform the asynchronous
+             set/reset to synchronous operation
+             (timing simulation highly recommended when using this option)
+
+  Please refer to http://www.xilinx.com search string "Spartan6 asynchronous set/reset" for more details.
+
+  List of register instances with asynchronous set or reset and opposite initialization value:
+    sda_int in unit <i2c_master>
+    busy in unit <i2c_master>
+
 WARNING:Xst:2042 - Unit wb_gpio: 8 internal tristates are replaced by logic (pull-up yes): gpio_io<0>, gpio_io<1>, gpio_io<2>, gpio_io<3>, gpio_io<4>, gpio_io<5>, gpio_io<6>, gpio_io<7>.
+WARNING:Xst:2041 - Unit i2c_master: 1 internal tristate is replaced by logic (pull-up yes): sda.
 
 Optimizing unit <system> ...
 
@@ -1403,6 +1564,10 @@ Optimizing unit <uart> ...
 
 Optimizing unit <wb_spi> ...
 
+Optimizing unit <wb_i2c> ...
+
+Optimizing unit <i2c_master> ...
+
 Optimizing unit <wb_timer> ...
 
 Optimizing unit <wb_gpio> ...
@@ -1487,6 +1652,7 @@ WARNING:Xst:2677 - Node <spi0/spi_cs_3> of sequential type is unconnected in blo
 WARNING:Xst:2677 - Node <spi0/spi_cs_2> of sequential type is unconnected in block <system>.
 WARNING:Xst:2677 - Node <spi0/spi_cs_1> of sequential type is unconnected in block <system>.
 WARNING:Xst:2677 - Node <spi0/spi_cs_0> of sequential type is unconnected in block <system>.
+WARNING:Xst:2677 - Node <i2c0/i2c0/scl_clk> of sequential type is unconnected in block <system>.
 WARNING:Xst:1710 - FF/Latch <uart0/uart0/enable16_counter_14> (without init value) has a constant value of 0 in block <system>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <uart0/uart0/enable16_counter_13> (without init value) has a constant value of 0 in block <system>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <uart0/uart0/enable16_counter_15> (without init value) has a constant value of 0 in block <system>. This FF/Latch will be trimmed during the optimization process.
@@ -1569,35 +1735,36 @@ INFO:Xst:2261 - The FF/Latch <lm0/multiplier/multiplier_29> in Unit <system> is 
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 0) on block system, actual ratio is 111.
+Found area constraint ratio of 100 (+ 0) on block system, actual ratio is 123.
 Optimizing block <system> to meet ratio 100 (+ 0) of 600 slices :
-Area constraint is met for block <system>, final ratio is 100.
+WARNING:Xst:2254 - Area constraint could not be met for block <system>, final ratio is 112.
 Forward register balancing over carry chain lm0/Mcompar_cmp_zero_cy<0>
 Forward register balancing over carry chain lm0/Madd_pc_d[31]_branch_offset_d[31]_add_160_OUT_cy<0>
-INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_0> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_8_BRB2> <lm0/load_store_unit/store_data_m_16_BRB0> <lm0/load_store_unit/store_data_m_24_BRB4> 
-INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_1> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_9_BRB2> <lm0/load_store_unit/store_data_m_17_BRB0> <lm0/load_store_unit/store_data_m_25_BRB4> 
-INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_2> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_10_BRB2> <lm0/load_store_unit/store_data_m_18_BRB0> <lm0/load_store_unit/store_data_m_26_BRB4> 
-INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_3> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_11_BRB2> <lm0/load_store_unit/store_data_m_19_BRB0> <lm0/load_store_unit/store_data_m_27_BRB4> 
-INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_4> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_12_BRB2> <lm0/load_store_unit/store_data_m_20_BRB0> <lm0/load_store_unit/store_data_m_28_BRB4> 
-INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_5> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_13_BRB2> <lm0/load_store_unit/store_data_m_21_BRB0> <lm0/load_store_unit/store_data_m_29_BRB4> 
-INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_6> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_14_BRB2> <lm0/load_store_unit/store_data_m_22_BRB0> <lm0/load_store_unit/store_data_m_30_BRB4> 
-INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_7> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_15_BRB2> <lm0/load_store_unit/store_data_m_23_BRB0> <lm0/load_store_unit/store_data_m_31_BRB4> 
-INFO:Xst:2261 - The FF/Latch <lm0/m_result_sel_shift_x> in Unit <system> is equivalent to the following FF/Latch, which will be removed : <lm0/m_bypass_enable_x_BRB0> 
-INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/size_m_1> in Unit <system> is equivalent to the following 16 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_15_BRB0> <lm0/load_store_unit/store_data_m_14_BRB0> <lm0/load_store_unit/store_data_m_13_BRB0> <lm0/load_store_unit/store_data_m_12_BRB0> <lm0/load_store_unit/store_data_m_11_BRB0> <lm0/load_store_unit/store_data_m_10_BRB0> <lm0/load_store_unit/store_data_m_9_BRB0> <lm0/load_store_unit/store_data_m_8_BRB0> <lm0/load_store_unit/store_data_m_31_BRB0> <lm0/load_store_unit/store_data_m_30_BRB0> <lm0/load_store_unit/store_data_m_29_BRB0> <lm0/load_store_unit/store_data_m_28_BRB0> <lm0/load_store_unit/store_data_m_27_BRB0> <lm0/load_store_unit/store_data_m_26_BRB0> <lm0/load_store_unit/store_data_m_25_BRB0> <lm0/load_store_unit/store_data_m_24_BRB0> 
-INFO:Xst:2261 - The FF/Latch <lm0/x_bypass_enable_x> in Unit <system> is equivalent to the following FF/Latch, which will be removed : <lm0/m_bypass_enable_x_BRB1> 
+Forward register balancing over carry chain i2c0/i2c0/Madd_count[9]_GND_27_o_add_1_OUT_cy<0>
+INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_0> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_8_BRB1> <lm0/load_store_unit/store_data_m_16_BRB0> <lm0/load_store_unit/store_data_m_24_BRB4> 
+INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_1> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_9_BRB1> <lm0/load_store_unit/store_data_m_17_BRB0> <lm0/load_store_unit/store_data_m_25_BRB4> 
+INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_2> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_10_BRB1> <lm0/load_store_unit/store_data_m_18_BRB0> <lm0/load_store_unit/store_data_m_26_BRB4> 
+INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_3> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_11_BRB1> <lm0/load_store_unit/store_data_m_19_BRB0> <lm0/load_store_unit/store_data_m_27_BRB4> 
+INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_4> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_12_BRB1> <lm0/load_store_unit/store_data_m_20_BRB0> <lm0/load_store_unit/store_data_m_28_BRB4> 
+INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_5> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_13_BRB1> <lm0/load_store_unit/store_data_m_21_BRB0> <lm0/load_store_unit/store_data_m_29_BRB4> 
+INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_6> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_14_BRB1> <lm0/load_store_unit/store_data_m_22_BRB0> <lm0/load_store_unit/store_data_m_30_BRB4> 
+INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/store_data_m_7> in Unit <system> is equivalent to the following 3 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_15_BRB1> <lm0/load_store_unit/store_data_m_23_BRB0> <lm0/load_store_unit/store_data_m_31_BRB4> 
 INFO:Xst:2261 - The FF/Latch <lm0/m_result_sel_compare_x> in Unit <system> is equivalent to the following FF/Latch, which will be removed : <lm0/m_bypass_enable_x_BRB2> 
+INFO:Xst:2261 - The FF/Latch <lm0/m_result_sel_shift_x> in Unit <system> is equivalent to the following FF/Latch, which will be removed : <lm0/m_bypass_enable_x_BRB0> 
+INFO:Xst:2261 - The FF/Latch <lm0/x_bypass_enable_x> in Unit <system> is equivalent to the following FF/Latch, which will be removed : <lm0/m_bypass_enable_x_BRB1> 
+INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/size_m_1> in Unit <system> is equivalent to the following 16 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_15_BRB0> <lm0/load_store_unit/store_data_m_14_BRB0> <lm0/load_store_unit/store_data_m_13_BRB0> <lm0/load_store_unit/store_data_m_12_BRB0> <lm0/load_store_unit/store_data_m_11_BRB0> <lm0/load_store_unit/store_data_m_10_BRB0> <lm0/load_store_unit/store_data_m_9_BRB0> <lm0/load_store_unit/store_data_m_8_BRB0> <lm0/load_store_unit/store_data_m_31_BRB0> <lm0/load_store_unit/store_data_m_30_BRB0> <lm0/load_store_unit/store_data_m_29_BRB0> <lm0/load_store_unit/store_data_m_28_BRB0> <lm0/load_store_unit/store_data_m_27_BRB0> <lm0/load_store_unit/store_data_m_26_BRB0> <lm0/load_store_unit/store_data_m_25_BRB0> <lm0/load_store_unit/store_data_m_24_BRB0> 
 INFO:Xst:2261 - The FF/Latch <lm0/size_x_1> in Unit <system> is equivalent to the following FF/Latch, which will be removed : <lm0/w_result_sel_mul_x_BRB0> 
 
 Pipelining and Register Balancing Report ...
 
 Processing Unit <system> :
 	Register(s) lm0/branch_x has(ve) been backward balanced into : lm0/branch_x_BRB0 lm0/branch_x_BRB1 lm0/branch_x_BRB2 lm0/branch_x_BRB3 lm0/branch_x_BRB4 lm0/branch_x_BRB5.
-	Register(s) lm0/load_store_unit/store_data_m_10 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_10_BRB1 .
-	Register(s) lm0/load_store_unit/store_data_m_11 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_11_BRB1 .
-	Register(s) lm0/load_store_unit/store_data_m_12 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_12_BRB1 .
-	Register(s) lm0/load_store_unit/store_data_m_13 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_13_BRB1 .
-	Register(s) lm0/load_store_unit/store_data_m_14 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_14_BRB1 .
-	Register(s) lm0/load_store_unit/store_data_m_15 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_15_BRB1 .
+	Register(s) lm0/load_store_unit/store_data_m_10 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_10_BRB2.
+	Register(s) lm0/load_store_unit/store_data_m_11 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_11_BRB2.
+	Register(s) lm0/load_store_unit/store_data_m_12 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_12_BRB2.
+	Register(s) lm0/load_store_unit/store_data_m_13 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_13_BRB2.
+	Register(s) lm0/load_store_unit/store_data_m_14 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_14_BRB2.
+	Register(s) lm0/load_store_unit/store_data_m_15 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_15_BRB2.
 	Register(s) lm0/load_store_unit/store_data_m_16 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_16_BRB3.
 	Register(s) lm0/load_store_unit/store_data_m_17 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_17_BRB3.
 	Register(s) lm0/load_store_unit/store_data_m_18 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_18_BRB3.
@@ -1614,12 +1781,16 @@ Processing Unit <system> :
 	Register(s) lm0/load_store_unit/store_data_m_29 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_29_BRB3 .
 	Register(s) lm0/load_store_unit/store_data_m_30 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_30_BRB3 .
 	Register(s) lm0/load_store_unit/store_data_m_31 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_31_BRB1 lm0/load_store_unit/store_data_m_31_BRB3 .
-	Register(s) lm0/load_store_unit/store_data_m_8 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_8_BRB1 .
-	Register(s) lm0/load_store_unit/store_data_m_9 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_9_BRB1 .
+	Register(s) lm0/load_store_unit/store_data_m_8 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_8_BRB2.
+	Register(s) lm0/load_store_unit/store_data_m_9 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_9_BRB2.
 	Register(s) lm0/store_x has(ve) been backward balanced into : lm0/store_x_BRB0 lm0/store_x_BRB5.
 	Register(s) lm0/w_result_sel_load_m has(ve) been backward balanced into : lm0/w_result_sel_load_m_BRB3.
 	Register(s) lm0/w_result_sel_mul_m has(ve) been backward balanced into : lm0/w_result_sel_mul_m_BRB0 lm0/w_result_sel_mul_m_BRB1 lm0/w_result_sel_mul_m_BRB2 lm0/w_result_sel_mul_m_BRB3.
 Unit <system> processed.
+WARNING:Xst:1426 - The value init of the FF/Latch i2c0/i2c0/busy_LD hinder the constant cleaning in the block system.
+   You should achieve better results by setting this init to 1.
+WARNING:Xst:1426 - The value init of the FF/Latch i2c0/i2c0/sda_int_LD hinder the constant cleaning in the block system.
+   You should achieve better results by setting this init to 0.
 FlipFlop uart0/uart0/uart_txd has been replicated 1 time(s) to handle iob=true attribute.
 FlipFlop spi0/sreg_7 has been replicated 1 time(s) to handle iob=true attribute.
 FlipFlop spi0/sck has been replicated 1 time(s) to handle iob=true attribute.
@@ -1634,8 +1805,8 @@ Unit <system> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 1331
- Flip-Flops                                            : 1331
+# Registers                                            : 1452
+ Flip-Flops                                            : 1452
 # Shift Registers                                      : 1
  2-bit shift register                                  : 1
 
@@ -1660,38 +1831,45 @@ Top Level Output File Name         : system.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 2306
+# BELS                             : 2637
 #      GND                         : 1
-#      INV                         : 18
-#      LUT1                        : 110
-#      LUT2                        : 201
-#      LUT3                        : 257
-#      LUT4                        : 147
-#      LUT5                        : 355
-#      LUT6                        : 690
-#      MUXCY                       : 272
-#      MUXF7                       : 6
+#      INV                         : 51
+#      LUT1                        : 120
+#      LUT2                        : 239
+#      LUT3                        : 275
+#      LUT4                        : 190
+#      LUT5                        : 327
+#      LUT6                        : 794
+#      MUXCY                       : 327
+#      MUXF7                       : 13
 #      VCC                         : 1
-#      XORCY                       : 248
-# FlipFlops/Latches                : 1332
-#      FD                          : 23
-#      FD_1                        : 1
-#      FDC                         : 121
+#      XORCY                       : 299
+# FlipFlops/Latches                : 1455
+#      FD                          : 25
+#      FD_1                        : 3
+#      FDC                         : 140
+#      FDC_1                       : 5
 #      FDCE                        : 778
-#      FDE                         : 81
+#      FDCE_1                      : 39
+#      FDE                         : 84
+#      FDE_1                       : 24
+#      FDP_1                       : 1
 #      FDPE                        : 34
-#      FDR                         : 35
+#      FDPE_1                      : 3
+#      FDR                         : 38
 #      FDR_1                       : 16
-#      FDRE                        : 159
+#      FDRE                        : 179
 #      FDRE_1                      : 7
 #      FDS                         : 4
 #      FDSE                        : 73
+#      LD                          : 2
 # RAMS                             : 67
 #      RAM32X1D                    : 64
 #      RAMB16BWER                  : 3
 # Shift Registers                  : 1
 #      SRLC16E                     : 1
-# Clock Buffers                    : 1
+# Clock Buffers                    : 2
+#      BUFG                        : 1
 #      BUFGP                       : 1
 # IO Buffers                       : 8
 #      IBUF                        : 3
@@ -1706,29 +1884,29 @@ Selected Device : 6slx4tqg144-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:            1327  out of   4800    27%  
- Number of Slice LUTs:                 1907  out of   2400    79%  
-    Number used as Logic:              1778  out of   2400    74%  
+ Number of Slice Registers:            1450  out of   4800    30%  
+ Number of Slice LUTs:                 2125  out of   2400    88%  
+    Number used as Logic:              1996  out of   2400    83%  
     Number used as Memory:              129  out of   1200    10%  
        Number used as RAM:              128
        Number used as SRL:                1
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   2147
-   Number with an unused Flip Flop:     820  out of   2147    38%  
-   Number with an unused LUT:           240  out of   2147    11%  
-   Number of fully used LUT-FF pairs:  1087  out of   2147    50%  
-   Number of unique control sets:        46
+ Number of LUT Flip Flop pairs used:   2383
+   Number with an unused Flip Flop:     933  out of   2383    39%  
+   Number with an unused LUT:           258  out of   2383    10%  
+   Number of fully used LUT-FF pairs:  1192  out of   2383    50%  
+   Number of unique control sets:        56
 
 IO Utilization: 
- Number of IOs:                           9
+ Number of IOs:                          11
  Number of bonded IOBs:                   9  out of    102     8%  
     IOB Flip Flops/Latches:               5
 
 Specific Feature Utilization:
  Number of Block RAM/FIFO:                3  out of     12    25%  
     Number using Block RAM only:          3
- Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
+ Number of BUFG/BUFGCTRLs:                2  out of     16    12%  
  Number of DSP48A1s:                      3  out of      8    37%  
 
 ---------------------------
@@ -1752,7 +1930,8 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 1400  |
+clk                                | BUFGP                  | 1521  |
+rst                                | IBUF+BUFG              | 2     |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -1764,7 +1943,7 @@ Timing Summary:
 Speed Grade: -2
 
    Minimum period: 15.304ns (Maximum Frequency: 65.342MHz)
-   Minimum input arrival time before clock: 6.186ns
+   Minimum input arrival time before clock: 6.356ns
    Maximum output required time after clock: 5.138ns
    Maximum combinational path delay: No path found
 
@@ -1775,7 +1954,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 15.304ns (frequency: 65.342MHz)
-  Total number of paths / destination ports: 1330775 / 3389
+  Total number of paths / destination ports: 1336008 / 3619
 -------------------------------------------------------------------------
 Delay:               15.304ns (Levels of Logic = 3)
   Source:            lm0/multiplier/multiplier_3 (FF)
@@ -1798,9 +1977,9 @@ Delay:               15.304ns (Levels of Logic = 3)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 1340 / 1339
+  Total number of paths / destination ports: 1479 / 1478
 -------------------------------------------------------------------------
-Offset:              6.186ns (Levels of Logic = 2)
+Offset:              6.356ns (Levels of Logic = 2)
   Source:            rst (PAD)
   Destination:       conbus0/conbus_arb/state_FSM_FFd3 (FF)
   Destination Clock: clk rising
@@ -1809,12 +1988,12 @@ Offset:              6.186ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            31   1.328   1.502  rst_IBUF (rst_IBUF)
-     INV:I->O           1160   0.255   2.641  rst_INV_172_o1_INV_0 (rst_INV_172_o)
+     IBUF:I->O            40   1.328   1.653  rst_IBUF (i2c0/i2c0/reset_inv)
+     INV:I->O           1230   0.255   2.661  i2c0/i2c0/reset_inv_BUFG_LUT1_INV_0 (i2c0/i2c0/reset_inv_BUFG_LUT1)
      FDR:R                     0.459          conbus0/conbus_arb/state_FSM_FFd3
     ----------------------------------------
-    Total                      6.186ns (2.042ns logic, 4.144ns route)
-                                       (33.0% logic, 67.0% route)
+    Total                      6.356ns (2.042ns logic, 4.314ns route)
+                                       (32.1% logic, 67.9% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
@@ -1846,21 +2025,22 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |   15.304|    3.124|    5.936|         |
+clk            |   15.304|    3.124|    7.623|         |
+rst            |    2.780|         |    4.870|         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 18.00 secs
-Total CPU time to Xst completion: 15.07 secs
+Total REAL time to Xst completion: 21.00 secs
+Total CPU time to Xst completion: 19.66 secs
  
 --> 
 
 
-Total memory usage is 412148 kilobytes
+Total memory usage is 415368 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  377 (   0 filtered)
-Number of infos    :  137 (   0 filtered)
+Number of warnings :  405 (   0 filtered)
+Number of infos    :  132 (   0 filtered)
 
