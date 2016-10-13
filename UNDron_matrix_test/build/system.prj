@@ -27,3 +27,5 @@ verilog work ../rtl/wb_everloop/everloop.v
 verilog work ../rtl/wb_everloop/wb_everloop.v
 verilog work ../rtl/wb_i2c/i2c_master.v
 verilog work ../rtl/wb_i2c/wb_i2c.v
+verilog work ../rtl/wb_pwm/pwm.v
+verilog work ../rtl/wb_pwm/wb_pwm.v

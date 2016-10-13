@@ -226,9 +226,8 @@ conbus #(
 	.s3_addr(4'h4), // gpio     0x40000000 
 	.s4_addr(4'h5), // spi      0x50000000 
 	.s5_addr(4'h6), // i2c      0x60000000 
-	.s6_addr(4'h7)  // everloop 0x70000000
-//PENDIENTE
-	.s6_addr(4'h8)  // pwm 0x80000000 // PENDIENTE 
+	.s6_addr(4'h7), // everloop 0x70000000
+	.s7_addr(4'h8)  // pwm      0x80000000 // PENDIENTE 
 ) conbus0(
 	.sys_clk( clk ),
 	.sys_rst( ~rst ),
@@ -497,7 +496,7 @@ wb_gpio gpio0 (
 //---------------------------------------------------------------------------
 wb_everloop  everloop0 (
 	.clk( clk ),
-	.reset( ~rst ),
+	.rst( ~rst ),
 	//	
 	.wb_adr_i( everloop0_adr   ),
 	.wb_dat_i( everloop0_dat_w ),
@@ -515,8 +514,8 @@ wb_everloop  everloop0 (
 //---------------------------------------------------------------------------
 wb_pwm  pwm0 (
 	.clk( clk ),
-	.reset( ~rst ),
-	
+	.rst( ~rst ),
+	//
 	.wb_adr_i( pwm0_adr   ),
 	.wb_dat_i( pwm0_dat_w ),
 	.wb_dat_o( pwm0_dat_r ),
@@ -525,9 +524,10 @@ wb_pwm  pwm0 (
 	.wb_we_i(  pwm0_we    ),
 	.wb_sel_i( pwm0_sel   ),
 	.wb_ack_o( pwm0_ack   ), 
+    //
+    .pwm_out(pwm_out),
+    .pwm_n_out(pwm_n_out)
 
-
-	.pwm_led_ctl( pwm_led_ctl )
 );
 //----------------------------------------------------------------------------
 // Mux UART wires according to sw[0]

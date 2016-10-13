@@ -42,7 +42,10 @@ module system
 	inout             i2c_sda, 
 	inout             i2c_scl,
 	// everloop
-    output            everloop_led_ctl
+    output            everloop_led_ctl,
+	// pwm
+    output            pwm_out,
+    output            pwm_n_out
 );
 
 
@@ -71,7 +74,9 @@ wire [31:0]  lm32i_adr,
              // I2C
              i2c0_adr,
              // EVERLOOP
-             everloop0_adr; 
+             everloop0_adr, 
+             // PWM
+             pwm0_adr; 
 
 
 wire [31:0]  lm32i_dat_r,
@@ -97,7 +102,10 @@ wire [31:0]  lm32i_dat_r,
              i2c0_dat_w,
              // EVERLOOP
              everloop0_dat_r,
-             everloop0_dat_w;
+             everloop0_dat_w,
+             // PWM
+             pwm0_dat_r,
+             pwm0_dat_w;
 
 wire [3:0]   lm32i_sel,
              lm32d_sel,
@@ -111,7 +119,9 @@ wire [3:0]   lm32i_sel,
              // I2C
              i2c0_sel,
              // EVERLOOP
-             everloop0_sel;
+             everloop0_sel,
+             // PWM
+             pwm0_sel;
 
 wire         lm32i_we,
              lm32d_we,
@@ -125,7 +135,9 @@ wire         lm32i_we,
              // I2C
              i2c0_we,
              // EVERLOOP
-             everloop0_we;
+             everloop0_we,
+             // PWM
+             pwm0_we;
 
 
 wire         lm32i_cyc,
@@ -140,7 +152,9 @@ wire         lm32i_cyc,
              // I2C
              i2c0_cyc,
              // EVERLOOP
-             everloop0_cyc;
+             everloop0_cyc,
+             // PWM
+             pwm0_cyc;
 
 
 wire         lm32i_stb,
@@ -155,7 +169,9 @@ wire         lm32i_stb,
              // I2C
              i2c0_stb,
              // EVERLOOP
-             everloop0_stb;
+             everloop0_stb,
+             // PWM
+             pwm0_stb;
 
 wire         lm32i_ack,
              lm32d_ack,
@@ -169,7 +185,9 @@ wire         lm32i_ack,
              // I2C
              i2c0_ack,
              // EVERLOOP
-             everloop0_ack;
+             everloop0_ack,
+             // PWM
+             pwm0_ack;
 
 
 wire         lm32i_rty,
@@ -208,7 +226,8 @@ conbus #(
 	.s3_addr(4'h4), // gpio     0x40000000 
 	.s4_addr(4'h5), // spi      0x50000000 
 	.s5_addr(4'h6), // i2c      0x60000000 
-	.s6_addr(4'h7)  // everloop 0x70000000 
+	.s6_addr(4'h7), // everloop 0x70000000
+	.s7_addr(4'h8)  // pwm      0x80000000 // PENDIENTE 
 ) conbus0(
 	.sys_clk( clk ),
 	.sys_rst( ~rst ),
@@ -426,8 +445,8 @@ wb_i2c  i2c0 (
 	.wb_we_i(  i2c0_we    ),
 	.wb_ack_o( i2c0_ack   ), 
      //
-	.scl(i2c0_scl),
-	.sda( i2c0_sda )
+	.i2c_scl( i2c0_scl ),
+	.i2c_sda( i2c0_sda )
 );
 
 //---------------------------------------------------------------------------
@@ -477,7 +496,7 @@ wb_gpio gpio0 (
 //---------------------------------------------------------------------------
 wb_everloop  everloop0 (
 	.clk( clk ),
-	.reset( ~rst ),
+	.rst( ~rst ),
 	//	
 	.wb_adr_i( everloop0_adr   ),
 	.wb_dat_i( everloop0_dat_w ),
@@ -490,7 +509,26 @@ wb_everloop  everloop0 (
 	//
 	.everloop_led_ctl( everloop_led_ctl )
 );
+//---------------------------------------------------------------------------
+// pwm0
+//---------------------------------------------------------------------------
+wb_pwm  pwm0 (
+	.clk( clk ),
+	.rst( ~rst ),
+	//
+	.wb_adr_i( pwm0_adr   ),
+	.wb_dat_i( pwm0_dat_w ),
+	.wb_dat_o( pwm0_dat_r ),
+	.wb_stb_i( pwm0_stb   ),
+	.wb_cyc_i( pwm0_cyc   ),
+	.wb_we_i(  pwm0_we    ),
+	.wb_sel_i( pwm0_sel   ),
+	.wb_ack_o( pwm0_ack   ), 
+    //
+    .pwm_outs(pwm_out),
+    .pwm_n_out(pwm_n_out)
 
+);
 //----------------------------------------------------------------------------
 // Mux UART wires according to sw[0]
 //----------------------------------------------------------------------------

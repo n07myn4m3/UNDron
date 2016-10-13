@@ -41,15 +41,16 @@ module wb_everloop#(
    output reg  [31:0] wb_dat_o,
 
    // Everloop interface
-   output everloop_led_ctl, // Es la salida que va conectada al everloop fisico
+   output everloop_led_ctl // Es la salida que va conectada al everloop fisico
    //input  led_fb,  // Esta entrada no es utilizada NPI
 );
 
-reg  ack;
+
 assign wb_ack_o = wb_stb_i & wb_cyc_i & ack;
 
 wire wb_rd = wb_stb_i & wb_cyc_i & ~wb_we_i;
 wire wb_wr = wb_stb_i & wb_cyc_i &  wb_we_i;
+reg  ack;
 
 
 // Al parecer son cables y registros usados por las memorias

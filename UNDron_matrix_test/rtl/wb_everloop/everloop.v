@@ -22,7 +22,7 @@ module everloop (
 	input clk,rst,
 	// Memory signals
 	output reg [7:0] address,
-	input [7:0] data_RGB,
+	input      [7:0] data_RGB,
 	// Led control signal
 	output reg everloop_d
 );

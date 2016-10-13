@@ -28,7 +28,7 @@ module wb_everloop#(
   parameter mem_file_name = "none"  
 )(
   input              clk,
-  input              reset,
+  input              rst,
      
    // Wishbone interface
    input              wb_stb_i,
@@ -45,11 +45,12 @@ module wb_everloop#(
    //input  led_fb,  // Esta entrada no es utilizada NPI
 );
 
-reg  ack;
+
 assign wb_ack_o = wb_stb_i & wb_cyc_i & ack;
 
 wire wb_rd = wb_stb_i & wb_cyc_i & ~wb_we_i;
 wire wb_wr = wb_stb_i & wb_cyc_i &  wb_we_i;
+reg  ack;
 
 
 // Al parecer son cables y registros usados por las memorias
@@ -67,7 +68,7 @@ wire wr_fallingedge = (swr[2:1]==2'b10);
 
 everloop everloop0(
   .clk(clk),
-  .rst(reset),
+  .rst(rst),
   .address(adr_b),           // Se conecta a la memoria RAM de doble puerto 
   .data_RGB(data_b),
   .everloop_d(everloop_led_ctl)
