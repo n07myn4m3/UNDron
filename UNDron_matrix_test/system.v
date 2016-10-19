@@ -22,7 +22,8 @@ module system
 //	parameter   bootram_file     = "../firmware/cain_loader/image.ram",
 //	parameter   bootram_file     = "../firmware/arch_examples/image.ram",
 //  parameter   bootram_file     = "../firmware/boot0-serial/image.ram",
-	parameter   bootram_file     = "../firmware/hw-test/image.ram",
+//	parameter   bootram_file     = "../firmware/hw-test/image.ram",
+	parameter   bootram_file     = "../firmware/i2c-test/image.ram",
 	parameter   clk_freq         = 100000000,
 	parameter   uart_baud_rate   = 115200
 ) (
@@ -226,8 +227,8 @@ conbus #(
 	.s3_addr(4'h4), // gpio     0x40000000 
 	.s4_addr(4'h5), // spi      0x50000000 
 	.s5_addr(4'h6), // i2c      0x60000000 
-	.s6_addr(4'h7), // everloop 0x70000000
-	.s7_addr(4'h8)  // pwm      0x80000000 // PENDIENTE 
+	.s6_addr(4'h7) // everloop 0x70000000
+//	.s7_addr(4'h8)  // pwm      0x80000000 // PENDIENTE 
 ) conbus0(
 	.sys_clk( clk ),
 	.sys_rst( ~rst ),
@@ -314,6 +315,16 @@ conbus #(
 	.s6_cyc_o(  everloop0_cyc   ),
 	.s6_stb_o(  everloop0_stb   ),
 	.s6_ack_i(  everloop0_ack   )
+/*	// Slave7
+	.s7_dat_i(  pwm0_dat_r ),
+	.s7_dat_o(  pwm0_dat_w ),
+	.s7_adr_o(  pwm0_adr   ),
+	.s7_sel_o(  pwm0_sel   ),
+	.s7_we_o(   pwm0_we    ),
+	.s7_cyc_o(  pwm0_cyc   ),
+	.s7_stb_o(  pwm0_stb   ),
+	.s7_ack_i(  pwm0_ack   )
+*/
 	
 );
 
@@ -512,7 +523,7 @@ wb_everloop  everloop0 (
 //---------------------------------------------------------------------------
 // pwm0
 //---------------------------------------------------------------------------
-wb_pwm  pwm0 (
+/*wb_pwm  pwm0 (
 	.clk( clk ),
 	.rst( ~rst ),
 	//
@@ -529,6 +540,7 @@ wb_pwm  pwm0 (
     .pwm_n_out(pwm_n_out)
 
 );
+*/
 //----------------------------------------------------------------------------
 // Mux UART wires according to sw[0]
 //----------------------------------------------------------------------------

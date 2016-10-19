@@ -37,7 +37,7 @@ reg [6:0] addr;
 reg [7:0] data_wr;
 reg        ena;
 reg        rw;
-
+reg [7:0] test;
 
 
 i2c_master i2c0 (
@@ -100,10 +100,11 @@ always @(posedge clk) begin
 				3'b000: begin
 					ena <= wb_dat_i[3];
 				end
-				3'b001: begin
+				3'b001: begin  //Escritura direccion 4 problema
 					data_wr <= wb_dat_i[7:0];
+                    test    <= wb_dat_i[7:0];
 		    end
-				3'b010: begin
+				3'b010: begin  //Escritura direccion 8
 					rw   <= wb_dat_i[7];	
 					addr <= wb_dat_i[6:0];
 					ena  <= 1'b1;
