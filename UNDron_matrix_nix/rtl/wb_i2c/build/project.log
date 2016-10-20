@@ -1,0 +1,526 @@
+Release 14.6 - xst P.68d (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "project.src"
+Input Format                       : mixed
+
+---- Target Parameters
+Target Device                      : xc6slx16-csg324-2
+Output File Name                   : "project.ngc"
+Output Format                      : NGC
+
+---- Source Options
+Top Module Name                    : i2c_master
+
+---- General Options
+Optimization Goal                  : Area
+Optimization Effort                : 1
+RTL Output                         : yes
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/julian/Semestre_VI/Digital_Lab/J1_Clase/j1_soc/hdl/i2c/i2c_master/i2c_master.v" into library work
+Parsing module <i2c_master>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating module <i2c_master>.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <i2c_master>.
+    Related source file is "/home/julian/Semestre_VI/Digital_Lab/J1_Clase/j1_soc/hdl/i2c/i2c_master/i2c_master.v".
+        input_clk = 100000000
+        bus_clk = 100000
+        countWidth = 10
+        ready = 4'b0000
+        start = 4'b0001
+        command = 4'b0010
+        slv_ack1 = 4'b0011
+        wr = 4'b0100
+        rd = 4'b0101
+        slv_ack2 = 4'b0110
+        mstr_ack = 4'b0111
+        stop = 4'b1000
+    Found 1-bit register for signal <busy>.
+    Found 4-bit register for signal <state>.
+    Found 32-bit register for signal <bit_cnt>.
+    Found 8-bit register for signal <data_rd>.
+    Found 10-bit register for signal <count>.
+    Found 1-bit register for signal <scl_ena>.
+    Found 1-bit register for signal <sda_int>.
+    Found 1-bit register for signal <ack_error>.
+    Found 1-bit register for signal <data_clk_prev>.
+    Found 1-bit register for signal <scl_clk>.
+    Found 1-bit register for signal <data_clk>.
+    Found 8-bit register for signal <addr_rw>.
+    Found 8-bit register for signal <data_tx>.
+    Found 8-bit register for signal <data_rx>.
+    Found finite state machine <FSM_0> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 9                                              |
+    | Transitions        | 36                                             |
+    | Inputs             | 6                                              |
+    | Outputs            | 10                                             |
+    | Clock              | clk (falling_edge)                             |
+    | Reset              | reset (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 0000                                           |
+    | Power Up State     | 0000                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 32-bit subtractor for signal <n0157[31:0]> created at line 170.
+    Found 10-bit adder for signal <count[9]_GND_1_o_add_1_OUT> created at line 80.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[2]_addr_rw[7]_Mux_13_o> created at line 134.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[31]_addr_rw[7]_Mux_17_o> created at line 147.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[2]_data_tx[7]_Mux_20_o> created at line 154.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[31]_data_tx[7]_Mux_25_o> created at line 170.
+    Found 1-bit 8-to-1 multiplexer for signal <bit_cnt[2]_data_wr[7]_Mux_35_o> created at line 198.
+    Found 1-bit tristate buffer for signal <scl> created at line 270
+    Found 1-bit tristate buffer for signal <sda> created at line 271
+    Found 10-bit comparator greater for signal <count[9]_GND_1_o_LessThan_4_o> created at line 81
+    Found 10-bit comparator greater for signal <count[9]_GND_1_o_LessThan_6_o> created at line 85
+    Found 10-bit comparator greater for signal <count[9]_PWR_1_o_LessThan_8_o> created at line 89
+    Found 8-bit comparator equal for signal <addr_rw[7]_addr[6]_equal_41_o> created at line 213
+    Found 32-bit comparator lessequal for signal <n0075> created at line 244
+    Found 32-bit comparator lessequal for signal <n0077> created at line 244
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  81 D-type flip-flop(s).
+	inferred   6 Comparator(s).
+	inferred  31 Multiplexer(s).
+	inferred   2 Tristate(s).
+	inferred   1 Finite State Machine(s).
+Unit <i2c_master> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 2
+ 10-bit adder                                          : 1
+ 32-bit subtractor                                     : 1
+# Registers                                            : 13
+ 1-bit register                                        : 7
+ 10-bit register                                       : 1
+ 32-bit register                                       : 1
+ 8-bit register                                        : 4
+# Comparators                                          : 6
+ 10-bit comparator greater                             : 3
+ 32-bit comparator lessequal                           : 2
+ 8-bit comparator equal                                : 1
+# Multiplexers                                         : 31
+ 1-bit 2-to-1 multiplexer                              : 24
+ 1-bit 8-to-1 multiplexer                              : 5
+ 10-bit 2-to-1 multiplexer                             : 1
+ 32-bit 2-to-1 multiplexer                             : 1
+# Tristates                                            : 2
+ 1-bit tristate buffer                                 : 2
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <i2c_master>.
+The following registers are absorbed into counter <count>: 1 register on signal <count>.
+Unit <i2c_master> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 2
+ 10-bit adder                                          : 1
+ 32-bit subtractor                                     : 1
+# Counters                                             : 1
+ 10-bit up counter                                     : 1
+# Registers                                            : 71
+ Flip-Flops                                            : 71
+# Comparators                                          : 6
+ 10-bit comparator greater                             : 3
+ 32-bit comparator lessequal                           : 2
+ 8-bit comparator equal                                : 1
+# Multiplexers                                         : 30
+ 1-bit 2-to-1 multiplexer                              : 23
+ 1-bit 8-to-1 multiplexer                              : 5
+ 10-bit 2-to-1 multiplexer                             : 1
+ 32-bit 2-to-1 multiplexer                             : 1
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <state[1:4]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ 0000  | 0000
+ 0001  | 0001
+ 0010  | 0010
+ 0011  | 0011
+ 0101  | 0101
+ 0100  | 0100
+ 0110  | 0110
+ 0111  | 0111
+ 1000  | 1000
+-------------------
+WARNING:Xst:3002 - This design contains one or more registers/latches that are directly
+   incompatible with the Spartan6 architecture. The two primary causes of this is
+   either a register or latch described with both an asynchronous set and
+   asynchronous reset, or a register or latch described with an asynchronous
+   set or reset which however has an initialization value of the opposite 
+   polarity (i.e. asynchronous reset with an initialization value of 1).
+    While this circuit can be built, it creates a sub-optimal implementation
+   in terms of area, power and performance. For a more optimal implementation
+   Xilinx highly recommends one of the following:
+
+          1) Remove either the set or reset from all registers and latches
+             if not needed for required functionality
+          2) Modify the code in order to produce a synchronous set
+             and/or reset (both is preferred)
+          3) Ensure all registers have the same initialization value as the
+             described asynchronous set or reset polarity
+          4) Use the -async_to_sync option to transform the asynchronous
+             set/reset to synchronous operation
+             (timing simulation highly recommended when using this option)
+
+  Please refer to http://www.xilinx.com search string "Spartan6 asynchronous set/reset" for more details.
+
+  List of register instances with asynchronous set or reset and opposite initialization value:
+    sda_int in unit <i2c_master>
+    busy in unit <i2c_master>
+
+
+Optimizing unit <i2c_master> ...
+WARNING:Xst:1710 - FF/Latch <bit_cnt_31> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_30> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_29> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_28> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_27> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_26> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_25> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_24> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_23> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_22> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_21> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_20> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_19> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_18> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_17> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_16> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_15> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_14> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_13> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_12> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_11> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_10> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_9> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_8> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_7> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_6> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_5> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_4> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bit_cnt_3> (without init value) has a constant value of 0 in block <i2c_master>. This FF/Latch will be trimmed during the optimization process.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 0) on block i2c_master, actual ratio is 1.
+WARNING:Xst:1426 - The value init of the FF/Latch busy_LD hinder the constant cleaning in the block i2c_master.
+   You should achieve better results by setting this init to 1.
+WARNING:Xst:1426 - The value init of the FF/Latch sda_int_LD hinder the constant cleaning in the block i2c_master.
+   You should achieve better results by setting this init to 0.
+FlipFlop ack_error has been replicated 1 time(s) to handle iob=true attribute.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 59
+ Flip-Flops                                            : 59
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : project.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 140
+#      GND                         : 1
+#      INV                         : 3
+#      LUT1                        : 10
+#      LUT2                        : 7
+#      LUT3                        : 13
+#      LUT4                        : 5
+#      LUT5                        : 12
+#      LUT6                        : 39
+#      MUXCY                       : 20
+#      MUXF7                       : 7
+#      VCC                         : 1
+#      XORCY                       : 22
+# FlipFlops/Latches                : 61
+#      FD                          : 1
+#      FD_1                        : 2
+#      FDC                         : 10
+#      FDC_1                       : 5
+#      FDCE_1                      : 11
+#      FDE_1                       : 24
+#      FDP_1                       : 1
+#      FDPE_1                      : 3
+#      FDR                         : 2
+#      LD                          : 2
+# Clock Buffers                    : 2
+#      BUFG                        : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 30
+#      IBUF                        : 18
+#      IOBUF                       : 1
+#      OBUF                        : 10
+#      OBUFT                       : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx16csg324-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:              52  out of  18224     0%  
+ Number of Slice LUTs:                   89  out of   9112     0%  
+    Number used as Logic:                89  out of   9112     0%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:     97
+   Number with an unused Flip Flop:      45  out of     97    46%  
+   Number with an unused LUT:             8  out of     97     8%  
+   Number of fully used LUT-FF pairs:    44  out of     97    45%  
+   Number of unique control sets:         9
+
+IO Utilization: 
+ Number of IOs:                          31
+ Number of bonded IOBs:                  31  out of    232    13%  
+    IOB Flip Flops/Latches:               9
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:                2  out of     16    12%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clk                                | BUFGP                  | 59    |
+reset                              | IBUF+BUFG              | 2     |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 8.986ns (Maximum Frequency: 111.284MHz)
+   Minimum input arrival time before clock: 7.615ns
+   Maximum output required time after clock: 6.754ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 8.986ns (frequency: 111.284MHz)
+  Total number of paths / destination ports: 1794 / 83
+-------------------------------------------------------------------------
+Delay:               4.493ns (Levels of Logic = 2)
+  Source:            data_clk (FF)
+  Destination:       data_tx_0 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk falling
+
+  Data Path: data_clk to data_tx_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q             12   0.525   1.177  data_clk (data_clk)
+     LUT2:I0->O            4   0.250   0.804  data_clk_data_clk_prev_AND_3_o1 (data_clk_data_clk_prev_AND_3_o)
+     LUT6:I5->O           16   0.254   1.181  _n0361_inv (_n0361_inv)
+     FDE_1:CE                  0.302          data_tx_0
+    ----------------------------------------
+    Total                      4.493ns (1.331ns logic, 3.162ns route)
+                                       (29.6% logic, 70.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 177 / 92
+-------------------------------------------------------------------------
+Offset:              7.615ns (Levels of Logic = 7)
+  Source:            addr<1> (PAD)
+  Destination:       sda_int_C (FF)
+  Destination Clock: clk falling
+
+  Data Path: addr<1> to sda_int_C
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             2   1.328   1.181  addr_1_IBUF (addr_1_IBUF)
+     LUT6:I0->O            1   0.254   1.137  addr_rw[7]_addr[6]_equal_41_o81 (addr_rw[7]_addr[6]_equal_41_o8)
+     LUT6:I0->O            3   0.254   0.766  addr_rw[7]_addr[6]_equal_41_o83 (addr_rw[7]_addr[6]_equal_41_o)
+     LUT2:I1->O            2   0.254   1.002  ena_INV_40_o1 (ena_INV_40_o)
+     LUT6:I2->O            1   0.254   0.000  Mmux__n031024_G (N26)
+     MUXF7:I1->O           1   0.175   0.682  Mmux__n031024 (_n0310)
+     LUT6:I5->O            2   0.254   0.000  sda_int_rstpot (sda_int_rstpot)
+     FDC_1:D                   0.074          sda_int_C
+    ----------------------------------------
+    Total                      7.615ns (2.847ns logic, 4.768ns route)
+                                       (37.4% logic, 62.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 20 / 12
+-------------------------------------------------------------------------
+Offset:              6.593ns (Levels of Logic = 3)
+  Source:            sda_int_C (FF)
+  Destination:       sda (PAD)
+  Source Clock:      clk falling
+
+  Data Path: sda_int_C to sda
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC_1:C->Q            1   0.525   0.790  sda_int_C (sda_int_C)
+     LUT3:I1->O            2   0.250   1.181  sda_int1 (sda_int)
+     LUT6:I0->O            1   0.254   0.681  Mmux_sda_ena_n11 (sda_ena_n)
+     IOBUF:T->IO               2.912          sda_IOBUF (sda)
+    ----------------------------------------
+    Total                      6.593ns (3.941ns logic, 2.652ns route)
+                                       (59.8% logic, 40.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'reset'
+  Total number of paths / destination ports: 2 / 2
+-------------------------------------------------------------------------
+Offset:              6.754ns (Levels of Logic = 3)
+  Source:            sda_int_LD (LATCH)
+  Destination:       sda (PAD)
+  Source Clock:      reset falling
+
+  Data Path: sda_int_LD to sda
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD:G->Q               1   0.581   0.910  sda_int_LD (sda_int_LD)
+     LUT3:I0->O            2   0.235   1.181  sda_int1 (sda_int)
+     LUT6:I0->O            1   0.254   0.681  Mmux_sda_ena_n11 (sda_ena_n)
+     IOBUF:T->IO               2.912          sda_IOBUF (sda)
+    ----------------------------------------
+    Total                      6.754ns (3.982ns logic, 2.772ns route)
+                                       (59.0% logic, 41.0% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |    7.022|         |    7.639|         |
+reset          |         |         |    3.235|         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 13.00 secs
+Total CPU time to Xst completion: 10.89 secs
+ 
+--> 
+
+
+Total memory usage is 381672 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   32 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

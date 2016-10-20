@@ -1,0 +1,310 @@
+//----------------------------------------------------------------
+//Para obtener automaticamente el tamaño de los arreglos de bytes
+//----------------------------------------------------------------
+`define log2(n)   ((n) <= (1<<0)  ? 0 : (n)  <= (1<<1)  ? 1  :\
+                   (n) <= (1<<2)  ? 2 : (n)  <= (1<<3)  ? 3  :\
+                   (n) <= (1<<4)  ? 4 : (n)  <= (1<<5)  ? 5  :\
+                   (n) <= (1<<6)  ? 6 : (n)  <= (1<<7)  ? 7  :\
+                   (n) <= (1<<8)  ? 8 : (n)  <= (1<<9)  ? 9  :\
+                   (n) <= (1<<10) ? 10 : (n) <= (1<<11) ? 11 :\
+                   (n) <= (1<<12) ? 12 : (n) <= (1<<13) ? 13 :\
+                   (n) <= (1<<14) ? 14 : (n) <= (1<<15) ? 15 :\
+                   (n) <= (1<<16) ? 16 : (n) <= (1<<17) ? 17 :\
+                   (n) <= (1<<18) ? 18 : (n) <= (1<<19) ? 19 :\
+                   (n) <= (1<<20) ? 20 : (n) <= (1<<21) ? 21 :\
+                   (n) <= (1<<22) ? 22 : (n) <= (1<<23) ? 23 :\
+                   (n) <= (1<<24) ? 24 : (n) <= (1<<25) ? 25 :\
+                   (n) <= (1<<26) ? 26 : (n) <= (1<<27) ? 27 :\
+                   (n) <= (1<<28) ? 28 : (n) <= (1<<29) ? 29 :\
+                   (n) <= (1<<30) ? 30 : (n) <= (1<<31) ? 31 : 32)
+
+module everloop (
+	input clk,rst,
+	// Memory signals
+	output reg [7:0] address,
+	input      [7:0] data_RGB,
+	// Led control signal
+	output reg everloop_d
+);
+
+//----------------------------------------------------------------
+	parameter   input_clk_MHz   = 5;  
+	localparam   three_us       = input_clk_MHz*3;
+	localparam   six_us         = input_clk_MHz*6; 
+	localparam   nine_us        = input_clk_MHz*9;
+	localparam   reset_us       = input_clk_MHz*815;
+    localparam   maxCount       = reset_us;
+    localparam   counterWidth   = `log2(maxCount);
+    localparam   width_three_us = `log2(three_us);
+    localparam   width_six_us   = `log2(six_us);
+    localparam   width_nine_us  = `log2(nine_us);
+//----------------------------------------------------------------
+	reg [counterWidth-1: 0] clk_cnt;
+
+	reg send_hi;
+	reg send_low;
+	reg send_rst;
+	reg finish_send;
+	reg [3:0] bit_count;
+	reg [7:0]data;
+
+
+//type state_type is (INIT, LD_DATA, CHECK, SEND_ONE,
+//                    SEND_ZERO, SEND_RESET, NEXT_BIT, WAIT_SEND, 
+//                    NEXT_BYTE, WAIT_RESET);
+//);
+
+
+parameter INIT      = 4'b0000, LD_DATA    = 4'b0001, CHECK    = 4'b0010, SEND_ONE  = 4'b0011,
+          SEND_ZERO = 4'b0100, SEND_RESET = 4'b0101, NEXT_BIT = 4'b0110, WAIT_SEND = 4'b0111, 
+          NEXT_BYTE = 4'b1000, WAIT_RESET = 4'b1001;
+
+reg [3:0] state = INIT; //PRUEBA INICIALIZAR ESTADO
+
+
+always @ (posedge clk) begin
+  if (rst) begin
+    send_hi    <= 0;
+    send_low   <= 0;
+    send_rst   <= 0;
+    address    <= 0;
+    bit_count  <= 0;
+    data       <= 0;
+    state      <= INIT;    
+  end // end main if
+  else begin
+    case(state)
+      INIT: begin
+        send_hi    <= 0;
+        send_low   <= 0;
+        send_rst   <= 0;
+        address    <= 0;
+        bit_count  <= 0;
+        data       <= 0;
+        state      <= LD_DATA;
+      end
+
+      LD_DATA: begin
+        send_hi    <= 0;
+        send_low   <= 0;
+        send_rst   <= 0;
+        address    <= address;
+        bit_count  <= 0;
+        data       <= data_RGB;
+        state      <= CHECK;
+      end
+
+      CHECK: begin
+        send_hi    <= 0;
+        send_low   <= 0;
+        send_rst   <= 0;
+        address    <= address;
+        bit_count  <= bit_count;
+        data       <= data;
+        if (data[7])
+          state      <= SEND_ONE;
+        else
+          state      <= SEND_ZERO;
+      end
+
+
+      SEND_ONE: begin
+        send_hi    <= 1;
+        send_low   <= 0;
+        send_rst   <= 0;
+        address    <= address;
+        bit_count  <= bit_count;
+        data       <= data;
+        state      <= WAIT_SEND;
+      end
+
+      SEND_ZERO: begin
+        send_hi    <= 0;
+        send_low   <= 1;
+        send_rst   <= 0;
+        address    <= address;
+        bit_count  <= bit_count;
+        data       <= data;
+        state      <= WAIT_SEND;
+      end
+
+      WAIT_SEND: begin
+        send_hi    <= 0;
+        send_low   <= 0;
+        send_rst   <= 0;
+        address    <= address;
+        if (finish_send) begin
+          bit_count <= bit_count + 1'b1;
+          data      <= data << 1;
+          state     <= NEXT_BIT;
+        end else begin
+          bit_count <= bit_count;
+          data      <= data;
+          state     <= WAIT_SEND;
+        end
+      end
+
+
+      NEXT_BIT: begin
+        send_hi    <= 0;
+        send_low   <= 0;
+        send_rst   <= 0;
+        bit_count  <= bit_count;
+        data       <= data;
+        if (bit_count == 4'b1000) begin
+          state    <= NEXT_BYTE;
+          address  <= address + 1'b1;
+        end else begin
+          state    <= CHECK;
+          address  <= address;
+        end
+      end
+
+      NEXT_BYTE: begin
+        send_hi    <= 0;
+        send_low   <= 0;
+        send_rst   <= 0;
+        address    <= address;
+        bit_count  <= bit_count;
+        data       <= data;
+        if (address == 8'd141)
+          state    <= SEND_RESET;
+        else
+          state    <= LD_DATA;
+      end
+
+
+      SEND_RESET: begin
+        send_hi    <= 0;
+        send_low   <= 0;
+        send_rst   <= 1;
+        address    <= address;
+        bit_count  <= bit_count;
+        data       <= data;
+        state      <= WAIT_RESET;
+      end
+
+      WAIT_RESET: begin
+        send_hi    <= 0;
+        send_low   <= 0;
+        send_rst   <= 0;
+        address    <= address;
+        bit_count  <= bit_count;
+        data       <= data;
+        if (finish_send)  
+          state    <= INIT;
+        else
+          state    <= WAIT_RESET;
+      end
+
+      default: begin
+        send_hi    <= 0;
+        send_low   <= 0;
+        send_rst   <= 0;
+        address    <= 0;
+        bit_count  <= 0;
+        data       <= 0;
+        state      <= INIT;
+      end
+   endcase
+
+  end // end else 
+end
+
+
+//clk_cnt
+
+parameter WAIT_INIT = 2'b00, WAIT_ONE =2'b01, WAIT_ZERO = 2'b10, EXIT = 2'b11;
+reg [1:0] send_state;
+reg [width_six_us-1:0] ones_count  = 0;
+reg [counterWidth-1:0] zeros_count = 0;
+
+
+always @ (negedge clk) begin
+  if (rst) begin
+    finish_send  <= 1'b0;
+    send_state   <= WAIT_INIT;
+    clk_cnt      <= 0;  
+    everloop_d   <= 0;  
+    ones_count   <= 0;
+    zeros_count  <= 0;
+  end // end main if
+  else begin
+    case (send_state)
+      WAIT_INIT: begin
+        finish_send  <= 1'b0;
+        clk_cnt      <= 0;
+        everloop_d   <= 1;           // Always start with 1  4 clock cicles before count increment
+        if(send_hi || send_low || send_rst) begin
+          case ({send_hi, send_low, send_rst})
+            3'b100: begin
+              ones_count  <= six_us;   //Debe durar 6 us 120 20 MHz
+              zeros_count <= six_us;   //Debe durar 6 us 120 20 MHz
+            end
+            3'b010: begin
+              ones_count  <= three_us;   //Debe durar 3 us 60  20 MHz
+              zeros_count <= nine_us;   //Debe durar 9 us 180 20 MHz
+            end
+            3'b001: begin
+              ones_count  <= 0;
+              zeros_count <= reset_us; //Debe durar 800 us creo 16300 20 MHz
+            end
+             default: begin
+              ones_count  <= 0;
+              zeros_count <= 0;
+             end
+          endcase
+          send_state   <= WAIT_ONE;
+        end else
+          send_state   <= WAIT_INIT;
+      end
+
+      WAIT_ONE: begin
+        zeros_count  <= zeros_count;
+        ones_count   <= ones_count;
+        finish_send  <= 1'b0;
+        everloop_d   <= 1;
+        clk_cnt      <= clk_cnt + 1'b1;
+        if (clk_cnt == ones_count) begin
+          send_state   <= WAIT_ZERO;
+          clk_cnt      <= 0;
+        end else
+          send_state   <= WAIT_ONE;
+      end
+      
+      WAIT_ZERO: begin
+        zeros_count  <= zeros_count;
+        ones_count   <= ones_count;
+        finish_send  <= 1'b0;
+        everloop_d   <= 0;
+        clk_cnt      <= clk_cnt + 1'b1;
+        if (clk_cnt == zeros_count) begin
+          send_state   <= EXIT;
+          clk_cnt      <= 0;
+        end else
+          send_state   <= WAIT_ZERO;
+      end
+
+      EXIT: begin
+        zeros_count  <= zeros_count;
+        ones_count   <= ones_count;
+        finish_send  <= 1'b1;
+        everloop_d   <= 0;
+        clk_cnt      <= 0;
+        send_state   <= WAIT_INIT;
+      end
+
+      default: begin
+        zeros_count  <= zeros_count;
+        ones_count   <= ones_count;
+        finish_send  <= 1'b0;
+        everloop_d   <= 0;
+        clk_cnt      <= 0;
+        send_state   <= WAIT_INIT;
+      end
+    endcase
+  end // end else
+end // end always
+
+
+endmodule

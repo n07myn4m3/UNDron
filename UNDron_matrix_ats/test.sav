@@ -1,0 +1,37 @@
+[*]
+[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
+[*] Tue Oct 18 13:18:02 2016
+[*]
+[dumpfile] "/home/karen/Documents/UNDron/UNDron_matrix_test/simulation/system_tb.vcd"
+[dumpfile_mtime] "Tue Oct 18 12:45:52 2016"
+[dumpfile_size] 2338421
+[savefile] "/home/karen/Documents/UNDron/UNDron_matrix_test/test.sav"
+[timestart] 19537200
+[size] 1311 744
+[pos] -312 -117
+*-17.318991 19820800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] system_tb.
+[treeopen] system_tb.dut.
+[sst_width] 223
+[signals_width] 142
+[sst_expanded] 1
+[sst_vpaned_height] 211
+@28
+system_tb.dut.pwm0.wb_stb_i
+@22
+system_tb.dut.conbus0.slave_sel[7:0]
+@23
+system_tb.dut.conbus0.m0_adr_i[31:0]
+@22
+system_tb.dut.lm0.I_ADR_O[31:0]
+system_tb.dut.lm0.D_ADR_O[31:0]
+@28
+system_tb.dut.conbus0.m3_ack_o
+system_tb.dut.conbus0.m0_ack_o
+system_tb.dut.conbus0.s2_ack_i
+system_tb.dut.conbus0.s1_ack_i
+system_tb.dut.conbus0.s0_ack_i
+system_tb.dut.conbus0.m1_cyc_i
+system_tb.dut.conbus0.m0_stb_i
+[pattern_trace] 1
+[pattern_trace] 0
