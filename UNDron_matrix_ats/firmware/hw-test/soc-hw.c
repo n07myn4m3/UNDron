@@ -5,7 +5,7 @@ uart_t     *uart0     = (uart_t *)    0x20000000;
 timer_t    *timer0    = (timer_t *)   0x30000000;
 gpio_t     *gpio0     = (gpio_t *)    0x40000000;
 spi_t      *spi0      = (spi_t *)     0x50000000;
-i2c_t 	   *i2c0	  = (i2c_t *)	 0x60000000;
+i2c_t 	   *i2c0	  = (i2c_t *)	 0x70000000;
 //everloop_t *everloop0 = (everloop_t *) 0x70000000; // por el momento no disponible
 pwm_t      *pwm0      = (pwm_t *)     0x80000000;    //leo y escribo datos de esa direccion
 
@@ -140,49 +140,20 @@ void uart_putstr(char *str)
  */
 
 static uint8_t data;
-//static uint32_t rwaddrs;
-//static uint8_t ena;
-//static uint8_t rw;
 
 
-void i2c_putchar(uint8_t c)
+void i2c_test_wxrx(uint8_t c)
 {
     data = c;
-	//while ((i2c0->ucr & !I2C_BUSY));
-	//i2c0->wxrx = data;
-    i2c0 -> rwaddr = c;
+    i2c0 -> wxrx = c;
 }
 
-void i2c_putrwaddr (uint8_t rw, uint8_t addrs)
+void i2c_test_ucr(uint8_t c)
 {
-	i2c0 -> rwaddr = ((rw<<7)|addrs>>1);
+    data = c;
+    i2c0 -> ucr = c;
 }
 
-void i2c_putdatas(char *str)	
-{
-	char *c= str;
-	while (*c) {
-		i2c_putchar(*c);
-    c++;
-	}
-}
-
-void i2c_init()
-{
- i2c0->ucr = I2C_ENA;  
-}
-
-void i2c_sleep()
-{
-	while((i2c0->ucr & I2C_BUSY))
-	i2c0->ucr = 0x00;
-}
-
-char i2c_getdata()
-{
-	while ( (i2c0->ucr & I2C_BUSY) && (!(i2c0->ucr & I2C_ERROR)));
-	return i2c0-> wxrx;
-}
 
 /***************************************************************************
  * PWM Functions

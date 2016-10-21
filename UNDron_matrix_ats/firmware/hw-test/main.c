@@ -23,7 +23,15 @@ int main(){
 
     // BasicIO
     //uart_putstr( "** BasicIO **\n" );
- 	i2c_putrwaddr(0x00, 0x30);   
+//Prueba registros
+    i2c_test_wxrx(0x20);  
+    i2c_test_wxrx(0x40);
+    i2c_test_wxrx(0x80);
+//Prueba registros
+    i2c_test_ucr(0x08);
+    i2c_test_ucr(0x38);
+    i2c_test_ucr(0x50);
+    //nsleep(20);
     pwm_enable(1);
     pwm_duty(10);
     nsleep(1);

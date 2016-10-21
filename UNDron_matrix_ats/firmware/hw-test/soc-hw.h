@@ -127,12 +127,10 @@ typedef struct {
    volatile uint32_t rwaddr; //Posicion x08
 } i2c_t;
 
-void i2c_init();
-void i2c_sleep();
-void i2c_putrwaddr(uint8_t rw, uint8_t addrs);
-void i2c_putchar(uint8_t c);
-void i2c_putdatas(char *str);
-char i2c_getdata();
+
+void i2c_test_wxrx(uint8_t c);
+void i2c_test_ucr(uint8_t c);
+
 
 /***************************************************************************
  * PWM

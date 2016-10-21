@@ -226,8 +226,8 @@ conbus #(
 	.s2_addr(4'h3), // timer    0x30000000 
 	.s3_addr(4'h4), // gpio     0x40000000 
 	.s4_addr(4'h5), // spi      0x50000000 
-	.s5_addr(4'h6), // i2c      0x60000000 
-	.s6_addr(4'h7), // everloop 0x70000000 // PENDIENTE 
+	.s5_addr(4'h6), // everloop 0x70000000 // PENDIENTE 
+	.s6_addr(4'h7), // i2c      0x60000000 
 	.s7_addr(4'h8)  // pwm      0x80000000 // PENDIENTE 
 )conbus0(
 	.sys_clk( clk ),
@@ -298,23 +298,23 @@ conbus #(
 	.s4_stb_o(  spi0_stb   ),
 	.s4_ack_i(  spi0_ack   ),
 	// Slave5
-	.s5_dat_i(  i2c0_dat_r ),
-	.s5_dat_o(  i2c0_dat_w ),
-	.s5_adr_o(  i2c0_adr   ),
-	.s5_sel_o(  i2c0_sel   ),
-	.s5_we_o(   i2c0_we    ),
-	.s5_cyc_o(  i2c0_cyc   ),
-	.s5_stb_o(  i2c0_stb   ),
-	.s5_ack_i(  i2c0_ack   ),
+	.s5_dat_i(  everloop0_dat_r ),
+	.s5_dat_o(  everloop0_dat_w ),
+	.s5_adr_o(  everloop0_adr   ),
+	.s5_sel_o(  everloop0_sel   ),
+	.s5_we_o(   everloop0_we    ),
+	.s5_cyc_o(  everloop0_cyc   ),
+	.s5_stb_o(  everloop0_stb   ),
+	.s5_ack_i(  everloop0_ack   ),
 	// Slave6
-	.s6_dat_i(  everloop0_dat_r ),
-	.s6_dat_o(  everloop0_dat_w ),
-	.s6_adr_o(  everloop0_adr   ),
-	.s6_sel_o(  everloop0_sel   ),
-	.s6_we_o(   everloop0_we    ),
-	.s6_cyc_o(  everloop0_cyc   ),
-	.s6_stb_o(  everloop0_stb   ),
-	.s6_ack_i(  everloop0_ack   ),
+	.s6_dat_i(  i2c0_dat_r ),
+	.s6_dat_o(  i2c0_dat_w ),
+	.s6_adr_o(  i2c0_adr   ),
+	.s6_sel_o(  i2c0_sel   ),
+	.s6_we_o(   i2c0_we    ),
+	.s6_cyc_o(  i2c0_cyc   ),
+	.s6_stb_o(  i2c0_stb   ),
+	.s6_ack_i(  i2c0_ack   ),
 	// Slave7
 	.s7_dat_i(  pwm0_dat_r ),
 	.s7_dat_o(  pwm0_dat_w ),
@@ -369,7 +369,7 @@ lm32_cpu lm0 (
 // Block RAM
 //---------------------------------------------------------------------------
 wb_bram #(
-	.adr_width( 14 ),
+	.adr_width( 12 ),
 	.mem_file_name( bootram_file )
 ) bram0 (
 	.clk_i(  clk  ),
@@ -453,6 +453,7 @@ wb_i2c  i2c0 (
 	.wb_stb_i( i2c0_stb   ),
 	.wb_cyc_i( i2c0_cyc   ),
 	.wb_we_i(  i2c0_we    ),
+	.wb_sel_i( i2c0_sel   ),
 	.wb_ack_o( i2c0_ack   ), 
      //
 	.i2c_scl( i2c0_scl ),

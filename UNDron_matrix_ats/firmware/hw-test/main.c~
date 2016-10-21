@@ -19,12 +19,19 @@ int main(){
 
   for(;;){
     uart_putchar(0x20);
-//	i2c_putrwaddr(0x00, 0x30);
     pwm_init();
 
     // BasicIO
     //uart_putstr( "** BasicIO **\n" );
-    
+//Prueba registros
+    i2c_test_wxrx(0x20);  
+    i2c_test_wxrx(0x40);
+    i2c_test_wxrx(0x80);
+//Prueba registros
+    i2c_test_ucr(0x04);
+    i2c_test_ucr(0x30);
+    i2c_test_ucr(0x15);
+    //nsleep(20);
     pwm_enable(1);
     pwm_duty(10);
     nsleep(1);

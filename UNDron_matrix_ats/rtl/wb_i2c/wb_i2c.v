@@ -47,7 +47,7 @@ i2c_master i2c0 (
 	.scl(  i2c_scl ),
 	.sda( i2c_sda ),
 	//
-  .ena ( ena ),
+    .ena( ena ),
 	.data_rd(   data_rd  ),
 	.busy(  busy ),
 	.ack_error(  ack_error ),
@@ -60,7 +60,7 @@ i2c_master i2c0 (
 // 
 //---------------------------------------------------------------------------
 wire [7:0] ucr = { 4'b0, ena, 1'b0, ack_error, busy };
-//reg ucr_aux;
+reg [7:0] prueba;
 //assign ucr=ucr_aux;
 
 wire wb_rd = wb_stb_i & wb_cyc_i & ~wb_we_i;
@@ -98,7 +98,8 @@ always @(posedge clk) begin
 
 			case (wb_adr_i[4:2])
 				3'b000: begin
-					ena <= wb_dat_i[3];
+					ena    <= wb_dat_i[3];
+                    prueba <= wb_dat_i[7:0];
 				end
 				3'b001: begin
 					data_wr <= wb_dat_i[7:0];
