@@ -1,4 +1,3 @@
-
 #include "soc-hw.h"
 #include "softfloat.h"
 
@@ -31,6 +30,11 @@ int main(){
     i2c_test_ucr(0x08);
     i2c_test_ucr(0x38);
     i2c_test_ucr(0x50);
+//Prueba unidades de punto flotante
+    i2c_test_ucr(PI);
+    float32 prueba;
+    prueba=float32_mul( PI, alfa );
+    prueba = float32_div( PI, alfa );
     //nsleep(20);
     pwm_enable(1);
     pwm_duty(10);
