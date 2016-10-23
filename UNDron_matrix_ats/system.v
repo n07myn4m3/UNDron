@@ -369,7 +369,7 @@ lm32_cpu lm0 (
 // Block RAM
 //---------------------------------------------------------------------------
 wb_bram #(
-	.adr_width( 12 ),
+	.adr_width( 14 ),
 	.mem_file_name( bootram_file )
 ) bram0 (
 	.clk_i(  clk  ),

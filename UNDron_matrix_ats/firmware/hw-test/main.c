@@ -15,6 +15,11 @@ int main(){
 //    irq_set_mask( 0x00000002 );
 //    irq_enable();
 
+//Valores para probar las librerias de coma flotante
+  volatile uint32_t entero;
+  float32 multiplicacion;
+  float32 division;
+
 
   for(;;){
     uart_putchar(0x20);
@@ -22,19 +27,26 @@ int main(){
 
     // BasicIO
     //uart_putstr( "** BasicIO **\n" );
+
 //Prueba registros
     i2c_test_wxrx(0x20);  
     i2c_test_wxrx(0x40);
     i2c_test_wxrx(0x80);
+
 //Prueba registros
     i2c_test_ucr(0x08);
     i2c_test_ucr(0x38);
     i2c_test_ucr(0x50);
-//Prueba unidades de punto flotante
-    i2c_test_ucr(PI);
-    float32 prueba;
-    prueba=float32_mul( PI, alfa );
-    prueba = float32_div( PI, alfa );
+
+//Prueba unidades de punto flotante    
+    multiplicacion=float32_mul( PI, alfa );
+    entero=float32_to_int32(multiplicacion);
+    gpio0->ctrl=entero;
+
+    division=float32_div( PI, alfa );
+    entero=float32_to_int32(division);
+    gpio0->ctrl=entero;
+
     //nsleep(20);
     pwm_enable(1);
     pwm_duty(10);

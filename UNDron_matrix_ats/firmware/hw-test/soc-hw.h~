@@ -128,8 +128,8 @@ typedef struct {
 } i2c_t;
 
 
-void i2c_test_wxrx(uint8_t c);
-void i2c_test_ucr(uint8_t c)
+void i2c_test_wxrx(uint32_t c);
+void i2c_test_ucr(uint32_t c);
 
 
 /***************************************************************************
