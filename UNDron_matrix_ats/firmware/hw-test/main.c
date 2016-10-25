@@ -27,6 +27,8 @@ int main(){
 
 //Prueba i2c
 	 i2c_putrwaddr(0x00, 0x40);
+	 i2c_putrwaddr(0x01, 0x50);
+	 i2c_putrwaddr(0x00, 0x70);
 
 //Prueba unidades de punto flotante    
     multiplicacion=float32_mul( PI, alfa );
