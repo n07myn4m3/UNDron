@@ -25,18 +25,8 @@ int main(){
     uart_putchar(0x20);
     pwm_init();
 
-    // BasicIO
-    //uart_putstr( "** BasicIO **\n" );
-
-//Prueba registros
-    i2c_test_wxrx(0x20);  
-    i2c_test_wxrx(0x40);
-    i2c_test_wxrx(0x80);
-
-//Prueba registros
-    i2c_test_ucr(0x08);
-    i2c_test_ucr(0x38);
-    i2c_test_ucr(0x50);
+//Prueba i2c
+	 i2c_putrwaddr(0x00, 0x40);
 
 //Prueba unidades de punto flotante    
     multiplicacion=float32_mul( PI, alfa );

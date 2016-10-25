@@ -5,7 +5,7 @@ uart_t     *uart0     = (uart_t *)    0x20000000;
 timer_t    *timer0    = (timer_t *)   0x30000000;
 gpio_t     *gpio0     = (gpio_t *)    0x40000000;
 spi_t      *spi0      = (spi_t *)     0x50000000;
-i2c_t 	   *i2c0	  = (i2c_t *)	 0x60000000;
+i2c_t 	   *i2c0	  = (i2c_t *)	 0x70000000;
 //everloop_t *everloop0 = (everloop_t *) 0x70000000; // por el momento no disponible
 pwm_t      *pwm0      = (pwm_t *)     0x80000000;    //leo y escribo datos de esa direccion
 

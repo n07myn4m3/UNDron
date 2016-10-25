@@ -141,18 +141,44 @@ void uart_putstr(char *str)
 
 static uint8_t data;
 
-
-void i2c_test_wxrx(uint8_t c)
+void i2c_putchar(uint8_t c)
 {
-    data = c;
-    i2c0 -> wxrx = c;
+  data = c;
+	while ((i2c0->ucr & !I2C_BUSY));
+	i2c0->wxrx = data;
 }
 
-void i2c_test_ucr(uint8_t c)
+void i2c_putrwaddr (uint8_t rw, uint8_t addrs)
 {
-    data = c;
-    i2c0 -> ucr = c;
+	i2c0 -> rwaddr = ((rw<<7)|addrs>>1);
 }
+
+void i2c_putdatas(char *str)	
+{
+	char *c= str;
+	while (*c) {
+		i2c_putchar(*c);
+    c++;
+	}
+}
+
+void i2c_init()
+{
+ i2c0->ucr = I2C_ENA;  
+}
+
+void i2c_sleep()
+{
+	while((i2c0->ucr & I2C_BUSY))
+	i2c0->ucr = 0x00;
+}
+
+char i2c_getdata()
+{
+	while ( (i2c0->ucr & I2C_BUSY) && (!(i2c0->ucr & I2C_ERROR)));
+	return i2c0-> wxrx;
+}
+
 
 
 /***************************************************************************
