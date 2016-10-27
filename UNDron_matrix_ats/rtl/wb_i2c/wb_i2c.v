@@ -96,18 +96,18 @@ always @(posedge clk) begin
 		end else if (wb_wr & ~ack) begin
 			ack <= 1'b1;
 
-			case (wb_adr_i[4:2])
-				3'b000: begin
+			case (wb_adr_i[7:0])
+				'h00: begin
 					ena    <= wb_dat_i[3];
                     prueba <= wb_dat_i[7:0];
 				end
-				3'b001: begin
+				'h04: begin
 					data_wr <= wb_dat_i[7:0];
-		    end
-				3'b010: begin
+		        end
+				'h08: begin
 					rw   <= wb_dat_i[7];	
 					addr <= wb_dat_i[6:0];
-					ena  <= 1'b1;
+					//ena  <= 1'b1;
 				end
 				default: begin
 					ena<= 1'b0;

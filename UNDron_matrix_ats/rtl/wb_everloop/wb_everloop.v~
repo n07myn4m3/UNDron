@@ -28,7 +28,7 @@ module wb_everloop#(
   parameter mem_file_name = "none"  
 )(
   input              clk,
-  input              reset,
+  input              rst,
      
    // Wishbone interface
    input              wb_stb_i,
@@ -52,62 +52,62 @@ wire wb_rd = wb_stb_i & wb_cyc_i & ~wb_we_i;
 wire wb_wr = wb_stb_i & wb_cyc_i &  wb_we_i;
 reg  ack;
 
+//registros de prueba
 
-// Al parecer son cables y registros usados por las memorias
-wire [7:0]  data_b;
-wire [10:0] adr_b;
-reg  [2:0]  swr; // NPI
-reg  [7:0]  data_a;
-reg         add_adr_a; // NPI
+reg [7:0] prueba_1;
+reg [7:0] prueba_2;
+reg [7:0] prueba_3;
 
-always @(negedge clk)  swr <= {swr[1:0],wb_wr};
+  always @(posedge clk)
+  begin
+    if (rst) begin
+      ack         <= 0;
+      prueba_1    <= 8'b0;
+      prueba_2    <= 8'b0;
+      prueba_3    <= 8'b0;
+    end else begin
+	  wb_dat_o[31:8] <= 24'b0;
+      // Handle WISHBONE access
+      ack    <= 0;
+//--------------------------------------------------------------------------------
+     if (wb_rd & ~ack) begin               // Operación de lectura Wishbone
+       ack <= 1;
+			case (wb_adr_i[4:2])
 
-wire wr_fallingedge = (swr[2:1]==2'b10);
+				3'b001: begin               // Switches
+					wb_dat_o[7:0] <= 8'b0; //Mostrar registro de estado
+				end
 
-
-
-everloop everloop0(
-  .clk(clk),
-  .rst(reset),
-  .address(adr_b),           // Se conecta a la memoria RAM de doble puerto 
-  .data_RGB(data_b),
-  .everloop_d(everloop_led_ctl)
-);
-
-everloop_ram #(
-  .adr_width(11), 
-  .dat_width(8), 
-  .mem_file_name(mem_file_name)
-) everloopram0(
-  .clk_a(clk),
-  .en_a (wb_wr | add_adr_a), // Solo habilita si el wishbone esta en modo de escritura y si el habilitador esta disponible
-  .adr_a({wb_adr_i[9:0],add_adr_a}), 
-  .dat_a(data_a[7:0]),
-  .we_a (wb_wr | add_adr_a), // Solo escribe si el wishbone esta en modo de escritura y si el habilitador esta disponible
-  .clk_b(clk),
-  .en_b (1'b1),              //Por defecto se dejo habilitado la lectura de la memoria RAM
-  .adr_b(adr_b),
-  .dat_b(data_b)	
-);
-
-always @(posedge clk)
-begin
-
-case({wb_wr,wr_fallingedge}) //Solo si esta en modo de escritura y detecta un flanco de bajada
-  2'b10: begin
-    data_a    <= wb_dat_i;   //Un dato queda almacenado en data_a
-    add_adr_a <= 0;          //No puedo escribirlo
+				3'b010: begin               // Botones
+					wb_dat_o[7:0] <= 8'b0; //Por defecto los dejo en cero
+				end
+      
+				default: begin
+					wb_dat_o[7:0] <= 8'b0; //Debido a que no estoy leyendo nada, en caso de escritura se debe incluir un case con la direccion de los switches y asignarle a wb_dat_0 los valores de la entrada, de switchs o buttons.	
+				end
+	        endcase
+     end
+//--------------------------------------------------------------------------------
+     else if (wb_wr & ~ack ) begin // write cycle
+       ack <= 1;
+			case (wb_adr_i[7:0])
+				'h00: begin
+                    prueba_1 <= wb_dat_i[7:0];
+				end
+				'h04: begin
+					prueba_2 <= wb_dat_i[7:0];
+		    end
+				'h08: begin
+					prueba_3 <= wb_dat_i[7:0];
+				end
+				default: begin
+                    prueba_1 <= 8'b0;
+                    prueba_2 <= 8'b0;
+                    prueba_3 <= 8'b0;
+				end
+			endcase
+     end
+    end
   end
-  2'b01:begin
-    data_a    <= data_a >>8; //Desplazo el numero para que puedan observarse el siguiente byte
-    add_adr_a <= 1;          //Envia la informacion a la memoria ram
-  end
-  
-  default: begin
-    data_a    <= data_a;
-    add_adr_a <= 0;
-  end
-endcase
-end
 
 endmodule

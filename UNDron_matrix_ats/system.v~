@@ -226,8 +226,8 @@ conbus #(
 	.s2_addr(4'h3), // timer    0x30000000 
 	.s3_addr(4'h4), // gpio     0x40000000 
 	.s4_addr(4'h5), // spi      0x50000000 
-	.s5_addr(4'h6), // everloop 0x70000000 // PENDIENTE 
-	.s6_addr(4'h7), // i2c      0x60000000 
+	.s5_addr(4'h6), // everloop 0x60000000 // PENDIENTE 
+	.s6_addr(4'h7), // i2c      0x70000000 
 	.s7_addr(4'h8)  // pwm      0x80000000 // PENDIENTE 
 )conbus0(
 	.sys_clk( clk ),
@@ -369,7 +369,7 @@ lm32_cpu lm0 (
 // Block RAM
 //---------------------------------------------------------------------------
 wb_bram #(
-	.adr_width( 12 ),
+	.adr_width( 14 ),
 	.mem_file_name( bootram_file )
 ) bram0 (
 	.clk_i(  clk  ),

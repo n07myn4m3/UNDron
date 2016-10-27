@@ -24,7 +24,7 @@ module system
 //  parameter   bootram_file     = "../firmware/boot0-serial/image.ram",
 	parameter   bootram_file     = "../firmware/hw-test/image.ram",
 //	parameter   bootram_file     = "../firmware/i2c-test/image.ram",
-	parameter   clk_freq         = 100000000,
+	parameter   clk_freq         = 50000000,
 	parameter   uart_baud_rate   = 115200
 ) (
 	input             clk,
@@ -226,8 +226,8 @@ conbus #(
 	.s2_addr(4'h3), // timer    0x30000000 
 	.s3_addr(4'h4), // gpio     0x40000000 
 	.s4_addr(4'h5), // spi      0x50000000 
-	.s5_addr(4'h6), // everloop 0x70000000 // PENDIENTE 
-	.s6_addr(4'h7), // i2c      0x60000000 
+	.s5_addr(4'h6), // everloop 0x60000000 // PENDIENTE 
+	.s6_addr(4'h7), // i2c      0x70000000 
 	.s7_addr(4'h8)  // pwm      0x80000000 // PENDIENTE 
 )conbus0(
 	.sys_clk( clk ),

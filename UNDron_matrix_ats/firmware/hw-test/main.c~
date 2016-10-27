@@ -22,11 +22,32 @@ int main(){
 
 
   for(;;){
-    uart_putchar(0x20);
-    pwm_init();
+   // uart_putchar(0x20);
+ //   pwm_init();
 
 //Prueba i2c
+     uart_putstr("Prueba Lab");
 	 i2c_putrwaddr(0x00, 0x40);
+	 //i2c_putrwaddr(0x01, 0x50);
+	 //i2c_putrwaddr(0x00, 0x70);
+	 //i2c_putrwaddr(0x01, 0x50);
+//Prueba lectura i2c
+     I2CreadByte(0x30, 0x35); 
+
+//Prueba unidades de punto flotante    
+    multiplicacion=float32_mul( PI, alfa );
+    entero=float32_to_int32(multiplicacion);
+    gpio0->oe  = 0x000000ff;
+    gpio0->out = multiplicacion;
+//-----------------------------------
+	 //i2c_putrwaddr(0x01, 0x23);
+
+//Prueba modulo problematico
+//everloop_putdata_2(0x41);
+//everloop_putdata_1(0x40);
+//everloop_putdata_2(0x41);
+//everloop_putdata_3(0x42);
+
 
 //Prueba unidades de punto flotante    
     multiplicacion=float32_mul( PI, alfa );

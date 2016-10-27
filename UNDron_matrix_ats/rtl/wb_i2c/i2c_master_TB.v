@@ -22,7 +22,7 @@ module i2c_master_TB;
             clk = 1'b0;
             reset = 1'b0;
             ena = 1'b0;
-            rw = 1'b0;
+            rw = 1'b1;
             addr = 7'h58;
             data_wr = 8'hbf;
     end

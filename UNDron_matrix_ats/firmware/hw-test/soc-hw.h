@@ -9,7 +9,7 @@
 #define RAM_START 0x40000000
 #define RAM_SIZE  0x04000000
 
-#define FCPU      100000000
+#define FCPU      50000000
 
 #define UART_RXBUFSIZE 32
 
@@ -114,26 +114,55 @@ char spi_getchar();
 
 /***************************************************************************
  * I2C0
- */
-#define I2C_BUSY   0x01                    // BUSY
-#define I2C_ERROR  0x02                    // ACK_ERROR 
-#define I2C_AVAIL  0x04					   // AVAILABLE
-#define I2C_ENA    0x08                    // ENA
+ 
+ Register Description:
+
+    0x00 UCR      [ 0 | 0 | 0 | 0 | ena | 0 | ack_error | busy ]
+    0x04 DATA_WXRX
+    0x08 ADDR-RW  [rw | addr] esto debe venir asi desde el software     
+ 
+  ****************************************************************************/
+
+
+//Constantes para seleccionar los valores deseados del ucr
+#define I2C_BUSY   0x01     // BUSY        0b00000001
+#define I2C_ERROR  0x02     // ACK_ERROR   0b00000010
+#define I2C_AVAIL  0x04		// AVAILABLE   0b00000100
+#define I2C_ENA    0x08     // ENA         0b00001000
+//Constantes de operacion del modulo i2c
+#define I2C_WRITE  0x00
+#define I2C_READ   0x01
+
+
 
 
 typedef struct {
    volatile uint32_t ucr;    //Posicion x00
-   volatile uint32_t wxrx;		//Posicion x04
+   volatile uint32_t wxrx;	 //Posicion x04
    volatile uint32_t rwaddr; //Posicion x08
 } i2c_t;
 
 void i2c_init();
 void i2c_sleep();
 void i2c_putrwaddr(uint8_t rw, uint8_t addrs);
-void i2c_putchar(uint8_t c);
+void i2c_putdata(uint8_t c);
 void i2c_putdatas(char *str);
-char i2c_getdata();
+uint8_t i2c_getdata();
+uint8_t I2CreadByte(uint8_t address, uint8_t subaddress);
 
+/***************************************************************************
+ * EVERLOOP
+ */
+
+typedef struct {
+   volatile uint8_t prueba_1; //Posicion x00
+   volatile uint8_t prueba_2; //Posicion x04
+   volatile uint8_t prueba_3; //Posicion x08
+} everloop_t;
+
+void everloop_putdata_1(uint8_t data1);
+void everloop_putdata_2(uint8_t data2);
+void everloop_putdata_3(uint8_t data3);
 
 /***************************************************************************
  * PWM
