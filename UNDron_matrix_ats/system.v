@@ -456,8 +456,8 @@ wb_i2c  i2c0 (
 	.wb_sel_i( i2c0_sel   ),
 	.wb_ack_o( i2c0_ack   ), 
      //
-	.i2c_scl( i2c0_scl ),
-	.i2c_sda( i2c0_sda )
+	.i2c_scl( i2c_scl ),
+	.i2c_sda( i2c_sda )
 );
 
 //---------------------------------------------------------------------------

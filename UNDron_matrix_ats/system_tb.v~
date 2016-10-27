@@ -140,7 +140,7 @@ assign i2c_sda = sda_out;
 	freqDiv aux1 (
 		.ClkOut(ClkOut),
 		.Clk(clk),
-		.Reset(start)
+		.Reset(init)
       );
 
 //---------------------------------------------------------------------------
@@ -209,6 +209,13 @@ assign i2c_sda = sda_out;
 
    always clk = #(PERIOD-(PERIOD*DUTY_CYCLE)) ~clk;
 
+//-----------------------------------------
+    always @(negedge clk) begin
+      init <= (i2c_scl == 1'b0) ? 1'b1:1'b0;  //Prueba 1
+      sda_out = 1'b0;   //Prueba 2
+    end
+//-----------------------------------------
+
 //---------------------------------------------------------------------------
 // Recopilacion de datos
 //---------------------------------------------------------------------------
@@ -220,6 +227,7 @@ initial begin: TEST_CASE
 			@ (negedge clk);
 		end 
       		rst <= 1;
+        sda_out = 1'b0;   //Prueba 2
        //--------------------------------
      #((PERIOD*DUTY_CYCLE)*400000) $finish;
 end

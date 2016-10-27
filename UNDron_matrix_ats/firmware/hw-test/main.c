@@ -1,5 +1,6 @@
 #include "soc-hw.h"
 #include "softfloat.h"
+#include "LSM9DS1.h"
 
 int main(){
 //

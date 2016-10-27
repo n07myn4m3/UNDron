@@ -140,6 +140,8 @@ void uart_putstr(char *str)
  */
 
 	static uint8_t data;
+    static uint8_t data_LSB;
+    static uint8_t data_MSB;
     //----------------------------------------------------------------
 	void i2c_putdata(uint8_t c)
 	{
@@ -188,20 +190,27 @@ void uart_putstr(char *str)
       //5) Enviar la dirección I2C del esclavo con el bit R/W alto.
       //6) Leer el byte de información del esclavo.
       //7) Opcionalmente puede leer mas bytes de información del esclavo.
-      //8) Enviar la secuencia de stop.    
+      //8) Enviar la secuencia de stop.
+      //Indicar la direccion interna que se desea leer    
       i2c_putrwaddr (I2C_WRITE, address);
       i2c_putdata(subaddress);
       i2c_init(); 
       nsleep(20);
 	  i2c_sleep();
-      nsleep(80); 
+      //Pausa para que el esclavo procese la orden
+      while((i2c0->ucr & I2C_BUSY));
+      //gpio0->oe  = 0x000000ff;
+      //gpio0->out = 0x64;
+      nsleep(80);               // Esta contando en us no en ns 
+      //gpio0->out = 0x65;
+      //Lectura de la informacion otorgada por el esclavo
       i2c_putrwaddr(I2C_READ, address);
       i2c_init();  
       nsleep(20);
       i2c_sleep();
 	  while ( (i2c0->ucr & I2C_BUSY) && (!(i2c0->ucr & I2C_ERROR)));
-      gpio0->oe  = 0x000000ff;
-      gpio0->out = 0x66;
+      //gpio0->oe  = 0x000000ff;
+      //gpio0->out = 0x66;
 	  return i2c0-> wxrx;     
     }
 
