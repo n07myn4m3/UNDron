@@ -13,12 +13,13 @@ VINCDIR=                                  \
 
 SYN_SRC=
 
-SIM_SRC=                               \
+SIM_SRC=                              \
 	system_tb.v                        \
 	../sim/sram/sram16.v               \
 	../sim/unisims/BUFG.v              \
 	../sim/unisims/DCM.v               \
-    ../sim/freqDiv/freqDiv.v
+   ../sim/modules/freqDiv.v           \
+   ../sim/modules/analyzer.v
 
 EVERLOOP_SRC = ../rtl/wb_everloop/everloop_bram.v \
                ../rtl/wb_everloop/everloop.v      \

@@ -1,40 +1,31 @@
 [*]
 [*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
-[*] Thu Oct 27 09:24:48 2016
+[*] Fri Oct 28 00:31:06 2016
 [*]
 [dumpfile] "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_ats/simulation/system_tb.vcd"
-[dumpfile_mtime] "Thu Oct 27 09:21:46 2016"
-[dumpfile_size] 202982770
+[dumpfile_mtime] "Fri Oct 28 00:29:07 2016"
+[dumpfile_size] 100652902
 [savefile] "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_ats/problema i2c.sav"
 [timestart] 0
 [size] 1000 600
 [pos] -1 -1
-*-30.267443 22400000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-29.190342 755200000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] system_tb.
 [treeopen] system_tb.uut.
 [treeopen] system_tb.uut.i2c0.
 [sst_width] 217
-[signals_width] 126
+[signals_width] 102
 [sst_expanded] 1
-[sst_vpaned_height] 161
-@23
-system_tb.uut.gpio0.gpio_o[7:0]
+[sst_vpaned_height] 163
 @28
-system_tb.uut.i2c0.i2c0.busy
-@22
-system_tb.uut.i2c0.i2c0.state[3:0]
+system_tb.analyzer1.INPUT_A
+system_tb.freqDiv1.Reset
+@29
+system_tb.freqDiv1.ClkOut
 @28
-system_tb.uut.i2c0.i2c0.ack_error
-system_tb.uut.i2c0.ena
-@22
+system_tb.uut.i2c_sda
+system_tb.uut.i2c_scl
 system_tb.uut.i2c0.addr[6:0]
-@28
-system_tb.uut.i2c0.i2c_scl
-system_tb.uut.i2c0.i2c_sda
-@22
-system_tb.uut.i2c0.i2c0.state[3:0]
-system_tb.uut.i2c0.i2c0.data_wr[7:0]
-@28
-system_tb.uut.i2c0.i2c0.rw
+system_tb.uut.i2c0.i2c0.data_clk
 [pattern_trace] 1
 [pattern_trace] 0
