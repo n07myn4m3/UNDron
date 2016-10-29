@@ -25,8 +25,6 @@ int main(){
   for(;;){
    // uart_putchar(0x20);
  //   pwm_init();
-
-//Prueba i2c
      uart_putstr("Prueba Lab");
 	 i2c_putrwaddr(0x00, 0x40);
 	 //i2c_putrwaddr(0x01, 0x50);

@@ -196,7 +196,7 @@ void uart_putstr(char *str)
       i2c_putdata(subaddress);
       i2c_init(); 
       nsleep(20);
-	  i2c_sleep();
+	  i2c0->ucr = 0x00;
       //Pausa para que el esclavo procese la orden
       while((i2c0->ucr & I2C_BUSY));
       //gpio0->oe  = 0x000000ff;
@@ -207,7 +207,7 @@ void uart_putstr(char *str)
       i2c_putrwaddr(I2C_READ, address);
       i2c_init();  
       nsleep(20);
-      i2c_sleep();
+      i2c0->ucr = 0x00;
 	  while ( (i2c0->ucr & I2C_BUSY) && (!(i2c0->ucr & I2C_ERROR)));
       //gpio0->oe  = 0x000000ff;
       //gpio0->out = 0x66;

@@ -1,5 +1,6 @@
 #include "soc-hw.h"
 #include "softfloat.h"
+#include "LSM9DS1.h"
 
 int main(){
 //
@@ -24,8 +25,11 @@ int main(){
   for(;;){
    // uart_putchar(0x20);
  //   pwm_init();
-
-//Prueba i2c
+      //---------------
+      i2c_init(); 
+      nsleep(20);
+	  i2c0->ucr = 0x00;
+      //---------------
      uart_putstr("Prueba Lab");
 	 i2c_putrwaddr(0x00, 0x40);
 	 //i2c_putrwaddr(0x01, 0x50);

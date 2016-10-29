@@ -155,32 +155,62 @@ module system_tb;
 //---------------------------------------------------------------------------
 // Prueba I2C
 //---------------------------------------------------------------------------
+//reg    read    = 1'b0;
 reg    sda_out = 1'bz;
 assign i2c_sda = sda_out; 
-
 pullup(i2c_scl); 
+reg   [7:0]  data_write = 8'b11101111;
+reg   [3:0]  count = 7;
 
     //1) Descubrir cuando el modulo I2C va a realizar una transmision de datos
     //   y verificar si llevara a cabo un proceso de lectura o escritura.
     always @(negedge i2c_sda) begin
        @ (negedge clk) begin
          if(i2c_scl == 1'b1) begin
-            start = 1'b1; 
-            INPUT_A = 1'b0;
-         //------------------------------   
-            for(i=0; i<9; i=i+1) begin
-			   @ (posedge ClkOut);
-		      end 
-         //------------------------------
-            start = 1'b0;
+		        start   = 1'b1; 
+		        INPUT_A = 1'b0;
+                INPUT_B = 1'b0;
+		     //------------------------------   
+		        for(i=0; i<9; i=i+1) begin   //Para revisar si el octavo bit del protocolo es
+				   @ (posedge ClkOut);       //de lectura o escritura
+				  end 
+		     //------------------------------
+		        //start = 1'b0;
 				if(i2c_sda == 1'b0) begin
-            INPUT_A = 1'b1;
-            end else begin
-            INPUT_A = 1'b0;
-            end
+		        INPUT_A = 1'b0;              //Se llevara a cabo un proceso de escritura
+		        end else begin
+		        INPUT_A = 1'b1;              //Se llevara a cabo un proceso de lectura
+		        end
 			end 
+         //------------------------------
        end
     end
+
+    //2) Si se lleva a cabo un proceso de lectura reconocer el bloque donde sucederá
+    //   interceptar i2c_sda y enviar los datos que se encuentren en data_write
+    always @(negedge clk) begin
+       //---------------------------
+       if(INPUT_A == 1'b1)begin  
+  		  for(i=0; i<2; i=i+1) begin   
+		   @ (posedge ClkOut);       
+		  end 
+          INPUT_B = 1'b1;
+          if(INPUT_B == 1'b1)begin
+		      for(i=0; i<8; i=i+1) begin   
+               sda_out = data_write[7-i] ? 1'b1:1'b0;
+			   @ (posedge ClkOut);       
+			  end 
+		      INPUT_B = 1'b0; //Indico que el estado de lectura termino
+		      INPUT_A = 1'b0; //Debido a que se hace cero en el siguiente ciclo que satisface la conclusion
+		                      //existe el riezgo que INPUT_B vuelva a ser 1.
+              sda_out = 1'bz; //Devolver i2c_sda a su estado original 
+          end 
+       end
+       //---------------------------
+    end
+
+
+
 
 //---------------------------------------------------------------------------
 // Definicion del reloj de pruebas
@@ -219,17 +249,6 @@ pullup(i2c_scl);
          @ (negedge clk);
        end 
       		rst = 1;
-
-
-/* 
-       for(i=0; i<4; i=i+1) begin
-         @ (negedge clk);
-       end
-			data_RGB = 8'h5D;	
-			ack = 1;
-       @ (negedge clk);
-            ack = 0;
-*/
       end
    end
 

@@ -79,17 +79,19 @@ int read_adc(int channel){
 void loop() { 
  readvalue = read_adc(1); 
  v_channel=readvalue*(5.0 / 255.0);
-  Serial.println("CANAL 0");
-  Serial.println(" "); 
-  Serial.println(readvalue,BIN); //DEC para decimal
-  Serial.println(v_channel,3);
+  Serial.print("CANAL 0 ");
+  Serial.print(readvalue,BIN); //DEC para decimal
+  Serial.print(" voltaje ");
+  Serial.print(v_channel,3);
+  Serial.print("\n\n");
   
  readvalue = read_adc(2); 
  v_channel=readvalue*(5.0 / 255.0);
-  Serial.println("CANAL 1");
-  Serial.println(" ");
-  Serial.println(readvalue,BIN); 
-  Serial.println(v_channel,5);
-  Serial.println(" "); 
-  delay(250); 
+  Serial.print("CANAL 1 ");
+  Serial.print(readvalue,BIN); 
+  Serial.print(" voltaje ");
+  Serial.print(v_channel,5);
+  
+  Serial.print("\n\n");
+  delay(1000); 
 } 
