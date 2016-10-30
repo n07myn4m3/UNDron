@@ -201,7 +201,8 @@ void uart_putstr(char *str)
       while((i2c0->ucr & I2C_BUSY));
       //gpio0->oe  = 0x000000ff;
       //gpio0->out = 0x64;
-      nsleep(80);               // Esta contando en us no en ns 
+      msleep(1);                //La pausa debe ser de un milisegundo
+      //nsleep(80);               // Esta contando en us no en ns 
       //gpio0->out = 0x65;
       //Lectura de la informacion otorgada por el esclavo
       i2c_putrwaddr(I2C_READ, address);

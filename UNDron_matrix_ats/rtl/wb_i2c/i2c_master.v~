@@ -272,9 +272,10 @@ module i2c_master (clk, reset, ena, addr, rw, data_wr, busy, data_rd, ack_error,
         endcase
     end
     
-    assign scl = (scl_ena && ~scl_clk) ? 1'b0 : 1'bz; //ESTA VERSION ES PARA SINTETIZAR
-//    assign scl = (scl_ena && ~scl_clk) ? 1'b0 : 1'b1;  //OJO ESTE ARREGLO ES EXCLUSIVO DE SIMULACION
+    assign scl = (scl_ena && ~scl_clk) ? 1'b0 : 1'bz;
     assign sda = (!sda_ena_n) ? 1'b0 : 1'bz;
+
+//    wire jackpot = (~data_clk && data_clk_prev);
 
 endmodule
 

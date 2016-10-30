@@ -1,0 +1,7 @@
+INFILE=/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_ats/build/system-routed.ncd
+OUTFILE=/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_ats/build/system.bit
+FAMILY=Spartan6
+PART=xc6slx4-2tqg144
+WORKINGDIR=/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_ats/build
+LICENSE=WebPack
+USER_INFO=211079392_0_0_238

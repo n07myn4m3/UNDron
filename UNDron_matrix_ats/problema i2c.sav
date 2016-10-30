@@ -1,25 +1,24 @@
 [*]
 [*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
-[*] Fri Oct 28 15:05:46 2016
+[*] Sat Oct 29 22:06:37 2016
 [*]
 [dumpfile] "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_ats/simulation/system_tb.vcd"
-[dumpfile_mtime] "Fri Oct 28 15:05:20 2016"
-[dumpfile_size] 209036556
+[dumpfile_mtime] "Sat Oct 29 21:55:08 2016"
+[dumpfile_size] 207385189
 [savefile] "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_ats/problema i2c.sav"
 [timestart] 0
 [size] 1000 600
-[pos] -1 -1
-*-30.230633 1810010000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 629 149
+*-30.281502 1513000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] system_tb.
 [treeopen] system_tb.uut.
 [treeopen] system_tb.uut.i2c0.
 [sst_width] 217
-[signals_width] 110
+[signals_width] 142
 [sst_expanded] 1
 [sst_vpaned_height] 163
-@29
-system_tb.analyzer1.INPUT_C
 @28
+system_tb.analyzer1.INPUT_C
 system_tb.analyzer1.INPUT_B
 system_tb.analyzer1.INPUT_A
 system_tb.freqDiv1.Reset
@@ -31,5 +30,10 @@ system_tb.uut.i2c0.i2c0.state[3:0]
 @28
 system_tb.uut.i2c0.addr[6:0]
 system_tb.uut.i2c0.i2c0.data_clk
+@22
+system_tb.uut.i2c0.i2c0.data_rd[7:0]
+system_tb.uut.gpio0.gpio_o[7:0]
+@821
+system_tb.uut.uart0.tx_data[7:0]
 [pattern_trace] 1
 [pattern_trace] 0

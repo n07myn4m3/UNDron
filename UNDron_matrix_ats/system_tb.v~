@@ -159,7 +159,7 @@ module system_tb;
 reg    sda_out = 1'bz;
 assign i2c_sda = sda_out; 
 pullup(i2c_scl); 
-reg   [7:0]  data_write = 8'b11101111;
+reg   [7:0]  data_write = 8'b00111101;
 reg   [3:0]  count = 7;
 
     //1) Descubrir cuando el modulo I2C va a realizar una transmision de datos

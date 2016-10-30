@@ -19,13 +19,23 @@
 #######################
 
 #OSC
-NET "clk"       LOC = "P84" | IOSTANDARD = LVCMOS33;
+NET "clk"    LOC = "P84" | CLOCK_DEDICATED_ROUTE = FALSE | IOSTANDARD = LVCMOS33;
 
 #LED
 NET "led"    LOC = "P39" | IOSTANDARD = LVCMOS33 | DRIVE = 24;   #Debug led?     
 #NET "everloop_ctl" LOC = "P56"| IOSTANDARD = LVCMOS33;
 
 NET "rst"    LOC = "P123" | CLOCK_DEDICATED_ROUTE = FALSE | IOSTANDARD = LVCMOS33 | PULLDOWN;     #RPI_GPIO12
+
+#=== I2C ===
+
+NET "i2c_sda"    LOC = "P74" | IOSTANDARD=LVCMOS33; 
+NET "i2c_scl"    LOC = "P75" | IOSTANDARD=LVCMOS33; 
+
+
+# ==== UART ====
+NET "uart_rxd" LOC = "P69" | IOSTANDARD = LVCMOS33;
+NET "uart_txd" LOC = "P70" | IOSTANDARD = LVCMOS33;
 
 #NET "sck"       LOC = "P115" | IOSTANDARD = LVCMOS33;        
 #NET "mosi"      LOC = "P112" | IOSTANDARD = LVCMOS33;        

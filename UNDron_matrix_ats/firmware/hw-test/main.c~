@@ -17,26 +17,44 @@ int main(){
 //    irq_enable();
 
 //Valores para probar las librerias de coma flotante
-  volatile uint32_t entero;
+/*  volatile uint32_t entero;
   float32 multiplicacion;
   float32 division;
+*/
 
 
   for(;;){
    // uart_putchar(0x20);
  //   pwm_init();
-      //---------------
-      i2c_init(); 
-      nsleep(20);
-	  i2c0->ucr = 0x00;
-      //---------------
-     uart_putstr("Prueba Lab");
+
+//=======================================================================
+// Pruebas modulo I2C
+//=======================================================================
+    uart_putstr("Prueba Lab");
 	 i2c_putrwaddr(0x00, 0x40);
 	 //i2c_putrwaddr(0x01, 0x50);
 	 //i2c_putrwaddr(0x00, 0x70);
 	 //i2c_putrwaddr(0x01, 0x50);
 //Prueba lectura i2c
-     I2CreadByte(0x30, 0x35); 
+    volatile uint8_t dataRead;
+    dataRead = I2CreadByte(0x30, 0x35); 
+    gpio0->oe  = 0x000000ff;
+    gpio0->out = 0x60;
+    gpio0->out = dataRead;
+    
+    uint8_t mTest = mReadByte(WHO_AM_I_M); //adress 0x1C subaddress 0x0F
+    gpio0->out = 0x70;
+    gpio0->out = mTest;
+
+    uart_putstr("Verificacion");
+
+    if(mTest==WHO_AM_I_M_RSP)
+      uart_putstr("Disponible");      
+    else 
+      uart_putstr("Error"); 
+    msleep(1000); 
+
+/*
 
 //Prueba unidades de punto flotante    
     multiplicacion=float32_mul( PI, alfa );
@@ -74,6 +92,7 @@ int main(){
     //nsleep(100);
     pwm_duty(50);
     //nsleep(100);
+*/
   }    
     return 0;
 }

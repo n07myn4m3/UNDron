@@ -27,8 +27,12 @@ soc-hw.o: soc-hw.c
 softfloat.o: softfloat.c
 	$(LM32_CC) $(CFLAGS) -c softfloat.c
 
-image: crt0ram.o main.o soc-hw.o softfloat.o
-	$(LM32_LD) $(LDFLAGS) -Map image.map -N -o image crt0ram.o main.o soc-hw.o softfloat.o 
+#Para añadir el magnetometro
+LSM9DS1.o: LSM9DS1.c
+	$(LM32_CC) $(CFLAGS) -c LSM9DS1.c
+
+image: crt0ram.o main.o soc-hw.o softfloat.o LSM9DS1.o
+	$(LM32_LD) $(LDFLAGS) -Map image.map -N -o image crt0ram.o main.o soc-hw.o softfloat.o LSM9DS1.o
 
 image.lst: image
 	$(LM32_OBJDUMP) -h -S $< > $@
