@@ -165,6 +165,10 @@ Distributed as-is; no warranty is given.
     #define INA219_CONFIG_MODE_SANDBVOLT_CONTINUOUS (0x0007)	
 /*=========================================================================*/
 
+////////////////////////////////
+//     LSM9DS1 FUNCTIONS      //
+////////////////////////////////
+
 uint8_t mReadByte(uint8_t subAddress);
 
 #endif
