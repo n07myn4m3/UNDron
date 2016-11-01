@@ -6,6 +6,12 @@ uint8_t mReadByte(uint8_t subAddress)
 	return I2CreadByte(mAddress, subAddress);
 }
 
+uint8_t agReadByte(uint8_t subAddress)
+{
+	return I2CreadByte(agAddress, subAddress);
+}
+
+
 
 /*
 uint16_t config = INA219_CONFIG_BVOLTAGERANGE_16V |

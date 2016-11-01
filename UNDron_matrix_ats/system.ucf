@@ -25,17 +25,25 @@ NET "clk"    LOC = "P84" | CLOCK_DEDICATED_ROUTE = FALSE | IOSTANDARD = LVCMOS33
 NET "led"    LOC = "P39" | IOSTANDARD = LVCMOS33 | DRIVE = 24;   #Debug led?     
 #NET "everloop_ctl" LOC = "P56"| IOSTANDARD = LVCMOS33;
 
-NET "rst"    LOC = "P123" | CLOCK_DEDICATED_ROUTE = FALSE | IOSTANDARD = LVCMOS33 | PULLDOWN;     #RPI_GPIO12
+#NET "rst"    LOC = "P123" | CLOCK_DEDICATED_ROUTE = FALSE | IOSTANDARD = LVCMOS33 | PULLDOWN;     #RPI_GPIO12
 
-#=== I2C ===
+NET  rst  LOC = "P105" | CLOCK_DEDICATED_ROUTE = FALSE | PULLUP;
+# === I2C ===
 
 NET "i2c_sda"    LOC = "P74" | IOSTANDARD=LVCMOS33; 
 NET "i2c_scl"    LOC = "P75" | IOSTANDARD=LVCMOS33; 
+
+#Cambio de posicion debido a la posibilidad de que este alterando el funcionamiento 
+#original de la raspberry
+#NET "i2c_sda"    LOC="P102" | IOSTANDARD=LVCMOS33;  #DF<15>
+#NET "i2c_scl"    LOC="P99"  | IOSTANDARD=LVCMOS33;  #DF<13>
+
 
 
 # ==== UART ====
 NET "uart_rxd" LOC = "P69" | IOSTANDARD = LVCMOS33;
 NET "uart_txd" LOC = "P70" | IOSTANDARD = LVCMOS33;
+
 
 #NET "sck"       LOC = "P115" | IOSTANDARD = LVCMOS33;        
 #NET "mosi"      LOC = "P112" | IOSTANDARD = LVCMOS33;        
@@ -48,6 +56,27 @@ NET "uart_txd" LOC = "P70" | IOSTANDARD = LVCMOS33;
 #NET "IR_RING_EN" LOC = "P143" | IOSTANDARD = LVCMOS33;
 #NET "RX_IR"      LOC = "P144" | IOSTANDARD = LVCMOS33;        
 #NET "TX_IR"      LOC = "P118" | IOSTANDARD = LVCMOS33;
+
+
+# ==== Expansion pinout ====
+
+#NET "DF<16>" LOC="P106"; #DF<16>
+#NET "DF<15>" LOC="P102"; #DF<15> #Prueba
+#NET "DF<14>" LOC="P101"; #DF<14>
+#NET "DF<13>" LOC="P99";  #DF<13>
+#NET "DF<12>" LOC="P98";  #DF<12>
+#NET "DF<11>" LOC="P95";  #DF<11>
+#NET "DF<10>" LOC="P94";  #DF<10>
+#NET "DF<9>" LOC="P93";   #DF<9>
+#NET "DF<8>" LOC="P92";   #DF<8>
+#NET "DF<7>" LOC="P88";   #DF<7>
+#NET "DF<6>" LOC="P85";   #DF<6>
+#NET "DF<5>" LOC="P83";   #DF<5>
+#NET "DF<4>" LOC="P82";   #DF<4>
+#NET "DF<3>" LOC="P81";   #DF<3>
+#NET "DF<2>" LOC="P80";   #DF<2>
+#NET "DF<1>" LOC="P79";   #DF<1>
+#NET "DF<0>" LOC="P78";   #DF<0>
 
 
 #######################

@@ -29,7 +29,7 @@ Distributed as-is; no warranty is given.
 // acelerometro-giroscopio deacuerdo a //
 // la matrix-creator                   //
 /////////////////////////////////////////
-#define mAddress	  		   0x1C  //Magnetometro
+#define mAddress	  		 0x1C  //Magnetometro
 #define agAddress	         0x6A  //Acelerometro-giroscopio  
 /////////////////////////////////////////
 // LSM9DS1 Accel/Gyro (XL/G) Registers //
@@ -44,7 +44,7 @@ Distributed as-is; no warranty is given.
 #define REFERENCE_G			0x0B
 #define INT1_CTRL			   0x0C
 #define INT2_CTRL			   0x0D
-#define WHO_AM_I_XG			0x0F
+#define WHO_AM_I_AG			0x0F
 #define CTRL_REG1_G			0x10
 #define CTRL_REG2_G			0x11
 #define CTRL_REG3_G			0x12
@@ -165,6 +165,10 @@ Distributed as-is; no warranty is given.
     #define INA219_CONFIG_MODE_SANDBVOLT_CONTINUOUS (0x0007)	
 /*=========================================================================*/
 
-uint8_t mReadByte(uint8_t subAddress);
+////////////////////////////////
+//     LSM9DS1 FUNCTIONS      //
+////////////////////////////////
 
+uint8_t mReadByte(uint8_t subAddress);
+uint8_t agReadByte(uint8_t subAddress);
 #endif

@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Sat Oct 29 18:20:17 2016
+// Written by: Map P.20131013 on Tue Nov 01 14:00:43 2016
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -7,7 +7,7 @@ COMP "clk" LOCATE = SITE "P84" LEVEL 1;
 PIN clk_pin<0> = BEL "clk" PINNAME PAD;
 PIN "clk_pin<0>" CLOCK_DEDICATED_ROUTE = FALSE;
 COMP "led" LOCATE = SITE "P39" LEVEL 1;
-COMP "rst" LOCATE = SITE "P123" LEVEL 1;
+COMP "rst" LOCATE = SITE "P105" LEVEL 1;
 PIN rst_pin<0> = BEL "rst" PINNAME PAD;
 PIN "rst_pin<0>" CLOCK_DEDICATED_ROUTE = FALSE;
 COMP "i2c_sda" LOCATE = SITE "P74" LEVEL 1;

@@ -8,7 +8,7 @@ Target Device  : xc6slx4
 Target Package : tqg144
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Sat Oct 29 18:19:33 2016
+Mapped Date    : Tue Nov  1 14:00:03 2016
 
 Design Summary
 --------------
@@ -20,10 +20,10 @@ Slice Logic Utilization:
     Number used as Latches:                      2
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                1
-  Number of Slice LUTs:                      1,759 out of   2,400   73%
-    Number used as logic:                    1,679 out of   2,400   69%
+  Number of Slice LUTs:                      1,762 out of   2,400   73%
+    Number used as logic:                    1,678 out of   2,400   69%
       Number using O6 output only:           1,292
-      Number using O5 output only:             104
+      Number using O5 output only:             103
       Number using O5 and O6:                  283
       Number used as ROM:                        0
     Number used as Memory:                      64 out of   1,200    5%
@@ -33,18 +33,18 @@ Slice Logic Utilization:
         Number using O5 and O6:                 64
       Number used as Single Port RAM:            0
       Number used as Shift Register:             0
-    Number used exclusively as route-thrus:     16
-      Number with same-slice register load:     11
+    Number used exclusively as route-thrus:     20
+      Number with same-slice register load:     15
       Number with same-slice carry load:         5
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   568 out of     600   94%
+  Number of occupied Slices:                   571 out of     600   95%
   Number of MUXCYs used:                       348 out of   1,200   29%
-  Number of LUT Flip Flop pairs used:        2,031
-    Number with an unused Flip Flop:           674 out of   2,031   33%
-    Number with an unused LUT:                 272 out of   2,031   13%
-    Number of fully used LUT-FF pairs:       1,085 out of   2,031   53%
+  Number of LUT Flip Flop pairs used:        2,008
+    Number with an unused Flip Flop:           654 out of   2,008   32%
+    Number with an unused LUT:                 246 out of   2,008   12%
+    Number of fully used LUT-FF pairs:       1,108 out of   2,008   55%
     Number of unique control sets:              56
     Number of slice register sites lost
       to control set restrictions:             117 out of   4,800    2%
@@ -90,9 +90,9 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                4.03
 
-Peak Memory Usage:  728 MB
-Total REAL time to MAP completion:  44 secs 
-Total CPU time to MAP completion:   44 secs 
+Peak Memory Usage:  698 MB
+Total REAL time to MAP completion:  40 secs 
+Total CPU time to MAP completion:   37 secs 
 
 Table of Contents
 -----------------
@@ -117,16 +117,16 @@ Section 2 - Warnings
 --------------------
 WARNING:Place:1109 - A clock IOB / BUFGMUX clock component pair have been found
    that are not placed at an optimal clock IOB / BUFGMUX site pair. The clock
-   IOB component <clk> is placed at site <P84>. The corresponding BUFG component
-   <clk_BUFGP/BUFG> is placed at site <BUFGMUX_X2Y2>. There is only a select set
-   of IOBs that can use the fast path to the Clocker buffer, and they are not
-   being used. You may want to analyze why this problem exists and correct it.
-   This is normally an ERROR but the CLOCK_DEDICATED_ROUTE constraint was
-   applied on COMP.PIN <clk.PAD> allowing your design to continue. This
-   constraint disables all clock placer rules related to the specified COMP.PIN.
-   The use of this override is highly discouraged as it may lead to very poor
-   timing results. It is recommended that this error condition be corrected in
-   the design.
+   IOB component <rst> is placed at site <P105>. The corresponding BUFG
+   component <i2c0/i2c0/reset_inv_BUFG> is placed at site <BUFGMUX_X3Y13>. There
+   is only a select set of IOBs that can use the fast path to the Clocker
+   buffer, and they are not being used. You may want to analyze why this problem
+   exists and correct it. This is normally an ERROR but the
+   CLOCK_DEDICATED_ROUTE constraint was applied on COMP.PIN <rst.PAD> allowing
+   your design to continue. This constraint disables all clock placer rules
+   related to the specified COMP.PIN. The use of this override is highly
+   discouraged as it may lead to very poor timing results. It is recommended
+   that this error condition be corrected in the design.
 
 Section 3 - Informational
 -------------------------
@@ -182,7 +182,7 @@ Section 6 - IOB Properties
 | led                                | IOB              | OUTPUT    | LVCMOS33             |       | 24       | SLOW |              |          |          |
 | pwm_n_out                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW | OFF          |          |          |
 | pwm_out                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW | OFF          |          |          |
-| rst                                | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLDOWN |          |
+| rst                                | IOB              | INPUT     | LVCMOS25             |       |          |      |              | PULLUP   |          |
 | spi_clk                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW | OFF          |          |          |
 | spi_miso                           | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | spi_mosi                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW | OFF          |          |          |

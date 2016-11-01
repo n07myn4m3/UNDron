@@ -30,28 +30,33 @@ int main(){
 //=======================================================================
 // Pruebas modulo I2C
 //=======================================================================
-    uart_putstr("Prueba Lab");
-	 i2c_putrwaddr(0x00, 0x40);
+    uart_putstr("Prueba Lab \r\n");
+	 //i2c_putrwaddr(0x00, 0x40);
 	 //i2c_putrwaddr(0x01, 0x50);
 	 //i2c_putrwaddr(0x00, 0x70);
 	 //i2c_putrwaddr(0x01, 0x50);
 //Prueba lectura i2c
-    volatile uint8_t dataRead;
-    dataRead = I2CreadByte(0x30, 0x35); 
-    gpio0->oe  = 0x000000ff;
-    gpio0->out = 0x60;
-    gpio0->out = dataRead;
+    //volatile uint8_t dataRead;
+    //dataRead = I2CreadByte(0x30, 0x35); 
+    //gpio0->oe  = 0x000000ff;
+    //gpio0->out = 0x60;
+    //gpio0->out = dataRead;
     
     uint8_t mTest = mReadByte(WHO_AM_I_M); //adress 0x1C subaddress 0x0F
-    gpio0->out = 0x70;
-    gpio0->out = mTest;
+    //gpio0->out = 0x70;
+    //gpio0->out = mTest;
 
-    uart_putstr("Verificacion");
+    uint8_t agTest = agReadByte(WHO_AM_I_AG); //adress 0x1C subaddress 0x0F
+    //gpio0->out = 0x70;
+    //gpio0->out = mTest;
 
-    if(mTest==WHO_AM_I_M_RSP)
-      uart_putstr("Disponible");      
+    uart_putstr("Verificacion \r\n");
+
+    if( mTest==WHO_AM_I_M_RSP && agTest==WHO_AM_I_AG_RSP)
+      uart_putstr("Disponible \r\n");      
     else 
-      uart_putstr("Error"); 
+      uart_putstr("Error \r\n"); 
+
     msleep(1000); 
 
 /*
