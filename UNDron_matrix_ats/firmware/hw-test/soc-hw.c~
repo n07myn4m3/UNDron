@@ -191,28 +191,61 @@ void uart_putstr(char *str)
       //6) Leer el byte de información del esclavo.
       //7) Opcionalmente puede leer mas bytes de información del esclavo.
       //8) Enviar la secuencia de stop.
-      //Indicar la direccion interna que se desea leer    
+
+		  //Indicar la direccion interna que se desea leer    
       i2c_putrwaddr (I2C_WRITE, address);
       i2c_putdata(subaddress);
       i2c_init(); 
       nsleep(20);
 	  i2c0->ucr = 0x00;
-      //Pausa para que el esclavo procese la orden
+		  //Pausa para que el esclavo procese la orden
       while((i2c0->ucr & I2C_BUSY));
-      //gpio0->oe  = 0x000000ff;
-      //gpio0->out = 0x64;
+		  //gpio0->oe  = 0x000000ff;
+		  //gpio0->out = 0x64;
       msleep(1);                //La pausa debe ser de un milisegundo
-      //nsleep(80);               // Esta contando en us no en ns 
-      //gpio0->out = 0x65;
-      //Lectura de la informacion otorgada por el esclavo
+		  //nsleep(80);               // Esta contando en us no en ns 
+		  //gpio0->out = 0x65;
+		  //Lectura de la informacion otorgada por el esclavo
       i2c_putrwaddr(I2C_READ, address);
       i2c_init();  
       nsleep(20);
       i2c0->ucr = 0x00;
 	  while ( (i2c0->ucr & I2C_BUSY) && (!(i2c0->ucr & I2C_ERROR)));
-      //gpio0->oe  = 0x000000ff;
-      //gpio0->out = 0x66;
+		  //gpio0->oe  = 0x000000ff;
+		  //gpio0->out = 0x66;
 	  return i2c0-> wxrx;     
+    }
+    //----------------------------------------------------------------
+    uint8_t I2CreadBytes(uint8_t address, uint8_t subaddress, uint8_t * dest, uint8_t count)
+    {
+		i2c_putrwaddr (I2C_WRITE, address);
+		i2c_putdata(subaddress);
+		i2c_init(); 
+		nsleep(20);
+		i2c0->ucr = 0x00;
+		  //Pausa para que el esclavo procese la orden
+		while((i2c0->ucr & I2C_BUSY));
+		  //gpio0->oe  = 0x000000ff;
+		  //gpio0->out = 0x64;
+		msleep(1);                //La pausa debe ser de un milisegundo
+		  //nsleep(80);               // Esta contando en us no en ns 
+		  //gpio0->out = 0x65;
+		  //Lectura de la informacion otorgada por el esclavo
+		i2c_putrwaddr(I2C_READ, address);
+		i2c_init();  
+		//-------------------------------------
+		for (uint8_t i=0; i<count;)
+		{
+			nsleep(20);
+            if (i==count-1) i2c0->ucr = 0x00;
+
+			while ( (i2c0->ucr & I2C_BUSY) && (!(i2c0->ucr & I2C_ERROR)));
+            dest[i++] = i2c0-> wxrx;
+            gpio0->oe  = 0x000000ff;
+		    gpio0->out = i;
+		}
+		//-------------------------------------
+        return count;
     }
 
 /***************************************************************************

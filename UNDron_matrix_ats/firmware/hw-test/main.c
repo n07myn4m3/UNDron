@@ -27,6 +27,7 @@ int main(){
    // uart_putchar(0x20);
  //   pwm_init();
 
+/*
 //=======================================================================
 // Pruebas modulo I2C
 //=======================================================================
@@ -58,6 +59,20 @@ int main(){
       uart_putstr("Error \r\n"); 
 
     msleep(1000); 
+*/
+//=======================================================================
+// Pruebas modulo I2C leer un arreglo de bytes
+//=======================================================================
+    uart_putstr("Prueba Lab \r\n");
+
+	uint8_t temp[6]; // We'll read six bytes from the gyro into temp
+    uint8_t gx;
+    uint8_t gy;
+    uint8_t gz;
+	I2CreadBytes(0x30, 0x35, temp, 6); 
+	gx = (temp[1] << 8) | temp[0]; 
+	gy = (temp[3] << 8) | temp[2]; 
+	gz = (temp[5] << 8) | temp[4]; 
 
 /*
 

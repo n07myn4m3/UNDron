@@ -121,6 +121,18 @@ Distributed as-is; no warranty is given.
 /*=========================================================================
     CONFIG REGISTER (R/W)
     -----------------------------------------------------------------------*/
+
+    //CTRL_REG1_G (0X00) 
+      //gyro sampleRate
+		#define ag_ctrl1_14hz_9mhz    (0x20)
+		#define ag_ctrl1_59hz_5mhz    (0x40)
+		#define ag_ctrl1_119hz        (0x60)
+		#define ag_ctrl1_238hz        (0x80)
+		#define ag_ctrl1_476hz        (0xA0)
+		#define ag_ctrl1_952hz        (0xCO)
+      //gyro bandWidth
+
+
     #define INA219_REG_CONFIG                      (0x00)
     /*---------------------------------------------------------------------*/
     #define INA219_CONFIG_RESET                    (0x8000)  // Reset Bit

@@ -18,7 +18,7 @@ Linker script and memory map
                 0x00004000                _RAM_SIZE = 0x4000
                 0x00004000                _RAM_END = (_RAM_START + _RAM_SIZE)
 
-.text           0x00000000     0x259c
+.text           0x00000000     0x26c8
                 0x00000000                _ftext = .
  *(.text .stub .text.* .gnu.linkonce.t.*)
  .text          0x00000000      0x208 crt0ram.o
@@ -31,118 +31,119 @@ Linker script and memory map
                 0x00000158                irq_set_mask
                 0x0000014c                irq_disable
                 0x0000016c                halt
- .text          0x00000208       0x98 main.o
+ .text          0x00000208       0x3c main.o
                 0x00000208                main
- .text          0x000002a0      0x4b4 soc-hw.o
-                0x000005d0                I2CreadByte
-                0x000003d0                tic_isr
-                0x000004c8                i2c_putdata
-                0x00000490                uart_putstr
-                0x00000570                i2c_sleep
-                0x00000344                isr_unregister
-                0x000006f0                everloop_putdata_3
-                0x0000039c                nsleep
-                0x00000448                uart_getchar
-                0x00000708                pwm_init
-                0x00000444                uart_init
-                0x0000032c                isr_register
-                0x000006c0                everloop_putdata_1
-                0x00000514                i2c_putdatas
-                0x000006d8                everloop_putdata_2
-                0x00000308                isr_init
-                0x00000558                i2c_init
-                0x000002a4                irq_handler
-                0x000002a0                isr_null
-                0x00000724                pwm_duty
-                0x000003fc                tic_init
-                0x000004f0                i2c_putrwaddr
-                0x0000073c                pwm_enable
-                0x000005a0                i2c_getdata
-                0x00000364                msleep
-                0x0000046c                uart_putchar
- .text          0x00000754     0x1e00 softfloat.o
-                0x00000d60                float32_to_int32_round_to_zero
-                0x00002450                float32_artan
-                0x00001608                float32_div
-                0x00001318                float32_add
-                0x000008d0                float32_is_signaling_nan
-                0x000008bc                float32_is_nan
-                0x000020c8                float32_lt
-                0x00001c50                float32_sqrt
-                0x00002180                float32_eq_signaling
-                0x00000e48                float32_round_to_int
-                0x000008a4                float_raise
-                0x00000c20                float32_to_int32
-                0x00002220                float32_le_quiet
-                0x000024b0                float32_pow2
-                0x00001930                float32_rem
-                0x00000bd0                int32_to_float32
-                0x00001390                float32_mul
-                0x00001f24                float32_eq
-                0x00002328                float32_lt_quiet
-                0x00002420                float32_abs
-                0x000024cc                float32_filterKom
-                0x00001354                float32_sub
-                0x00002008                float32_le
- .text          0x00002554       0x48 LSM9DS1.o
-                0x00002578                mReadByte
-                0x00002554                agReadByte
-                0x0000259c                _etext = .
+ .text          0x00000244      0x63c soc-hw.o
+                0x00000574                I2CreadByte
+                0x00000374                tic_isr
+                0x0000046c                i2c_putdata
+                0x00000434                uart_putstr
+                0x00000514                i2c_sleep
+                0x000002e8                isr_unregister
+                0x0000081c                everloop_putdata_3
+                0x00000340                nsleep
+                0x000003ec                uart_getchar
+                0x00000834                pwm_init
+                0x000003e8                uart_init
+                0x000002d0                isr_register
+                0x000007ec                everloop_putdata_1
+                0x00000664                I2CreadBytes
+                0x000004b8                i2c_putdatas
+                0x00000804                everloop_putdata_2
+                0x000002ac                isr_init
+                0x000004fc                i2c_init
+                0x00000248                irq_handler
+                0x00000244                isr_null
+                0x00000850                pwm_duty
+                0x000003a0                tic_init
+                0x00000494                i2c_putrwaddr
+                0x00000868                pwm_enable
+                0x00000544                i2c_getdata
+                0x00000308                msleep
+                0x00000410                uart_putchar
+ .text          0x00000880     0x1e00 softfloat.o
+                0x00000e8c                float32_to_int32_round_to_zero
+                0x0000257c                float32_artan
+                0x00001734                float32_div
+                0x00001444                float32_add
+                0x000009fc                float32_is_signaling_nan
+                0x000009e8                float32_is_nan
+                0x000021f4                float32_lt
+                0x00001d7c                float32_sqrt
+                0x000022ac                float32_eq_signaling
+                0x00000f74                float32_round_to_int
+                0x000009d0                float_raise
+                0x00000d4c                float32_to_int32
+                0x0000234c                float32_le_quiet
+                0x000025dc                float32_pow2
+                0x00001a5c                float32_rem
+                0x00000cfc                int32_to_float32
+                0x000014bc                float32_mul
+                0x00002050                float32_eq
+                0x00002454                float32_lt_quiet
+                0x0000254c                float32_abs
+                0x000025f8                float32_filterKom
+                0x00001480                float32_sub
+                0x00002134                float32_le
+ .text          0x00002680       0x48 LSM9DS1.o
+                0x000026a4                mReadByte
+                0x00002680                agReadByte
+                0x000026c8                _etext = .
 
-.rodata         0x0000259c      0x47c
-                0x0000259c                . = ALIGN (0x4)
-                0x0000259c                _frodata = .
+.rodata         0x000026c8      0x450
+                0x000026c8                . = ALIGN (0x4)
+                0x000026c8                _frodata = .
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata.str1.4
-                0x0000259c       0x3c main.o
- .rodata        0x000025d8      0x440 softfloat.o
+                0x000026c8       0x10 main.o
+ .rodata        0x000026d8      0x440 softfloat.o
  *(.rodata1)
-                0x00002a18                _erodata = .
+                0x00002b18                _erodata = .
 
-.data           0x00002a18       0x1c
-                0x00002a18                . = ALIGN (0x4)
-                0x00002a18                _fdata = .
+.data           0x00002b18       0x1c
+                0x00002b18                . = ALIGN (0x4)
+                0x00002b18                _fdata = .
  *(.data .data.* .gnu.linkonce.d.*)
- .data          0x00002a18        0x0 crt0ram.o
- .data          0x00002a18        0x0 main.o
- .data          0x00002a18       0x1c soc-hw.o
-                0x00002a18                uart0
-                0x00002a2c                i2c0
-                0x00002a1c                timer0
-                0x00002a20                gpio0
-                0x00002a28                everloop0
-                0x00002a30                pwm0
-                0x00002a24                spi0
- .data          0x00002a34        0x0 softfloat.o
- .data          0x00002a34        0x0 LSM9DS1.o
+ .data          0x00002b18        0x0 crt0ram.o
+ .data          0x00002b18        0x0 main.o
+ .data          0x00002b18       0x1c soc-hw.o
+                0x00002b18                uart0
+                0x00002b2c                i2c0
+                0x00002b1c                timer0
+                0x00002b20                gpio0
+                0x00002b28                everloop0
+                0x00002b30                pwm0
+                0x00002b24                spi0
+ .data          0x00002b34        0x0 softfloat.o
+ .data          0x00002b34        0x0 LSM9DS1.o
  *(.data1)
-                0x00002a40                _gp = ALIGN (0x10)
+                0x00002b40                _gp = ALIGN (0x10)
  *(.sdata .sdata.* .gnu.linkonce.s.*)
-                0x00002a34                _edata = .
+                0x00002b34                _edata = .
 
-.bss            0x00002a34       0x94
-                0x00002a34                . = ALIGN (0x4)
-                0x00002a34                _fbss = .
+.bss            0x00002b34       0x94
+                0x00002b34                . = ALIGN (0x4)
+                0x00002b34                _fbss = .
  *(.dynsbss)
  *(.sbss .sbss.* .gnu.linkonce.sb.*)
  *(.scommon)
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
- .bss           0x00002a34        0x0 crt0ram.o
- .bss           0x00002a34        0x0 main.o
- .bss           0x00002a34        0x1 soc-hw.o
- *fill*         0x00002a35        0x3 00
- .bss           0x00002a38        0xc softfloat.o
-                0x00002a40                float_detect_tininess
-                0x00002a3c                float_exception_flags
-                0x00002a38                float_rounding_mode
- .bss           0x00002a44        0x0 LSM9DS1.o
+ .bss           0x00002b34        0x0 crt0ram.o
+ .bss           0x00002b34        0x0 main.o
+ .bss           0x00002b34        0x1 soc-hw.o
+ *fill*         0x00002b35        0x3 00
+ .bss           0x00002b38        0xc softfloat.o
+                0x00002b40                float_detect_tininess
+                0x00002b3c                float_exception_flags
+                0x00002b38                float_rounding_mode
+ .bss           0x00002b44        0x0 LSM9DS1.o
  *(COMMON)
- COMMON         0x00002a44       0x84 soc-hw.o
-                0x00002a44                isr_table
-                0x00002ac4                tic_msec
-                0x00002ac8                _ebss = .
-                0x00002ac8                _end = .
+ COMMON         0x00002b44       0x84 soc-hw.o
+                0x00002b44                isr_table
+                0x00002bc4                tic_msec
+                0x00002bc8                _ebss = .
+                0x00002bc8                _end = .
                 0x00003ffc                PROVIDE (_fstack, 0x3ffc)
 LOAD crt0ram.o
 LOAD main.o
@@ -151,40 +152,40 @@ LOAD softfloat.o
 LOAD LSM9DS1.o
 OUTPUT(image elf32-lm32)
 
-.debug_abbrev   0x00000000      0x657
- .debug_abbrev  0x00000000       0x62 main.o
- .debug_abbrev  0x00000062      0x270 soc-hw.o
- .debug_abbrev  0x000002d2      0x30f softfloat.o
- .debug_abbrev  0x000005e1       0x76 LSM9DS1.o
+.debug_abbrev   0x00000000      0x6a9
+ .debug_abbrev  0x00000000       0x8e main.o
+ .debug_abbrev  0x0000008e      0x296 soc-hw.o
+ .debug_abbrev  0x00000324      0x30f softfloat.o
+ .debug_abbrev  0x00000633       0x76 LSM9DS1.o
 
-.debug_info     0x00000000     0x286b
- .debug_info    0x00000000       0x84 main.o
- .debug_info    0x00000084      0x8cf soc-hw.o
- .debug_info    0x00000953     0x1e79 softfloat.o
- .debug_info    0x000027cc       0x9f LSM9DS1.o
+.debug_info     0x00000000     0x29e8
+ .debug_info    0x00000000       0xb1 main.o
+ .debug_info    0x000000b1      0xa1f soc-hw.o
+ .debug_info    0x00000ad0     0x1e79 softfloat.o
+ .debug_info    0x00002949       0x9f LSM9DS1.o
 
-.debug_line     0x00000000     0x2410
- .debug_line    0x00000000       0xe1 main.o
- .debug_line    0x000000e1      0x60b soc-hw.o
- .debug_line    0x000006ec     0x1c8a softfloat.o
- .debug_line    0x00002376       0x9a LSM9DS1.o
+.debug_line     0x00000000     0x2562
+ .debug_line    0x00000000       0x6f main.o
+ .debug_line    0x0000006f      0x7cf soc-hw.o
+ .debug_line    0x0000083e     0x1c8a softfloat.o
+ .debug_line    0x000024c8       0x9a LSM9DS1.o
 
-.debug_frame    0x00000000      0x3e0
+.debug_frame    0x00000000      0x3f0
  .debug_frame   0x00000000       0x20 main.o
- .debug_frame   0x00000020      0x1b0 soc-hw.o
- .debug_frame   0x000001d0      0x1e0 softfloat.o
- .debug_frame   0x000003b0       0x30 LSM9DS1.o
+ .debug_frame   0x00000020      0x1c0 soc-hw.o
+ .debug_frame   0x000001e0      0x1e0 softfloat.o
+ .debug_frame   0x000003c0       0x30 LSM9DS1.o
 
 .debug_pubnames
-                0x00000000      0x476
+                0x00000000      0x487
  .debug_pubnames
                 0x00000000       0x1b main.o
  .debug_pubnames
-                0x0000001b      0x20e soc-hw.o
+                0x0000001b      0x21f soc-hw.o
  .debug_pubnames
-                0x00000229      0x21e softfloat.o
+                0x0000023a      0x21e softfloat.o
  .debug_pubnames
-                0x00000447       0x2f LSM9DS1.o
+                0x00000458       0x2f LSM9DS1.o
 
 .debug_aranges  0x00000000       0x80
  .debug_aranges
@@ -196,14 +197,14 @@ OUTPUT(image elf32-lm32)
  .debug_aranges
                 0x00000060       0x20 LSM9DS1.o
 
-.debug_str      0x00000000      0x95e
- .debug_str     0x00000000       0x8d main.o
-                                 0xa6 (size before relaxing)
- .debug_str     0x0000008d      0x28e soc-hw.o
-                                0x345 (size before relaxing)
- .debug_str     0x0000031b      0x619 softfloat.o
+.debug_str      0x00000000      0x963
+ .debug_str     0x00000000       0x85 main.o
+                                 0x9e (size before relaxing)
+ .debug_str     0x00000085      0x2a6 soc-hw.o
+                                0x35d (size before relaxing)
+ .debug_str     0x0000032b      0x60e softfloat.o
                                 0x6b9 (size before relaxing)
- .debug_str     0x00000934       0x2a LSM9DS1.o
+ .debug_str     0x00000939       0x2a LSM9DS1.o
                                  0xb7 (size before relaxing)
 
 .comment        0x00000000       0x48
@@ -212,11 +213,11 @@ OUTPUT(image elf32-lm32)
  .comment       0x00000024       0x12 softfloat.o
  .comment       0x00000036       0x12 LSM9DS1.o
 
-.debug_loc      0x00000000     0x20e8
- .debug_loc     0x00000000      0x1a3 soc-hw.o
- .debug_loc     0x000001a3     0x1f09 softfloat.o
- .debug_loc     0x000020ac       0x3c LSM9DS1.o
+.debug_loc      0x00000000     0x21cd
+ .debug_loc     0x00000000      0x288 soc-hw.o
+ .debug_loc     0x00000288     0x1f09 softfloat.o
+ .debug_loc     0x00002191       0x3c LSM9DS1.o
 
-.debug_ranges   0x00000000      0xad8
- .debug_ranges  0x00000000       0xd0 soc-hw.o
- .debug_ranges  0x000000d0      0xa08 softfloat.o
+.debug_ranges   0x00000000      0xbc0
+ .debug_ranges  0x00000000      0x1b8 soc-hw.o
+ .debug_ranges  0x000001b8      0xa08 softfloat.o
