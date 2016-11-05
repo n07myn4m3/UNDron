@@ -65,14 +65,57 @@ int main(){
 //=======================================================================
     uart_putstr("Prueba Lab \r\n");
 
-	uint8_t temp[6]; // We'll read six bytes from the gyro into temp
-    uint8_t gx;
-    uint8_t gy;
-    uint8_t gz;
-	I2CreadBytes(0x30, 0x35, temp, 6); 
-	gx = (temp[1] << 8) | temp[0]; 
-	gy = (temp[3] << 8) | temp[2]; 
-	gz = (temp[5] << 8) | temp[4]; 
+	static int temp[6]; 
+
+   I2CreadBytes(0x30, 0x35, temp, 6);
+   //lectura_array(temp, 6); 
+
+   gpio0->oe  = 0x000000ff;
+
+   gpio0->out = 0xAA;
+
+
+   gpio0->out = 0x00;
+   gpio0->out = temp[0];
+   gpio0->out = 0x01;
+	gpio0->out = temp[1];
+   gpio0->out = 0x02;
+	gpio0->out = temp[2];
+   gpio0->out = 0x03;
+	gpio0->out = temp[3];
+   gpio0->out = 0x04;
+	gpio0->out = temp[4];
+   gpio0->out = 0x05;
+	gpio0->out = temp[5];
+
+   //--------------------------------------------------------
+
+   I2CreadBytes(0x30, 0x35, temp, 6);
+   //lectura_array(temp, 6); 
+
+   gpio0->oe  = 0x000000ff;
+
+   gpio0->out = 0xAA;
+
+
+   gpio0->out = 0x00;
+   gpio0->out = temp[0];
+   gpio0->out = 0x01;
+	gpio0->out = temp[1];
+   gpio0->out = 0x02;
+	gpio0->out = temp[2];
+   gpio0->out = 0x03;
+	gpio0->out = temp[3];
+   gpio0->out = 0x04;
+	gpio0->out = temp[4];
+   gpio0->out = 0x05;
+	gpio0->out = temp[5];
+
+
+
+   msleep(1000);
+
+
 
 /*
 

@@ -133,7 +133,7 @@ char spi_getchar();
 #define I2C_WRITE  0x00
 #define I2C_READ   0x01
 
-
+//static uint8_t dest[];
 
 
 typedef struct {
@@ -149,6 +149,7 @@ void i2c_putdata(uint8_t c);
 void i2c_putdatas(char *str);
 uint8_t i2c_getdata();
 uint8_t I2CreadByte(uint8_t address, uint8_t subaddress);
+void I2CreadBytes(uint8_t address, uint8_t subaddress, int *dest, uint8_t count);
 
 /***************************************************************************
  * EVERLOOP

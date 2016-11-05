@@ -216,7 +216,7 @@ void uart_putstr(char *str)
 	  return i2c0-> wxrx;     
     }
     //----------------------------------------------------------------
-    uint8_t I2CreadBytes(uint8_t address, uint8_t subaddress, uint8_t * dest, uint8_t count)
+    void I2CreadBytes(uint8_t address, uint8_t subaddress, int *dest, uint8_t count)
     {
 		i2c_putrwaddr (I2C_WRITE, address);
 		i2c_putdata(subaddress);
@@ -234,18 +234,16 @@ void uart_putstr(char *str)
 		i2c_putrwaddr(I2C_READ, address);
 		i2c_init();  
 		//-------------------------------------
-		for (uint8_t i=0; i<count;)
+      uint8_t i;
+		for (i=0; i<count;)
 		{
 			nsleep(20);
-            if (i==count-1) i2c0->ucr = 0x00;
+         if (i==count-1) i2c0->ucr = 0x00;
 
 			while ( (i2c0->ucr & I2C_BUSY) && (!(i2c0->ucr & I2C_ERROR)));
             dest[i++] = i2c0-> wxrx;
-            gpio0->oe  = 0x000000ff;
-		    gpio0->out = i;
 		}
 		//-------------------------------------
-        return count;
     }
 
 /***************************************************************************

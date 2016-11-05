@@ -152,6 +152,11 @@ module system_tb;
       .everloop_led_ctl(everloop_led_ctl)
   );
 
+
+
+/*
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 // Prueba I2C
 //---------------------------------------------------------------------------
@@ -208,6 +213,129 @@ reg   [3:0]  count = 7;
        end
        //---------------------------
     end
+*/
+
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+// Prueba I2C Lectura multiple
+//---------------------------------------------------------------------------
+//reg    read    = 1'b0;
+
+/*
+PREGUNTAS FRECUENTES
+
+1) ¿Para que es el registro checker?
+
+	Lo que sucede es que al inicio del codigo se cumple una condicion de proceso  
+	de lectura que no deberia llevarse a cabo, esto se debe a que i2c_sda presen-
+   ta un flanco de bajada e i2c_scl esta en alto lo cual indiferente a que inicie
+   con un proceso de lectura lo tomara como uno de escritura, se podria solucionar
+   mejor el problema pero por el momento funciona.
+*/
+
+reg   [7:0] checker = 1'b0;
+reg    sda_out = 1'bz;
+assign i2c_sda = sda_out; 
+pullup(i2c_scl); 
+reg   [7:0]  data_write = 8'b00111101;
+reg   [3:0]  count = 7;
+
+    //1) Descubrir cuando el modulo I2C va a realizar una transmision de datos
+    //   y verificar si llevara a cabo un proceso de lectura o escritura.
+    always @(negedge i2c_sda) begin
+       @ (negedge clk) begin
+         if(i2c_scl == 1'b1) begin
+		        start   = 1'b1; 
+		        INPUT_A = 1'b0;
+              INPUT_B = 1'b0;
+		     //------------------------------   
+		        for(i=0; i<9; i=i+1) begin   //Para revisar si el octavo bit del protocolo es
+				   @ (posedge ClkOut);         //de lectura o escritura
+				  end 
+		     //------------------------------
+		        //start = 1'b0;
+				if(i2c_sda == 1'b0) begin
+		        INPUT_A = 1'b0;              //Se llevara a cabo un proceso de escritura
+		        end else begin
+		        INPUT_A = 1'b1;              //Se llevara a cabo un proceso de lectura
+              checker = checker + 1;       //Para evitar atrapar al bug
+		        end
+			end 
+         //------------------------------
+       end
+    end
+
+    //2) Si se lleva a cabo un proceso de lectura reconocer el bloque donde sucederá
+    //   interceptar i2c_sda y enviar los datos que se encuentren en data_write
+
+    always @(negedge clk) begin
+       //---------------------------
+       if(INPUT_A == 1'b1 && checker > 1'b1)begin  
+
+  		  for(i=0; i<2; i=i+1) begin   
+		   @ (posedge ClkOut);       
+		  end 
+
+        //Primer valor
+
+        data_write = 8'h1D;
+        INPUT_B = 1'b1;
+          if(INPUT_B == 1'b1)begin
+		      for(i=0; i<8; i=i+1) begin   
+               sda_out = data_write[7-i] ? 1'b1:1'b0;
+
+			   @ (posedge ClkOut);       
+			   end 
+		      INPUT_B = 1'b0; //Indico que el estado de lectura termino
+            sda_out = 1'bz; //Devolver i2c_sda a su estado original 
+
+          end 
+
+  		  for(i=0; i<1; i=i+1) begin   
+		   @ (posedge ClkOut);       
+		  end 
+
+        //Segundo valor
+
+        for(j=0; j<4; j=j+1) begin  
+
+				  data_write = data_write + 8'h10;
+				  INPUT_B = 1'b1;
+				    if(INPUT_B == 1'b1)begin
+						for(i=0; i<8; i=i+1) begin   
+				         sda_out = data_write[7-i] ? 1'b1:1'b0;
+						@ (posedge ClkOut);       
+						end 
+						INPUT_B = 1'b0; //Indico que el estado de lectura termino
+				      sda_out = 1'bz; //Devolver i2c_sda a su estado original 
+				    end 
+
+		  		  for(i=0; i<1; i=i+1) begin   
+					@ (posedge ClkOut);       
+				  end 
+
+        end
+
+        //Ultimo valor
+
+        data_write = 8'h6D;
+        INPUT_B = 1'b1;
+          if(INPUT_B == 1'b1)begin
+		      for(i=0; i<8; i=i+1) begin   
+               sda_out = data_write[7-i] ? 1'b1:1'b0;
+			   @ (posedge ClkOut);       
+			   end 
+		      INPUT_B = 1'b0; //Indico que el estado de lectura termino
+            INPUT_A = 1'b0; //Debido a que se hace cero en el siguiente ciclo que satisface la conclusion
+		                      //existe el riezgo que INPUT_B vuelva a ser 1.
+            sda_out = 1'bz; //Devolver i2c_sda a su estado original 
+          end 
+
+       end
+       //---------------------------
+    end
+
 
 
 
@@ -219,6 +347,7 @@ reg   [3:0]  count = 7;
    parameter real DUTY_CYCLE = 0.5;
    parameter OFFSET          = 0;
    reg [20:0] i;
+   reg [20:0] j;
    event reset_trigger;
 //---------------------------------------------------------------------------
 // Inicializacion de las entradas del modulo
@@ -262,7 +391,7 @@ reg   [3:0]  count = 7;
 	
      #10 -> reset_trigger;
 //     #((PERIOD*DUTY_CYCLE)*400000) $finish;
-     #((PERIOD*DUTY_CYCLE)*400000) $finish;
+     #((PERIOD*DUTY_CYCLE)*600000) $finish;
    end
 
 endmodule

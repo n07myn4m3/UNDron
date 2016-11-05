@@ -1,22 +1,22 @@
 [*]
 [*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
-[*] Sat Oct 29 22:06:37 2016
+[*] Fri Nov  4 12:00:00 2016
 [*]
 [dumpfile] "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_ats/simulation/system_tb.vcd"
-[dumpfile_mtime] "Sat Oct 29 21:55:08 2016"
-[dumpfile_size] 207385189
+[dumpfile_mtime] "Fri Nov  4 11:56:26 2016"
+[dumpfile_size] 211842698
 [savefile] "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix_ats/problema i2c.sav"
-[timestart] 0
-[size] 1000 600
-[pos] 629 149
-*-30.281502 1513000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 2848730100
+[size] 1861 1056
+[pos] -1 -1
+*-17.281502 2849072600 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] system_tb.
 [treeopen] system_tb.uut.
 [treeopen] system_tb.uut.i2c0.
 [sst_width] 217
-[signals_width] 142
+[signals_width] 174
 [sst_expanded] 1
-[sst_vpaned_height] 163
+[sst_vpaned_height] 324
 @28
 system_tb.analyzer1.INPUT_C
 system_tb.analyzer1.INPUT_B
@@ -32,8 +32,14 @@ system_tb.uut.i2c0.addr[6:0]
 system_tb.uut.i2c0.i2c0.data_clk
 @22
 system_tb.uut.i2c0.i2c0.data_rd[7:0]
+>50000
 system_tb.uut.gpio0.gpio_o[7:0]
-@821
+@820
+>0
 system_tb.uut.uart0.tx_data[7:0]
+@22
+system_tb.uut.gpio0.wb_dat_i[31:0]
+@29
+system_tb.uut.gpio0.wb_stb_i
 [pattern_trace] 1
 [pattern_trace] 0
