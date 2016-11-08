@@ -50,8 +50,7 @@ parameter INIT = 4'b1111,
 always @ (posedge clk) begin
   if (rst) begin
     write = 1;
-    dicicle = di;
-    dicicle << 2;
+    dicicle = (di) << 2;
   end
   else if (write) begin
     case(dicicle)
