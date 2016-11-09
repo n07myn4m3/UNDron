@@ -1,33 +1,10 @@
 #include "soc-hw.h"
 #include "softfloat.h"
 #include "LSM9DS1.h"
+#include "MPL3115A2.h"
 
 int main(){
-//
-/*    volatile unsigned int     *data32;
-    data32 = (volatile unsigned int   *)(0x70000000);
-    data32++;
-    *data32 = PI;*/
-    
-    // Init Commands//
-//    uart_init();
-//    isr_init();
-    //tic_init();
-//    irq_set_mask( 0x00000002 );
-//    irq_enable();
-
-//Valores para probar las librerias de coma flotante
-/*  volatile uint32_t entero;
-  float32 multiplicacion;
-  float32 division;
-*/
-
-
   for(;;){
-   // uart_putchar(0x20);
- //   pwm_init();
-
-
 /*
 //=======================================================================
 // Pruebas modulo I2C
@@ -123,7 +100,7 @@ int main(){
 
 
 
-
+/*
 //=======================================================================
 // Pruebas modulo I2C escribir un byte
 //=======================================================================
@@ -132,9 +109,9 @@ int main(){
     I2CwriteByte(0x60, 0x70, 0x80);
 
 
-static int temp2[2]; 
+static int temp[6]; 
 
-   I2CreadBytes(0x30, 0x35, temp2, 2);
+   I2CreadBytes(0x30, 0x35, temp, 6);
    //lectura_array(temp, 6); 
 
    gpio0->oe  = 0x000000ff;
@@ -143,18 +120,37 @@ static int temp2[2];
 
 
    gpio0->out = 0x00;
-   gpio0->out = temp2[0];
+   gpio0->out = temp[0];
    gpio0->out = 0x01;
-	gpio0->out = temp2[1];
-
+	gpio0->out = temp[1];
+   gpio0->out = 0x02;
+	gpio0->out = temp[2];
+   gpio0->out = 0x03;
+	gpio0->out = temp[3];
+   gpio0->out = 0x04;
+	gpio0->out = temp[4];
+   gpio0->out = 0x05;
+	gpio0->out = temp[5];
 
     I2CwriteByte(0x30, 0x40, 0x50);
     I2CwriteByte(0x60, 0x70, 0x80);
 
     msleep(1000);
+*/
+
+
+//=======================================================================
+// Prueba altimetro
+//=======================================================================
+    uart_putstr("Prueba Lab \r\n");
+    MPLBegin();
+    I2CwriteByte(MPL3115A2_CTRL_REG1_SBYB, MPL3115A2_CTRL_REG1_SBYB, MPL3115A2_CTRL_REG1_SBYB);
+
+    msleep(1000);
+
+
 
 /*
-
 //=======================================================================
 // Prueba unidad de punto flotante
 //=======================================================================

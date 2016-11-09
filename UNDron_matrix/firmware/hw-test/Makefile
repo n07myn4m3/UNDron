@@ -31,8 +31,12 @@ softfloat.o: softfloat.c
 LSM9DS1.o: LSM9DS1.c
 	$(LM32_CC) $(CFLAGS) -c LSM9DS1.c
 
-image: crt0ram.o main.o soc-hw.o softfloat.o LSM9DS1.o
-	$(LM32_LD) $(LDFLAGS) -Map image.map -N -o image crt0ram.o main.o soc-hw.o softfloat.o LSM9DS1.o
+#Para añadir el barometric/altitude pressure sensor
+MPL3115A2.o: MPL3115A2.c
+	$(LM32_CC) $(CFLAGS) -c MPL3115A2.c
+
+image: crt0ram.o main.o soc-hw.o softfloat.o LSM9DS1.o MPL3115A2.o
+	$(LM32_LD) $(LDFLAGS) -Map image.map -N -o image crt0ram.o main.o soc-hw.o softfloat.o LSM9DS1.o MPL3115A2.o
 
 image.lst: image
 	$(LM32_OBJDUMP) -h -S $< > $@

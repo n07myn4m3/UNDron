@@ -1,33 +1,10 @@
 #include "soc-hw.h"
 #include "softfloat.h"
 #include "LSM9DS1.h"
+#include "MPL3115A2.h"
 
 int main(){
-//
-/*    volatile unsigned int     *data32;
-    data32 = (volatile unsigned int   *)(0x70000000);
-    data32++;
-    *data32 = PI;*/
-    
-    // Init Commands//
-//    uart_init();
-//    isr_init();
-    //tic_init();
-//    irq_set_mask( 0x00000002 );
-//    irq_enable();
-
-//Valores para probar las librerias de coma flotante
-/*  volatile uint32_t entero;
-  float32 multiplicacion;
-  float32 division;
-*/
-
-
   for(;;){
-   // uart_putchar(0x20);
- //   pwm_init();
-
-
 /*
 //=======================================================================
 // Pruebas modulo I2C
@@ -123,7 +100,7 @@ int main(){
 
 
 
-
+/*
 //=======================================================================
 // Pruebas modulo I2C escribir un byte
 //=======================================================================
@@ -159,9 +136,21 @@ static int temp[6];
     I2CwriteByte(0x60, 0x70, 0x80);
 
     msleep(1000);
+*/
+
+
+//=======================================================================
+// Prueba altimetro
+//=======================================================================
+    uart_putstr("Prueba Lab \r\n");
+    MPLBegin();
+    I2CwriteByte(MPL3115A2_CTRL_REG1_OS128, MPL3115A2_CTRL_REG1_OS128, MPL3115A2_CTRL_REG1_OS128);
+
+    msleep(1000);
+
+
 
 /*
-
 //=======================================================================
 // Prueba unidad de punto flotante
 //=======================================================================
