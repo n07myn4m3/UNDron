@@ -252,8 +252,8 @@ void uart_putstr(char *str)
       nsleep(20);
 	  //Para verificar cuando se valida la condicion
       while((i2c0->ucr & I2C_BUSY));
-	   gpio0->oe  = 0x000000ff;
-	   gpio0->out = 0xAA;
+	   //gpio0->oe  = 0x000000ff;
+	   //gpio0->out = 0xAA;
       i2c0->wxrx = data;
       nsleep(20);
 	  i2c0->ucr = 0x00;

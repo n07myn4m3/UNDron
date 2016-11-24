@@ -44,9 +44,8 @@ module system
 	inout             i2c_scl,
 	// everloop
     output            everloop_led_ctl,
-	// pwm
-    output            pwm_out,
-    output            pwm_n_out
+	//pwm
+	output 			  [3:0]pwm_out
 );
 
 
@@ -62,7 +61,7 @@ wire         gnd   =  1'b0;
 wire   [3:0] gnd4  =  4'h0;
 wire  [31:0] gnd32 = 32'h00000000;
 
- 
+//DIRECTIONS 
 wire [31:0]  lm32i_adr,
              lm32d_adr,
              uart0_adr,
@@ -79,7 +78,7 @@ wire [31:0]  lm32i_adr,
              // PWM
              pwm0_adr; 
 
-
+//DATA IN-OUT
 wire [31:0]  lm32i_dat_r,
              lm32i_dat_w,
              lm32d_dat_r,
@@ -124,6 +123,7 @@ wire [3:0]   lm32i_sel,
              // PWM
              pwm0_sel;
 
+//READ_WRITE
 wire         lm32i_we,
              lm32d_we,
              uart0_we,
@@ -140,7 +140,7 @@ wire         lm32i_we,
              // PWM
              pwm0_we;
 
-
+//CYCLE
 wire         lm32i_cyc,
              lm32d_cyc,
              uart0_cyc,
@@ -157,7 +157,7 @@ wire         lm32i_cyc,
              // PWM
              pwm0_cyc;
 
-
+//CHIP_SELECT
 wire         lm32i_stb,
              lm32d_stb,
              uart0_stb,
@@ -174,6 +174,7 @@ wire         lm32i_stb,
              // PWM
              pwm0_stb;
 
+//ACK_SIGNAL
 wire         lm32i_ack,
              lm32d_ack,
              uart0_ack,
@@ -228,7 +229,7 @@ conbus #(
 	.s4_addr(4'h5), // spi      0x50000000 
 	.s5_addr(4'h6), // everloop 0x60000000 // PENDIENTE 
 	.s6_addr(4'h7), // i2c      0x70000000 
-	.s7_addr(4'h8)  // pwm      0x80000000 // PENDIENTE 
+	.s7_addr(4'h8)  // pwm      0x80000000  
 )conbus0(
 	.sys_clk( clk ),
 	.sys_rst( ~rst ),
@@ -536,8 +537,7 @@ wb_pwm  pwm0 (
 	.wb_sel_i( pwm0_sel   ),
 	.wb_ack_o( pwm0_ack   ), 
     //
-    .pwm_out(pwm_out),
-    .pwm_n_out(pwm_n_out)
+    .pwm_out(pwm_out)
 
 );
 //----------------------------------------------------------------------------

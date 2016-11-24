@@ -84,4 +84,6 @@
     FUNCTIONS
     -----------------------------------------------------------------------*/
 	void MPLBegin();
+    void MPLReadBytes(uint8_t subaddress, int *dest, uint8_t count);
+    void MPLgetAltitude();
 #endif

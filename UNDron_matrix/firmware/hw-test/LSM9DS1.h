@@ -42,13 +42,13 @@ Distributed as-is; no warranty is given.
 #define INT_GEN_THS_Z_XL	0x09
 #define INT_GEN_DUR_XL		0x0A
 #define REFERENCE_G			0x0B
-#define INT1_CTRL			   0x0C
-#define INT2_CTRL			   0x0D
+#define INT1_CTRL			0x0C
+#define INT2_CTRL			0x0D
 #define WHO_AM_I_AG			0x0F
 #define CTRL_REG1_G			0x10
 #define CTRL_REG2_G			0x11
 #define CTRL_REG3_G			0x12
-#define ORIENT_CFG_G		   0x13
+#define ORIENT_CFG_G		0x13
 #define INT_GEN_SRC_G		0x14
 #define OUT_TEMP_L			0x15
 #define OUT_TEMP_H			0x16
@@ -121,31 +121,61 @@ Distributed as-is; no warranty is given.
 /*=========================================================================
     CONFIG REGISTER (R/W)
     -----------------------------------------------------------------------*/
+    /*=======================
+    //CTRL_REG1_G (0X10)
+    -----------------------*/ 
 
-    //CTRL_REG1_G (0X00) 
+		// CTRL_REG1_G (Valor por defecto: 0x00)
+		// [ODR_G2][ODR_G1][ODR_G0][FS_G1][FS_G0][0][BW_G1][BW_G0]
+		// ODR_G[2:0] - Output data rate selection (sampleRate)
+		// FS_G[1:0] - Gyroscope full-scale selection (fullScaleSel)
+		// BW_G[1:0] - Gyroscope bandwidth selection (bandWidth)
+	
+		// To disable gyro, set sample rate bits to 0. We'll only set sample
+		// rate if the gyro is enabled.
+
       //gyro sampleRate
-		#define ag_ctrl1_14hz_9mhz    (0x20)
-		#define ag_ctrl1_59hz_5mhz    (0x40)
-		#define ag_ctrl1_119hz        (0x60)
-		#define ag_ctrl1_238hz        (0x80)
-		#define ag_ctrl1_476hz        (0xA0)
-		#define ag_ctrl1_952hz        (0xCO)
+		#define ag_ctrl1_sampleRate_14hz_9mhz    (0x20) //0010-0000
+		#define ag_ctrl1_sampleRate_59hz_5mhz    (0x40) //0100-0000
+		#define ag_ctrl1_sampleRate_119hz        (0x60) //0110-0000
+		#define ag_ctrl1_sampleRate_238hz        (0x80) //1000-0000
+		#define ag_ctrl1_sampleRate_476hz        (0xA0) //1010-0000
+		#define ag_ctrl1_sampleRate_952hz        (0xCO) //1100-0000
+      //gyro fullScaleSel
+		#define ag_ctrl1_fullScaleSel_245_dps    (0x00) //0000-0000
+		#define ag_ctrl1_fullScaleSel_500_dps    (0x08) //0000-1000
+		#define ag_ctrl1_fullScaleSel_2000_dps   (0x18) //0001-1000
       //gyro bandWidth
+		#define ag_ctrl1_bandWidth_1             (0x00) //0000-0000  
+		#define ag_ctrl1_bandWidth_2             (0x01) //0000-0001
+		#define ag_ctrl1_bandWidth_3             (0x02) //0000-0010
+		#define ag_ctrl1_bandWidth_4             (0x03) //0000-0011    
 
+    /*=======================
+    //CTRL_REG2_G (0X11)
+    -----------------------*/ 
 
-    #define INA219_REG_CONFIG                      (0x00)
-    /*---------------------------------------------------------------------*/
-    #define INA219_CONFIG_RESET                    (0x8000)  // Reset Bit
-	
-    #define INA219_CONFIG_BVOLTAGERANGE_MASK       (0x2000)  // Bus Voltage Range Mask
-    #define INA219_CONFIG_BVOLTAGERANGE_16V        (0x0000)  // 0-16V Range
-    #define INA219_CONFIG_BVOLTAGERANGE_32V        (0x2000)  // 0-32V Range
-	
-    #define INA219_CONFIG_GAIN_MASK                (0x1800)  // Gain Mask
-    #define INA219_CONFIG_GAIN_1_40MV              (0x0000)  // Gain 1, 40mV Range
-    #define INA219_CONFIG_GAIN_2_80MV              (0x0800)  // Gain 2, 80mV Range
-    #define INA219_CONFIG_GAIN_4_160MV             (0x1000)  // Gain 4, 160mV Range
-    #define INA219_CONFIG_GAIN_8_320MV             (0x1800)  // Gain 8, 320mV Range
+		// CTRL_REG2_G (Default value: 0x00)
+		// [0][0][0][0][INT_SEL1][INT_SEL0][OUT_SEL1][OUT_SEL0]
+		// INT_SEL[1:0] - INT selection configuration
+		// OUT_SEL[1:0] - Out selection configuration
+
+        // Nota: Se deja por defecto en cero
+
+		#define ag_ctrl2_Default                 (0x00) //0000-0000   
+
+    /*=======================
+    //CTRL_REG3_G (0X12)
+    -----------------------*/ 
+
+	// CTRL_REG3_G (Default value: 0x00)
+	// [LP_mode][HP_EN][0][0][HPCF3_G][HPCF2_G][HPCF1_G][HPCF0_G]
+	// LP_mode - Low-power mode enable (0: disabled, 1: enabled)
+	// HP_EN - HPF enable (0:disabled, 1: enabled)
+	// HPCF_G[3:0] - HPF cutoff frequency
+
+		#define ag_ctrl3_Default                 (0x00) //0000-0000 
+
 	
     #define INA219_CONFIG_BADCRES_MASK             (0x0780)  // Bus ADC Resolution Mask
     #define INA219_CONFIG_BADCRES_9BIT             (0x0080)  // 9-bit bus res = 0..511
@@ -183,4 +213,5 @@ Distributed as-is; no warranty is given.
 
 uint8_t mReadByte(uint8_t subAddress);
 uint8_t agReadByte(uint8_t subAddress);
+void initGyro();
 #endif

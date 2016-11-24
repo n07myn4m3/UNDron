@@ -275,7 +275,7 @@ module i2c_master (clk, reset, ena, addr, rw, data_wr, busy, data_rd, ack_error,
     assign scl = (scl_ena && ~scl_clk) ? 1'b0 : 1'bz;
     assign sda = (!sda_ena_n) ? 1'b0 : 1'bz;
 
-//    wire jackpot = (~data_clk && data_clk_prev);
+    wire jackpot = (~data_clk && data_clk_prev);
 
 endmodule
 

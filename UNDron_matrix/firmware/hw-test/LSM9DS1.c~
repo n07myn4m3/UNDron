@@ -11,7 +11,25 @@ uint8_t agReadByte(uint8_t subAddress)
 	return I2CreadByte(agAddress, subAddress);
 }
 
+void agWriteByte(uint8_t subAddress,uint8_t data)
+{
+	I2CwriteByte(agAddress, data);
+}
 
+void initGyro()
+{
+
+// PRIMER REGISTRO
+/*Como guía se seleccionara un ODR de 952hz con un ancho de banda de 33 Hz (1)
+  y un valor a full escala de 245 DPS*/
+	agWriteByte(CTRL_REG1_G,
+		ag_ctrl1_sampleRate_952hz     |
+		ag_ctrl1_fullScaleSel_245_dps |
+        ag_ctrl1_bandWidth_1);
+// SEGUNDO REGISTRO
+// Se dejara el valor por defecto
+	agWriteByte(CTRL_REG2_G, ag_ctrl2_Default );
+}
 
 /*
 uint16_t config = INA219_CONFIG_BVOLTAGERANGE_16V |

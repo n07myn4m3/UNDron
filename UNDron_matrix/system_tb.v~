@@ -119,10 +119,12 @@ module system_tb;
 	wire            spi_mosi;
 	wire            spi_clk;
 	// 12c
-	wire             i2c_sda; 
-	wire             i2c_scl;
+	wire            i2c_sda; 
+	wire            i2c_scl;
 	// everloop
     wire            everloop_led_ctl;
+	//pwm
+	wire 	[3:0]   pwm_out;
 
     // Parametros
 
@@ -149,23 +151,28 @@ module system_tb;
 	  .i2c_sda(i2c_sda), 
 	  .i2c_scl(i2c_scl),
 	// everloop
-      .everloop_led_ctl(everloop_led_ctl)
+      .everloop_led_ctl(everloop_led_ctl),
+      .pwm_out(pwm_out)
   );
 
 
 
+
 /*
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-// Prueba I2C
-//---------------------------------------------------------------------------
-//reg    read    = 1'b0;
+---------------------------------------------------------------------------
+						 ____  ____  ____  ____ 
+						(_  _)(  __)/ ___)(_  _)
+						  )(   ) _) \___ \  )(  
+						 (__) (____)(____/ (__)                         
+---------------------------------------------------------------------------
+ Prueba I2C
+---------------------------------------------------------------------------*/
 reg    sda_out = 1'bz;
 assign i2c_sda = sda_out; 
 pullup(i2c_scl); 
-reg   [7:0]  data_write = 8'b00111101;
+reg   [7:0]  data_write = 8'b00001100;
 reg   [3:0]  count = 7;
+reg   [7:0] checker = 1'b0;
 
     //1) Descubrir cuando el modulo I2C va a realizar una transmision de datos
     //   y verificar si llevara a cabo un proceso de lectura o escritura.
@@ -185,6 +192,7 @@ reg   [3:0]  count = 7;
 		        INPUT_A = 1'b0;              //Se llevara a cabo un proceso de escritura
 		        end else begin
 		        INPUT_A = 1'b1;              //Se llevara a cabo un proceso de lectura
+                checker = checker + 1;       //Para evitar atrapar al bug
 		        end
 			end 
          //------------------------------
@@ -195,7 +203,7 @@ reg   [3:0]  count = 7;
     //   interceptar i2c_sda y enviar los datos que se encuentren en data_write
     always @(negedge clk) begin
        //---------------------------
-       if(INPUT_A == 1'b1)begin  
+       if(INPUT_A == 1'b1 && checker > 1'b1)begin  
   		  for(i=0; i<2; i=i+1) begin   
 		   @ (posedge ClkOut);       
 		  end 
@@ -213,16 +221,18 @@ reg   [3:0]  count = 7;
        end
        //---------------------------
     end
-*/
 
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-// Prueba I2C Lectura multiple
-//---------------------------------------------------------------------------
-//reg    read    = 1'b0;
+
 
 /*
+---------------------------------------------------------------------------
+						 ____  ____  ____  ____ 
+						(_  _)(  __)/ ___)(_  _)
+						  )(   ) _) \___ \  )(  
+						 (__) (____)(____/ (__)                         
+---------------------------------------------------------------------------
+ Prueba I2C Lectura multiple
+---------------------------------------------------------------------------
 PREGUNTAS FRECUENTES
 
 1) ¿Para que es el registro checker?
@@ -232,8 +242,10 @@ PREGUNTAS FRECUENTES
    ta un flanco de bajada e i2c_scl esta en alto lo cual indiferente a que inicie
    con un proceso de lectura lo tomara como uno de escritura, se podria solucionar
    mejor el problema pero por el momento funciona.
+---------------------------------------------------------------------------
 */
 
+/*
 reg   [7:0] checker = 1'b0;
 reg    sda_out = 1'bz;
 assign i2c_sda = sda_out; 
@@ -335,7 +347,7 @@ reg   [3:0]  count = 7;
        end
        //---------------------------
     end
-
+*/
 
 
 
@@ -391,8 +403,8 @@ reg   [3:0]  count = 7;
 	
      #10 -> reset_trigger;
 //     #((PERIOD*DUTY_CYCLE)*400000) $finish;
-     #((PERIOD*DUTY_CYCLE)*100000) $finish; //Prueba corta
-//     #((PERIOD*DUTY_CYCLE)*600000) $finish; //Prueba larga
+//     #((PERIOD*DUTY_CYCLE)*100000) $finish; //Prueba corta
+     #((PERIOD*DUTY_CYCLE)*600000) $finish; //Prueba larga
    end
 
 endmodule
