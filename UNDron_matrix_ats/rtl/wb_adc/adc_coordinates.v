@@ -66,12 +66,15 @@ module adc_coordinates (ena,clk,rst,done,coordinates,data_chl,cs0,cs1,chl_sel);
     parameter   maxCount     = divFactor/2;
     parameter   counterWidth = `log2(maxCount);
     reg clock;
+		reg reset;
+		reg rdelay = 0;
     reg     [counterWidth-1: 0]  Q = 0;
     
     always @(posedge clk, posedge rst) begin
         if(rst) begin
             //adc
-						reset = 1;
+						reset <= 1;
+						rdelay <= 0;
             //clock
 						Q <= 0;
             clock <= 1'b0;
@@ -80,6 +83,8 @@ module adc_coordinates (ena,clk,rst,done,coordinates,data_chl,cs0,cs1,chl_sel);
             if(Q == (maxCount-1)) begin
                 Q <= 0;
                 clock <= ~clock;
+								if (rdelay==0) begin rdelay <= rdelay+1; end
+								else begin reset <= 0; end
             end
             else begin
                 Q <= Q + 1;
@@ -89,19 +94,19 @@ module adc_coordinates (ena,clk,rst,done,coordinates,data_chl,cs0,cs1,chl_sel);
 //-------------------------------------------------------------------------------//
 
 reg read;
-reg reset;
-wire enable = ena;
+reg enable;
 wire adc_done;
 wire [7:0] chl_val;
 reg [1:0] xyz;
 
 
-		adc acd0 (.ena(enable),.clk(clock),.di(xyz),.done(adc_done),.data(chl_val),.data_chl(data_chl),.cs0(cs0),.cs1(cs1),.ch_sel(ch_sel));
+		adc acd0 (.rst(reset),.ena(enable),.clk(clock),.di(xyz),.done(adc_done),.data(chl_val),.data_chl(data_chl),.cs0(cs0),.cs1(cs1),.ch_sel(ch_sel));
 		always @(posedge clock) begin
 		 if(reset) begin
           coordinates[23:0] <= 8'd0;
 			    done <=0;
 			    xyz <=2'b00;
+					enable <= 1;
       end
 			else begin
 				if (done != 1) begin
