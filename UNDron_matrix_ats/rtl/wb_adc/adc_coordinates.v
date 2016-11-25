@@ -98,8 +98,8 @@ wire [7:0] chl_val;
 reg [1:0] xyz;
 
 
-		adc acd0 (.ena(enable),.clk(clk),.di(xyz),.done(adc_done),.data(chl_val),.data_chl(data_chl),.cs0(cs0),.cs1(cs1),.ch_sel(ch_sel));
-		always @(posedge clk) begin
+		adc acd0 (.ena(enable),.clk(clock),.di(xyz),.done(adc_done),.data(chl_val),.data_chl(data_chl),.cs0(cs0),.cs1(cs1),.ch_sel(ch_sel));
+		always @(posedge clock) begin
 			if (done != 1) begin
 				if (adc_done==1 & xyz == 2'b00 & read == 0) begin
 					coordinates[7:0] = chl_val[7:0];
