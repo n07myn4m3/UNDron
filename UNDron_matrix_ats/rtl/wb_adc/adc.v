@@ -53,6 +53,7 @@ always @ (posedge clk) begin
     write <= 1;
     state <= INIT;
   end
+	else if (write==0 && done==1) begin write <= 1; end
   else if (write==1 && done==0) begin// && done==0
     case(state)
       INIT: begin
@@ -132,13 +133,11 @@ always @ (negedge clk) begin
   end
   else if (write==1 && done==1) begin
     done <= 0;
-    data <= 8'd0;
-		readcicle = 3'd0;
   end
 	else if (write==0 && done==0)  begin
       if (readcicle<3'b111) begin
           data <= (data + data_chl)<<1;
-					readcicle = readcicle + 1;
+					readcicle <= readcicle + 1;
       end
       else begin
           data <= data + data_chl;
@@ -146,7 +145,8 @@ always @ (negedge clk) begin
       end
   end
   else begin
-		write <= 1;
+    data <= 8'd0;
+		readcicle <= 3'd0;
   end
 end // end always
 endmodule

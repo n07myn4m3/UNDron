@@ -68,13 +68,10 @@ module adc_coordinates (ena,clk,rst,done,coordinates,data_chl,cs0,cs1,chl_sel);
     reg clock;
     reg     [counterWidth-1: 0]  Q = 0;
     
-    always @(posedge clk, negedge rst) begin
+    always @(posedge clk, posedge rst) begin
         if(rst) begin
             //adc
-            coordinates[23:0] <= 8'd0;
-				    done <=0;
-				    read <=0;
-				    xyz <=2'b00;
+						reset = 1;
             //clock
 						Q <= 0;
             clock <= 1'b0;
@@ -92,6 +89,7 @@ module adc_coordinates (ena,clk,rst,done,coordinates,data_chl,cs0,cs1,chl_sel);
 //-------------------------------------------------------------------------------//
 
 reg read;
+reg reset;
 wire enable = ena;
 wire adc_done;
 wire [7:0] chl_val;
@@ -100,25 +98,28 @@ reg [1:0] xyz;
 
 		adc acd0 (.ena(enable),.clk(clock),.di(xyz),.done(adc_done),.data(chl_val),.data_chl(data_chl),.cs0(cs0),.cs1(cs1),.ch_sel(ch_sel));
 		always @(posedge clock) begin
-			if (done != 1) begin
-				if (adc_done==1 & xyz == 2'b00 & read == 0) begin
-					coordinates[7:0] = chl_val[7:0];
-					read = 1;
-				end
-				else if (adc_done==1 & xyz == 2'b01 & read == 0) begin
-					coordinates[15:8] =  chl_val[7:0];
-					read = 1;
-				end
-				else if (adc_done==1 & xyz == 2'b10 & read == 0) begin
-					coordinates[23:16] =  chl_val[7:0];
-					read = 1;
-				end
-				else if (adc_done==1 & read == 1) begin
-					read = 0;
-					xyz=xyz+1;
-				end
-				else if(xyz == 2'b11) begin
-					done = 1;
+		 if(reset) begin
+          coordinates[23:0] <= 8'd0;
+			    done <=0;
+			    xyz <=2'b00;
+      end
+			else begin
+				if (done != 1) begin
+					if (adc_done==1 & xyz == 2'b00) begin
+						coordinates[7:0] <= chl_val[7:0];
+						xyz<=xyz+1;
+					end
+					else if (adc_done==1 & xyz == 2'b01) begin
+						coordinates[15:8] <=  chl_val[7:0];
+						xyz<=xyz+1;
+					end
+					else if (adc_done==1 & xyz == 2'b10) begin
+						coordinates[23:16] <=  chl_val[7:0];
+						xyz<=xyz+1;
+					end
+					else if(xyz == 2'b11) begin
+						done <= 1;
+					end
 				end
 			end
 		end
