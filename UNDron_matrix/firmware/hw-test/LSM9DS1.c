@@ -13,7 +13,7 @@ uint8_t agReadByte(uint8_t subAddress)
 
 void agWriteByte(uint8_t subAddress,uint8_t data)
 {
-	I2CwriteByte(agAddress, data);
+	I2CwriteByte(agAddress, subAddress, data);
 }
 
 void initGyro()

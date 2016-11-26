@@ -61,7 +61,7 @@ NET "uart_txd" LOC = "P70" | IOSTANDARD = LVCMOS33;
 # ==== Expansion pinout ====
 
 #NET "DF<16>" LOC="P106"; #DF<16>
-#NET "DF<15>" LOC="P102"; #DF<15> #Prueba
+#NET "DF<15>" LOC="P102"; #DF<15> 
 #NET "DF<14>" LOC="P101"; #DF<14>
 #NET "DF<13>" LOC="P99";  #DF<13>
 #NET "DF<12>" LOC="P98";  #DF<12>
@@ -69,13 +69,13 @@ NET "uart_txd" LOC = "P70" | IOSTANDARD = LVCMOS33;
 #NET "DF<10>" LOC="P94";  #DF<10>
 #NET "DF<9>" LOC="P93";   #DF<9>
 #NET "DF<8>" LOC="P92";   #DF<8>
-#NET "DF<7>" LOC="P88";   #DF<7>
+NET "pwm_out<3>" LOC="P88" | IOSTANDARD=LVCMOS33;   #DF<7> #Prueba
 #NET "DF<6>" LOC="P85";   #DF<6>
-#NET "DF<5>" LOC="P83";   #DF<5>
+NET "pwm_out<2>" LOC="P83" | IOSTANDARD=LVCMOS33;   #DF<5> #Prueba
 #NET "DF<4>" LOC="P82";   #DF<4>
-#NET "DF<3>" LOC="P81";   #DF<3>
+NET "pwm_out<1>" LOC="P81" | IOSTANDARD=LVCMOS33;   #DF<3> #Prueba
 #NET "DF<2>" LOC="P80";   #DF<2>
-#NET "DF<1>" LOC="P79";   #DF<1>
+NET "pwm_out<0>" LOC="P79" | IOSTANDARD=LVCMOS33;   #DF<1> #Prueba
 #NET "DF<0>" LOC="P78";   #DF<0>
 
 

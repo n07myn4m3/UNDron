@@ -3,9 +3,13 @@
 #include "LSM9DS1.h"
 #include "MPL3115A2.h"
 
-int main(){
+int main(int argc, char **argv){
 
-    uart_init();
+ //   uint8_t  c;
+    pwm_init();
+    setmotor1(0b00001100);
+    msleep(5000);
+ //   c = '*'; // Cumplir la condicion por default
 
   for(;;){
 
@@ -18,7 +22,40 @@ int main(){
 ---------------------------------------------------------------------------
  Prueba motores
 ---------------------------------------------------------------------------*/
+setmotor1(0b00001110);
+msleep(10000);
+setmotor1(0b00001111);
+msleep(10000);
+setmotor1(0b00010011);
+msleep(10000);
+setmotor1(0b00001100);
+msleep(10000);
 
+/*
+
+		switch (c) {
+    		case 'a':  
+                uart_putstr("minimo \r\n");
+				setmotor1(0b00001110); //00001110
+    			break;
+		    case 's': 
+                uart_putstr("medio \r\n");
+				setmotor1(0b00001111); //00001111
+    			break;
+    		case 'd': 
+                uart_putstr("maximo \r\n");
+                setmotor1(0b00010011); //00010011
+    			break;  
+    		case 'q': 
+                uart_putstr("apagado \r\n");
+                setmotor1(0b00001100); //00001100
+    			break; 
+		    default:
+                uart_putstr("default \r\n");
+				break;
+		};
+		c = uart_getchar();
+*/
 
 
 /*

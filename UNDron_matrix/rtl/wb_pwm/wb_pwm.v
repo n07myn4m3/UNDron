@@ -1,6 +1,6 @@
 module
 wb_pwm #(
-	parameter bit_resolution = 9,
+	parameter bit_resolution = 8,
 	parameter phases = 1
 )(
 	input clk,
@@ -15,8 +15,8 @@ wb_pwm #(
 	input       [31:0] wb_dat_i,//data in
 	output reg  [31:0] wb_dat_o, //data out
 // Interfaz del modulo
-  output [phases*3:0] pwm_out
-//    output [phases-1:0] pwm_n_out
+    output [phases*3:0] pwm_out
+//  output [phases-1:0] pwm_n_out
 );
 
 	reg [bit_resolution-1:0] duty0;
@@ -70,10 +70,10 @@ begin
 			ack  <= 1;
       case (wb_adr_i[5:2])
 	    4'b0000: ena    <= wb_dat_i[0];
-      4'b0001: duty0  <= {1'b0,wb_dat_i[7:0]};
-      4'b0010: duty1  <= {1'b0,wb_dat_i[7:0]};
-      4'b0011: duty2  <= {1'b0,wb_dat_i[7:0]};
-      4'b0100: duty3  <= {1'b0,wb_dat_i[7:0]};
+        4'b0001: duty0  <= wb_dat_i[7:0];
+        4'b0010: duty1  <= wb_dat_i[7:0];
+        4'b0011: duty2  <= wb_dat_i[7:0];
+        4'b0100: duty3  <= wb_dat_i[7:0];
        endcase
 		end
 	end

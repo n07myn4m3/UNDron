@@ -13,6 +13,9 @@
 
 #define UART_RXBUFSIZE 32
 
+#define TRUE  0x01
+#define FALSE 0x00
+
 
 /****************************************************************************
  * Types
@@ -167,17 +170,26 @@ void everloop_putdata_2(uint8_t data2);
 void everloop_putdata_3(uint8_t data3);
 
 /***************************************************************************
- * PWM
+ * PWM0
  */
 
-typedef struct {
-   volatile uint32_t duty; //aparecen de 4 en 4 enteros de 32 bits 
-   volatile uint32_t enable; // Tengo que colocarlas en orden para que funcione estan implicitas
-} pwm_t;
+#define HIGH 0x01
+#define LOW  0x00
 
-void pwm_init();
-void pwm_duty(uint8_t duty0);
-void pwm_enable(uint8_t enable0);
+typedef struct {
+	volatile uint32_t enable;	    //00
+	volatile uint32_t duty_m1;	 	//04
+	volatile uint32_t duty_m2;	 	//08
+	volatile uint32_t duty_m3;	 	//0c
+	volatile uint32_t duty_m4;	 	//20
+} pwm_t;
+	
+uint8_t setmotor1(uint8_t bit);
+uint8_t setmotor2(uint8_t bit);
+uint8_t setmotor3(uint8_t bit);
+uint8_t setmotor4(uint8_t bit);
+void	set_pwm(uint8_t state);
+void 	pwm_init(void);
 
 /***************************************************************************
  * Pointer to actual components

@@ -140,7 +140,7 @@ Distributed as-is; no warranty is given.
 		#define ag_ctrl1_sampleRate_119hz        (0x60) //0110-0000
 		#define ag_ctrl1_sampleRate_238hz        (0x80) //1000-0000
 		#define ag_ctrl1_sampleRate_476hz        (0xA0) //1010-0000
-		#define ag_ctrl1_sampleRate_952hz        (0xCO) //1100-0000
+		#define ag_ctrl1_sampleRate_952hz        (0xC0) //1100-0000
       //gyro fullScaleSel
 		#define ag_ctrl1_fullScaleSel_245_dps    (0x00) //0000-0000
 		#define ag_ctrl1_fullScaleSel_500_dps    (0x08) //0000-1000
@@ -213,5 +213,6 @@ Distributed as-is; no warranty is given.
 
 uint8_t mReadByte(uint8_t subAddress);
 uint8_t agReadByte(uint8_t subAddress);
-void initGyro();
+void    agWriteByte(uint8_t subAddress,uint8_t data);
+void    initGyro();
 #endif

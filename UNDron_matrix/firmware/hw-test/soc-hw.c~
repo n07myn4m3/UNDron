@@ -7,7 +7,7 @@ gpio_t     *gpio0     = (gpio_t *)     0x40000000;
 spi_t      *spi0      = (spi_t *)      0x50000000;
 everloop_t *everloop0 = (everloop_t *) 0x60000000; // por el momento no disponible
 i2c_t 	   *i2c0	  = (i2c_t *)	   0x70000000;
-pwm_t      *pwm0      = (pwm_t *)      0x80000000;    //leo y escribo datos de esa direccion
+pwm_t      *pwm0      = (pwm_t *)      0x80000000; 
 
 
 isr_ptr_t isr_table[32];
@@ -280,19 +280,47 @@ void uart_putstr(char *str)
 /***************************************************************************
  * PWM Functions
  */
-void pwm_init(void)
-{
-  pwm0->duty = 0;
-  pwm0->enable = 0;
-}
-
-void pwm_duty(uint8_t duty0)
-{
-  pwm0->duty = duty0;
-}
-
-void pwm_enable(uint8_t enable0)
-{
-  pwm0->enable = enable0;
-}
+    //----------------------------------------------------------------
+	uint8_t setmotor1(uint8_t bit)
+	{
+		uint8_t val0=bit;
+		pwm0->duty_m1=val0;
+		return val0;
+	
+	}
+    //----------------------------------------------------------------
+	uint8_t setmotor2(uint8_t bit)
+	{
+		uint8_t val0=bit;
+		pwm0-> duty_m2=val0;
+		return val0;
+	}
+    //----------------------------------------------------------------
+	uint8_t setmotor3(uint8_t bit)
+	{
+		uint8_t val0=bit;
+		pwm0-> duty_m3=val0;
+		return val0;
+	}
+    //----------------------------------------------------------------
+	uint8_t setmotor4(uint8_t bit)
+	{
+		uint8_t val0=bit;
+		pwm0-> duty_m4=val0;
+		return val0;
+	}
+    //----------------------------------------------------------------
+	void pwm_init(void)
+	{
+			pwm0->enable=TRUE;
+	}
+    //----------------------------------------------------------------
+	void set_pwm(uint8_t state)
+	{
+		if(state == HIGH){
+			pwm0->enable=TRUE;
+		}else if(state ==LOW){
+			pwm0->enable=FALSE;
+		}
+	}
 

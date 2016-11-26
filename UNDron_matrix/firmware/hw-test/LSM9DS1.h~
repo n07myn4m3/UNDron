@@ -164,6 +164,18 @@ Distributed as-is; no warranty is given.
 
 		#define ag_ctrl2_Default                 (0x00) //0000-0000   
 
+    /*=======================
+    //CTRL_REG3_G (0X12)
+    -----------------------*/ 
+
+	// CTRL_REG3_G (Default value: 0x00)
+	// [LP_mode][HP_EN][0][0][HPCF3_G][HPCF2_G][HPCF1_G][HPCF0_G]
+	// LP_mode - Low-power mode enable (0: disabled, 1: enabled)
+	// HP_EN - HPF enable (0:disabled, 1: enabled)
+	// HPCF_G[3:0] - HPF cutoff frequency
+
+		#define ag_ctrl3_Default                 (0x00) //0000-0000 
+
 	
     #define INA219_CONFIG_BADCRES_MASK             (0x0780)  // Bus ADC Resolution Mask
     #define INA219_CONFIG_BADCRES_9BIT             (0x0080)  // 9-bit bus res = 0..511
@@ -201,5 +213,6 @@ Distributed as-is; no warranty is given.
 
 uint8_t mReadByte(uint8_t subAddress);
 uint8_t agReadByte(uint8_t subAddress);
-void initGyro();
+void    agWriteByte(uint8_t subAddress,uint8_t data);
+void    initGyro();
 #endif

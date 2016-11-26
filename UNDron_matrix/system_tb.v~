@@ -242,8 +242,7 @@ PREGUNTAS FRECUENTES
    ta un flanco de bajada e i2c_scl esta en alto lo cual indiferente a que inicie
    con un proceso de lectura lo tomara como uno de escritura, se podria solucionar
    mejor el problema pero por el momento funciona.
----------------------------------------------------------------------------
-*/
+---------------------------------------------------------------------------*/
 
 /*
 reg   [7:0] checker = 1'b0;
@@ -404,7 +403,8 @@ reg   [3:0]  count = 7;
      #10 -> reset_trigger;
 //     #((PERIOD*DUTY_CYCLE)*400000) $finish;
 //     #((PERIOD*DUTY_CYCLE)*100000) $finish; //Prueba corta
-     #((PERIOD*DUTY_CYCLE)*600000) $finish; //Prueba larga
+//     #((PERIOD*DUTY_CYCLE)*600000) $finish; //Prueba larga
+     #((PERIOD*DUTY_CYCLE)*2000000) $finish; //Prueba larga
    end
 
 endmodule

@@ -1,3 +1,8 @@
+/*
+Notas:
+- 1000 produjo una salida cada un milisegundo
+- 500 produce una salida cada dos milisegundos
+*/
 `define log2(n)   ((n) <= (1<<0)  ? 0 : (n)  <= (1<<1)  ? 1  :\
                    (n) <= (1<<2)  ? 2 : (n)  <= (1<<3)  ? 3  :\
                    (n) <= (1<<4)  ? 4 : (n)  <= (1<<5)  ? 5  :\
@@ -23,8 +28,8 @@ module pwm (
 	output reg [phases-1:0]  pwm_n_out
 );
 	parameter sys_clk = 50000000;
-	parameter pwm_freq = 8000;
-	parameter bit_resolution = 9;
+	parameter pwm_freq = 50; //El valor debe ser 50 para obtener un pulso cada 20 ms
+	parameter bit_resolution = 8;
 	parameter phases = 1;
 /*
 			  _________

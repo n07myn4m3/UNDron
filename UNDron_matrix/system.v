@@ -45,7 +45,7 @@ module system
 	// everloop
     output            everloop_led_ctl,
 	//pwm
-	output 			  [3:0]pwm_out
+	output 	    [3:0] pwm_out
 );
 
 

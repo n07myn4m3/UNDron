@@ -13,7 +13,7 @@ uint8_t agReadByte(uint8_t subAddress)
 
 void agWriteByte(uint8_t subAddress,uint8_t data)
 {
-	I2CwriteByte(agAddress, data);
+	I2CwriteByte(agAddress, subAddress, data);
 }
 
 void initGyro()
@@ -26,9 +26,14 @@ void initGyro()
 		ag_ctrl1_sampleRate_952hz     |
 		ag_ctrl1_fullScaleSel_245_dps |
         ag_ctrl1_bandWidth_1);
+
 // SEGUNDO REGISTRO
 // Se dejara el valor por defecto
 	agWriteByte(CTRL_REG2_G, ag_ctrl2_Default );
+
+// TERCER REGISTRO
+// Se dejara el valor por defecto
+	agWriteByte(CTRL_REG3_G, ag_ctrl3_Default );
 }
 
 /*

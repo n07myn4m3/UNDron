@@ -404,6 +404,7 @@ reg   [3:0]  count = 7;
 //     #((PERIOD*DUTY_CYCLE)*400000) $finish;
 //     #((PERIOD*DUTY_CYCLE)*100000) $finish; //Prueba corta
      #((PERIOD*DUTY_CYCLE)*600000) $finish; //Prueba larga
+//     #((PERIOD*DUTY_CYCLE)*2000000) $finish; //Prueba larga
    end
 
 endmodule
