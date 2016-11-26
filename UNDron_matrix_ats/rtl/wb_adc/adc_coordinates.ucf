@@ -1,0 +1,17 @@
+# ==== Clock inputs (CLK) ====
+
+#NET "clk"   LOC = "P84"	| IOSTANDARD = "LVCMOS33";
+#NET "clk" TNM_NET = sys_clk;
+#TIMESPEC TS_sys_clk = PERIOD sys_clk_pin 20.0 ns HIGH 50%;
+
+#NET "clk" LOC = "P84";
+#NET "led" LOC = "P39" | IOSTANDARD = LVCMOS33;
+#NET  "rst"  LOC = "P105" | IOSTANDARD = LVCMOS33 | PULLUP;
+
+# ==== UART ====
+#NET "uart_rxd" LOC = "P69";
+#NET "uart_txd" LOC = "P70";
+
+# ==== EVERLOOP ====
+
+#NET "led_ctl" LOC = "P56"| IOSTANDARD = LVCMOS33;
