@@ -1,0 +1,1 @@
+LSM9DS1.o: LSM9DS1.c LSM9DS1.h soc-hw.h
