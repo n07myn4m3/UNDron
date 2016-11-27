@@ -1,0 +1,246 @@
+//----------------------------------------------------------------------------
+//
+//----------------------------------------------------------------------------
+`timescale 1 ns / 100 ps
+
+module system_tb;
+
+//----------------------------------------------------------------------------
+// Parameter (may differ for physical synthesis)
+//----------------------------------------------------------------------------
+parameter tck              = 10;       // clock period in ns
+parameter uart_baud_rate   = 1152000;  // uart baud rate for simulation 
+
+parameter clk_freq = 1000000000 / tck; // Frequenzy in HZ
+//----------------------------------------------------------------------------
+//
+//----------------------------------------------------------------------------
+reg        clk;
+reg        rst;
+wire       led;
+
+//----------------------------------------------------------------------------
+// UART STUFF (testbench uart, simulating a comm. partner)
+//----------------------------------------------------------------------------
+wire         uart_rxd;
+wire         uart_txd;
+
+//----------------------------------------------------------------------------
+// I2C STUFF (testbench i2c, simulating a comm. partner)
+//----------------------------------------------------------------------------
+
+wire 				 i2c_sda;
+wire				 i2c_scl;
+
+//----------------------------------------------------------------------------
+// SPI STUFF (testbench spi, simulating a comm. partner)
+//----------------------------------------------------------------------------
+
+wire mosi;
+reg miso;
+wire sck;
+wire ssn;
+wire ce;
+wire csn;
+
+//Only Simulate register
+reg  [0:7] miso_test;
+reg  [3:0] spi_count;  
+reg 			 ssn_t = 0;
+
+
+//Probe signals transmision rfl2401+
+
+reg [0:55] data_transmision = 56'h686f6c61417373;
+reg [0:7] mosi_data = 0;
+reg [0:7] mosi_data_aux = 0;
+reg [7:0] repeat_count = 0;
+reg [6:0] repeats = 0;
+
+//----------------------------------------------------------------------------
+// BASICIO STUFF (testbench basicIO, simulating a comm. partner)
+//----------------------------------------------------------------------------
+
+/*
+reg 	[7:0] in_switch;
+reg 				buttom;
+reg					btn;
+wire	[7:0] led0;
+*/
+
+//----------------------------------------------------------------------------
+// GPIO STUFF (testbench gpio, simulating a comm. partner)
+//----------------------------------------------------------------------------
+
+wire [7:0] gpio_io;
+reg  [7:0] gpio_i;
+assign gpio_io = gpio_i;
+reg  [7:0] ports;
+
+//----------------------------------------------------------------------------
+// PWM STUFF (testbench gpio, simulating a comm. partner)
+//----------------------------------------------------------------------------
+
+wire [3:0] pwm_out;
+localparam period_pwm = 10000000/(4000);
+integer count_pwm;
+reg [2:0] count_data;
+
+//----------------------------------------------------------------------------
+// Device Under Test 
+//----------------------------------------------------------------------------
+system #(
+	.clk_freq(           clk_freq         ),
+	.uart_baud_rate(     uart_baud_rate   )
+) dut  (
+	.clk(          clk    ),
+	// Debug
+	.rst_n(          rst    ),
+	//.led(          led    ),
+	// Uart
+	.uart_rxd(  uart_rxd  ),
+	.uart_txd(  uart_txd  ),
+	// i2c
+	.i2c0_sda( i2c_sda ),
+	.i2c0_scl( i2c_scl ),
+   // basicIO
+/*
+  .in_switch(in_switch),
+	.buttom(buttom),
+	.btn(btn),
+	.led(led0),
+*/
+	//spi
+	.spi_mosi(mosi),
+	.spi_miso(miso),
+	.spi_sck(sck),
+	.spi_ssn(ssn),
+	.spi_csn(csn),
+	.spi_ce(ce),
+	//GPIO
+	.gpio0_io(gpio_io),
+	//pwm
+	.pwm_out(pwm_out)
+);
+
+/* Clocking device */
+initial         clk <= 0;
+always #(tck/2) clk <= ~clk;
+
+initial begin
+gpio_i = {8{1'bz}};
+miso <= 1'b0;
+ssn_t <= 1'b0;
+spi_count = 0;
+repeats = 0;
+miso_test= 8'h02;
+count_pwm = 0;
+count_data = 0;
+ports = 0;
+end
+
+
+/*dummy tests spi receive*/
+/*
+always @(negedge ssn)begin
+	ssn_t	<= 1'b1;
+	if(!gpio_io[0])begin
+		mosi_data_aux <= mosi_data;
+		miso<=miso_test[spi_count];
+		mosi_data[spi_count]<=(mosi)?1'b1:1'b0;
+		spi_count = spi_count+1;
+	end
+end
+
+always @(negedge sck) begin
+	if(spi_count<8 && (ssn_t))	begin
+		miso <= miso_test[spi_count];
+		mosi_data[spi_count]<=(mosi)?1'b1:1'b0;
+		spi_count = spi_count + 1;
+	end else
+		miso <= 1'b0;
+		miso_test =(mosi_data == mosi_data_aux)?8'h30:miso_test;
+		ssn_t <=1'b0;
+		spi_count = 0;
+end
+*/
+
+
+/*Dummy tests 2 spi receive*/ //Use in probe of stop transmisssion
+
+always @(posedge sck) begin
+
+	if(!gpio_io[0] && spi_count<9)begin
+		mosi_data[spi_count-1]<=mosi;
+	end	
+end
+
+always @(negedge ssn, negedge sck) begin
+
+	if(!gpio_io[0])begin
+		if(spi_count<8)begin
+			if(spi_count == 0)begin
+				mosi_data_aux <= mosi_data;
+				mosi_data <= 0;
+			end
+			miso <= miso_test[spi_count];
+			spi_count <= spi_count + 1;
+		end else begin	
+			miso<=1'b0;
+			spi_count = 0;
+			repeat_count<=(mosi_data_aux == mosi_data)?repeat_count+1:repeat_count;
+			miso_test<= (repeat_count == 30)? 8'h20: miso_test;
+		end
+	end
+end
+
+
+/*DUmmy tests 3 spi receive*/ //use in probe read_payload
+/*
+always @(negedge ssn, negedge sck) begin
+
+	if(!gpio_io[0])begin
+		if(spi_count<8)begin
+			miso <= miso_test[spi_count];
+			spi_count <= spi_count + 1;	
+		end else begin	
+			miso<=1'b0;
+			spi_count = 0;
+			miso_test= data_transmision[8*repeats +:8];
+			repeats = (repeats < 6)? repeats + 1:0; 
+		end
+	end
+end
+*/
+
+
+/*Dummy test pwm */
+/*
+always @(posedge clk) begin
+	count_pwm = count_pwm+1;
+	if(count_pwm == period_pwm)begin
+		count_pwm=0;
+		count_data = count_data+1;
+	end
+ 
+	if(count_data == 4)begin
+		count_data = 0;
+		ports=(ports<256)?ports+10:0;
+		gpio_i=ports;
+	end
+end
+*/
+
+/* Simulation setup */
+initial begin
+	$dumpfile("system_tb.vcd");
+	$dumpvars(-1, dut);
+	#0  rst <= 1;
+	#80 rst <= 0;
+
+	#(tck*150000) $finish;
+end
+
+
+
+endmodule

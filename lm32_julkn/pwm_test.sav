@@ -1,0 +1,63 @@
+[*]
+[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
+[*] Thu Nov 10 09:48:33 2016
+[*]
+[dumpfile] "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Pruebas_Lab/lm32_basicIO/simulation/system_tb.vcd"
+[dumpfile_mtime] "Thu Nov 10 09:48:13 2016"
+[dumpfile_size] 55383952
+[savefile] "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Pruebas_Lab/lm32_basicIO/pwm_test.sav"
+[timestart] 0
+[size] 1317 744
+[pos] -318 -117
+*-26.711718 7000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] system_tb.
+[treeopen] system_tb.dut.
+[treeopen] system_tb.dut.pwm0.
+[sst_width] 227
+[signals_width] 142
+[sst_expanded] 1
+[sst_vpaned_height] 211
+@200
+-PWM_PROBE
+@28
+system_tb.dut.pwm0.wb_wr
+@22
+system_tb.dut.pwm0.wb_adr_i[31:0]
+@28
+system_tb.dut.pwm0.ack
+system_tb.dut.pwm0.ena
+@200
+-pwm_1
+@22
+system_tb.dut.pwm0.duty0[8:0]
+@28
+system_tb.dut.pwm0.pwm0.pwm_out
+@200
+-pwm_2
+@22
+system_tb.dut.pwm0.duty1[8:0]
+@28
+system_tb.dut.pwm0.pwm1.pwm_out
+@200
+-pwm_3
+@22
+system_tb.dut.pwm0.duty2[8:0]
+@28
+system_tb.dut.pwm0.pwm2.pwm_out
+@200
+-pwm_4
+@22
+system_tb.dut.pwm0.duty3[8:0]
+@28
+system_tb.dut.pwm0.pwm3.pwm_out
+@200
+-gpio
+@28
+system_tb.dut.gpio0.wb_rd
+system_tb.dut.gpio0.wb_wr
+@22
+system_tb.dut.gpio0.gpio_dir[7:0]
+system_tb.dut.gpio0.gpio_io[7:0]
+system_tb.dut.gpio0.gpio_i[7:0]
+[pattern_trace] 1
+[pattern_trace] 0

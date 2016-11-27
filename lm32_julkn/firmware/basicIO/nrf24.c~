@@ -1,0 +1,626 @@
+#include "nrf24.h"
+#include "soc-hw.h"
+#include "nRF24L01.h"
+
+//Parametros del modulo
+#define DEFAULT 0x00 
+#define CSN   	0
+#define CE    	1
+#define addr_width 0x05   //tamano de la direccion del canal
+
+
+
+//Control numeros booleanos
+ #define _BV(x) (1<<(x))
+
+//Deteccion de maximos y minimos
+#define rf24_max(a,b) (a>b?a:b)
+#define rf24_min(a,b) (a<b?a:b)
+
+/*******************************************************************************
+*Funciones control de señales
+*******************************************************************************/
+volatile uint32_t puerto;
+volatile int ports;
+const uint8_t channel0[] = {0xF0,0xF0,0xF0,0xF0,0xE1};
+uint8_t payload_size = 32; //Permite ajustar el tamaño del dato a transmitir
+static const uint8_t child_pipe[] =
+{
+  RX_ADDR_P0, RX_ADDR_P1, RX_ADDR_P2, RX_ADDR_P3, RX_ADDR_P4, RX_ADDR_P5
+};
+
+static const uint8_t child_payload_size[] =
+{
+  RX_PW_P0, RX_PW_P1, RX_PW_P2, RX_PW_P3, RX_PW_P4, RX_PW_P5
+};
+
+static const uint8_t child_pipe_enable[]=
+{
+  ERX_P0, ERX_P1, ERX_P2, ERX_P3, ERX_P4, ERX_P5
+};
+
+//static char channel1[] = {'p','i','p','e','1'};
+/*
+void digital_write(uint8_t port)
+{
+	ports |= port;
+	gpio0-> ports;
+}
+*/
+
+uint8_t ce(uint8_t level)
+{
+	if(level == (HIGH)){
+		ports |=_BV(CE);
+		//gpio0-> oe =ports;
+		gpio0->out = ports;
+		spi0->ce= 1;
+		ce_pin = 1;
+	}else if(level == (LOW)){
+		ports &=~_BV(CE);
+		gpio0->out = ports;
+		spi0->ce = 0;
+		ce_pin = 0;
+	} else{
+		ce_pin = 0;
+	}
+	return ce_pin;
+}
+
+uint8_t csn(uint8_t level)
+{
+	if(level == HIGH){
+		ports |=_BV(CSN);
+		gpio0->out = ports;
+		spi0->csn = 1;
+		nsleep(1);
+		csn_pin = 1;
+	}else
+	if(level == LOW){
+		ports &=~_BV(CSN);
+		gpio0->out = ports;
+		spi0->csn = 0;
+		csn_pin = 0;
+	} else {
+		csn_pin = 0;
+	}
+	return csn_pin;
+}
+
+void spi_finish()
+{
+	nsleep(10);
+	gpio0->out = DEFAULT;
+	spi0->ce = 0x00;
+	spi0->csn=0x00;
+}
+
+void spi_enable()
+{
+	spi_finish();
+	csn(HIGH);
+}
+/*
+uint8_t spi_receive(uint8_t data)
+{
+	uint8_t receive;
+	spi_transfer(data);
+	receive = spi_getchar();
+	nsleep(100);
+	CSN(HIGH);
+	return receive;
+}
+*/
+//Para usar esta funcion no hay que olvidar que hay que habilitar el CSN y darle los restrasos adecuados al mismo
+uint8_t spi_transfer(uint8_t data)
+{
+	uint8_t receive;
+	csn(LOW);
+	receive = spi_transmitD(data);
+	nsleep(3);
+	csn(HIGH);
+	nsleep(5);
+	return receive; 
+}
+
+void spi_putstr_nrf24(const uint8_t *data)
+{
+	csn(LOW);
+	nsleep(1);
+	const uint8_t *c = data;
+	while(*c){
+		spi_transmitD(*c);
+		c++;
+	}
+	nsleep(3);
+	csn(HIGH);
+	nsleep(5);
+}
+
+uint8_t spi_transmitD(uint8_t data)
+{
+	uint8_t receive;
+	spi_putchar(data);
+	nsleep(1);
+	spi_init();
+  receive = spi_getchar();
+	return receive; 
+}
+/*
+bool spi_transPay()
+{
+	digital_wirte(CE);
+	return 1;
+}
+*/
+
+
+/******************************************************************************
+*Funciones nrf240l+
+******************************************************************************/
+static uint8_t setup;   //almacena el estado actual del registro
+static uint8_t delay_t; //Retraso necesario que se debe esperar despues de cada transmision
+static uint8_t status;  //almacena el status de las antenas
+
+void nrf24_begin(void)
+{
+	gpio_init_write(); //Habilita el gpio en forma de escritura
+//	spi_finish();
+	csn(HIGH);
+	ce(LOW);
+	msleep(100); //usar para sintetizacion
+	//nsleep(10);	 //usar para simulacion
+	
+  // Reset NRF_CONFIG and enable 16-bit CRC.
+  write_register_basic( NRF_CONFIG, 0b00001100 );
+	//Tiempo de reenvio entre cada paquete 250uS, se reenvia 15 veces
+	setRetries(5,15);
+	//Se configura la velocidad de transmision de las antenas
+	setup = read_register( RF_SETUP );
+  // HIGH and LOW '00' is 1Mbs - our default
+  setup &= ~(_BV(RF_DR_LOW) | _BV(RF_DR_HIGH)) ;
+	setup |= 0x00; //-0b00101000Se configura la antena para que transmita a una velocidad de 1MBits
+	write_register_basic( RF_SETUP, setup);
+	delay_t = 85; 
+	//Configura la senal de acknowledge y los dinamicos payaloads de la antena
+	toggle_features();
+	write_register_basic(FEATURE,0); //Permite que se adjunte un payload a la senal de ack, proveniente del PRX
+  write_register_basic(DYNPD,0);			//Desactiva el payload dinamico de todos los canales
+	//resetea las senales de control, provenientes de la recepcion de un paquete PRX
+	//Del recibimiento de una senal de ACK PTX
+	//De una maximo de envios de un payload PTX  
+	write_register_basic(NRF_STATUS,_BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
+	//Configuracion de la frecuencia de transmision del dato
+	setChannel(110);
+	//Limpia los buffers
+	flush_rx();
+	flush_tx();
+
+	power_up();
+
+	//Se configura la antena para que sea receptora	
+	write_register_basic(NRF_CONFIG, ( read_register(NRF_CONFIG) ) | _BV(PRIM_RX) );
+	
+	//Configura la potencia de trasnmision a -6dBm
+	setPaLevel(RF_HIGH_PWR);	
+
+	//abre el canal 0
+	//openPipe0_tx(channel0);
+}
+
+/****************************************************************************/
+uint8_t load_payload(const void *spi_txbuff, uint8_t writeType, uint8_t len)
+{
+	uint8_t status;
+	const uint8_t *data = (const uint8_t *)spi_txbuff;
+  uint8_t data_len = rf24_min(len, payload_size);
+  uint8_t blank_len = dynamic_payloads_enabled ? 0 : payload_size- data_len;
+
+
+	csn(LOW);
+	nsleep(1);
+	if(writeType == W_TX_PAYLOAD){
+		spi_transmitD(W_TX_PAYLOAD);
+	}else{
+		spi_transmitD(W_TX_PAYLOAD_NO_ACK);
+	}
+	while(data_len--){
+		spi_transmitD(*data);
+		data++;
+	}
+	while(blank_len--){
+		spi_transmitD(0x00);
+	}
+	nsleep(1);
+	csn(HIGH);
+	ce(HIGH);
+	init_watch();
+	while( ! ( get_status()  & ( _BV(TX_DS) | _BV(MAX_RT) ))) {
+
+		if(time_happened_millis(95)==1){
+			uart_putstr("\nLa transmision fallo");
+			init_watch();
+			goto cont;
+		}
+
+	}
+  cont:
+	ce(LOW);
+	status = write_register_basic	(NRF_STATUS,_BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
+
+  if( status & _BV(MAX_RT)){
+  	flush_tx(); //Cuando se excede el maximo de intentos, se limpia el TX_FIFO
+  	return 0;
+  }
+	//TX OK 1 or 0
+  return 1;
+}
+
+/****************************************************************************/
+/*
+void transmit_data(uint8_t *data)
+{
+	load_payload(data, W_TX_PAYLOAD);
+	ce(HIGH); //ce enable
+	data++;
+}
+*/
+/****************************************************************************/
+uint8_t get_status()
+{
+	return spi_transfer(0xff);
+}
+
+/****************************************************************************/
+uint8_t read_register(uint8_t reg)
+{
+	uint8_t result;
+	csn(LOW);
+	nsleep(1);
+	spi_transmitD(R_REGISTER|(REGISTER_MASK & reg));
+	spi_transmitD(0xff);
+	result = spi_getchar();
+	nsleep(3);
+	csn(HIGH);
+	nsleep(20);
+	return result;	
+}
+
+uint8_t read_register_buff(uint8_t reg, uint8_t * buf, uint8_t len){
+	uint8_t status;
+	csn(LOW);
+	nsleep(1);
+	status = spi_transmitD( R_REGISTER | ( REGISTER_MASK & reg ) );
+
+	 while ( len-- ){
+    *buf++ = spi_transmitD(0xff);
+  }
+	nsleep(4);
+  csn(HIGH);
+  return status;
+}
+
+/****************************************************************************/
+uint8_t write_register_basic(uint8_t reg, uint8_t value)
+{
+	csn(LOW);
+	status = spi_transmitD(W_REGISTER|(REGISTER_MASK & reg) );
+	spi_transmitD(value);
+	nsleep(3);
+	csn(HIGH);
+	nsleep(5);
+	return status;
+}
+
+/****************************************************************************/
+uint8_t write_register(uint8_t reg,const uint8_t *buf, uint8_t len)
+{
+	csn(LOW);
+	nsleep(1);
+	status = spi_transmitD(W_REGISTER|(REGISTER_MASK & reg) );
+	while(len--){
+	spi_transmitD(*buf++);
+	}
+	nsleep(2);
+	csn(HIGH);
+	nsleep(5);
+	return status;
+}
+
+/****************************************************************************/
+void setRetries(uint8_t delay, uint8_t count)
+{
+	write_register_basic(SETUP_RETR,(delay&0xf)<<ARD | (count&0xf)<<ARC);
+}
+
+/****************************************************************************/
+void setChannel(uint8_t channel)
+{
+	const uint8_t max_channel=125;
+	write_register_basic(RF_CH, rf24_min(channel, max_channel));
+}
+
+/****************************************************************************/
+void flush_rx()
+{
+	spi_transfer(FLUSH_RX);
+}
+
+/****************************************************************************/
+void flush_tx()
+{
+	spi_transfer(FLUSH_TX);
+}
+
+/****************************************************************************/
+void power_down(void)
+{
+  ce(LOW); // Guarantee CE is low on powerDown
+  write_register_basic(NRF_CONFIG,read_register(NRF_CONFIG) & ~_BV(PWR_UP));
+}
+
+/****************************************************************************/
+void power_up(void)
+{
+   uint8_t cfg = read_register(NRF_CONFIG);
+
+   //si no se ha activado la senal PWR_UP, se ectiva y se verifica que el modulo este donectado
+   if (!(cfg & _BV(PWR_UP))){
+      write_register_basic(NRF_CONFIG, cfg | _BV(PWR_UP));
+			//Espere 5ms para que el modulo pueda establecer el cambio del estado power down al estado StandBy-I
+			//Ver datasheet tiempo tpd2stby
+      msleep(5); //Para sintetizacion
+   }
+}
+
+
+/****************************************************************************/
+void setPaLevel(uint8_t level)
+{
+	status = read_register(RF_SETUP) & 0b11111000;
+	if(level<7){
+	status |=level;
+	}else{
+	status |=0x00;
+	//Deja por default la potencia de las antenas en -18dBm
+	}
+	write_register_basic(RF_SETUP, status);
+}
+
+/****************************************************************************/
+void openPipe0_tx(const uint8_t * addres)
+{
+
+  write_register(RX_ADDR_P0,addres, addr_width);
+  write_register(TX_ADDR,addres, addr_width);
+
+  write_register_basic(RX_PW_P0,payload_size);
+}
+
+
+
+/****************************************************************************/
+void openpipe_rx(uint8_t pipe,const uint8_t *address)
+{
+/* Se hace necesario verificar si se desea modificar la direccion
+del canal 0, puesto que en el modo ptx, la antena asigna a este direccion
+la misma direccion que la direccion del TX_ADDR, es decir habilita
+la misma direccion para asignar el canal de transmision y recepcion.
+el dilema surge que cuando se intenta cambiar la antena de PTX a RTX
+durante la ejecucion esta contendra por defecto en la direccion cero
+la misma que tenia antes que era identica el ptx, entonces ninguna antena 
+ptx tendra esta direccion, entonces seria erroneo usarla para recepcion
+de los datos de las otras antenas amenos que se verifique para que el PRX
+pueda acpetar 6 antenas o simplemente se cierre el canal 0 a modo de que 
+si la antena vuelve a ser PTX, la direccion TX_ADDR concuerde con la RX_ADDR_P0
+mas infotmacion en el datasheet pag 39
+*/
+  if (pipe == 0){
+    pipe0_reading_address=(uint8_t *)address;//periodo de prueba
+  }
+  if (pipe <= 6)
+  {
+    // Para los canales 2 y 5 solo se modifica el byte menos significatico LSB
+    if ( pipe < 2 ){
+      write_register((child_pipe[pipe]), (uint8_t *)address, addr_width);
+    }else{
+      write_register((child_pipe[pipe]), (uint8_t *)address, 1);
+	}
+    write_register_basic((child_payload_size[pipe]),payload_size);
+
+    // Note it would be more efficient to set all of the bits for all open
+    // pipes at once.  However, I thought it would make the calling code
+    // more simple to do it this way.
+    write_register_basic(EN_RXADDR,read_register(EN_RXADDR) | _BV(child_pipe_enable[pipe]));
+
+  }
+}
+
+
+
+/***************************************************************************/
+void startRx_mode(void)
+{
+  power_up();
+
+  write_register_basic(NRF_CONFIG, read_register(NRF_CONFIG) | _BV(PRIM_RX));
+  write_register_basic(NRF_STATUS, _BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
+  ce(HIGH);
+  // Restaura la direccion del canal 0 si esta fue modificada
+/*
+  if (*pipe0_reading_address > 0){
+    write_register(RX_ADDR_P0, pipe0_reading_address, addr_width);	
+  }else{
+	closeReadingPipe(0);
+  }
+*/
+	closeReadingPipe(0);
+
+  // Flush buffers
+  //flush_rx();
+  if(read_register(FEATURE) & _BV(EN_ACK_PAY)){
+	flush_tx();
+  }
+
+  // Go!
+  //delayMicroseconds(100);
+}
+
+/****************************************************************************/
+void closeReadingPipe( uint8_t pipe )
+{
+  write_register_basic(EN_RXADDR,read_register(EN_RXADDR) & ~_BV(child_pipe_enable[pipe]));
+}
+
+/****************************************************************************/
+void setAutoAck(uint8_t enable)
+{
+  if ( enable ) 
+    write_register_basic(EN_AA, 0b111111);
+  else
+    write_register_basic(EN_AA, 0);
+}
+
+/****************************************************************************/
+void enableDynamicAckPayloads(void)
+{
+  write_register_basic(FEATURE,read_register(FEATURE) | _BV(EN_ACK_PAY) | _BV(EN_DPL) );
+
+  write_register_basic(DYNPD,read_register(DYNPD) | _BV(DPL_P5) | _BV(DPL_P4) | _BV(DPL_P3) | _BV(DPL_P2) | _BV(DPL_P1) | _BV(DPL_P0));
+
+  dynamic_payloads_enabled = true;
+}
+
+/* Hace los mismo que la funcion de arriba solo que habilita dos canales
+void enableAckPayload(void)
+{
+  // habilita la opcion de que la senal ack tendra payload y que 
+	//	la entrada de valores sera dinamico
+
+    write_register(FEATURE,read_register(FEATURE) | _BV(EN_ACK_PAY) | _BV(EN_DPL) );
+
+  // habilita la carga de payloads dinamicos en los canales 0 y 1
+
+  write_register(DYNPD,read_register(DYNPD) | _BV(DPL_P1) | _BV(DPL_P0));
+  dynamic_payloads_enabled = true;
+}
+*/
+
+/****************************************************************************/
+void stopTransmission(void)
+{
+	ce(LOW);
+
+	nsleep(wxrxDelay);
+  
+  if(read_register(FEATURE) & _BV(EN_ACK_PAY)){
+		nsleep(wxrxDelay);
+		flush_tx(); //Limpia el TX_	FIFO luego que ha terminado el tiempo de espera
+  }
+	flush_rx();
+  write_register_basic(NRF_CONFIG, ( read_register(NRF_CONFIG) ) & ~_BV(PRIM_RX) );
+ 
+  write_register_basic(EN_RXADDR,read_register(EN_RXADDR) | _BV(ERX_P0)); // Enable RX on pipe0
+}
+
+/****************************************************************************/
+uint8_t isAckPayloadAvailable(void)
+{
+	uint8_t status;
+  status = (read_register(FIFO_STATUS) & _BV(RX_EMPTY))? false : true;
+	//se usa para negar la condicion de status, ya que no existe variables booleanas
+	return status;
+}
+
+uint8_t available(void)
+{
+  if (!( read_register(FIFO_STATUS) & _BV(RX_EMPTY) )){
+  	return 1;
+  }
+  return 0;
+}
+
+/****************************************************************************/
+void writeAckPayload(uint8_t pipe, const void* buf, uint8_t len)
+{
+  const uint8_t* current = (uint8_t*)buf;
+
+  uint8_t data_len = rf24_min(len,5);
+
+  csn(LOW);
+	nsleep(1);
+  spi_transmitD(W_ACK_PAYLOAD | ( pipe & 0b111 ) );
+
+  while ( data_len-- )
+    spi_transmitD(*current++);
+	nsleep(4);
+  csn(HIGH);
+}
+
+/****************************************************************************/
+uint8_t read_payload(void *buf, uint8_t data_len)
+{
+	uint8_t status;
+  int *data = (int*) buf;
+	if(data_len > payload_size) data_len = payload_size;
+  uint8_t blank_len = dynamic_payloads_enabled ? 0 : payload_size - data_len;
+
+	csn(LOW);
+  status = spi_transmitD( R_RX_PAYLOAD );
+  while ( data_len-- ) {
+    *data++ = spi_transmitD(0xff);
+  }
+  while ( blank_len-- ) {
+    spi_transmitD(0xff);
+  }
+  nsleep(3);
+	csn(HIGH);
+
+  return status;
+}
+
+
+void toggle_features(void)
+{
+	csn(LOW);
+	 spi_transmitD(ACTIVATE);
+   spi_transmitD( 0x73 );
+	nsleep(3);
+	csn(HIGH);
+}
+
+void nrf24_config(void)
+{
+	pipe0_reading_address=0;
+}
+/*Bitacora del capi--26/10/16*/
+/*Lo que se lleva hasta el momento ha funcionado en simulacion, 
+hasta el momento se ha probado todo hasta la funcion load_payload,
+ aun se debe probar la habilitacion de canales*/
+/*Bitacora del capi--27/10/16*/
+/*Se agregaron nuevas funciones openpipe_rx, startRx_mode y closeReadingPipe,
+se busco la manera de reemplazar la funcion memcpy, por lo cual se uso
+un apuntador, se entendio que RX_ADDR_PO generalmente no se usa
+pues trata de dejarse como un canal de escritura en caso
+de que la antena cambie de ptx a prx no surjan ambiguedades
+las funciones agregadas no se han simulado, pero verificando el 
+codigo no se ha visto necesario tal procedimiento*/
+/*Al parecer todas las funciones sirven solo falta probar el stopTransmission
+y configurar el csn y el ce, para que no se interrumpan a la hora de transmitir
+las senales al GPIO, se espera manana se arregle eso y el fin de semana
+se hagan las ultimas pruebas fisicas*/
+/*Bitacora del capi--28/10/16*/
+/*Se probo todas las funciones  y se corrigio el problema que surgia con las
+funciones csn y ce, (se debe tener cuidado usando ! o ~) se debe probar la
+funcion available y empezar las pruebas en arduino/arduino, arduino/FPGA
+y FPGA/FPGA*/
+/*Bitacora del capi--01/11/16*/
+/*No se pudieron hacer pruebas de sintetizacion debido a que faltaba
+la fucnion read_payload, se rebisara si faltan mas funciones antes 
+de hacer las pruebas finales
+-La funcion read no procede, se espera la ayuda de profesor para 
+resolver ese problema*/
+/*Bitacora del capi--03/11/16*/
+/*Se arreglo el problema en la funcion read_payload, el dilema estaba asociado al
+uso de la variable char y uint8, para est caso es mas conveniente usar
+int, no es lo mas optimo pero funciona*/

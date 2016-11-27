@@ -1,0 +1,28 @@
+[*]
+[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
+[*] Fri Oct 21 00:25:52 2016
+[*]
+[dumpfile] "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Pruebas_Lab/lm32_basicIO/simulation/system_tb.vcd"
+[dumpfile_mtime] "Fri Oct 21 00:25:29 2016"
+[dumpfile_size] 199213252
+[savefile] "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Pruebas_Lab/lm32_basicIO/i2c_putdatas_probe.sav"
+[timestart] 0
+[size] 1317 744
+[pos] -318 -117
+*-29.680151 1116000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] system_tb.
+[treeopen] system_tb.dut.
+[sst_width] 223
+[signals_width] 126
+[sst_expanded] 1
+[sst_vpaned_height] 211
+@22
+system_tb.dut.i2c0.data_wr[7:0]
+@28
+system_tb.dut.i2c0.ack
+system_tb.dut.i2c0.busy
+system_tb.dut.i2c0.i2c_scl
+@29
+system_tb.dut.i2c0.i2c_sda
+[pattern_trace] 1
+[pattern_trace] 0

@@ -1,0 +1,116 @@
+
+# ==== Cloclk inputs (CLK) ====
+
+#NET "clk"   LOC = "E3" | IOSTANDARD = "LVCMOS33";
+#NET "clk" TNM_NET = sys_clk;
+#TIMESPEC TS_sys_clk = PERIOD sys_clk_pin 100 MHz HIGH 50%; 
+
+#NET "rst" LOC = "C12" | IOSTANDARD = "LVCMOS33";
+
+# ==== UART ====
+#NET "uart_txd" LOC = "D4" | IOSTANDARD = "LVCMOS33";  
+#NET "uart_rxd" LOC = "C4" | IOSTANDARD = "LVCMOS33";  
+
+# ==== SPI ====
+#NET "spi_miso" LOC = "P2" | IOSTANDARD = "LVCMOS33";  
+#NET "spi_mosi" LOC = "R2" | IOSTANDARD = "LVCMOS33";  
+#NET "spi_clk" LOC = "U1" | IOSTANDARD = "LVCMOS33";  
+
+# ==== I2C ====
+#NET "i2c_sda" LOC = "V9" | IOSTANDARD = "LVCMOS33";  
+#NET "i2c_clk" LOC = "R8" | IOSTANDARD = "LVCMOS33";  
+
+## LEDs
+#NET "led<0>"   LOC = "T8" | IOSTANDARD = "LVCMOS33";  #Bank = 34, Pin name = IO_L24N_T3_34,      Sch name = LED0
+#NET "led<1>"   LOC = "V9" | IOSTANDARD = "LVCMOS33";  #Bank = 34, Pin name = IO_L21N_T3_DQS_34,     Sch name = LED1
+#NET "led<2>"   LOC = "R8" | IOSTANDARD = "LVCMOS33";  #Bank = 34, Pin name = IO_L24P_T3_34,      Sch name = LED2
+#NET "led<3>"   LOC = "T6" | IOSTANDARD = "LVCMOS33";  #Bank = 34, Pin name = IO_L23N_T3_34,      Sch name = LED3
+#NET "led<4>"   LOC = "T5" | IOSTANDARD = "LVCMOS33";  #Bank = 34, Pin name = IO_L12P_T1_MRCC_34,     Sch name = LED4
+#NET "led<5>"   LOC = "T4" | IOSTANDARD = "LVCMOS33";  #Bank = 34, Pin name = IO_L12N_T1_MRCC_34,     Sch name = LED5
+#NET "led<6>"   LOC = "U7" | IOSTANDARD = "LVCMOS33";  #Bank = 34, Pin name = IO_L22P_T3_34,      Sch name = LED6
+#NET "led<7>"   LOC = "U6" | IOSTANDARD = "LVCMOS33";  #Bank = 34, Pin name = IO_L22N_T3_34,      Sch name = LED7
+
+
+#Nexys4DDR
+
+## Clock signal
+NET "clk"   LOC = "E3"	| IOSTANDARD = "LVCMOS33";					#Bank = 35, Pin name = IO_L12P_T1_MRCC_35,					Sch name = CLK100MHZ
+NET "clk" TNM_NET = sys_clk_pin;
+TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 100 MHz HIGH 50%; 
+
+NET "rst_n"           LOC=N17 | IOSTANDARD=LVCMOS33;
+
+## LEDs
+#NET "led<0>"         LOC=H17 | IOSTANDARD=LVCMOS33; #IO_L18P_T2_A24_15
+#NET "led<1>"         LOC=K15 | IOSTANDARD=LVCMOS33; #IO_L24P_T3_RS1_15
+#NET "led<2>"         LOC=J13 | IOSTANDARD=LVCMOS33; #IO_L17N_T2_A25_15
+#NET "led<3>"         LOC=N14 | IOSTANDARD=LVCMOS33; #IO_L8P_T1_D11_14
+#NET "led<4>"         LOC=R18 | IOSTANDARD=LVCMOS33; #IO_L7P_T1_D09_14
+#NET "led<5>"         LOC=V17 | IOSTANDARD=LVCMOS33; #IO_L18N_T2_A11_D27_14
+#NET "led<6>"         LOC=U17 | IOSTANDARD=LVCMOS33; #IO_L17P_T2_A14_D30_14
+#NET "led<7>"         LOC=U16 | IOSTANDARD=LVCMOS33; #IO_L18P_T2_A12_D28_14
+
+## Switches
+#NET "in_switch<0>"          LOC=J15 | IOSTANDARD=LVCMOS33; #IO_L24N_T3_RS0_15
+#NET "in_switch<1>"          LOC=L16 | IOSTANDARD=LVCMOS33; #IO_L3N_T0_DQS_EMCCLK_14
+#NET "in_switch<2>"          LOC=M13 | IOSTANDARD=LVCMOS33; #IO_L6N_T0_D08_VREF_14
+#NET "in_switch<3>"          LOC=R15 | IOSTANDARD=LVCMOS33; #IO_L13N_T2_MRCC_14
+#NET "in_switch<4>"          LOC=R17 | IOSTANDARD=LVCMOS33; #IO_L12N_T1_MRCC_14
+#NET "in_switch<5>"          LOC=T18 | IOSTANDARD=LVCMOS33; #IO_L7N_T1_D10_14
+#NET "in_switch<6>"          LOC=U18 | IOSTANDARD=LVCMOS33; #IO_L17N_T2_A13_D29_14
+#NET "in_switch<7>"          LOC=R13 | IOSTANDARD=LVCMOS33; #IO_L5N_T0_D07_14
+
+# ==== UART ====
+NET "uart_txd"   LOC=D4 | IOSTANDARD=LVCMOS33; #IO_L11N_T1_SRCC_35
+NET "uart_rxd"    LOC=C4 | IOSTANDARD=LVCMOS33; #IO_L7P_T1_AD6P_35
+
+# ==== SPI ====
+NET "spi_miso"         LOC=H4 | IOSTANDARD=LVCMOS33; #IO_L21N_T3_DQS_35 pmod	jd<1>
+NET "spi_mosi"         LOC=H1 | IOSTANDARD=LVCMOS33; #IO_L17P_T2_35			pmod  jd<2>
+NET "spi_sck"          LOC=G1 | IOSTANDARD=LVCMOS33; #IO_L17N_T2_35			pmod	jd<3>
+NET "spi_ssn"          LOC=G3 | IOSTANDARD=LVCMOS33; #IO_L20N_T3_35			pmod	jd<4>
+NET "spi_csn"    LOC=H2 | IOSTANDARD=LVCMOS33; #IO_L15P_T2_DQS_35 pmod  jd<7>
+NET "spi_ce"    LOC=G4 | IOSTANDARD=LVCMOS33; #IO_L20P_T3_35			pmod  jd<8>
+
+
+
+# ==== I2C ====
+
+NET "i2c0_sda"          LOC=C17 | IOSTANDARD=LVCMOS33; #pmod ja<1>
+NET "i2c0_scl"          LOC=D18 | IOSTANDARD=LVCMOS33; #IO_L21N_T3_DQS_A18_15 pmod ja<2>
+
+# ==== GPIO ====
+
+#READ
+NET "gpio0_io<0>"          LOC=E6 | IOSTANDARD=LVCMOS33; #IO_L5P_T0_AD13P_35 pmod jc<10>
+NET "gpio0_io<1>"          LOC=K1 | IOSTANDARD=LVCMOS33; #IO_L23N_T3_35			 pmod jc<1>
+NET "gpio0_io<2>"          LOC=F6 | IOSTANDARD=LVCMOS33; #IO_L19N_T3_VREF_35 pmod jc<2>
+NET "gpio0_io<3>"          LOC=J2 | IOSTANDARD=LVCMOS33; #IO_L22N_T3_35			 pmod jc<3>
+NET "gpio0_io<4>"          LOC=G6 | IOSTANDARD=LVCMOS33; #IO_L19P_T3_35			 pmod jc<4>
+NET "gpio0_io<5>"          LOC=E7 | IOSTANDARD=LVCMOS33; #IO_L6P_T0_35       pmod jc<7>
+NET "gpio0_io<6>"          LOC=J3 | IOSTANDARD=LVCMOS33; #IO_L22P_T3_35			 pmod jc<8>
+NET "gpio0_io<7>"          LOC=J4 | IOSTANDARD=LVCMOS33; #IO_L21P_T3_DQS_35  pmod jc<9>
+
+#WRITE
+#NET "gpio0_io<0>"          LOC=J15 | IOSTANDARD=LVCMOS33; #IO_L24N_T3_RS0_15
+#NET "gpio0_io<1>"          LOC=L16 | IOSTANDARD=LVCMOS33; #IO_L3N_T0_DQS_EMCCLK_14
+#NET "gpio0_io<2>"          LOC=M13 | IOSTANDARD=LVCMOS33; #IO_L6N_T0_D08_VREF_14
+#NET "gpio0_io<3>"          LOC=R15 | IOSTANDARD=LVCMOS33; #IO_L13N_T2_MRCC_14
+#NET "gpio0_io<4>"          LOC=R17 | IOSTANDARD=LVCMOS33; #IO_L12N_T1_MRCC_14
+#NET "gpio0_io<5>"          LOC=T18 | IOSTANDARD=LVCMOS33; #IO_L7N_T1_D10_14
+#NET "gpio0_io<6>"          LOC=U18 | IOSTANDARD=LVCMOS33; #IO_L17N_T2_A13_D29_14
+#NET "gpio0_io<7>"          LOC=R13 | IOSTANDARD=LVCMOS33; #IO_L5N_T0_D07_14
+
+
+# ==== PWM ====
+## Pmod Header JB
+NET "pwm_out<0>"          LOC=D14 | IOSTANDARD=LVCMOS33; #IO_L1P_T0_AD0P_15
+NET "pwm_out<1>"          LOC=F16 | IOSTANDARD=LVCMOS33; #IO_L14N_T2_SRCC_15
+NET "pwm_out<2>"          LOC=G16 | IOSTANDARD=LVCMOS33; #IO_L13N_T2_MRCC_15
+NET "pwm_out<3>"          LOC=H14 | IOSTANDARD=LVCMOS33; #IO_L15P_T2_DQS_15
+
+
+##Buttom
+#NET "buttom"        LOC=M18 | IOSTANDARD=LVCMOS33; #IO_L4N_T0_D05_14
+#NET "btn"           LOC=P18 | IOSTANDARD=LVCMOS33; #IO_L9N_T1_DQS_D13_14
+

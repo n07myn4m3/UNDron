@@ -1,0 +1,70 @@
+[*]
+[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
+[*] Sat Nov 12 17:40:04 2016
+[*]
+[dumpfile] "(null)"
+[savefile] "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Pruebas_Lab/lm32_basicIO/Watch_probe.sav"
+[timestart] 0
+[size] 1317 744
+[pos] -1 -117
+*-26.856691 180565000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] system_tb.
+[treeopen] system_tb.dut.
+[treeopen] system_tb.dut.i2c0.
+[treeopen] system_tb.dut.pwm0.
+[sst_width] 227
+[signals_width] 229
+[sst_expanded] 1
+[sst_vpaned_height] 211
+@200
+-uart
+@28
+[color] 1
+system_tb.dut.uart0.ack
+@820
+[color] 5
+system_tb.dut.uart0.tx_data[7:0]
+@200
+-gpio
+@28
+system_tb.dut.gpio0.wb_rd
+system_tb.dut.gpio0.wb_wr
+@22
+system_tb.dut.gpio0.gpio_dir[7:0]
+system_tb.dut.gpio0.gpio_io[7:0]
+@c00022
+system_tb.dut.gpio0.gpio_i[7:0]
+@28
+(0)system_tb.dut.gpio0.gpio_i[7:0]
+(1)system_tb.dut.gpio0.gpio_i[7:0]
+(2)system_tb.dut.gpio0.gpio_i[7:0]
+(3)system_tb.dut.gpio0.gpio_i[7:0]
+(4)system_tb.dut.gpio0.gpio_i[7:0]
+(5)system_tb.dut.gpio0.gpio_i[7:0]
+(6)system_tb.dut.gpio0.gpio_i[7:0]
+(7)system_tb.dut.gpio0.gpio_i[7:0]
+@1401200
+-group_end
+@200
+-Reloj
+@28
+system_tb.dut.timer0.wb_rd
+system_tb.dut.timer0.wb_wr
+@22
+system_tb.dut.timer0.compare0[31:0]
+system_tb.dut.timer0.counter0[31:0]
+@28
+system_tb.dut.timer0.en0
+@24
+system_tb.dut.timer0.compare1[31:0]
+system_tb.dut.timer0.counter1[31:0]
+@23
+system_tb.dut.timer0.tcr1[31:0]
+@28
+system_tb.dut.timer0.intr[1:0]
+@200
+-i2c
+@22
+system_tb.dut.i2c0.i2c0.data_wr[7:0]
+[pattern_trace] 1
+[pattern_trace] 0

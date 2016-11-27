@@ -1,0 +1,356 @@
+#include "soc-hw.h"
+#include "nrf24.h"
+#include "nRF24L01.h"
+
+
+//static long probe [0] = {0x20403245LL};
+//uint8_t data_spi;
+//uint8_t count;
+const uint8_t pipe[] = {0xF0,0xF0,0xF0,0xF0,0xE1};
+static char pipex[] = {'p','i','p','e','0','7'};
+//static char pipe0[] = {'p','i','p','e','0'};
+static char *data_aux;
+static char data[] = {'t','u','G','F','A'};
+static char data2[] ={':','v','l','o','l'};
+static uint8_t ports;
+int *data_receive;
+//uint8_t valid = 0x01;
+
+int main(){
+
+		nrf24_config();
+
+
+		for(;;){
+
+
+		nrf24_begin();
+		msleep(100);
+		setAutoAck(true);
+		enableDynamicAckPayloads();
+		//PTX
+		//stopTransmission();
+		//openPipe0_tx(pipe);
+		//PRX
+		openpipe_rx(1,pipe);
+		startRx_mode();
+		setRetries(15, 15);
+
+
+			uart_putstr("\nLa transmision va a iniciar");
+			if ( available() == 1) {
+				writeAckPayload( 1, data, 5 );
+				uart_putstr("\nEL dato enviado es: ");
+				uart_putstr((char*)data);
+				read_payload( data_receive, sizeof(data_receive) );
+				uart_putstr("\nEl archivo recibido es : ");
+				uart_putstr("\nEL mensaje recibo es : ");
+				uart_putstr((char*)data_receive);
+		  }
+			msleep(100);
+		}
+
+/*
+		uart_putstr("\nLa transmision va a iniciar:");
+			if(load_payload(data,W_TX_PAYLOAD,sizeof(data)) == 1){
+				uart_putstr("\nEl mensaje ha sido enviado, el mensaje fue: \n");
+				uart_putstr((char*)data);
+				data_aux = (data_aux==data)?data2:data;				
+				if(isAckPayloadAvailable() == 1){
+					read_payload(data_receive, sizeof(data_receive));
+					uart_putstr("\nLos datos recibido son: ");
+					uart_putstr((char*)data_receive);
+				} else {
+				uart_putstr("\nEL mensaje no ha podido enviarse");
+				}
+			}else{
+				uart_putstr("\nLa transmision no se pudo completar");
+			}
+			msleep(1000);		
+*/
+/*
+*/
+
+/*Prueba Load Payload con nuevo reloj*/
+/*
+uint8_t i;
+for (i=0;i<2;i++){
+		setAutoAck(true);
+		openPipe0_tx(pipe);
+		ports = load_payload(data,W_TX_PAYLOAD,sizeof(data));
+		i2c0->wxrx= ports;
+		setAutoAck(false);
+}
+*/
+
+/*prueba watch*/
+
+/*
+		gpio_init_write();
+		ports = 0xaa;
+		gpio0->out = ports;
+		nsleep(1);
+		ports = 0xbb;
+		gpio0->out = ports;
+		uart_putstr("Prueba lab notmyname");
+		init_watch();
+		uint8_t i= 0;
+		while(time_happened_micro(5)!=1){
+			i++;
+			i2c0->wxrx=i;
+		}
+		uart_putstr("La prueba ha terminado");
+*/
+
+/*pwm-Gpio*/		
+/*
+		pwm_init();	
+		for(;;){
+			ports = read_gpio();
+			setmotor1(ports);
+		}
+*/		
+			
+		
+
+
+
+/* EN REVISION ******************************/
+/*
+		nrf24_begin();
+		msleep(100);
+		setAutoAck(true);
+		enableDynamicAckPayloads();
+		//PTX
+		stopTransmission();
+		openPipe0_tx(pipe);
+		//PRX
+		//openpipe_rx(1,pipe);
+		//startRx_mode();
+		setRetries(15, 15);
+
+*/
+//PTX
+
+//		for(;;){
+//Begin
+/*
+		nrf24_begin();
+		msleep(100);
+		setAutoAck(true);
+		enableDynamicAckPayloads();
+		//PTX
+		stopTransmission();
+		openPipe0_tx(pipe);
+		//PRX
+		//openpipe_rx(1,pipe);
+		//startRx_mode();
+		setRetries(15, 15);
+*/
+//for
+/*
+			if(load_payload(data,W_TX_PAYLOAD,sizeof(data)) == 1){
+				uart_putstr("El mensaje ha sido enviado");
+				data_aux = (data_aux==data)?data2:data;				
+				if(isAckPayloadAvailable() == 1){
+					read_payload(data_receive, sizeof(data_receive));
+					uart_putstr("El datos recibido es: ");
+					uart_putstr((char*)data_receive);
+				} else {
+				uart_putstr("EL mensaje no ha podido enviarse");
+				}
+			}
+			msleep(1000);		
+		}
+*/
+//PRX 
+/*
+		for(;;){
+			uart_putstr("La transmision va a iniciar");
+			if ( available() == 1) {
+				writeAckPayload( 1, data, 5 );
+				uart_putstr("\nEL dato enviado es: ");
+				uart_putstr((char*)data);
+				read_payload( data_receive, sizeof(data) );
+				uart_putstr("\nEl archivo recibido es : ");
+				uart_putstr("\nEL mensaje recibo es : ");
+				uart_putchar(data_receive[0]);
+				uart_putchar(data_receive[1]);
+				uart_putchar(data_receive[2]);
+				uart_putchar(data_receive[3]);
+				uart_putchar(data_receive[4]);
+		  }
+			msleep(1000);
+		}
+*************************************************************************/
+
+/*
+//Prueba read_payload
+		gpio_init_write();
+		csn(HIGH);
+		ce(LOW);
+	  dynamic_payloads_enabled = 1;
+		i2c_putrwaddr(0x00, 0x40);
+		spi_putstr((char*)data_receive);
+		i2c_putchar(0xff);
+		read_payload(data_receive, sizeof(data_receive));
+		 	nsleep(10);
+		volatile char *data_a  = data_receive;
+		i2c0->wxrx = 0x00;
+		nsleep(1);
+		spi0->rxtx = data_receive[0];
+		nsleep(1);
+		spi0->rxtx = data_receive[1];
+		nsleep(1);
+		spi0->rxtx = data_receive[2];
+		nsleep(1);
+		spi0->rxtx = data_receive[3];
+		nsleep(1);
+		spi0->rxtx = data_receive[4];
+		nsleep(1);
+		char count = 5;
+		while(count--){
+		i2c0->wxrx = *data_a;
+		data_a++;
+		nsleep(1);
+		}
+		spi_putstr((char*)data_receive);
+*/
+/*	Prueba de la funcion writeAckPayload	
+		i2c_putrwaddr(0x00, 0x40);
+		i2c_putchar(0xff);
+		writeAckPayload(1, data, sizeof(data));
+*/
+/*Prueba para las funciones openpipe_rx, startRx_mode y stopTransmission		
+		uart_init();
+		uart_putstr("Prueba Lab by Julk N");
+		spi_enable();
+		nsleep(100);
+		openpipe_rx(0, probe4);//solo se pueden habilitar seis canales
+		openpipe_rx(5, probe2);//solo se pueden habilitar seis canales
+		startRx_mode();
+		stopTransmission();
+
+*/
+/* Prueba de las funciones load_payload y openpipe0_tx
+		junto con enableDynamicAckPayloads
+		data_spi = spi_transfer(0x40);
+		uart_putchar(data_spi);
+		gpio0->out=0xA0;
+		nsleep(1);
+		gpio0->out=0x10;
+		nsleep(10);
+		//spi_putstr_nrf24(probe[1]);
+		nsleep(100);
+		setAutoAck(true);
+		uint8_t len = sizeof(probe3);
+		openPipe0_tx(probe3, len);
+		openPipe0_tx(probe4,sizeof(probe4));
+		load_payload(data,W_TX_PAYLOAD,sizeof(data));
+		load_payload(data2,W_TX_PAYLOAD,sizeof(data2));
+		setAutoAck(false);
+		enableDynamicAckPayloads();
+		
+		//nrf24_begin();
+*/		
+/*
+		isr_init();
+		uart_init();
+    basicIO_init();
+    basicIO_leds(0b01010101);
+    nsleep(200);
+    basicIO_leds(0b10101010);
+    nsleep(200);
+		i2c_putchar(0x54);
+		spi_putchar(0x40);
+		//gpio0->out = CE;
+		nsleep(10);
+		i2c_putrwaddr(0x00, 0x40);
+		const char data [] = {0x0A,0x0B,0x0C,0x0F,0x12}; //Obligatorio el static o const, si no el porgrama optimiza el array
+		i2c_putdatas(data);
+		i2c_putdatas("Hello world");
+		spi_init();
+		spi_not_ena();
+		spi_sleep();
+		spi_getchar();
+		uart_putstr("Probando 1 2 3");
+		i2c_putrwaddr(0x00, 0x40);
+		i2c_putchar(0x80);
+		i2c_init();
+		spi_sleep();
+		spi_init();
+//		spi_putstr("Hola Mundo");
+//		spi_sleep();
+//		nsleep(200);
+		uart_putstr("my heart feel so bad\n");
+    nsleep(20);
+		i2c_sleep();
+*/
+/*    
+    // Init Commands
+    isr_init();
+    //tic_init();
+    irq_set_mask( 0x00000012 );
+    irq_enable();
+
+    uart_init();
+    basicIO_init();
+    // BasicIO
+    //uart_putstr( "** BasicIO **\n" );
+    
+
+    basicIO_leds(0b01010101);
+    msleep(200);
+    basicIO_leds(0b10101010);
+    msleep(200);
+
+    while(1){
+    basicIO_leds(0b01010101);
+    msleep(200);
+    basicIO_leds(0b10101010);
+    msleep(200);
+    }
+
+    basicIO_leds(basicIO_sw());
+    basicIO_leds(basicIO_bt());
+    
+    uint8_t i;
+    for(i=0;i<8;i++){
+        basicIO_leds(0x01);
+        msleep(20);
+        basicIO_leds(0x02);
+        msleep(20);
+        basicIO_leds(0x04);
+        msleep(20);
+        basicIO_leds(0x08);
+        msleep(20);
+        basicIO_leds(0x10);
+        msleep(20);
+        basicIO_leds(0x20);
+        msleep(20);
+        basicIO_leds(0x40);
+        msleep(20);
+        basicIO_leds(0x80);
+        msleep(20);
+        
+        basicIO_leds(0x80);
+        msleep(20);
+        basicIO_leds(0x40);
+        msleep(20);
+        basicIO_leds(0x20);
+        msleep(20);
+        basicIO_leds(0x10);
+        msleep(20);
+        basicIO_leds(0x08);
+        msleep(20);
+        basicIO_leds(0x04);
+        msleep(20);
+        basicIO_leds(0x02);
+        msleep(20);
+        basicIO_leds(0x01);
+        msleep(20);
+
+    }   
+*/
+				return 0;
+}
