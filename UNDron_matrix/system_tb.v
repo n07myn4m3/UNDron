@@ -176,7 +176,48 @@ reg [6:0] repeats = 0;
       .pwm_out(pwm_out)
   );
 
+/*
 
+---------------------------------------------------------------------------
+
+						 ____  ____  ____  ____ 
+
+						(_  _)(  __)/ ___)(_  _)
+
+						  )(   ) _) \___ \  )(  
+
+						 (__) (____)(____/ (__)                         
+
+---------------------------------------------------------------------------
+
+ Prueba SPI
+
+---------------------------------------------------------------------------*/
+always @(posedge sck) begin
+
+	if(!csn && spi_count<9)begin
+		mosi_data[spi_count-1]<=mosi;
+	end	
+end
+
+always @(negedge ssn, negedge sck) begin
+
+	if(!csn)begin
+		if(spi_count<8)begin
+			if(spi_count == 0)begin
+				mosi_data_aux <= mosi_data;
+				mosi_data <= 0;
+			end
+			miso <= miso_test[spi_count];
+			spi_count <= spi_count + 1;
+		end else begin	
+			miso<=1'b0;
+			spi_count = 0;
+			repeat_count<=(mosi_data_aux == mosi_data)?repeat_count+1:repeat_count;
+			miso_test<= (repeat_count == 30)? 8'h20: miso_test;
+		end
+	end
+end
 
 
 /*
@@ -188,6 +229,7 @@ reg [6:0] repeats = 0;
 ---------------------------------------------------------------------------
  Prueba I2C
 ---------------------------------------------------------------------------*/
+/*
 reg    sda_out = 1'bz;
 assign i2c_sda = sda_out; 
 pullup(i2c_scl); 
@@ -243,7 +285,7 @@ reg   [7:0] checker = 1'b0;
        //---------------------------
     end
 
-
+*/
 
 /*
 ---------------------------------------------------------------------------
@@ -385,7 +427,7 @@ reg   [3:0]  count = 7;
 // Inicializacion de las entradas del modulo
 //---------------------------------------------------------------------------
    initial begin  
-      clk = 0; rst = 0; uart_rxd = 0; miso <= 1'b0; start = 0; 
+      clk = 0; rst = 0; uart_rxd = 0; miso <= 1'b0; start = 0; miso_test= 8'h02;
    end
 //---------------------------------------------------------------------------
 // Proceso para el reloj

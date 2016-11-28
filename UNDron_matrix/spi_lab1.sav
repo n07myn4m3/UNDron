@@ -1,49 +1,31 @@
 [*]
 [*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
-[*] Sat Oct  8 04:14:10 2016
+[*] Mon Nov 28 02:00:42 2016
 [*]
-[dumpfile] "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Pruebas_Lab/lm32_basicIO/simulation/system_tb.vcd"
-[dumpfile_mtime] "Sat Oct  8 04:12:39 2016"
-[dumpfile_size] 98498774
-[savefile] "/home/julian/MEGA/Semestre_VII/Digital_II/Semestre_VII/Pruebas_Lab/lm32_basicIO/spi_lab1.sav"
-[timestart] 841920000
+[dumpfile] "/home/julian/git_julkn/UNDron/UNDron_matrix/simulation/system_tb.vcd"
+[dumpfile_mtime] "Mon Nov 28 01:54:07 2016"
+[dumpfile_size] 58183084
+[savefile] "/home/julian/git_julkn/UNDron/UNDron_matrix/spi_lab1.sav"
+[timestart] 0
 [size] 1317 744
 [pos] -318 -117
-*-21.705215 849770000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-27.643507 59160000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] system_tb.
-[treeopen] system_tb.dut.
-[treeopen] system_tb.dut.spi0.
-[treeopen] system_tb.dut.uart0.
+[treeopen] system_tb.uut.
+[treeopen] system_tb.uut.spi0.
 [sst_width] 223
-[signals_width] 142
+[signals_width] 126
 [sst_expanded] 1
 [sst_vpaned_height] 211
 @28
-system_tb.dut.spi0.ack
+system_tb.uut.spi_ce
+system_tb.uut.spi_csn
+system_tb.uut.spi0_mosi
+system_tb.uut.spi_miso
+system_tb.uut.spi0_sck
 @22
-system_tb.dut.spi0.ucr[7:0]
-@28
-system_tb.dut.spi0.wb_rd
-@29
-system_tb.dut.spi0.spi0.busy
-@28
-system_tb.dut.spi0.mosi_txd
-@22
-system_tb.dut.spi0.rx_data[7:0]
-system_tb.dut.spi0.spi0.tx_data[7:0]
-@28
-system_tb.dut.spi0.busy
-system_tb.dut.spi0.cont
-system_tb.dut.spi0.spi0.enable
-system_tb.dut.spi0.cpha
-system_tb.dut.spi0.ss_n
-@22
-system_tb.dut.spi0.wb_dat_i[31:0]
-@28
-system_tb.dut.spi0.wb_we_i
-system_tb.dut.spi0.wb_rd
-system_tb.dut.uart0.ack
-@22
-system_tb.dut.uart0.tx_data[7:0]
+system_tb.uut.spi0.spi0.tx_data[7:0]
+@23
+system_tb.uut.spi0.spi0.rx_data[7:0]
 [pattern_trace] 1
 [pattern_trace] 0

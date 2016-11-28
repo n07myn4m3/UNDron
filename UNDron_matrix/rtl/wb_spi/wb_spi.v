@@ -38,8 +38,6 @@ module wb_spi #(
   reg enable =1'b0;
 	wire cpol;
 	wire cpha;
-	reg cont =1'b0;
-  wire [31:0] addr;
   reg [d_width-1:0] tx_data = 1'b0;
   wire [31:0] clk_div;
   wire busy;
@@ -64,9 +62,7 @@ spi_master #(
 	.enable(    enable   ),
 	.cpol(			cpol		 ), //Se adjunta por defecto en el wb
 	.cpha(			cpha		 ), //Se adjunta por defecto en el wb
-	.cont(			cont		 ), 
 	.clk_div(		clk_div	 ), //Se adjunta por defecto en el wb
-	.addr(			addr		 ),
 	.tx_data(		tx_data	 ),
 	.rx_data(   rx_data  ),
 	.busy(  		busy		 )
@@ -77,10 +73,9 @@ spi_master #(
 //---------------------------------------------------------------------------
 assign cpol = 1'b0;
 assign cpha = 1'b0;
-assign addr = 32'b1;
 assign clk_div = 5;
 
-wire [7:0] ucr = { 4'b0, cont , enable , 1'b0 , busy };
+wire [7:0] ucr = { 5'b0 , enable , 1'b0 , busy };
 
 wire wb_rd = wb_stb_i & wb_cyc_i & ~wb_we_i;
 wire wb_wr = wb_stb_i & wb_cyc_i &  wb_we_i;
@@ -118,7 +113,6 @@ begin
 			case (wb_adr_i[5:2])
 				3'b000: begin
 					enable  <= wb_dat_i[2];
-					cont <= wb_dat_i[3];
 				end
 				3'b001: begin
 					tx_data <= wb_dat_i[7:0];
@@ -131,7 +125,6 @@ begin
 				end
 				default: begin
 					enable  <= 1'b0;
-					cont <= 1'b0;
 					tx_data<=8'bx;
 				end
 			endcase
