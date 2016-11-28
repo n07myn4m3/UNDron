@@ -41,7 +41,7 @@ NET "i2c_scl"    LOC = "P75" | IOSTANDARD=LVCMOS33;
 
 
 # ==== UART ====
-NET "uart_rxd" LOC = "P69" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "uart_rxd" LOC = "P69" | IOSTANDARD = LVCMOS33;
 NET "uart_txd" LOC = "P70" | IOSTANDARD = LVCMOS33;
 
 

@@ -63,12 +63,12 @@ NET "uart_txd" LOC = "P70" | IOSTANDARD = LVCMOS33;
 #NET "DF<16>" LOC="P106"; #DF<16>
 #NET "DF<15>" LOC="P102"; #DF<15> 
 #NET "DF<14>" LOC="P101"; #DF<14>
-#NET "DF<13>" LOC="P99";  #DF<13>
-#NET "DF<12>" LOC="P98";  #DF<12>
-#NET "DF<11>" LOC="P95";  #DF<11>
-#NET "DF<10>" LOC="P94";  #DF<10>
-#NET "DF<9>" LOC="P93";   #DF<9>
-#NET "DF<8>" LOC="P92";   #DF<8>
+#NET "spi_miso" LOC="P99";  #DF<13>
+#NET "spi_mosi" LOC="P98";  #DF<12>
+#NET "spi_sck" LOC="P95";  #DF<11>
+#NET "spi_ssn" LOC="P94";  #DF<10>
+#NET "spi_ce" LOC="P93";   #DF<9>
+#NET "spi_csn" LOC="P92";   #DF<8>
 NET "pwm_out<3>" LOC="P88" | IOSTANDARD=LVCMOS33;   #DF<7> #Prueba
 #NET "DF<6>" LOC="P85";   #DF<6>
 NET "pwm_out<2>" LOC="P83" | IOSTANDARD=LVCMOS33;   #DF<5> #Prueba
