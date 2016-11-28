@@ -2,6 +2,7 @@
 Allocating common symbols
 Common symbol       size              file
 
+data_receive        0x4               main.o
 dynamic_payloads_enabled
                     0x1               main.o
 csn_pin             0x1               main.o
@@ -27,7 +28,7 @@ Linker script and memory map
                 0x00004000                _RAM_SIZE = 0x4000
                 0x00004000                _RAM_END = (_RAM_START + _RAM_SIZE)
 
-.text           0x00000000     0x3b08
+.text           0x00000000     0x3af8
                 0x00000000                _ftext = .
  *(.text .stub .text.* .gnu.linkonce.t.*)
  .text          0x00000000      0x208 crt0ram.o
@@ -40,207 +41,209 @@ Linker script and memory map
                 0x00000158                irq_set_mask
                 0x0000014c                irq_disable
                 0x0000016c                halt
- .text          0x00000208       0xf8 main.o
+ .text          0x00000208       0xe8 main.o
                 0x00000208                main
- .text          0x00000300      0x9bc soc-hw.o
-                0x00000c50                setmotor4
-                0x000007c0                I2CreadByte
-                0x00000504                tic_isr
-                0x000006b8                i2c_putdata
-                0x00000450                read_gpio
-                0x00000c18                setmotor2
-                0x00000bfc                setmotor1
-                0x00000bb4                spi_putstr
-                0x00000680                uart_putstr
-                0x00000ac0                spi_init
-                0x00000760                i2c_sleep
-                0x000003a4                isr_unregister
-                0x000003ec                digitalWrite
-                0x00000b3c                spi_continue
-                0x00000c84                set_pwm
-                0x00000aa8                everloop_putdata_3
-                0x00000b90                spi_putchar
-                0x000004d0                nsleep
-                0x00000638                uart_getchar
-                0x00000c6c                pwm_init
-                0x00000634                uart_init
-                0x00000c34                setmotor3
-                0x00000b04                spi_not_ena
-                0x000003c4                gpio_init_write
-                0x00000b70                spi_cont_d
-                0x0000038c                isr_register
-                0x00000a78                everloop_putdata_1
-                0x00000b1c                spi_sleep
-                0x000008b0                I2CreadBytes
-                0x00000704                i2c_putdatas
-                0x00000a90                everloop_putdata_2
-                0x00000368                isr_init
-                0x00000748                i2c_init
-                0x00000304                irq_handler
-                0x000005c8                init_watch
-                0x00000300                isr_null
-                0x00000578                time_happened_millis
-                0x00000468                step_sleep
-                0x000009dc                I2CwriteByte
-                0x00000530                tic_init
-                0x000005e0                time_happened_micro
-                0x000006e0                i2c_putrwaddr
-                0x00000ae0                spi_getchar
-                0x00000790                i2c_getdata
-                0x00000498                msleep
-                0x0000065c                uart_putchar
- .text          0x00000cbc     0x1e00 softfloat.o
-                0x000012c8                float32_to_int32_round_to_zero
-                0x000029b8                float32_artan
-                0x00001b70                float32_div
-                0x00001880                float32_add
-                0x00000e38                float32_is_signaling_nan
-                0x00000e24                float32_is_nan
-                0x00002630                float32_lt
-                0x000021b8                float32_sqrt
-                0x000026e8                float32_eq_signaling
-                0x000013b0                float32_round_to_int
-                0x00000e0c                float_raise
-                0x00001188                float32_to_int32
-                0x00002788                float32_le_quiet
-                0x00002a18                float32_pow2
-                0x00001e98                float32_rem
-                0x00001138                int32_to_float32
-                0x000018f8                float32_mul
-                0x0000248c                float32_eq
-                0x00002890                float32_lt_quiet
-                0x00002988                float32_abs
-                0x00002a34                float32_filterKom
-                0x000018bc                float32_sub
-                0x00002570                float32_le
- .text          0x00002abc       0xb8 LSM9DS1.o
-                0x00002abc                agWriteByte
-                0x00002b50                mReadByte
-                0x00002b2c                agReadByte
-                0x00002ae8                initGyro
- .text          0x00002b74      0x1e0 MPL3115A2.o
-                0x00002c04                MPLReadByte
-                0x00002ba4                MPLWriteByte
-                0x00002b74                MPLReadBytes
-                0x00002bd0                MPLBegin
-                0x00002c28                MPLgetAltitude
- .text          0x00002d54      0xdb4 nrf24.o
-                0x00002fb8                toggle_features
-                0x000037c4                startRx_mode
-                0x00003568                openpipe_rx
-                0x0000331c                setChannel
-                0x000039b8                load_payload
-                0x0000399c                get_status
-                0x00003824                flush_rx
-                0x0000349c                isAckPayloadAvailable
-                0x000036f8                spi_putstr_nrf24
-                0x000034c0                enableDynamicAckPayloads
-                0x00003758                spi_transfer
-                0x00003414                read_register
-                0x00003478                available
-                0x00002e2c                spi_finish
-                0x00002e70                csn
-                0x00002d54                ce
-                0x00002e18                nrf24_config
-                0x00002f6c                spi_enable
-                0x00003514                closeReadingPipe
-                0x00002f8c                spi_transmitD
-                0x0000328c                setAutoAck
-                0x000032c8                openPipe0_tx
-                0x00003214                write_register_basic
-                0x00003688                power_up
-                0x000037a8                flush_tx
-                0x00003348                setRetries
-                0x000030d0                writeAckPayload
-                0x000038c4                nrf24_begin
-                0x00002ff4                read_payload
-                0x00003378                read_register_buff
-                0x00003634                setPaLevel
-                0x00003840                stopTransmission
-                0x00003168                write_register
-                0x000036c4                power_down
-                0x00003b08                _etext = .
+ .text          0x000002f0      0x9bc soc-hw.o
+                0x00000c40                setmotor4
+                0x000007b0                I2CreadByte
+                0x000004f4                tic_isr
+                0x000006a8                i2c_putdata
+                0x00000440                read_gpio
+                0x00000c08                setmotor2
+                0x00000bec                setmotor1
+                0x00000ba4                spi_putstr
+                0x00000670                uart_putstr
+                0x00000ab0                spi_init
+                0x00000750                i2c_sleep
+                0x00000394                isr_unregister
+                0x000003dc                digitalWrite
+                0x00000b2c                spi_continue
+                0x00000c74                set_pwm
+                0x00000a98                everloop_putdata_3
+                0x00000b80                spi_putchar
+                0x000004c0                nsleep
+                0x00000628                uart_getchar
+                0x00000c5c                pwm_init
+                0x00000624                uart_init
+                0x00000c24                setmotor3
+                0x00000af4                spi_not_ena
+                0x000003b4                gpio_init_write
+                0x00000b60                spi_cont_d
+                0x0000037c                isr_register
+                0x00000a68                everloop_putdata_1
+                0x00000b0c                spi_sleep
+                0x000008a0                I2CreadBytes
+                0x000006f4                i2c_putdatas
+                0x00000a80                everloop_putdata_2
+                0x00000358                isr_init
+                0x00000738                i2c_init
+                0x000002f4                irq_handler
+                0x000005b8                init_watch
+                0x000002f0                isr_null
+                0x00000568                time_happened_millis
+                0x00000458                step_sleep
+                0x000009cc                I2CwriteByte
+                0x00000520                tic_init
+                0x000005d0                time_happened_micro
+                0x000006d0                i2c_putrwaddr
+                0x00000ad0                spi_getchar
+                0x00000780                i2c_getdata
+                0x00000488                msleep
+                0x0000064c                uart_putchar
+ .text          0x00000cac     0x1e00 softfloat.o
+                0x000012b8                float32_to_int32_round_to_zero
+                0x000029a8                float32_artan
+                0x00001b60                float32_div
+                0x00001870                float32_add
+                0x00000e28                float32_is_signaling_nan
+                0x00000e14                float32_is_nan
+                0x00002620                float32_lt
+                0x000021a8                float32_sqrt
+                0x000026d8                float32_eq_signaling
+                0x000013a0                float32_round_to_int
+                0x00000dfc                float_raise
+                0x00001178                float32_to_int32
+                0x00002778                float32_le_quiet
+                0x00002a08                float32_pow2
+                0x00001e88                float32_rem
+                0x00001128                int32_to_float32
+                0x000018e8                float32_mul
+                0x0000247c                float32_eq
+                0x00002880                float32_lt_quiet
+                0x00002978                float32_abs
+                0x00002a24                float32_filterKom
+                0x000018ac                float32_sub
+                0x00002560                float32_le
+ .text          0x00002aac       0xb8 LSM9DS1.o
+                0x00002aac                agWriteByte
+                0x00002b40                mReadByte
+                0x00002b1c                agReadByte
+                0x00002ad8                initGyro
+ .text          0x00002b64      0x1e0 MPL3115A2.o
+                0x00002bf4                MPLReadByte
+                0x00002b94                MPLWriteByte
+                0x00002b64                MPLReadBytes
+                0x00002bc0                MPLBegin
+                0x00002c18                MPLgetAltitude
+ .text          0x00002d44      0xdb4 nrf24.o
+                0x00002fa8                toggle_features
+                0x000037b4                startRx_mode
+                0x00003558                openpipe_rx
+                0x0000330c                setChannel
+                0x000039a8                load_payload
+                0x0000398c                get_status
+                0x00003814                flush_rx
+                0x0000348c                isAckPayloadAvailable
+                0x000036e8                spi_putstr_nrf24
+                0x000034b0                enableDynamicAckPayloads
+                0x00003748                spi_transfer
+                0x00003404                read_register
+                0x00003468                available
+                0x00002e1c                spi_finish
+                0x00002e60                csn
+                0x00002d44                ce
+                0x00002e08                nrf24_config
+                0x00002f5c                spi_enable
+                0x00003504                closeReadingPipe
+                0x00002f7c                spi_transmitD
+                0x0000327c                setAutoAck
+                0x000032b8                openPipe0_tx
+                0x00003204                write_register_basic
+                0x00003678                power_up
+                0x00003798                flush_tx
+                0x00003338                setRetries
+                0x000030c0                writeAckPayload
+                0x000038b4                nrf24_begin
+                0x00002fe4                read_payload
+                0x00003368                read_register_buff
+                0x00003624                setPaLevel
+                0x00003830                stopTransmission
+                0x00003158                write_register
+                0x000036b4                power_down
+                0x00003af8                _etext = .
 
-.rodata         0x00003b08      0x500
-                0x00003b08                . = ALIGN (0x4)
-                0x00003b08                _frodata = .
+.rodata         0x00003af8      0x500
+                0x00003af8                . = ALIGN (0x4)
+                0x00003af8                _frodata = .
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata.str1.4
-                0x00003b08       0x6d main.o
+                0x00003af8       0x6d main.o
                                  0x70 (size before relaxing)
- *fill*         0x00003b75        0x3 00
- .rodata        0x00003b78        0x8 main.o
- .rodata        0x00003b80      0x440 softfloat.o
+ *fill*         0x00003b65        0x3 00
+ .rodata        0x00003b68        0x8 main.o
+                0x00003b68                pipe
+ .rodata        0x00003b70      0x440 softfloat.o
  .rodata.str1.4
-                0x00003fc0        0xd MPL3115A2.o
+                0x00003fb0        0xd MPL3115A2.o
                                  0x10 (size before relaxing)
- *fill*         0x00003fcd        0x3 00
+ *fill*         0x00003fbd        0x3 00
  .rodata.str1.4
-                0x00003fd0       0x18 nrf24.o
- .rodata        0x00003fe8       0x20 nrf24.o
-                0x00003fe8                channel0
+                0x00003fc0       0x18 nrf24.o
+ .rodata        0x00003fd8       0x20 nrf24.o
+                0x00003fd8                channel0
  *(.rodata1)
-                0x00004008                _erodata = .
+                0x00003ff8                _erodata = .
 
-.data           0x00004008       0x25
-                0x00004008                . = ALIGN (0x4)
-                0x00004008                _fdata = .
+.data           0x00003ff8       0x25
+                0x00003ff8                . = ALIGN (0x4)
+                0x00003ff8                _fdata = .
  *(.data .data.* .gnu.linkonce.d.*)
- .data          0x00004008        0x0 crt0ram.o
- .data          0x00004008        0x8 main.o
- .data          0x00004010       0x1c soc-hw.o
-                0x00004010                uart0
-                0x00004024                i2c0
-                0x00004014                timer0
-                0x00004018                gpio0
-                0x00004020                everloop0
-                0x00004028                pwm0
-                0x0000401c                spi0
- .data          0x0000402c        0x0 softfloat.o
- .data          0x0000402c        0x0 LSM9DS1.o
- .data          0x0000402c        0x0 MPL3115A2.o
- .data          0x0000402c        0x1 nrf24.o
-                0x0000402c                payload_size
+ .data          0x00003ff8        0x0 crt0ram.o
+ .data          0x00003ff8        0x8 main.o
+ .data          0x00004000       0x1c soc-hw.o
+                0x00004000                uart0
+                0x00004014                i2c0
+                0x00004004                timer0
+                0x00004008                gpio0
+                0x00004010                everloop0
+                0x00004018                pwm0
+                0x0000400c                spi0
+ .data          0x0000401c        0x0 softfloat.o
+ .data          0x0000401c        0x0 LSM9DS1.o
+ .data          0x0000401c        0x0 MPL3115A2.o
+ .data          0x0000401c        0x1 nrf24.o
+                0x0000401c                payload_size
  *(.data1)
-                0x00004030                _gp = ALIGN (0x10)
+                0x00004020                _gp = ALIGN (0x10)
  *(.sdata .sdata.* .gnu.linkonce.s.*)
-                0x0000402d                _edata = .
+                0x0000401d                _edata = .
 
-.bss            0x00004030       0xbc
-                0x00004030                . = ALIGN (0x4)
-                0x00004030                _fbss = .
+.bss            0x00004020       0xc0
+                0x00004020                . = ALIGN (0x4)
+                0x00004020                _fbss = .
  *(.dynsbss)
  *(.sbss .sbss.* .gnu.linkonce.sb.*)
  *(.scommon)
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
- .bss           0x00004030        0x0 crt0ram.o
- .bss           0x00004030        0x0 main.o
- .bss           0x00004030        0x8 soc-hw.o
- .bss           0x00004038        0xc softfloat.o
-                0x00004040                float_detect_tininess
-                0x0000403c                float_exception_flags
-                0x00004038                float_rounding_mode
- .bss           0x00004044        0x0 LSM9DS1.o
- .bss           0x00004044        0xc MPL3115A2.o
- .bss           0x00004050        0x3 nrf24.o
+ .bss           0x00004020        0x0 crt0ram.o
+ .bss           0x00004020        0x0 main.o
+ .bss           0x00004020        0x8 soc-hw.o
+ .bss           0x00004028        0xc softfloat.o
+                0x00004030                float_detect_tininess
+                0x0000402c                float_exception_flags
+                0x00004028                float_rounding_mode
+ .bss           0x00004034        0x0 LSM9DS1.o
+ .bss           0x00004034        0xc MPL3115A2.o
+ .bss           0x00004040        0x3 nrf24.o
  *(COMMON)
- *fill*         0x00004053        0x1 00
- COMMON         0x00004054        0xa main.o
-                0x00004054                dynamic_payloads_enabled
-                0x00004055                csn_pin
-                0x00004058                pipe0_reading_address
-                0x0000405c                ce_pin
-                0x0000405d                wxrxDelay
- *fill*         0x0000405e        0x2 00
- COMMON         0x00004060       0x84 soc-hw.o
-                0x00004060                isr_table
-                0x000040e0                tic_msec
- COMMON         0x000040e4        0x8 nrf24.o
-                0x000040e4                ports
-                0x000040e8                puerto
-                0x000040ec                _ebss = .
-                0x000040ec                _end = .
+ *fill*         0x00004043        0x1 00
+ COMMON         0x00004044        0xe main.o
+                0x00004044                data_receive
+                0x00004048                dynamic_payloads_enabled
+                0x00004049                csn_pin
+                0x0000404c                pipe0_reading_address
+                0x00004050                ce_pin
+                0x00004051                wxrxDelay
+ *fill*         0x00004052        0x2 00
+ COMMON         0x00004054       0x84 soc-hw.o
+                0x00004054                isr_table
+                0x000040d4                tic_msec
+ COMMON         0x000040d8        0x8 nrf24.o
+                0x000040d8                ports
+                0x000040dc                puerto
+                0x000040e0                _ebss = .
+                0x000040e0                _end = .
                 0x00007ffc                PROVIDE (_fstack, 0x7ffc)
 LOAD crt0ram.o
 LOAD main.o
@@ -251,29 +254,29 @@ LOAD MPL3115A2.o
 LOAD nrf24.o
 OUTPUT(image elf32-lm32)
 
-.debug_abbrev   0x00000000      0xb64
- .debug_abbrev  0x00000000       0x99 main.o
- .debug_abbrev  0x00000099      0x36f soc-hw.o
- .debug_abbrev  0x00000408      0x30f softfloat.o
- .debug_abbrev  0x00000717       0xea LSM9DS1.o
- .debug_abbrev  0x00000801      0x100 MPL3115A2.o
- .debug_abbrev  0x00000901      0x263 nrf24.o
+.debug_abbrev   0x00000000      0xb6f
+ .debug_abbrev  0x00000000       0xa4 main.o
+ .debug_abbrev  0x000000a4      0x36f soc-hw.o
+ .debug_abbrev  0x00000413      0x30f softfloat.o
+ .debug_abbrev  0x00000722       0xea LSM9DS1.o
+ .debug_abbrev  0x0000080c      0x100 MPL3115A2.o
+ .debug_abbrev  0x0000090c      0x263 nrf24.o
 
-.debug_info     0x00000000     0x3a3e
- .debug_info    0x00000000      0x12c main.o
- .debug_info    0x0000012c      0xe65 soc-hw.o
- .debug_info    0x00000f91     0x1e79 softfloat.o
- .debug_info    0x00002e0a      0x157 LSM9DS1.o
- .debug_info    0x00002f61      0x223 MPL3115A2.o
- .debug_info    0x00003184      0x8ba nrf24.o
+.debug_info     0x00000000     0x3a81
+ .debug_info    0x00000000      0x16f main.o
+ .debug_info    0x0000016f      0xe65 soc-hw.o
+ .debug_info    0x00000fd4     0x1e79 softfloat.o
+ .debug_info    0x00002e4d      0x157 LSM9DS1.o
+ .debug_info    0x00002fa4      0x223 MPL3115A2.o
+ .debug_info    0x000031c7      0x8ba nrf24.o
 
-.debug_line     0x00000000     0x3802
- .debug_line    0x00000000      0x12c main.o
- .debug_line    0x0000012c      0xc31 soc-hw.o
- .debug_line    0x00000d5d     0x1c8a softfloat.o
- .debug_line    0x000029e7       0xd4 LSM9DS1.o
- .debug_line    0x00002abb      0x1be MPL3115A2.o
- .debug_line    0x00002c79      0xb89 nrf24.o
+.debug_line     0x00000000     0x37e2
+ .debug_line    0x00000000      0x10c main.o
+ .debug_line    0x0000010c      0xc31 soc-hw.o
+ .debug_line    0x00000d3d     0x1c8a softfloat.o
+ .debug_line    0x000029c7       0xd4 LSM9DS1.o
+ .debug_line    0x00002a9b      0x1be MPL3115A2.o
+ .debug_line    0x00002c59      0xb89 nrf24.o
 
 .debug_frame    0x00000000      0x7d0
  .debug_frame   0x00000000       0x20 main.o
@@ -284,19 +287,19 @@ OUTPUT(image elf32-lm32)
  .debug_frame   0x000005a0      0x230 nrf24.o
 
 .debug_pubnames
-                0x00000000      0x981
+                0x00000000      0x99b
  .debug_pubnames
-                0x00000000       0x77 main.o
+                0x00000000       0x91 main.o
  .debug_pubnames
-                0x00000077      0x354 soc-hw.o
+                0x00000091      0x354 soc-hw.o
  .debug_pubnames
-                0x000003cb      0x21e softfloat.o
+                0x000003e5      0x21e softfloat.o
  .debug_pubnames
-                0x000005e9       0x4c LSM9DS1.o
+                0x00000603       0x4c LSM9DS1.o
  .debug_pubnames
-                0x00000635       0x64 MPL3115A2.o
+                0x0000064f       0x64 MPL3115A2.o
  .debug_pubnames
-                0x00000699      0x2e8 nrf24.o
+                0x000006b3      0x2e8 nrf24.o
 
 .debug_aranges  0x00000000       0xc0
  .debug_aranges
@@ -312,18 +315,18 @@ OUTPUT(image elf32-lm32)
  .debug_aranges
                 0x000000a0       0x20 nrf24.o
 
-.debug_str      0x00000000      0xd98
- .debug_str     0x00000000       0xe7 main.o
-                                0x10f (size before relaxing)
- .debug_str     0x000000e7      0x3a0 soc-hw.o
+.debug_str      0x00000000      0xde2
+ .debug_str     0x00000000       0xd9 main.o
+                                0x101 (size before relaxing)
+ .debug_str     0x000000d9      0x3fe soc-hw.o
                                 0x470 (size before relaxing)
- .debug_str     0x00000487      0x613 softfloat.o
+ .debug_str     0x000004d7      0x613 softfloat.o
                                 0x6cb (size before relaxing)
- .debug_str     0x00000a9a       0x3f LSM9DS1.o
+ .debug_str     0x00000aea       0x3f LSM9DS1.o
                                  0xe3 (size before relaxing)
- .debug_str     0x00000ad9       0x4a MPL3115A2.o
+ .debug_str     0x00000b29       0x4a MPL3115A2.o
                                 0x114 (size before relaxing)
- .debug_str     0x00000b23      0x275 nrf24.o
+ .debug_str     0x00000b73      0x26f nrf24.o
                                 0x3df (size before relaxing)
 
 .comment        0x00000000       0x6c

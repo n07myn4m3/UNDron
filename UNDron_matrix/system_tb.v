@@ -115,9 +115,27 @@ module system_tb;
 	reg             uart_rxd; 
 	wire            uart_txd;
 	// SPI
-	reg             spi_miso; 
-	wire            spi_mosi;
-	wire            spi_clk;
+
+wire mosi;
+reg miso;
+wire sck;
+wire ssn;
+wire ce;
+wire csn;
+
+//Only Simulate register
+reg  [0:7] miso_test;
+reg  [3:0] spi_count;  
+reg 			 ssn_t = 0;
+
+//Probe signals transmision rfl2401+
+
+reg [0:55] data_transmision = 56'h686f6c61417373;
+reg [0:7] mosi_data = 0;
+reg [0:7] mosi_data_aux = 0;
+reg [7:0] repeat_count = 0;
+reg [6:0] repeats = 0;
+
 	// 12c
 	wire            i2c_sda; 
 	wire            i2c_scl;
@@ -143,14 +161,17 @@ module system_tb;
 	  // Uart
 	  .uart_rxd(uart_rxd),
 	  .uart_txd(uart_txd),
-	// SPI
-	  .spi_miso(spi_miso), 
-	  .spi_mosi(spi_mosi),
-	  .spi_clk(spi_clk),
-	// 12c
+	  // SPI
+	.spi_mosi(mosi),
+	.spi_miso(miso),
+	.spi_sck(sck),
+	.spi_ssn(ssn),
+	.spi_csn(csn),
+	.spi_ce(ce),
+	  // 12c
 	  .i2c_sda(i2c_sda), 
 	  .i2c_scl(i2c_scl),
-	// everloop
+	  // everloop
       .everloop_led_ctl(everloop_led_ctl),
       .pwm_out(pwm_out)
   );
@@ -364,7 +385,7 @@ reg   [3:0]  count = 7;
 // Inicializacion de las entradas del modulo
 //---------------------------------------------------------------------------
    initial begin  
-      clk = 0; rst = 0; uart_rxd = 0; spi_miso = 0; start = 0; 
+      clk = 0; rst = 0; uart_rxd = 0; miso <= 1'b0; start = 0; 
    end
 //---------------------------------------------------------------------------
 // Proceso para el reloj
@@ -402,8 +423,8 @@ reg   [3:0]  count = 7;
 	
      #10 -> reset_trigger;
 //     #((PERIOD*DUTY_CYCLE)*400000) $finish;
-//     #((PERIOD*DUTY_CYCLE)*100000) $finish; //Prueba corta
-     #((PERIOD*DUTY_CYCLE)*600000) $finish; //Prueba larga
+     #((PERIOD*DUTY_CYCLE)*100000) $finish; //Prueba corta
+//     #((PERIOD*DUTY_CYCLE)*600000) $finish; //Prueba larga
 //     #((PERIOD*DUTY_CYCLE)*2000000) $finish; //Prueba larga
    end
 

@@ -29,7 +29,10 @@ PWM_SRC =      ../rtl/wb_pwm/pwm.v      \
 
 
 I2C_SRC      = ../rtl/wb_i2c/i2c_master.v         \
-               ../rtl/wb_i2c/wb_i2c.v             
+               ../rtl/wb_i2c/wb_i2c.v            
+
+SPI_SRC			 = ../rtl/wb_spi/wb_spi.v		\
+							 ../rtl/wb_spi/spi_master.v
 
 SRC=                                    \
 	../system.v                         \
@@ -58,7 +61,8 @@ SRC=                                    \
 	../rtl/wb_conbus/conbus_arb.v       \
     $(EVERLOOP_SRC)                     \
     $(I2C_SRC) \
-    $(PWM_SRC)
+    $(PWM_SRC) \
+		$(SPI_SRC)
 
 #############################################################################
 # Synthesis constants

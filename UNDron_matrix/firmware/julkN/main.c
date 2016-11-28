@@ -6,7 +6,6 @@
 #include "nrf24.h"
 #include "nRF24L01.h"
 
-int main(){
 
 const uint8_t pipe[] = {0xF0,0xF0,0xF0,0xF0,0xE1};
 static char pipex[] = {'p','i','p','e','0','7'};
@@ -17,6 +16,9 @@ static char data2[] ={':','v','l','o','l'};
 static uint8_t ports;
 int *data_receive;
 
+
+
+int main(){
 
   for(;;){
 /*
@@ -34,6 +36,7 @@ int *data_receive;
 		nrf24_begin();
 		msleep(100);
 		setAutoAck(true);
+
 		enableDynamicAckPayloads();
 		//PTX
 		//stopTransmission();

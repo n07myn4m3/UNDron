@@ -528,7 +528,5 @@ assign spi_mosi  = spi0_mosi;
 assign spi_ssn 	 = spi0_ssn;
 assign spi0_miso = spi_miso;
 
-//assign i2c_sda = i2c0_sda;
-//assign i2c_scl = i2c0_scl;
 
 endmodule 

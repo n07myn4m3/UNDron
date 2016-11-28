@@ -27,7 +27,9 @@ module system
 //	parameter   bootram_file     = "../firmware/hw-test/image.ram",
 //	parameter   bootram_file     = "../firmware/i2c-test/image.ram",
 	parameter   clk_freq         = 50000000,
-	parameter   uart_baud_rate   = 57600
+	parameter   uart_baud_rate   = 57600,
+	parameter 	slaves 					 = 1,
+	parameter 	spi_dwidth			 = 8
 ) (
 	input             clk,
 	// Debug 
@@ -40,7 +42,10 @@ module system
 	// SPI
 	input             spi_miso, 
 	output            spi_mosi,
-	output            spi_clk,
+	output            spi_sck,
+	output						spi_ssn,
+	output 						spi_ce,
+	output 						spi_csn,
 	// 12c
 	inout             i2c_sda, 
 	inout             i2c_scl,
@@ -67,7 +72,6 @@ wire  [31:0] gnd32 = 32'h00000000;
 wire [31:0]  lm32i_adr,
              lm32d_adr,
              uart0_adr,
-             spi0_adr,
              timer0_adr,
              gpio0_adr,
              ddr0_adr,
@@ -78,7 +82,9 @@ wire [31:0]  lm32i_adr,
              // EVERLOOP
              everloop0_adr, 
              // PWM
-             pwm0_adr; 
+             pwm0_adr, 
+             // SPI
+             spi0_adr;
 
 //DATA IN-OUT
 wire [31:0]  lm32i_dat_r,
@@ -87,8 +93,6 @@ wire [31:0]  lm32i_dat_r,
              lm32d_dat_w,
              uart0_dat_r,
              uart0_dat_w,
-             spi0_dat_r,
-             spi0_dat_w,
              timer0_dat_r,
              timer0_dat_w,
              gpio0_dat_r,
@@ -107,12 +111,14 @@ wire [31:0]  lm32i_dat_r,
              everloop0_dat_w,
              // PWM
              pwm0_dat_r,
-             pwm0_dat_w;
+             pwm0_dat_w,
+             // SPI
+             spi0_dat_r,
+             spi0_dat_w;
 
 wire [3:0]   lm32i_sel,
              lm32d_sel,
              uart0_sel,
-             spi0_sel,
              timer0_sel,
              gpio0_sel,
              bram0_sel,
@@ -123,13 +129,15 @@ wire [3:0]   lm32i_sel,
              // EVERLOOP
              everloop0_sel,
              // PWM
-             pwm0_sel;
+             pwm0_sel,
+             // SPI
+             spi0_sel,
+						 
 
 //READ_WRITE
 wire         lm32i_we,
              lm32d_we,
              uart0_we,
-             spi0_we,
              timer0_we,
              gpio0_we,
              bram0_we,
@@ -141,12 +149,13 @@ wire         lm32i_we,
              everloop0_we,
              // PWM
              pwm0_we;
+             // SPI
+             spi0_we,
 
 //CYCLE
 wire         lm32i_cyc,
              lm32d_cyc,
              uart0_cyc,
-             spi0_cyc,
              timer0_cyc,
              gpio0_cyc,
              bram0_cyc,
@@ -158,12 +167,13 @@ wire         lm32i_cyc,
              everloop0_cyc,
              // PWM
              pwm0_cyc;
+             // SPI
+             spi0_cyc,
 
 //CHIP_SELECT
 wire         lm32i_stb,
              lm32d_stb,
              uart0_stb,
-             spi0_stb,
              timer0_stb,
              gpio0_stb,
              bram0_stb,
@@ -175,12 +185,13 @@ wire         lm32i_stb,
              everloop0_stb,
              // PWM
              pwm0_stb;
+             // SPI
+             spi0_stb,
 
 //ACK_SIGNAL
 wire         lm32i_ack,
              lm32d_ack,
              uart0_ack,
-             spi0_ack,
              timer0_ack,
              gpio0_ack,
              bram0_ack,
@@ -192,6 +203,8 @@ wire         lm32i_ack,
              everloop0_ack,
              // PWM
              pwm0_ack;
+             // SPI
+             spi0_ack,
 
 
 wire         lm32i_rty,
@@ -372,7 +385,7 @@ lm32_cpu lm0 (
 // Block RAM
 //---------------------------------------------------------------------------
 wb_bram #(
-	.adr_width( 14 ),
+	.adr_width( 16 ),
 	.mem_file_name( bootram_file )
 ) bram0 (
 	.clk_i(  clk  ),
@@ -416,29 +429,6 @@ wb_uart #(
 	.uart_txd( uart0_txd )
 );
 
-//---------------------------------------------------------------------------
-// spi0
-//---------------------------------------------------------------------------
-wire spi0_mosi;
-wire spi0_miso;
-wire spi0_clk;
-
-wb_spi  spi0 (
-	.clk( clk ),
-	.reset( ~rst ),
-	//
-	.wb_adr_i( spi0_adr ),
-	.wb_dat_i( spi0_dat_w ),
-	.wb_dat_o( spi0_dat_r ),
-	.wb_stb_i( spi0_stb ),
-	.wb_cyc_i( spi0_cyc ),
-	.wb_we_i(  spi0_we ),
-	.wb_sel_i( spi0_sel ),
-	.wb_ack_o( spi0_ack ), 
-	.spi_sck(spi0_clk),
-	.spi_mosi( spi0_mosi ),
-	.spi_miso( spi0_miso )
-);
 //---------------------------------------------------------------------------
 // i2c0
 //---------------------------------------------------------------------------
@@ -542,6 +532,40 @@ wb_pwm  pwm0 (
     .pwm_out(pwm_out)
 
 );
+
+
+//----------------------------------------------------------------------------
+//SPI
+//----------------------------------------------------------------------------
+wire spi0_ssn;
+wire spi0_miso;
+wire spi0_mosi;
+wire spi0_sck;
+
+wb_spi #(
+	.slaves(slaves),
+	.d_width(spi_dwidth)
+   ) spi0 (
+	.clk( clk ),
+	.reset( ~rst ),
+	//
+	.wb_adr_i( spi0_adr ),
+	.wb_dat_i( spi0_dat_w ),
+	.wb_dat_o( spi0_dat_r ),
+	.wb_stb_i( spi0_stb ),
+	.wb_cyc_i( spi0_cyc ),
+	.wb_we_i(  spi0_we ),
+	.wb_sel_i( spi0_sel ),
+	.wb_ack_o( spi0_ack ), 
+	//spi_ports
+	.sclk(	 spi0_sck),
+	.mosi_txd( spi0_mosi),
+	.miso_rxd( spi0_miso),
+	.csn(spi_csn),
+	.ce(spi_ce),
+	.ss_n(  spi0_ssn)
+);
+
 //----------------------------------------------------------------------------
 // Mux UART wires according to sw[0]
 //----------------------------------------------------------------------------
@@ -549,9 +573,10 @@ assign uart_txd  = uart0_txd;
 assign uart0_rxd = uart_rxd;
 assign led       = ~uart_txd;
 
+assign spi_sck	 = spi0_sck;
 assign spi_mosi  = spi0_mosi;
+assign spi_ssn 	 = spi0_ssn;
 assign spi0_miso = spi_miso;
-assign spi_clk = spi0_clk;
 
 //assign i2c_sda = i2c0_sda;
 //assign i2c_scl = i2c0_scl;

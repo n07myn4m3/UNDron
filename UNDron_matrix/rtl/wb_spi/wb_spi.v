@@ -1,101 +1,143 @@
-//-----------------------------------------------------------------
-// SPI Master
-//-----------------------------------------------------------------
+//---------------------------------------------------------------------------
+// Wishbone SPI
+//
+// Register Description:
+//
+//    0x00 UCR      [ 0 | 0 | 0 | 0 | count | enable | 0 | busy ]
+//    0x04 RX_DATA AND TX_DATA
+//		
+//---------------------------------------------------------------------------
 
-module wb_spi(
-	input               clk,
-	input               reset,
-	// Wishbone bus
-	input      [31:0]   wb_adr_i,
-	input      [31:0]   wb_dat_i,
-	output reg [31:0]   wb_dat_o,
-	input      [ 3:0]   wb_sel_i,
-	input               wb_cyc_i,
-	input               wb_stb_i,
-	output              wb_ack_o,
-	input               wb_we_i,
-	// SPI 
-	output              spi_sck,
-	output              spi_mosi,
-	input               spi_miso,
-	output reg   [7:0]  spi_cs
+module wb_spi #(
+	parameter slaves = 1,
+	parameter d_width = 8
+  ) (
+	input              clk,
+	input              reset,
+	// Wishbone interface
+	input              wb_stb_i,
+	input              wb_cyc_i,
+	output             wb_ack_o,
+	input              wb_we_i,
+	input       [31:0] wb_adr_i,
+	input        [3:0] wb_sel_i,
+	input       [31:0] wb_dat_i,
+	output reg  [31:0] wb_dat_o,
+	// Serial Wires
+	input              miso_rxd,
+	output             mosi_txd,
+	output 						 sclk,
+	output 						 ss_n,
+	output 			 			 csn,
+	output 						 ce
 );
 
+//---------------------------------------------------------------------------
+// Actual SPI engine
+//---------------------------------------------------------------------------
+  reg enable =1'b0;
+	wire cpol;
+	wire cpha;
+	reg cont =1'b0;
+  wire [31:0] addr;
+  reg [d_width-1:0] tx_data = 1'b0;
+  wire [31:0] clk_div;
+  wire busy;
+	reg  							  csn= 1'b0;
+	reg 								ce = 1'b0;
+  wire							 ss_n;
+  wire [d_width-1:0] rx_data;
 
-	reg  ack;
-	assign wb_ack_o = wb_stb_i & wb_cyc_i & ack;
 
-	wire wb_rd = wb_stb_i & wb_cyc_i & ~ack & ~wb_we_i;
-	wire wb_wr = wb_stb_i & wb_cyc_i & ~ack & wb_we_i;
+spi_master #(
+	.slaves(	slaves	),
+	.d_width(	d_width )
+) spi0(
+	.clk(       clk      ),
+	.rst(     reset    ),
+	//
+	.sclk(	sclk		 ),
+	.ss_n(	ss_n		 ),
+	.miso(  miso_rxd ),
+	.mosi(  mosi_txd ),
+	//
+	.enable(    enable   ),
+	.cpol(			cpol		 ), //Se adjunta por defecto en el wb
+	.cpha(			cpha		 ), //Se adjunta por defecto en el wb
+	.cont(			cont		 ), 
+	.clk_div(		clk_div	 ), //Se adjunta por defecto en el wb
+	.addr(			addr		 ),
+	.tx_data(		tx_data	 ),
+	.rx_data(   rx_data  ),
+	.busy(  		busy		 )
+);
 
-	
-	reg [2:0] bitcount;
-	reg ilatch;
-	reg run;
+//---------------------------------------------------------------------------
+// 
+//---------------------------------------------------------------------------
+assign cpol = 1'b0;
+assign cpha = 1'b0;
+assign addr = 32'b1;
+assign clk_div = 5;
 
-	reg sck;
+wire [7:0] ucr = { 4'b0, cont , enable , 1'b0 , busy };
 
-	//prescaler registers for sclk
-	reg [7:0] prescaler;
-	reg [7:0] divisor;
+wire wb_rd = wb_stb_i & wb_cyc_i & ~wb_we_i;
+wire wb_wr = wb_stb_i & wb_cyc_i &  wb_we_i;
 
-	//data shift register
-	reg [7:0] sreg;
+reg  ack;
 
-	assign spi_sck = sck;
-	assign spi_mosi = sreg[7];
+assign wb_ack_o       = wb_stb_i & wb_cyc_i & ack;
 
-	always @(posedge clk) begin
-		if (reset == 1'b1) begin
-			ack      <= 0;
-			sck <= 1'b0;
-			bitcount <= 3'b000;
-			run <= 1'b0;
-			prescaler <= 8'h00;
-			divisor <= 8'hff;
-		end else begin
-			prescaler <= prescaler + 1;
-			if (prescaler == divisor) begin
-				prescaler <= 8'h00;
-				if (run == 1'b1) begin
-					sck <= ~sck;
-					if(sck == 1'b1) begin
-						bitcount <= bitcount + 1;
-						if(bitcount == 3'b111) begin
-							run <= 1'b0;
-						end
-						
-						sreg [7:0] <= {sreg[6:0], ilatch};
-					end else begin
-						ilatch <= spi_miso;
-					end
+
+always @(posedge clk)
+begin
+	if (reset) begin
+		wb_dat_o[31:8] <= 24'b0;
+		ack            <= 0;
+	end else begin
+		wb_dat_o[31:8] <= 24'b0;
+		ack 					 <= 0;
+		if (wb_rd & ~ack) begin
+			ack <= 1;
+
+			case (wb_adr_i[5:2])
+				3'b000: begin
+					wb_dat_o[7:0] <= ucr;
 				end
-			end
+				3'b001: begin
+					wb_dat_o[7:0] <= rx_data;
+				end
+				default: begin
+					wb_dat_o[7:0] <= 8'b0;
+				end
+			endcase
+		end else if (wb_wr & ~ack ) begin
+			ack <= 1;
 
-			ack <= wb_stb_i & wb_cyc_i;
-			
-			if (wb_rd) begin           // read cycle
-				case (wb_adr_i[5:2])
-					4'b0000: wb_dat_o <= sreg;
-					4'b0001: wb_dat_o <= {7'b0000000 , run};
-				endcase
-			end
-			
-			
-			if (wb_wr) begin // write cycle
-				case (wb_adr_i[5:2])
-					4'b0000: begin
-							sreg    <=  wb_dat_i[7:0];
-							run     <=  1'b1;
-						end
-					4'b0010:
-							spi_cs  <=  wb_dat_i[7:0];
-					4'b0100: 
-							divisor <=  wb_dat_i[7:0];
-				endcase
-			end
+			case (wb_adr_i[5:2])
+				3'b000: begin
+					enable  <= wb_dat_i[2];
+					cont <= wb_dat_i[3];
+				end
+				3'b001: begin
+					tx_data <= wb_dat_i[7:0];
+				end
+				3'b010: begin
+					csn		<= wb_dat_i[0];
+		    end
+				3'b011: begin
+					ce    <= wb_dat_i[0];
+				end
+				default: begin
+					enable  <= 1'b0;
+					cont <= 1'b0;
+					tx_data<=8'bx;
+				end
+			endcase
 		end
 	end
+end
 
-
-endmodule
+endmodule 
+			

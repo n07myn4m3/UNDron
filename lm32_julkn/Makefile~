@@ -41,7 +41,7 @@ SRC=                                      \
 	../rtl/wb_conbus/conbus_arb.v      \
 	../rtl/wb_i2c/i2c_master.v         \
 	../rtl/wb_pwm/wb_pwm.v						 \
-	../rtl/wb_pwm/pwm.v
+	../rtl/wb_pwm/pwm.v								 \
 	../rtl/wb_spi/spi_master.v
 #	../rtl/wb_basicIO/wb_basicIO.v     \
 #############################################################################
