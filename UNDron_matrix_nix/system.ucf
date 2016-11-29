@@ -1,0 +1,115 @@
+######################################################
+######################################################
+## These constraints are for MATRIX-CREATOR         ##
+######################################################
+######################################################
+
+######################
+# Timing Constraints #
+######################
+
+
+#NET "clk"   LOC = "P84"	| IOSTANDARD = "LVCMOS33";
+#NET "clk" TNM_NET = sys_clk;
+#TIMESPEC TS_sys_clk = PERIOD sys_clk_pin 20.0 ns HIGH 50%;
+
+
+#######################
+# Pin LOC Constraints #
+#######################
+
+#OSC
+NET "clk"    LOC = "P84" | CLOCK_DEDICATED_ROUTE = FALSE | IOSTANDARD = LVCMOS33;
+
+#LED
+NET "led"    LOC = "P39" | IOSTANDARD = LVCMOS33 | DRIVE = 24;   #Debug led?     
+#NET "everloop_ctl" LOC = "P56"| IOSTANDARD = LVCMOS33;
+
+#NET "rst"    LOC = "P123" | CLOCK_DEDICATED_ROUTE = FALSE | IOSTANDARD = LVCMOS33 | PULLDOWN;     #RPI_GPIO12
+
+NET  rst  LOC = "P105" | CLOCK_DEDICATED_ROUTE = FALSE | PULLUP;
+# === I2C ===
+
+NET "i2c_sda"    LOC = "P74" | IOSTANDARD=LVCMOS33; 
+NET "i2c_scl"    LOC = "P75" | IOSTANDARD=LVCMOS33; 
+
+#Cambio de posicion debido a la posibilidad de que este alterando el funcionamiento 
+#original de la raspberry
+#NET "i2c_sda"    LOC="P102" | IOSTANDARD=LVCMOS33;  #DF<15>
+#NET "i2c_scl"    LOC="P99"  | IOSTANDARD=LVCMOS33;  #DF<13>
+
+
+
+# ==== UART ====
+NET "uart_rxd" LOC = "P69" | IOSTANDARD = LVCMOS33;
+NET "uart_txd" LOC = "P70" | IOSTANDARD = LVCMOS33;
+
+
+#NET "sck"       LOC = "P115" | IOSTANDARD = LVCMOS33;        
+#NET "mosi"      LOC = "P112" | IOSTANDARD = LVCMOS33;        
+#NET "miso"      LOC = "P114" | IOSTANDARD = LVCMOS33;        
+#NET "ss"        LOC = "P116" | IOSTANDARD = LVCMOS33;        
+	
+#NET "RX_PI"      LOC = "P119" | IOSTANDARD = LVCMOS33;     #RPI_GPIO16
+#NET "TX_PI"      LOC = "P120" | IOSTANDARD = LVCMOS33;     #RPI_GPIO13
+
+#NET "IR_RING_EN" LOC = "P143" | IOSTANDARD = LVCMOS33;
+#NET "RX_IR"      LOC = "P144" | IOSTANDARD = LVCMOS33;        
+#NET "TX_IR"      LOC = "P118" | IOSTANDARD = LVCMOS33;
+
+
+# ==== Expansion pinout ====
+
+#NET "DF<16>" LOC="P106"; #DF<16>
+#NET "DF<15>" LOC="P102"; #DF<15> 
+#NET "DF<14>" LOC="P101"; #DF<14>
+#NET "DF<13>" LOC="P99";  #DF<13>
+#NET "DF<12>" LOC="P98";  #DF<12>
+#NET "DF<11>" LOC="P95";  #DF<11>
+#NET "DF<10>" LOC="P94";  #DF<10>
+#NET "DF<9>" LOC="P93";   #DF<9>
+#NET "DF<8>" LOC="P92";   #DF<8>
+NET "pwm_out<3>" LOC="P88" | IOSTANDARD=LVCMOS33;   #DF<7> #Prueba
+#NET "DF<6>" LOC="P85";   #DF<6>
+NET "pwm_out<2>" LOC="P83" | IOSTANDARD=LVCMOS33;   #DF<5> #Prueba
+#NET "DF<4>" LOC="P82";   #DF<4>
+NET "pwm_out<1>" LOC="P81" | IOSTANDARD=LVCMOS33;   #DF<3> #Prueba
+#NET "DF<2>" LOC="P80";   #DF<2>
+NET "pwm_out<0>" LOC="P79" | IOSTANDARD=LVCMOS33;   #DF<1> #Prueba
+#NET "DF<0>" LOC="P78";   #DF<0>
+
+
+#######################
+# SAM 3S INTERFACE    #
+#######################
+#ADDRESS BUS
+#NET "mcu_addr<13>" LOC = "P24" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<12>" LOC = "P26" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<11>" LOC = "P27" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<10>" LOC = "P100" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<9>"  LOC = "P14" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<8>"  LOC = "P17" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<7>"  LOC = "P48" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<6>"  LOC = "P50" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<5>"  LOC = "P51" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<4>"  LOC = "P57" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<3>"  LOC = "P60" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<2>"  LOC = "P61" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<1>"  LOC = "P62" | IOSTANDARD = LVCMOS33;
+#NET "mcu_addr<0>"  LOC = "P66" | IOSTANDARD = LVCMOS33; 
+
+#DATA BUS
+#NET "mcu_sram_data<7>"  LOC = "P137" | IOSTANDARD = LVCMOS33;
+#NET "mcu_sram_data<6>"  LOC = "P132" | IOSTANDARD = LVCMOS33;
+#NET "mcu_sram_data<5>"  LOC = "P131" | IOSTANDARD = LVCMOS33;
+#NET "mcu_sram_data<4>"  LOC = "P127" | IOSTANDARD = LVCMOS33;
+#NET "mcu_sram_data<3>"  LOC = "P124" | IOSTANDARD = LVCMOS33;
+#NET "mcu_sram_data<2>"  LOC = "P121" | IOSTANDARD = LVCMOS33;
+#NET "mcu_sram_data<1>"  LOC = "P117" | IOSTANDARD = LVCMOS33;
+#NET "mcu_sram_data<0>"  LOC = "P6" | IOSTANDARD = LVCMOS33;
+
+#CONTROL BUS
+#NET "mcu_nwe"   LOC = "P97" | IOSTANDARD = LVCMOS33;
+#NET "mcu_nrd"   LOC = "P87" | IOSTANDARD = LVCMOS33;
+#NET "mcu_ncs"   LOC = "P8" | IOSTANDARD = LVCMOS33;
+

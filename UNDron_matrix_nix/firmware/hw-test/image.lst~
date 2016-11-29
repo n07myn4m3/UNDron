@@ -1,0 +1,5803 @@
+
+image:     file format elf32-lm32
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000022f8  00000000  00000000  00000054  2**2
+                  CONTENTS, ALLOC, LOAD, CODE
+  1 .rodata       00000440  000022f8  000022f8  0000234c  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 .data         00000014  00002738  00002738  0000278c  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00000090  0000274c  0000274c  000027a0  2**2
+                  ALLOC
+  4 .debug_abbrev 00000503  00000000  00000000  000027a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000240f  00000000  00000000  00002ca3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   0000205c  00000000  00000000  000050b2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000310  00000000  00000000  00007110  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_pubnames 0000037d  00000000  00000000  00007420  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_aranges 00000060  00000000  00000000  0000779d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000816  00000000  00000000  000077fd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .comment      00000036  00000000  00000000  00008013  2**0
+                  CONTENTS, READONLY
+ 12 .debug_loc    00001fe0  00000000  00000000  00008049  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000a28  00000000  00000000  0000a029  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <_ftext>:
+       0:	98 00 00 00 	xor r0,r0,r0
+       4:	d0 00 00 00 	wcsr IE,r0
+       8:	78 01 00 00 	mvhi r1,0x0
+       c:	38 21 00 00 	ori r1,r1,0x0
+      10:	d0 e1 00 00 	wcsr EBA,r1
+      14:	f8 00 00 3b 	calli 100 <_crt0>
+      18:	34 00 00 00 	nop
+      1c:	34 00 00 00 	nop
+
+00000020 <_breakpoint_handler>:
+      20:	34 00 00 00 	nop
+      24:	34 00 00 00 	nop
+      28:	34 00 00 00 	nop
+      2c:	34 00 00 00 	nop
+      30:	34 00 00 00 	nop
+      34:	34 00 00 00 	nop
+      38:	34 00 00 00 	nop
+      3c:	34 00 00 00 	nop
+
+00000040 <_ibuserror_handler>:
+      40:	34 00 00 00 	nop
+      44:	34 00 00 00 	nop
+      48:	34 00 00 00 	nop
+      4c:	34 00 00 00 	nop
+      50:	34 00 00 00 	nop
+      54:	34 00 00 00 	nop
+      58:	34 00 00 00 	nop
+      5c:	34 00 00 00 	nop
+
+00000060 <_watchpoint_handler>:
+      60:	34 00 00 00 	nop
+      64:	34 00 00 00 	nop
+      68:	34 00 00 00 	nop
+      6c:	34 00 00 00 	nop
+      70:	34 00 00 00 	nop
+      74:	34 00 00 00 	nop
+      78:	34 00 00 00 	nop
+      7c:	34 00 00 00 	nop
+
+00000080 <_dbuserror_handler>:
+      80:	34 00 00 00 	nop
+      84:	34 00 00 00 	nop
+      88:	34 00 00 00 	nop
+      8c:	34 00 00 00 	nop
+      90:	34 00 00 00 	nop
+      94:	34 00 00 00 	nop
+      98:	34 00 00 00 	nop
+      9c:	34 00 00 00 	nop
+
+000000a0 <_divzero_handler>:
+      a0:	34 00 00 00 	nop
+      a4:	34 00 00 00 	nop
+      a8:	34 00 00 00 	nop
+      ac:	34 00 00 00 	nop
+      b0:	34 00 00 00 	nop
+      b4:	34 00 00 00 	nop
+      b8:	34 00 00 00 	nop
+      bc:	34 00 00 00 	nop
+
+000000c0 <_interrupt_handler>:
+      c0:	5b 9d 00 00 	sw (sp+0),ra
+      c4:	f8 00 00 2b 	calli 170 <_save_all>
+      c8:	90 40 08 00 	rcsr r1,IP
+      cc:	f8 00 00 6a 	calli 274 <irq_handler>
+      d0:	78 01 ff ff 	mvhi r1,0xffff
+      d4:	38 21 ff ff 	ori r1,r1,0xffff
+      d8:	d0 41 00 00 	wcsr IP,r1
+      dc:	e0 00 00 38 	bi 1bc <_restore_all_and_eret>
+
+000000e0 <_scall_handler>:
+      e0:	34 00 00 00 	nop
+      e4:	34 00 00 00 	nop
+      e8:	34 00 00 00 	nop
+      ec:	34 00 00 00 	nop
+      f0:	34 00 00 00 	nop
+      f4:	34 00 00 00 	nop
+      f8:	34 00 00 00 	nop
+      fc:	34 00 00 00 	nop
+
+00000100 <_crt0>:
+     100:	78 1c 00 00 	mvhi sp,0x0
+     104:	3b 9c 3f fc 	ori sp,sp,0x3ffc
+     108:	78 1a 00 00 	mvhi gp,0x0
+     10c:	3b 5a 27 50 	ori gp,gp,0x2750
+     110:	78 01 00 00 	mvhi r1,0x0
+     114:	38 21 27 4c 	ori r1,r1,0x274c
+     118:	78 03 00 00 	mvhi r3,0x0
+     11c:	38 63 27 dc 	ori r3,r3,0x27dc
+
+00000120 <.clearBSS>:
+     120:	44 23 00 04 	be r1,r3,130 <.callMain>
+     124:	58 20 00 00 	sw (r1+0),r0
+     128:	34 21 00 04 	addi r1,r1,4
+     12c:	e3 ff ff fd 	bi 120 <.clearBSS>
+
+00000130 <.callMain>:
+     130:	34 01 00 00 	mvi r1,0
+     134:	34 02 00 00 	mvi r2,0
+     138:	34 03 00 00 	mvi r3,0
+     13c:	f8 00 00 33 	calli 208 <main>
+
+00000140 <irq_enable>:
+     140:	34 01 00 01 	mvi r1,1
+     144:	d0 01 00 00 	wcsr IE,r1
+     148:	c3 a0 00 00 	ret
+
+0000014c <irq_disable>:
+     14c:	34 01 00 00 	mvi r1,0
+     150:	d0 01 00 00 	wcsr IE,r1
+     154:	c3 a0 00 00 	ret
+
+00000158 <irq_set_mask>:
+     158:	d0 21 00 00 	wcsr IM,r1
+     15c:	c3 a0 00 00 	ret
+
+00000160 <irq_get_mask>:
+     160:	90 20 08 00 	rcsr r1,IM
+     164:	c3 a0 00 00 	ret
+
+00000168 <jump>:
+     168:	c0 20 00 00 	b r1
+
+0000016c <halt>:
+     16c:	e0 00 00 00 	bi 16c <halt>
+
+00000170 <_save_all>:
+     170:	37 9c ff 80 	addi sp,sp,-128
+     174:	5b 81 00 04 	sw (sp+4),r1
+     178:	5b 82 00 08 	sw (sp+8),r2
+     17c:	5b 83 00 0c 	sw (sp+12),r3
+     180:	5b 84 00 10 	sw (sp+16),r4
+     184:	5b 85 00 14 	sw (sp+20),r5
+     188:	5b 86 00 18 	sw (sp+24),r6
+     18c:	5b 87 00 1c 	sw (sp+28),r7
+     190:	5b 88 00 20 	sw (sp+32),r8
+     194:	5b 89 00 24 	sw (sp+36),r9
+     198:	5b 8a 00 28 	sw (sp+40),r10
+     19c:	5b 9e 00 78 	sw (sp+120),ea
+     1a0:	5b 9f 00 7c 	sw (sp+124),ba
+     1a4:	2b 81 00 80 	lw r1,(sp+128)
+     1a8:	5b 81 00 74 	sw (sp+116),r1
+     1ac:	bb 80 08 00 	mv r1,sp
+     1b0:	34 21 00 80 	addi r1,r1,128
+     1b4:	5b 81 00 70 	sw (sp+112),r1
+     1b8:	c3 a0 00 00 	ret
+
+000001bc <_restore_all_and_eret>:
+     1bc:	2b 81 00 04 	lw r1,(sp+4)
+     1c0:	2b 82 00 08 	lw r2,(sp+8)
+     1c4:	2b 83 00 0c 	lw r3,(sp+12)
+     1c8:	2b 84 00 10 	lw r4,(sp+16)
+     1cc:	2b 85 00 14 	lw r5,(sp+20)
+     1d0:	2b 86 00 18 	lw r6,(sp+24)
+     1d4:	2b 87 00 1c 	lw r7,(sp+28)
+     1d8:	2b 88 00 20 	lw r8,(sp+32)
+     1dc:	2b 89 00 24 	lw r9,(sp+36)
+     1e0:	2b 8a 00 28 	lw r10,(sp+40)
+     1e4:	2b 9d 00 74 	lw ra,(sp+116)
+     1e8:	2b 9e 00 78 	lw ea,(sp+120)
+     1ec:	2b 9f 00 7c 	lw ba,(sp+124)
+     1f0:	2b 9c 00 70 	lw sp,(sp+112)
+     1f4:	c3 c0 00 00 	eret
+
+000001f8 <get_sp>:
+     1f8:	bb 80 08 00 	mv r1,sp
+     1fc:	c3 a0 00 00 	ret
+
+00000200 <get_gp>:
+     200:	bb 40 08 00 	mv r1,gp
+     204:	c3 a0 00 00 	ret
+
+00000208 <main>:
+
+#include "soc-hw.h"
+#include "softfloat.h"
+
+int main(){
+     208:	37 9c ff fc 	addi sp,sp,-4
+     20c:	5b 9d 00 04 	sw (sp+4),ra
+//    irq_set_mask( 0x00000002 );
+//    irq_enable();
+
+
+  for(;;){
+    pwm_init();
+     210:	f8 00 00 a7 	calli 4ac <pwm_init>
+
+    // BasicIO
+    //uart_putstr( "** BasicIO **\n" );
+    
+    pwm_enable(1);
+     214:	34 01 00 01 	mvi r1,1
+     218:	f8 00 00 b2 	calli 4e0 <pwm_enable>
+    pwm_duty(10);
+     21c:	34 01 00 0a 	mvi r1,10
+     220:	f8 00 00 aa 	calli 4c8 <pwm_duty>
+    nsleep(100);
+     224:	34 01 00 64 	mvi r1,100
+     228:	f8 00 00 52 	calli 370 <nsleep>
+    pwm_duty(20);
+     22c:	34 01 00 14 	mvi r1,20
+     230:	f8 00 00 a6 	calli 4c8 <pwm_duty>
+    nsleep(100);
+     234:	34 01 00 64 	mvi r1,100
+     238:	f8 00 00 4e 	calli 370 <nsleep>
+    pwm_duty(30);
+     23c:	34 01 00 1e 	mvi r1,30
+     240:	f8 00 00 a2 	calli 4c8 <pwm_duty>
+    nsleep(100);
+     244:	34 01 00 64 	mvi r1,100
+     248:	f8 00 00 4a 	calli 370 <nsleep>
+    pwm_duty(40);
+     24c:	34 01 00 28 	mvi r1,40
+     250:	f8 00 00 9e 	calli 4c8 <pwm_duty>
+    nsleep(100);
+     254:	34 01 00 64 	mvi r1,100
+     258:	f8 00 00 46 	calli 370 <nsleep>
+    pwm_duty(50);
+     25c:	34 01 00 32 	mvi r1,50
+     260:	f8 00 00 9a 	calli 4c8 <pwm_duty>
+    nsleep(100);
+     264:	34 01 00 64 	mvi r1,100
+     268:	f8 00 00 42 	calli 370 <nsleep>
+     26c:	e3 ff ff e9 	bi 210 <main+0x8>
+
+00000270 <isr_null>:
+void tic_isr();
+/***************************************************************************
+ * IRQ handling
+ */
+void isr_null()
+{
+     270:	c3 a0 00 00 	ret
+
+00000274 <irq_handler>:
+}
+
+void irq_handler(uint32_t pending)
+{
+     274:	37 9c ff f0 	addi sp,sp,-16
+     278:	5b 8b 00 10 	sw (sp+16),r11
+     27c:	5b 8c 00 0c 	sw (sp+12),r12
+     280:	5b 8d 00 08 	sw (sp+8),r13
+     284:	5b 9d 00 04 	sw (sp+4),ra
+     288:	78 0b 00 00 	mvhi r11,0x0
+     28c:	39 6b 27 58 	ori r11,r11,0x2758
+     290:	b8 20 60 00 	mv r12,r1
+     294:	35 6d 00 80 	addi r13,r11,128
+     298:	e0 00 00 03 	bi 2a4 <irq_handler+0x30>
+    int i;
+
+    for(i=0; i<32; i++) {
+        if (pending & 0x01) (*isr_table[i])();
+     29c:	35 6b 00 04 	addi r11,r11,4
+
+void irq_handler(uint32_t pending)
+{
+    int i;
+
+    for(i=0; i<32; i++) {
+     2a0:	45 6d 00 08 	be r11,r13,2c0 <irq_handler+0x4c>
+        if (pending & 0x01) (*isr_table[i])();
+     2a4:	21 81 00 01 	andi r1,r12,0x1
+        pending >>= 1;
+     2a8:	01 8c 00 01 	srui r12,r12,1
+void irq_handler(uint32_t pending)
+{
+    int i;
+
+    for(i=0; i<32; i++) {
+        if (pending & 0x01) (*isr_table[i])();
+     2ac:	44 20 ff fc 	be r1,r0,29c <irq_handler+0x28>
+     2b0:	29 61 00 00 	lw r1,(r11+0)
+     2b4:	35 6b 00 04 	addi r11,r11,4
+     2b8:	d8 20 00 00 	call r1
+
+void irq_handler(uint32_t pending)
+{
+    int i;
+
+    for(i=0; i<32; i++) {
+     2bc:	5d 6d ff fa 	bne r11,r13,2a4 <irq_handler+0x30>
+        if (pending & 0x01) (*isr_table[i])();
+        pending >>= 1;
+    }
+}
+     2c0:	2b 9d 00 04 	lw ra,(sp+4)
+     2c4:	2b 8b 00 10 	lw r11,(sp+16)
+     2c8:	2b 8c 00 0c 	lw r12,(sp+12)
+     2cc:	2b 8d 00 08 	lw r13,(sp+8)
+     2d0:	37 9c 00 10 	addi sp,sp,16
+     2d4:	c3 a0 00 00 	ret
+
+000002d8 <isr_init>:
+
+void isr_init()
+{
+     2d8:	78 01 00 00 	mvhi r1,0x0
+     2dc:	38 21 27 58 	ori r1,r1,0x2758
+     2e0:	78 02 00 00 	mvhi r2,0x0
+     2e4:	38 42 02 70 	ori r2,r2,0x270
+     2e8:	34 23 00 80 	addi r3,r1,128
+    int i;
+    for(i=0; i<32; i++)
+        isr_table[i] = &isr_null;
+     2ec:	58 22 00 00 	sw (r1+0),r2
+     2f0:	34 21 00 04 	addi r1,r1,4
+}
+
+void isr_init()
+{
+    int i;
+    for(i=0; i<32; i++)
+     2f4:	5c 23 ff fe 	bne r1,r3,2ec <isr_init+0x14>
+        isr_table[i] = &isr_null;
+}
+     2f8:	c3 a0 00 00 	ret
+
+000002fc <isr_register>:
+
+void isr_register(int irq, isr_ptr_t isr)
+{
+     2fc:	3c 21 00 02 	sli r1,r1,2
+     300:	78 03 00 00 	mvhi r3,0x0
+     304:	38 63 27 58 	ori r3,r3,0x2758
+     308:	b4 61 18 00 	add r3,r3,r1
+     30c:	58 62 00 00 	sw (r3+0),r2
+    isr_table[irq] = isr;
+}
+     310:	c3 a0 00 00 	ret
+
+00000314 <isr_unregister>:
+
+void isr_unregister(int irq)
+{
+     314:	3c 21 00 02 	sli r1,r1,2
+     318:	78 03 00 00 	mvhi r3,0x0
+     31c:	38 63 27 58 	ori r3,r3,0x2758
+     320:	78 02 00 00 	mvhi r2,0x0
+     324:	b4 61 18 00 	add r3,r3,r1
+     328:	38 42 02 70 	ori r2,r2,0x270
+     32c:	58 62 00 00 	sw (r3+0),r2
+    isr_table[irq] = &isr_null;
+}
+     330:	c3 a0 00 00 	ret
+
+00000334 <msleep>:
+ * TIMER Functions
+ */
+uint32_t tic_msec;
+
+void msleep(uint32_t msec)
+{
+     334:	78 03 00 00 	mvhi r3,0x0
+     338:	78 02 00 01 	mvhi r2,0x1
+     33c:	38 42 86 a0 	ori r2,r2,0x86a0
+     340:	38 63 27 3c 	ori r3,r3,0x273c
+     344:	88 22 08 00 	mul r1,r1,r2
+     348:	28 63 00 00 	lw r3,(r3+0)
+    uint32_t tcr;
+
+    // Use timer0.1
+    timer0->compare1 = (FCPU/1000)*msec;
+    timer0->counter1 = 0;
+    timer0->tcr1 = TIMER_EN;
+     34c:	34 02 00 08 	mvi r2,8
+void msleep(uint32_t msec)
+{
+    uint32_t tcr;
+
+    // Use timer0.1
+    timer0->compare1 = (FCPU/1000)*msec;
+     350:	58 61 00 10 	sw (r3+16),r1
+    timer0->counter1 = 0;
+     354:	34 01 00 00 	mvi r1,0
+     358:	58 61 00 14 	sw (r3+20),r1
+    timer0->tcr1 = TIMER_EN;
+     35c:	58 62 00 0c 	sw (r3+12),r2
+
+    do {
+        //halt();
+         tcr = timer0->tcr1;
+     360:	28 61 00 0c 	lw r1,(r3+12)
+     } while ( ! (tcr & TIMER_TRIG) );
+     364:	20 21 00 01 	andi r1,r1,0x1
+     368:	44 20 ff fe 	be r1,r0,360 <msleep+0x2c>
+}
+     36c:	c3 a0 00 00 	ret
+
+00000370 <nsleep>:
+
+void nsleep(uint32_t nsec)
+{
+     370:	b4 21 10 00 	add r2,r1,r1
+     374:	b4 41 10 00 	add r2,r2,r1
+     378:	78 03 00 00 	mvhi r3,0x0
+     37c:	38 63 27 3c 	ori r3,r3,0x273c
+     380:	3c 44 00 05 	sli r4,r2,5
+     384:	28 63 00 00 	lw r3,(r3+0)
+     388:	b4 44 10 00 	add r2,r2,r4
+     38c:	b4 41 10 00 	add r2,r2,r1
+     390:	58 62 00 10 	sw (r3+16),r2
+    uint32_t tcr;
+
+    // Use timer0.1
+    timer0->compare1 = (FCPU/1000000)*nsec;
+    timer0->counter1 = 0;
+     394:	34 01 00 00 	mvi r1,0
+     398:	58 61 00 14 	sw (r3+20),r1
+    timer0->tcr1 = TIMER_EN;
+     39c:	34 02 00 08 	mvi r2,8
+     3a0:	58 62 00 0c 	sw (r3+12),r2
+
+    do {
+        //halt();
+         tcr = timer0->tcr1;
+     3a4:	28 61 00 0c 	lw r1,(r3+12)
+     } while ( ! (tcr & TIMER_TRIG) );
+     3a8:	20 21 00 01 	andi r1,r1,0x1
+     3ac:	44 20 ff fe 	be r1,r0,3a4 <nsleep+0x34>
+}
+     3b0:	c3 a0 00 00 	ret
+
+000003b4 <tic_isr>:
+
+void tic_isr()
+{
+     3b4:	78 03 00 00 	mvhi r3,0x0
+     3b8:	38 63 27 d8 	ori r3,r3,0x27d8
+     3bc:	28 62 00 00 	lw r2,(r3+0)
+    tic_msec++;
+    timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
+     3c0:	78 01 00 00 	mvhi r1,0x0
+     3c4:	38 21 27 3c 	ori r1,r1,0x273c
+     3c8:	28 24 00 00 	lw r4,(r1+0)
+     } while ( ! (tcr & TIMER_TRIG) );
+}
+
+void tic_isr()
+{
+    tic_msec++;
+     3cc:	34 42 00 01 	addi r2,r2,1
+     3d0:	58 62 00 00 	sw (r3+0),r2
+    timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
+     3d4:	34 01 00 0e 	mvi r1,14
+     3d8:	58 81 00 00 	sw (r4+0),r1
+}
+     3dc:	c3 a0 00 00 	ret
+
+000003e0 <tic_init>:
+
+void tic_init()
+{
+     3e0:	78 01 00 00 	mvhi r1,0x0
+     3e4:	38 21 27 3c 	ori r1,r1,0x273c
+     3e8:	28 24 00 00 	lw r4,(r1+0)
+    tic_msec = 0;
+     3ec:	78 02 00 00 	mvhi r2,0x0
+     3f0:	38 42 27 d8 	ori r2,r2,0x27d8
+     3f4:	34 05 00 00 	mvi r5,0
+     3f8:	58 45 00 00 	sw (r2+0),r5
+
+    // Setup timer0.0
+    timer0->compare0 = (FCPU/10000);
+     3fc:	34 01 27 10 	mvi r1,10000
+     400:	58 81 00 04 	sw (r4+4),r1
+        isr_table[i] = &isr_null;
+}
+
+void isr_register(int irq, isr_ptr_t isr)
+{
+    isr_table[irq] = isr;
+     404:	78 03 00 00 	mvhi r3,0x0
+     408:	78 02 00 00 	mvhi r2,0x0
+{
+    tic_msec = 0;
+
+    // Setup timer0.0
+    timer0->compare0 = (FCPU/10000);
+    timer0->counter0 = 0;
+     40c:	58 85 00 08 	sw (r4+8),r5
+        isr_table[i] = &isr_null;
+}
+
+void isr_register(int irq, isr_ptr_t isr)
+{
+    isr_table[irq] = isr;
+     410:	38 63 27 58 	ori r3,r3,0x2758
+     414:	38 42 03 b4 	ori r2,r2,0x3b4
+    tic_msec = 0;
+
+    // Setup timer0.0
+    timer0->compare0 = (FCPU/10000);
+    timer0->counter0 = 0;
+    timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
+     418:	34 01 00 0e 	mvi r1,14
+     41c:	58 81 00 00 	sw (r4+0),r1
+        isr_table[i] = &isr_null;
+}
+
+void isr_register(int irq, isr_ptr_t isr)
+{
+    isr_table[irq] = isr;
+     420:	58 62 00 04 	sw (r3+4),r2
+    timer0->compare0 = (FCPU/10000);
+    timer0->counter0 = 0;
+    timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
+
+    isr_register(1, &tic_isr);
+}
+     424:	c3 a0 00 00 	ret
+
+00000428 <uart_init>:
+
+/***************************************************************************
+ * UART Functions
+ */
+void uart_init()
+{
+     428:	c3 a0 00 00 	ret
+
+0000042c <uart_getchar>:
+    // Setup Divisor register (Fclk / Baud)
+    //uart0->div = (FCPU/(57600*16));
+}
+
+char uart_getchar()
+{   
+     42c:	78 01 00 00 	mvhi r1,0x0
+     430:	38 21 27 38 	ori r1,r1,0x2738
+     434:	28 22 00 00 	lw r2,(r1+0)
+     438:	28 41 00 00 	lw r1,(r2+0)
+     43c:	20 21 00 01 	andi r1,r1,0x1
+     440:	44 20 ff fe 	be r1,r0,438 <uart_getchar+0xc>
+    while (! (uart0->ucr & UART_DR)) ;
+    return uart0->rxtx;
+     444:	28 41 00 04 	lw r1,(r2+4)
+}
+     448:	20 21 00 ff 	andi r1,r1,0xff
+     44c:	c3 a0 00 00 	ret
+
+00000450 <uart_putchar>:
+
+void uart_putchar(char c)
+{
+     450:	78 02 00 00 	mvhi r2,0x0
+     454:	38 42 27 38 	ori r2,r2,0x2738
+     458:	28 42 00 00 	lw r2,(r2+0)
+     45c:	20 23 00 ff 	andi r3,r1,0xff
+    while (uart0->ucr & UART_BUSY) ;
+     460:	28 41 00 00 	lw r1,(r2+0)
+     464:	20 21 00 10 	andi r1,r1,0x10
+     468:	5c 20 ff fe 	bne r1,r0,460 <uart_putchar+0x10>
+    uart0->rxtx = c;
+     46c:	58 43 00 04 	sw (r2+4),r3
+}
+     470:	c3 a0 00 00 	ret
+
+00000474 <uart_putstr>:
+
+void uart_putstr(char *str)
+{
+     474:	40 24 00 00 	lbu r4,(r1+0)
+     478:	b8 20 18 00 	mv r3,r1
+    char *c = str;
+    while(*c) {
+     47c:	44 80 00 0b 	be r4,r0,4a8 <uart_putstr+0x34>
+    return uart0->rxtx;
+}
+
+void uart_putchar(char c)
+{
+    while (uart0->ucr & UART_BUSY) ;
+     480:	78 01 00 00 	mvhi r1,0x0
+     484:	38 21 27 38 	ori r1,r1,0x2738
+     488:	28 22 00 00 	lw r2,(r1+0)
+     48c:	28 41 00 00 	lw r1,(r2+0)
+     490:	20 21 00 10 	andi r1,r1,0x10
+     494:	5c 20 ff fe 	bne r1,r0,48c <uart_putstr+0x18>
+    uart0->rxtx = c;
+     498:	58 44 00 04 	sw (r2+4),r4
+void uart_putstr(char *str)
+{
+    char *c = str;
+    while(*c) {
+        uart_putchar(*c);
+        c++;
+     49c:	34 63 00 01 	addi r3,r3,1
+}
+
+void uart_putstr(char *str)
+{
+    char *c = str;
+    while(*c) {
+     4a0:	40 64 00 00 	lbu r4,(r3+0)
+     4a4:	5c 81 ff fa 	bne r4,r1,48c <uart_putstr+0x18>
+     4a8:	c3 a0 00 00 	ret
+
+000004ac <pwm_init>:
+
+/***************************************************************************
+ * PWM Functions
+ */
+void pwm_init()
+{
+     4ac:	78 01 00 00 	mvhi r1,0x0
+     4b0:	38 21 27 48 	ori r1,r1,0x2748
+     4b4:	28 23 00 00 	lw r3,(r1+0)
+     4b8:	34 02 00 00 	mvi r2,0
+     4bc:	58 62 00 00 	sw (r3+0),r2
+  pwm0->duty = 0;
+  pwm0->enable = 0;
+     4c0:	58 62 00 04 	sw (r3+4),r2
+}
+     4c4:	c3 a0 00 00 	ret
+
+000004c8 <pwm_duty>:
+
+void pwm_duty(uint8_t duty0)
+{
+     4c8:	78 02 00 00 	mvhi r2,0x0
+     4cc:	38 42 27 48 	ori r2,r2,0x2748
+     4d0:	28 43 00 00 	lw r3,(r2+0)
+     4d4:	20 21 00 ff 	andi r1,r1,0xff
+  pwm0->duty = duty0;
+     4d8:	58 61 00 00 	sw (r3+0),r1
+}
+     4dc:	c3 a0 00 00 	ret
+
+000004e0 <pwm_enable>:
+
+void pwm_enable(uint8_t enable0)
+{
+     4e0:	78 02 00 00 	mvhi r2,0x0
+     4e4:	38 42 27 48 	ori r2,r2,0x2748
+     4e8:	28 43 00 00 	lw r3,(r2+0)
+     4ec:	20 21 00 ff 	andi r1,r1,0xff
+  pwm0->enable = enable0;
+     4f0:	58 61 00 04 	sw (r3+4),r1
+}
+     4f4:	c3 a0 00 00 	ret
+
+000004f8 <estimateDiv64To32>:
+the exact quotient q is larger than 32 bits, the maximum positive 32-bit
+unsigned integer is returned.
+-------------------------------------------------------------------------------
+*/
+static bits32 estimateDiv64To32( bits32 a0, bits32 a1, bits32 b )
+{
+     4f8:	37 9c ff f0 	addi sp,sp,-16
+     4fc:	5b 8b 00 10 	sw (sp+16),r11
+     500:	5b 8c 00 0c 	sw (sp+12),r12
+     504:	5b 8d 00 08 	sw (sp+8),r13
+     508:	5b 8e 00 04 	sw (sp+4),r14
+     50c:	b8 20 38 00 	mv r7,r1
+     510:	b8 60 60 00 	mv r12,r3
+     514:	b8 40 68 00 	mv r13,r2
+    bits32 b0, b1;
+    bits32 rem0, rem1, term0, term1;
+    bits32 z;
+
+    if ( b <= a0 ) return 0xFFFFFFFF;
+     518:	54 61 00 08 	bgu r3,r1,538 <estimateDiv64To32+0x40>
+     51c:	34 01 ff ff 	mvi r1,-1
+    }
+    rem0 = ( rem0<<16 ) | ( rem1>>16 );
+    z |= ( b0<<16 <= rem0 ) ? 0xFFFF : rem0 / b0;
+    return z;
+
+}
+     520:	2b 8b 00 10 	lw r11,(sp+16)
+     524:	2b 8c 00 0c 	lw r12,(sp+12)
+     528:	2b 8d 00 08 	lw r13,(sp+8)
+     52c:	2b 8e 00 04 	lw r14,(sp+4)
+     530:	37 9c 00 10 	addi sp,sp,16
+     534:	c3 a0 00 00 	ret
+    bits32 b0, b1;
+    bits32 rem0, rem1, term0, term1;
+    bits32 z;
+
+    if ( b <= a0 ) return 0xFFFFFFFF;
+    b0 = b>>16;
+     538:	00 69 00 10 	srui r9,r3,16
+    z = ( b0<<16 <= a0 ) ? 0xFFFF0000 : ( a0 / b0 )<<16;
+     53c:	3d 2e 00 10 	sli r14,r9,16
+     540:	55 c1 00 2f 	bgu r14,r1,5fc <estimateDiv64To32+0x104>
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+     544:	20 61 ff ff 	andi r1,r3,0xffff
+     548:	3c 22 00 10 	sli r2,r1,16
+     54c:	34 0b 00 00 	mvi r11,0
+     550:	78 08 ff ff 	mvhi r8,0xffff
+     554:	c8 41 28 00 	sub r5,r2,r1
+     558:	39 08 00 00 	ori r8,r8,0x0
+    bits32 rem0, rem1, term0, term1;
+    bits32 z;
+
+    if ( b <= a0 ) return 0xFFFFFFFF;
+    b0 = b>>16;
+    z = ( b0<<16 <= a0 ) ? 0xFFFF0000 : ( a0 / b0 )<<16;
+     55c:	21 2a ff ff 	andi r10,r9,0xffff
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+     560:	b9 60 20 00 	mv r4,r11
+     564:	38 06 ff ff 	mvu r6,0xffff
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    zMiddleA <<= 16;
+     568:	3c a2 00 10 	sli r2,r5,16
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+     56c:	89 46 08 00 	mul r1,r10,r6
+    zMiddleA <<= 16;
+    z1 += zMiddleA;
+     570:	b4 44 18 00 	add r3,r2,r4
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+     574:	00 a5 00 10 	srui r5,r5,16
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+    *z0Ptr = a0 - b0 - ( a1 < b1 );
+     578:	f4 43 10 00 	cmpgu r2,r2,r3
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+     57c:	c8 e1 08 00 	sub r1,r7,r1
+     580:	c8 25 08 00 	sub r1,r1,r5
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+    *z0Ptr = a0 - b0 - ( a1 < b1 );
+     584:	f4 6d 20 00 	cmpgu r4,r3,r13
+     588:	c8 22 08 00 	sub r1,r1,r2
+     58c:	c8 24 08 00 	sub r1,r1,r4
+     590:	c8 2b 28 00 	sub r5,r1,r11
+INLINE void
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+     594:	c9 a3 10 00 	sub r2,r13,r3
+    if ( b <= a0 ) return 0xFFFFFFFF;
+    b0 = b>>16;
+    z = ( b0<<16 <= a0 ) ? 0xFFFF0000 : ( a0 / b0 )<<16;
+    mul32To64( b, z, &term0, &term1 );
+    sub64( a0, a1, term0, term1, &rem0, &rem1 );
+    while ( ( (sbits32) rem0 ) < 0 ) {
+     598:	4c a0 00 0d 	bge r5,r0,5cc <estimateDiv64To32+0xd4>
+     59c:	78 07 ff ff 	mvhi r7,0xffff
+     5a0:	3d 83 00 10 	sli r3,r12,16
+        z -= 0x10000;
+     5a4:	38 e7 00 00 	ori r7,r7,0x0
+ add64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+    bits32 z1;
+
+    z1 = a1 + b1;
+     5a8:	b4 43 30 00 	add r6,r2,r3
+    *z1Ptr = z1;
+    *z0Ptr = a0 + b0 + ( z1 < a1 );
+     5ac:	f4 46 08 00 	cmpgu r1,r2,r6
+    b0 = b>>16;
+    z = ( b0<<16 <= a0 ) ? 0xFFFF0000 : ( a0 / b0 )<<16;
+    mul32To64( b, z, &term0, &term1 );
+    sub64( a0, a1, term0, term1, &rem0, &rem1 );
+    while ( ( (sbits32) rem0 ) < 0 ) {
+        z -= 0x10000;
+     5b0:	b5 07 40 00 	add r8,r8,r7
+{
+    bits32 z1;
+
+    z1 = a1 + b1;
+    *z1Ptr = z1;
+    *z0Ptr = a0 + b0 + ( z1 < a1 );
+     5b4:	b4 29 08 00 	add r1,r1,r9
+     5b8:	b4 a1 28 00 	add r5,r5,r1
+    if ( b <= a0 ) return 0xFFFFFFFF;
+    b0 = b>>16;
+    z = ( b0<<16 <= a0 ) ? 0xFFFF0000 : ( a0 / b0 )<<16;
+    mul32To64( b, z, &term0, &term1 );
+    sub64( a0, a1, term0, term1, &rem0, &rem1 );
+    while ( ( (sbits32) rem0 ) < 0 ) {
+     5bc:	b8 c0 10 00 	mv r2,r6
+     5c0:	4c a0 00 02 	bge r5,r0,5c8 <estimateDiv64To32+0xd0>
+     5c4:	e3 ff ff f9 	bi 5a8 <estimateDiv64To32+0xb0>
+     5c8:	b8 c0 10 00 	mv r2,r6
+        z -= 0x10000;
+        b1 = b<<16;
+        add64( rem0, rem1, b0, b1, &rem0, &rem1 );
+    }
+    rem0 = ( rem0<<16 ) | ( rem1>>16 );
+     5cc:	00 42 00 10 	srui r2,r2,16
+     5d0:	3c a1 00 10 	sli r1,r5,16
+     5d4:	b8 41 08 00 	or r1,r2,r1
+    z |= ( b0<<16 <= rem0 ) ? 0xFFFF : rem0 / b0;
+     5d8:	55 c1 00 19 	bgu r14,r1,63c <estimateDiv64To32+0x144>
+     5dc:	38 01 ff ff 	mvu r1,0xffff
+     5e0:	b8 28 08 00 	or r1,r1,r8
+    return z;
+
+}
+     5e4:	2b 8b 00 10 	lw r11,(sp+16)
+     5e8:	2b 8c 00 0c 	lw r12,(sp+12)
+     5ec:	2b 8d 00 08 	lw r13,(sp+8)
+     5f0:	2b 8e 00 04 	lw r14,(sp+4)
+     5f4:	37 9c 00 10 	addi sp,sp,16
+     5f8:	c3 a0 00 00 	ret
+    bits32 rem0, rem1, term0, term1;
+    bits32 z;
+
+    if ( b <= a0 ) return 0xFFFFFFFF;
+    b0 = b>>16;
+    z = ( b0<<16 <= a0 ) ? 0xFFFF0000 : ( a0 / b0 )<<16;
+     5fc:	8c 29 08 00 	divu r1,r1,r9
+     600:	20 64 ff ff 	andi r4,r3,0xffff
+     604:	3c 28 00 10 	sli r8,r1,16
+     608:	21 2a ff ff 	andi r10,r9,0xffff
+     60c:	01 06 00 10 	srui r6,r8,16
+     610:	21 01 ff ff 	andi r1,r8,0xffff
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+     614:	88 86 10 00 	mul r2,r4,r6
+    bits32 rem0, rem1, term0, term1;
+    bits32 z;
+
+    if ( b <= a0 ) return 0xFFFFFFFF;
+    b0 = b>>16;
+    z = ( b0<<16 <= a0 ) ? 0xFFFF0000 : ( a0 / b0 )<<16;
+     618:	88 2a 18 00 	mul r3,r1,r10
+     61c:	88 24 20 00 	mul r4,r1,r4
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+     620:	b4 43 28 00 	add r5,r2,r3
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+     624:	54 65 00 03 	bgu r3,r5,630 <estimateDiv64To32+0x138>
+     628:	34 0b 00 00 	mvi r11,0
+     62c:	e3 ff ff cf 	bi 568 <estimateDiv64To32+0x70>
+     630:	78 0b 00 01 	mvhi r11,0x1
+     634:	39 6b 00 00 	ori r11,r11,0x0
+     638:	e3 ff ff cc 	bi 568 <estimateDiv64To32+0x70>
+        z -= 0x10000;
+        b1 = b<<16;
+        add64( rem0, rem1, b0, b1, &rem0, &rem1 );
+    }
+    rem0 = ( rem0<<16 ) | ( rem1>>16 );
+    z |= ( b0<<16 <= rem0 ) ? 0xFFFF : rem0 / b0;
+     63c:	8c 29 08 00 	divu r1,r1,r9
+     640:	b8 28 08 00 	or r1,r1,r8
+     644:	e3 ff ff e8 	bi 5e4 <estimateDiv64To32+0xec>
+
+00000648 <float_raise>:
+substitute a result value.  If traps are not implemented, this routine
+should be simply `float_exception_flags |= flags;'.
+-------------------------------------------------------------------------------
+*/
+void float_raise( int8 flags )
+{
+     648:	78 02 00 00 	mvhi r2,0x0
+     64c:	38 42 27 50 	ori r2,r2,0x2750
+     650:	28 43 00 00 	lw r3,(r2+0)
+     654:	b8 23 08 00 	or r1,r1,r3
+     658:	58 41 00 00 	sw (r2+0),r1
+
+    float_exception_flags |= flags;
+
+}
+     65c:	c3 a0 00 00 	ret
+
+00000660 <float32_is_nan>:
+Returns 1 if the single-precision floating-point value `a' is a NaN;
+otherwise returns 0.
+-------------------------------------------------------------------------------
+*/
+flag float32_is_nan( float32 a )
+{
+     660:	78 02 ff 00 	mvhi r2,0xff00
+     664:	38 42 00 00 	ori r2,r2,0x0
+     668:	b4 21 08 00 	add r1,r1,r1
+
+    return ( 0xFF000000 < (bits32) ( a<<1 ) );
+
+}
+     66c:	f4 22 08 00 	cmpgu r1,r1,r2
+     670:	c3 a0 00 00 	ret
+
+00000674 <float32_is_signaling_nan>:
+Returns 1 if the single-precision floating-point value `a' is a signaling
+NaN; otherwise returns 0.
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+     674:	b8 20 20 00 	mv r4,r1
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+     678:	00 21 00 16 	srui r1,r1,22
+     67c:	34 02 01 fe 	mvi r2,510
+     680:	20 21 01 ff 	andi r1,r1,0x1ff
+     684:	34 03 00 00 	mvi r3,0
+     688:	44 22 00 03 	be r1,r2,694 <float32_is_signaling_nan+0x20>
+
+}
+     68c:	b8 60 08 00 	mv r1,r3
+     690:	c3 a0 00 00 	ret
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+     694:	78 01 00 3f 	mvhi r1,0x3f
+     698:	38 21 ff ff 	ori r1,r1,0xffff
+     69c:	a0 81 08 00 	and r1,r4,r1
+     6a0:	7c 23 00 00 	cmpnei r3,r1,0
+
+}
+     6a4:	b8 60 08 00 	mv r1,r3
+     6a8:	c3 a0 00 00 	ret
+
+000006ac <propagateFloat32NaN>:
+is a NaN, and returns the appropriate NaN result.  If either `a' or `b' is a
+signaling NaN, the invalid exception is raised.
+-------------------------------------------------------------------------------
+*/
+static float32 propagateFloat32NaN( float32 a, float32 b )
+{
+     6ac:	00 23 00 16 	srui r3,r1,22
+     6b0:	b8 20 30 00 	mv r6,r1
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+     6b4:	20 63 01 ff 	andi r3,r3,0x1ff
+     6b8:	34 01 01 fe 	mvi r1,510
+is a NaN, and returns the appropriate NaN result.  If either `a' or `b' is a
+signaling NaN, the invalid exception is raised.
+-------------------------------------------------------------------------------
+*/
+static float32 propagateFloat32NaN( float32 a, float32 b )
+{
+     6bc:	b8 40 20 00 	mv r4,r2
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+     6c0:	34 07 00 00 	mvi r7,0
+     6c4:	44 61 00 24 	be r3,r1,754 <propagateFloat32NaN+0xa8>
+    aIsNaN = float32_is_nan( a );
+    aIsSignalingNaN = float32_is_signaling_nan( a );
+    bIsNaN = float32_is_nan( b );
+    bIsSignalingNaN = float32_is_signaling_nan( b );
+    a |= 0x00400000;
+    b |= 0x00400000;
+     6c8:	00 81 00 16 	srui r1,r4,22
+     6cc:	34 02 01 fe 	mvi r2,510
+     6d0:	20 21 01 ff 	andi r1,r1,0x1ff
+     6d4:	34 03 00 00 	mvi r3,0
+     6d8:	44 22 00 1a 	be r1,r2,740 <propagateFloat32NaN+0x94>
+     6dc:	78 05 00 40 	mvhi r5,0x40
+     6e0:	b8 a0 08 00 	mv r1,r5
+    if ( aIsSignalingNaN | bIsSignalingNaN ) float_raise( float_flag_invalid );
+     6e4:	b8 67 10 00 	or r2,r3,r7
+    aIsNaN = float32_is_nan( a );
+    aIsSignalingNaN = float32_is_signaling_nan( a );
+    bIsNaN = float32_is_nan( b );
+    bIsSignalingNaN = float32_is_signaling_nan( b );
+    a |= 0x00400000;
+    b |= 0x00400000;
+     6e8:	38 21 00 00 	ori r1,r1,0x0
+     6ec:	b8 81 18 00 	or r3,r4,r1
+    if ( aIsSignalingNaN | bIsSignalingNaN ) float_raise( float_flag_invalid );
+     6f0:	44 40 00 06 	be r2,r0,708 <propagateFloat32NaN+0x5c>
+-------------------------------------------------------------------------------
+*/
+void float_raise( int8 flags )
+{
+
+    float_exception_flags |= flags;
+     6f4:	78 02 00 00 	mvhi r2,0x0
+     6f8:	38 42 27 50 	ori r2,r2,0x2750
+     6fc:	28 41 00 00 	lw r1,(r2+0)
+     700:	38 21 00 10 	ori r1,r1,0x10
+     704:	58 41 00 00 	sw (r2+0),r1
+    bIsNaN = float32_is_nan( b );
+    bIsSignalingNaN = float32_is_signaling_nan( b );
+    a |= 0x00400000;
+    b |= 0x00400000;
+    if ( aIsSignalingNaN | bIsSignalingNaN ) float_raise( float_flag_invalid );
+    if ( aIsNaN ) {
+     708:	78 02 ff 00 	mvhi r2,0xff00
+     70c:	38 42 00 00 	ori r2,r2,0x0
+     710:	b4 c6 08 00 	add r1,r6,r6
+     714:	50 41 00 05 	bgeu r2,r1,728 <propagateFloat32NaN+0x7c>
+        return ( aIsSignalingNaN & bIsNaN ) ? b : a;
+     718:	b4 84 08 00 	add r1,r4,r4
+     71c:	f4 22 08 00 	cmpgu r1,r1,r2
+     720:	a0 e1 08 00 	and r1,r7,r1
+     724:	44 20 00 03 	be r1,r0,730 <propagateFloat32NaN+0x84>
+    }
+    else {
+        return b;
+    }
+
+}
+     728:	b8 60 08 00 	mv r1,r3
+     72c:	c3 a0 00 00 	ret
+
+    aIsNaN = float32_is_nan( a );
+    aIsSignalingNaN = float32_is_signaling_nan( a );
+    bIsNaN = float32_is_nan( b );
+    bIsSignalingNaN = float32_is_signaling_nan( b );
+    a |= 0x00400000;
+     730:	38 a5 00 00 	ori r5,r5,0x0
+     734:	b8 c5 18 00 	or r3,r6,r5
+    }
+    else {
+        return b;
+    }
+
+}
+     738:	b8 60 08 00 	mv r1,r3
+     73c:	c3 a0 00 00 	ret
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+     740:	78 01 00 3f 	mvhi r1,0x3f
+     744:	38 21 ff ff 	ori r1,r1,0xffff
+     748:	a0 81 08 00 	and r1,r4,r1
+     74c:	7c 23 00 00 	cmpnei r3,r1,0
+     750:	e3 ff ff e3 	bi 6dc <propagateFloat32NaN+0x30>
+     754:	78 01 00 3f 	mvhi r1,0x3f
+     758:	38 21 ff ff 	ori r1,r1,0xffff
+     75c:	a0 c1 08 00 	and r1,r6,r1
+     760:	7c 27 00 00 	cmpnei r7,r1,0
+     764:	e3 ff ff d9 	bi 6c8 <propagateFloat32NaN+0x1c>
+
+00000768 <roundAndPackFloat32>:
+The handling of underflow and overflow follows the IEC/IEEE Standard for
+Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+static float32 roundAndPackFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+     768:	78 04 00 00 	mvhi r4,0x0
+     76c:	38 84 27 4c 	ori r4,r4,0x274c
+     770:	28 84 00 00 	lw r4,(r4+0)
+     774:	b8 20 48 00 	mv r9,r1
+     778:	b8 40 30 00 	mv r6,r2
+    flag roundNearestEven;
+    int8 roundIncrement, roundBits;
+    flag isTiny;
+
+    roundingMode = float_rounding_mode;
+    roundNearestEven = roundingMode == float_round_nearest_even;
+     77c:	64 88 00 00 	cmpei r8,r4,0
+The handling of underflow and overflow follows the IEC/IEEE Standard for
+Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+static float32 roundAndPackFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+     780:	b8 60 38 00 	mv r7,r3
+    flag isTiny;
+
+    roundingMode = float_rounding_mode;
+    roundNearestEven = roundingMode == float_round_nearest_even;
+    roundIncrement = 0x40;
+    if ( ! roundNearestEven ) {
+     784:	34 05 00 40 	mvi r5,64
+     788:	5d 00 00 07 	bne r8,r0,7a4 <roundAndPackFloat32+0x3c>
+        if ( roundingMode == float_round_to_zero ) {
+     78c:	34 01 00 01 	mvi r1,1
+     790:	44 81 00 37 	be r4,r1,86c <roundAndPackFloat32+0x104>
+            roundIncrement = 0;
+        }
+        else {
+            roundIncrement = 0x7F;
+            if ( zSign ) {
+     794:	45 28 00 34 	be r9,r8,864 <roundAndPackFloat32+0xfc>
+                if ( roundingMode == float_round_up ) roundIncrement = 0;
+     798:	34 01 00 02 	mvi r1,2
+     79c:	44 81 00 34 	be r4,r1,86c <roundAndPackFloat32+0x104>
+            }
+            else {
+                if ( roundingMode == float_round_down ) roundIncrement = 0;
+     7a0:	34 05 00 7f 	mvi r5,127
+            }
+        }
+    }
+    roundBits = zSig & 0x7F;
+    if ( 0xFD <= (bits16) zExp ) {
+     7a4:	20 c2 ff ff 	andi r2,r6,0xffff
+     7a8:	34 01 00 fc 	mvi r1,252
+            else {
+                if ( roundingMode == float_round_down ) roundIncrement = 0;
+            }
+        }
+    }
+    roundBits = zSig & 0x7F;
+     7ac:	20 e3 00 7f 	andi r3,r7,0x7f
+     7b0:	b4 a7 20 00 	add r4,r5,r7
+    if ( 0xFD <= (bits16) zExp ) {
+     7b4:	50 22 00 05 	bgeu r1,r2,7c8 <roundAndPackFloat32+0x60>
+        if (    ( 0xFD < zExp )
+     7b8:	34 01 00 fd 	mvi r1,253
+     7bc:	48 c1 00 1e 	bg r6,r1,834 <roundAndPackFloat32+0xcc>
+     7c0:	44 c1 00 1c 	be r6,r1,830 <roundAndPackFloat32+0xc8>
+                  && ( (sbits32) ( zSig + roundIncrement ) < 0 ) )
+           ) {
+            float_raise( float_flag_overflow | float_flag_inexact );
+            return packFloat32( zSign, 0xFF, 0 ) - ( roundIncrement == 0 );
+        }
+        if ( zExp < 0 ) {
+     7c4:	48 06 00 2c 	bg r0,r6,874 <roundAndPackFloat32+0x10c>
+            zExp = 0;
+            roundBits = zSig & 0x7F;
+            if ( isTiny && roundBits ) float_raise( float_flag_underflow );
+        }
+    }
+    if ( roundBits ) float_exception_flags |= float_flag_inexact;
+     7c8:	5c 60 00 0d 	bne r3,r0,7fc <roundAndPackFloat32+0x94>
+    zSig = ( zSig + roundIncrement )>>7;
+    zSig &= ~ ( ( ( roundBits ^ 0x40 ) == 0 ) & roundNearestEven );
+     7cc:	64 61 00 40 	cmpei r1,r3,64
+     7d0:	00 82 00 07 	srui r2,r4,7
+     7d4:	a0 28 08 00 	and r1,r1,r8
+     7d8:	a4 20 08 00 	not r1,r1
+     7dc:	a0 22 10 00 	and r2,r1,r2
+    if ( zSig == 0 ) zExp = 0;
+     7e0:	3c c3 00 17 	sli r3,r6,23
+     7e4:	5c 40 00 02 	bne r2,r0,7ec <roundAndPackFloat32+0x84>
+     7e8:	b8 40 18 00 	mv r3,r2
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+     7ec:	3d 21 00 1f 	sli r1,r9,31
+     7f0:	b4 41 08 00 	add r1,r2,r1
+     7f4:	b4 23 08 00 	add r1,r1,r3
+    zSig = ( zSig + roundIncrement )>>7;
+    zSig &= ~ ( ( ( roundBits ^ 0x40 ) == 0 ) & roundNearestEven );
+    if ( zSig == 0 ) zExp = 0;
+    return packFloat32( zSign, zExp, zSig );
+
+}
+     7f8:	c3 a0 00 00 	ret
+     7fc:	78 02 00 00 	mvhi r2,0x0
+     800:	38 42 27 50 	ori r2,r2,0x2750
+            zExp = 0;
+            roundBits = zSig & 0x7F;
+            if ( isTiny && roundBits ) float_raise( float_flag_underflow );
+        }
+    }
+    if ( roundBits ) float_exception_flags |= float_flag_inexact;
+     804:	28 41 00 00 	lw r1,(r2+0)
+     808:	38 21 00 01 	ori r1,r1,0x1
+     80c:	58 41 00 00 	sw (r2+0),r1
+    zSig = ( zSig + roundIncrement )>>7;
+    zSig &= ~ ( ( ( roundBits ^ 0x40 ) == 0 ) & roundNearestEven );
+     810:	64 61 00 40 	cmpei r1,r3,64
+     814:	00 82 00 07 	srui r2,r4,7
+     818:	a0 28 08 00 	and r1,r1,r8
+     81c:	a4 20 08 00 	not r1,r1
+     820:	a0 22 10 00 	and r2,r1,r2
+    if ( zSig == 0 ) zExp = 0;
+     824:	3c c3 00 17 	sli r3,r6,23
+     828:	5c 40 ff f1 	bne r2,r0,7ec <roundAndPackFloat32+0x84>
+     82c:	e3 ff ff ef 	bi 7e8 <roundAndPackFloat32+0x80>
+            }
+        }
+    }
+    roundBits = zSig & 0x7F;
+    if ( 0xFD <= (bits16) zExp ) {
+        if (    ( 0xFD < zExp )
+     830:	4c 80 ff e6 	bge r4,r0,7c8 <roundAndPackFloat32+0x60>
+-------------------------------------------------------------------------------
+*/
+void float_raise( int8 flags )
+{
+
+    float_exception_flags |= flags;
+     834:	78 04 00 00 	mvhi r4,0x0
+     838:	38 84 27 50 	ori r4,r4,0x2750
+     83c:	28 82 00 00 	lw r2,(r4+0)
+             || (    ( zExp == 0xFD )
+                  && ( (sbits32) ( zSig + roundIncrement ) < 0 ) )
+           ) {
+            float_raise( float_flag_overflow | float_flag_inexact );
+            return packFloat32( zSign, 0xFF, 0 ) - ( roundIncrement == 0 );
+     840:	3d 23 00 1f 	sli r3,r9,31
+     844:	78 01 7f 80 	mvhi r1,0x7f80
+     848:	38 21 00 00 	ori r1,r1,0x0
+     84c:	64 a5 00 00 	cmpei r5,r5,0
+     850:	b4 61 18 00 	add r3,r3,r1
+     854:	38 42 00 09 	ori r2,r2,0x9
+     858:	58 82 00 00 	sw (r4+0),r2
+     85c:	c8 65 08 00 	sub r1,r3,r5
+     860:	c3 a0 00 00 	ret
+            roundIncrement = 0x7F;
+            if ( zSign ) {
+                if ( roundingMode == float_round_up ) roundIncrement = 0;
+            }
+            else {
+                if ( roundingMode == float_round_down ) roundIncrement = 0;
+     864:	34 01 00 03 	mvi r1,3
+     868:	5c 81 ff ce 	bne r4,r1,7a0 <roundAndPackFloat32+0x38>
+     86c:	34 05 00 00 	mvi r5,0
+     870:	e3 ff ff cd 	bi 7a4 <roundAndPackFloat32+0x3c>
+           ) {
+            float_raise( float_flag_overflow | float_flag_inexact );
+            return packFloat32( zSign, 0xFF, 0 ) - ( roundIncrement == 0 );
+        }
+        if ( zExp < 0 ) {
+            isTiny =
+     874:	78 01 00 00 	mvhi r1,0x0
+     878:	38 21 27 54 	ori r1,r1,0x2754
+     87c:	28 22 00 00 	lw r2,(r1+0)
+     880:	34 03 ff ff 	mvi r3,-1
+     884:	e8 66 18 00 	cmpg r3,r3,r6
+     888:	64 42 00 01 	cmpei r2,r2,1
+     88c:	34 0a 00 01 	mvi r10,1
+     890:	b8 43 10 00 	or r2,r2,r3
+     894:	5c 40 00 02 	bne r2,r0,89c <roundAndPackFloat32+0x134>
+     898:	6c 8a 00 00 	cmpgei r10,r4,0
+                   ( float_detect_tininess == float_tininess_before_rounding )
+                || ( zExp < -1 )
+                || ( zSig + roundIncrement < 0x80000000 );
+            shift32RightJamming( zSig, - zExp, &zSig );
+     89c:	c8 06 10 00 	sub r2,r0,r6
+    bits32 z;
+
+    if ( count == 0 ) {
+        z = a;
+    }
+    else if ( count < 32 ) {
+     8a0:	34 01 00 1f 	mvi r1,31
+     8a4:	48 41 00 06 	bg r2,r1,8bc <roundAndPackFloat32+0x154>
+        z = ( a>>count ) | ( ( a<<( ( - count ) & 31 ) ) != 0 );
+     8a8:	bc e6 08 00 	sl r1,r7,r6
+     8ac:	80 e2 10 00 	sru r2,r7,r2
+     8b0:	7c 21 00 00 	cmpnei r1,r1,0
+     8b4:	b8 22 38 00 	or r7,r1,r2
+     8b8:	e0 00 00 02 	bi 8c0 <roundAndPackFloat32+0x158>
+    }
+    else {
+        z = ( a != 0 );
+     8bc:	7c e7 00 00 	cmpnei r7,r7,0
+            zExp = 0;
+            roundBits = zSig & 0x7F;
+     8c0:	20 e3 00 7f 	andi r3,r7,0x7f
+            if ( isTiny && roundBits ) float_raise( float_flag_underflow );
+     8c4:	7c 61 00 00 	cmpnei r1,r3,0
+     8c8:	b4 a7 20 00 	add r4,r5,r7
+     8cc:	a1 41 08 00 	and r1,r10,r1
+     8d0:	b8 20 30 00 	mv r6,r1
+     8d4:	44 20 ff bd 	be r1,r0,7c8 <roundAndPackFloat32+0x60>
+     8d8:	78 02 00 00 	mvhi r2,0x0
+     8dc:	38 42 27 50 	ori r2,r2,0x2750
+     8e0:	28 41 00 00 	lw r1,(r2+0)
+     8e4:	b4 a7 20 00 	add r4,r5,r7
+     8e8:	34 06 00 00 	mvi r6,0
+     8ec:	38 21 00 04 	ori r1,r1,0x4
+     8f0:	58 41 00 00 	sw (r2+0),r1
+     8f4:	e3 ff ff c4 	bi 804 <roundAndPackFloat32+0x9c>
+
+000008f8 <normalizeRoundAndPackFloat32>:
+point exponent.
+-------------------------------------------------------------------------------
+*/
+static float32
+ normalizeRoundAndPackFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+     8f8:	37 9c ff fc 	addi sp,sp,-4
+     8fc:	5b 9d 00 04 	sw (sp+4),ra
+     900:	b8 20 30 00 	mv r6,r1
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+     904:	38 01 ff ff 	mvu r1,0xffff
+     908:	b8 40 38 00 	mv r7,r2
+     90c:	b8 60 28 00 	mv r5,r3
+        shiftCount += 16;
+        a <<= 16;
+     910:	3c 62 00 10 	sli r2,r3,16
+     914:	34 04 00 10 	mvi r4,16
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+     918:	50 23 00 03 	bgeu r1,r3,924 <normalizeRoundAndPackFloat32+0x2c>
+     91c:	b8 60 10 00 	mv r2,r3
+     920:	34 04 00 00 	mvi r4,0
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+     924:	78 01 00 ff 	mvhi r1,0xff
+     928:	38 21 ff ff 	ori r1,r1,0xffff
+     92c:	54 41 00 03 	bgu r2,r1,938 <normalizeRoundAndPackFloat32+0x40>
+        shiftCount += 8;
+        a <<= 8;
+     930:	3c 42 00 08 	sli r2,r2,8
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+        shiftCount += 8;
+     934:	34 84 00 08 	addi r4,r4,8
+    int8 shiftCount;
+	
+    shiftCount = countLeadingZeros32( zSig ) - 1;
+     938:	00 42 00 18 	srui r2,r2,24
+     93c:	78 01 00 00 	mvhi r1,0x0
+     940:	3c 42 00 02 	sli r2,r2,2
+     944:	38 21 22 f8 	ori r1,r1,0x22f8
+     948:	b4 22 08 00 	add r1,r1,r2
+     94c:	28 23 00 00 	lw r3,(r1+0)
+     950:	34 82 ff ff 	addi r2,r4,-1
+    return roundAndPackFloat32( zSign, zExp - shiftCount, zSig<<shiftCount );
+     954:	b8 c0 08 00 	mv r1,r6
+static float32
+ normalizeRoundAndPackFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    int8 shiftCount;
+	
+    shiftCount = countLeadingZeros32( zSig ) - 1;
+     958:	b4 43 10 00 	add r2,r2,r3
+    return roundAndPackFloat32( zSign, zExp - shiftCount, zSig<<shiftCount );
+     95c:	bc a2 18 00 	sl r3,r5,r2
+     960:	c8 e2 10 00 	sub r2,r7,r2
+     964:	fb ff ff 81 	calli 768 <roundAndPackFloat32>
+
+}
+     968:	2b 9d 00 04 	lw ra,(sp+4)
+     96c:	37 9c 00 04 	addi sp,sp,4
+     970:	c3 a0 00 00 	ret
+
+00000974 <int32_to_float32>:
+the single-precision floating-point format.  The conversion is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 int32_to_float32( int32 a )
+{
+     974:	37 9c ff fc 	addi sp,sp,-4
+     978:	5b 9d 00 04 	sw (sp+4),ra
+     97c:	b8 20 18 00 	mv r3,r1
+    flag zSign;
+
+    if ( a == 0 ) return 0;
+     980:	44 60 00 09 	be r3,r0,9a4 <int32_to_float32+0x30>
+    if ( a == 0x80000000 ) return packFloat32( 1, 0x9E, 0 );
+     984:	78 01 80 00 	mvhi r1,0x8000
+     988:	38 21 00 00 	ori r1,r1,0x0
+     98c:	44 61 00 09 	be r3,r1,9b0 <int32_to_float32+0x3c>
+    zSign = ( a < 0 );
+     990:	00 61 00 1f 	srui r1,r3,31
+    return normalizeRoundAndPackFloat32( zSign, 0x9C, zSign ? - a : a );
+     994:	44 20 00 02 	be r1,r0,99c <int32_to_float32+0x28>
+     998:	c8 03 18 00 	sub r3,r0,r3
+     99c:	34 02 00 9c 	mvi r2,156
+     9a0:	fb ff ff d6 	calli 8f8 <normalizeRoundAndPackFloat32>
+
+}
+     9a4:	2b 9d 00 04 	lw ra,(sp+4)
+     9a8:	37 9c 00 04 	addi sp,sp,4
+     9ac:	c3 a0 00 00 	ret
+float32 int32_to_float32( int32 a )
+{
+    flag zSign;
+
+    if ( a == 0 ) return 0;
+    if ( a == 0x80000000 ) return packFloat32( 1, 0x9E, 0 );
+     9b0:	78 01 cf 00 	mvhi r1,0xcf00
+     9b4:	38 21 00 00 	ori r1,r1,0x0
+    zSign = ( a < 0 );
+    return normalizeRoundAndPackFloat32( zSign, 0x9C, zSign ? - a : a );
+
+}
+     9b8:	2b 9d 00 04 	lw ra,(sp+4)
+     9bc:	37 9c 00 04 	addi sp,sp,4
+     9c0:	c3 a0 00 00 	ret
+
+000009c4 <float32_to_int32>:
+positive integer is returned.  Otherwise, if the conversion overflows, the
+largest integer with the same sign as `a' is returned.
+-------------------------------------------------------------------------------
+*/
+int32 float32_to_int32( float32 a )
+{
+     9c4:	00 22 00 17 	srui r2,r1,23
+     9c8:	b8 20 18 00 	mv r3,r1
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+     9cc:	20 45 00 ff 	andi r5,r2,0xff
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+     9d0:	78 01 00 7f 	mvhi r1,0x7f
+     9d4:	38 21 ff ff 	ori r1,r1,0xffff
+    int8 roundingMode;
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    shiftCount = aExp - 0x96;
+     9d8:	34 a4 ff 6a 	addi r4,r5,-150
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+     9dc:	a0 61 30 00 	and r6,r3,r1
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+     9e0:	00 67 00 1f 	srui r7,r3,31
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    shiftCount = aExp - 0x96;
+    if ( 0 <= shiftCount ) {
+     9e4:	48 04 00 1c 	bg r0,r4,a54 <float32_to_int32+0x90>
+        if ( 0x9E <= aExp ) {
+     9e8:	34 01 00 9d 	mvi r1,157
+     9ec:	4c 25 00 12 	bge r1,r5,a34 <float32_to_int32+0x70>
+            if ( a == 0xCF000000 ) return 0x80000000;
+     9f0:	78 01 cf 00 	mvhi r1,0xcf00
+     9f4:	38 21 00 00 	ori r1,r1,0x0
+     9f8:	44 61 00 40 	be r3,r1,af8 <float32_to_int32+0x134>
+     9fc:	78 02 00 00 	mvhi r2,0x0
+     a00:	38 42 27 50 	ori r2,r2,0x2750
+     a04:	28 41 00 00 	lw r1,(r2+0)
+     a08:	38 21 00 10 	ori r1,r1,0x10
+     a0c:	58 41 00 00 	sw (r2+0),r1
+            float_raise( float_flag_invalid );
+            if ( ! aSign || ( ( aExp == 0xFF ) && aSig ) ) return 0x7FFFFFFF;
+     a10:	44 e0 00 05 	be r7,r0,a24 <float32_to_int32+0x60>
+     a14:	64 a1 00 ff 	cmpei r1,r5,255
+     a18:	7c c2 00 00 	cmpnei r2,r6,0
+     a1c:	a0 22 08 00 	and r1,r1,r2
+     a20:	44 20 00 36 	be r1,r0,af8 <float32_to_int32+0x134>
+            if ( aSign ) {
+                z += ( roundingMode == float_round_down ) & zExtra;
+                z = - z;
+            }
+            else {
+                z += ( roundingMode == float_round_up ) & zExtra;
+     a24:	78 03 7f ff 	mvhi r3,0x7fff
+     a28:	38 63 ff ff 	ori r3,r3,0xffff
+            }
+        }
+    }
+    return z;
+
+}
+     a2c:	b8 60 08 00 	mv r1,r3
+     a30:	c3 a0 00 00 	ret
+            if ( a == 0xCF000000 ) return 0x80000000;
+            float_raise( float_flag_invalid );
+            if ( ! aSign || ( ( aExp == 0xFF ) && aSig ) ) return 0x7FFFFFFF;
+            return 0x80000000;
+        }
+        z = ( aSig | 0x00800000 )<<shiftCount;
+     a34:	78 01 00 80 	mvhi r1,0x80
+     a38:	38 21 00 00 	ori r1,r1,0x0
+     a3c:	b8 c1 08 00 	or r1,r6,r1
+     a40:	bc 24 18 00 	sl r3,r1,r4
+        if ( aSign ) z = - z;
+     a44:	44 e0 ff fa 	be r7,r0,a2c <float32_to_int32+0x68>
+        if ( roundingMode == float_round_nearest_even ) {
+            if ( (sbits32) zExtra < 0 ) {
+                ++z;
+                if ( (bits32) ( zExtra<<1 ) == 0 ) z &= ~1;
+            }
+            if ( aSign ) z = - z;
+     a48:	c8 03 18 00 	sub r3,r0,r3
+            }
+        }
+    }
+    return z;
+
+}
+     a4c:	b8 60 08 00 	mv r1,r3
+     a50:	c3 a0 00 00 	ret
+        }
+        z = ( aSig | 0x00800000 )<<shiftCount;
+        if ( aSign ) z = - z;
+    }
+    else {
+        if ( aExp < 0x7E ) {
+     a54:	34 01 00 7d 	mvi r1,125
+     a58:	48 a1 00 16 	bg r5,r1,ab0 <float32_to_int32+0xec>
+            zExtra = aExp | aSig;
+     a5c:	b8 a6 20 00 	or r4,r5,r6
+     a60:	34 03 00 00 	mvi r3,0
+        else {
+            aSig |= 0x00800000;
+            zExtra = aSig<<( shiftCount & 31 );
+            z = aSig>>( - shiftCount );
+        }
+        if ( zExtra ) float_exception_flags |= float_flag_inexact;
+     a64:	44 80 00 06 	be r4,r0,a7c <float32_to_int32+0xb8>
+     a68:	78 02 00 00 	mvhi r2,0x0
+     a6c:	38 42 27 50 	ori r2,r2,0x2750
+     a70:	28 41 00 00 	lw r1,(r2+0)
+     a74:	38 21 00 01 	ori r1,r1,0x1
+     a78:	58 41 00 00 	sw (r2+0),r1
+        roundingMode = float_rounding_mode;
+     a7c:	78 01 00 00 	mvhi r1,0x0
+     a80:	38 21 27 4c 	ori r1,r1,0x274c
+     a84:	28 21 00 00 	lw r1,(r1+0)
+        if ( roundingMode == float_round_nearest_even ) {
+     a88:	5c 20 00 11 	bne r1,r0,acc <float32_to_int32+0x108>
+            if ( (sbits32) zExtra < 0 ) {
+     a8c:	4c 81 00 06 	bge r4,r1,aa4 <float32_to_int32+0xe0>
+                ++z;
+                if ( (bits32) ( zExtra<<1 ) == 0 ) z &= ~1;
+     a90:	b4 84 08 00 	add r1,r4,r4
+        }
+        if ( zExtra ) float_exception_flags |= float_flag_inexact;
+        roundingMode = float_rounding_mode;
+        if ( roundingMode == float_round_nearest_even ) {
+            if ( (sbits32) zExtra < 0 ) {
+                ++z;
+     a94:	34 63 00 01 	addi r3,r3,1
+                if ( (bits32) ( zExtra<<1 ) == 0 ) z &= ~1;
+     a98:	5c 20 00 03 	bne r1,r0,aa4 <float32_to_int32+0xe0>
+     a9c:	34 01 ff fe 	mvi r1,-2
+     aa0:	a0 61 18 00 	and r3,r3,r1
+            }
+            if ( aSign ) z = - z;
+     aa4:	44 e0 ff e2 	be r7,r0,a2c <float32_to_int32+0x68>
+     aa8:	c8 03 18 00 	sub r3,r0,r3
+     aac:	e3 ff ff e8 	bi a4c <float32_to_int32+0x88>
+        if ( aExp < 0x7E ) {
+            zExtra = aExp | aSig;
+            z = 0;
+        }
+        else {
+            aSig |= 0x00800000;
+     ab0:	78 01 00 80 	mvhi r1,0x80
+     ab4:	38 21 00 00 	ori r1,r1,0x0
+     ab8:	b8 c1 08 00 	or r1,r6,r1
+            zExtra = aSig<<( shiftCount & 31 );
+            z = aSig>>( - shiftCount );
+     abc:	c8 04 10 00 	sub r2,r0,r4
+     ac0:	80 22 18 00 	sru r3,r1,r2
+            zExtra = aExp | aSig;
+            z = 0;
+        }
+        else {
+            aSig |= 0x00800000;
+            zExtra = aSig<<( shiftCount & 31 );
+     ac4:	bc 24 20 00 	sl r4,r1,r4
+     ac8:	e3 ff ff e7 	bi a64 <float32_to_int32+0xa0>
+                if ( (bits32) ( zExtra<<1 ) == 0 ) z &= ~1;
+            }
+            if ( aSign ) z = - z;
+        }
+        else {
+            zExtra = ( zExtra != 0 );
+     acc:	7c 82 00 00 	cmpnei r2,r4,0
+            if ( aSign ) {
+     ad0:	44 e0 00 06 	be r7,r0,ae8 <float32_to_int32+0x124>
+                z += ( roundingMode == float_round_down ) & zExtra;
+     ad4:	64 21 00 03 	cmpei r1,r1,3
+     ad8:	a0 41 08 00 	and r1,r2,r1
+     adc:	b4 23 08 00 	add r1,r1,r3
+                z = - z;
+     ae0:	c8 01 18 00 	sub r3,r0,r1
+     ae4:	e3 ff ff d2 	bi a2c <float32_to_int32+0x68>
+            }
+            else {
+                z += ( roundingMode == float_round_up ) & zExtra;
+     ae8:	64 21 00 02 	cmpei r1,r1,2
+     aec:	a0 41 08 00 	and r1,r2,r1
+     af0:	b4 23 18 00 	add r3,r1,r3
+     af4:	e3 ff ff ce 	bi a2c <float32_to_int32+0x68>
+    shiftCount = aExp - 0x96;
+    if ( 0 <= shiftCount ) {
+        if ( 0x9E <= aExp ) {
+            if ( a == 0xCF000000 ) return 0x80000000;
+            float_raise( float_flag_invalid );
+            if ( ! aSign || ( ( aExp == 0xFF ) && aSig ) ) return 0x7FFFFFFF;
+     af8:	78 03 80 00 	mvhi r3,0x8000
+     afc:	38 63 00 00 	ori r3,r3,0x0
+     b00:	e3 ff ff cb 	bi a2c <float32_to_int32+0x68>
+
+00000b04 <float32_to_int32_round_to_zero>:
+conversion overflows, the largest integer with the same sign as `a' is
+returned.
+-------------------------------------------------------------------------------
+*/
+int32 float32_to_int32_round_to_zero( float32 a )
+{
+     b04:	00 22 00 17 	srui r2,r1,23
+     b08:	b8 20 18 00 	mv r3,r1
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+     b0c:	20 45 00 ff 	andi r5,r2,0xff
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+     b10:	78 01 00 7f 	mvhi r1,0x7f
+     b14:	38 21 ff ff 	ori r1,r1,0xffff
+    int32 z;
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    shiftCount = aExp - 0x9E;
+     b18:	34 a4 ff 62 	addi r4,r5,-158
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+     b1c:	a0 61 30 00 	and r6,r3,r1
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+     b20:	00 67 00 1f 	srui r7,r3,31
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    shiftCount = aExp - 0x9E;
+    if ( 0 <= shiftCount ) {
+     b24:	48 04 00 11 	bg r0,r4,b68 <float32_to_int32_round_to_zero+0x64>
+        if ( a == 0xCF000000 ) return 0x80000000;
+     b28:	78 01 cf 00 	mvhi r1,0xcf00
+     b2c:	38 21 00 00 	ori r1,r1,0x0
+     b30:	44 61 00 0b 	be r3,r1,b5c <float32_to_int32_round_to_zero+0x58>
+     b34:	78 02 00 00 	mvhi r2,0x0
+     b38:	38 42 27 50 	ori r2,r2,0x2750
+     b3c:	28 41 00 00 	lw r1,(r2+0)
+     b40:	38 21 00 10 	ori r1,r1,0x10
+     b44:	58 41 00 00 	sw (r2+0),r1
+        float_raise( float_flag_invalid );
+        if ( ! aSign || ( ( aExp == 0xFF ) && aSig ) ) return 0x7FFFFFFF;
+     b48:	44 e0 00 26 	be r7,r0,be0 <float32_to_int32_round_to_zero+0xdc>
+     b4c:	64 a1 00 ff 	cmpei r1,r5,255
+     b50:	7c c2 00 00 	cmpnei r2,r6,0
+     b54:	a0 22 08 00 	and r1,r1,r2
+     b58:	5c 20 00 22 	bne r1,r0,be0 <float32_to_int32_round_to_zero+0xdc>
+     b5c:	78 04 80 00 	mvhi r4,0x8000
+     b60:	38 84 00 00 	ori r4,r4,0x0
+     b64:	e0 00 00 0c 	bi b94 <float32_to_int32_round_to_zero+0x90>
+        return 0x80000000;
+    }
+    else if ( aExp <= 0x7E ) {
+     b68:	34 01 00 7e 	mvi r1,126
+     b6c:	48 a1 00 0c 	bg r5,r1,b9c <float32_to_int32_round_to_zero+0x98>
+        if ( aExp | aSig ) float_exception_flags |= float_flag_inexact;
+     b70:	b8 a6 08 00 	or r1,r5,r6
+     b74:	b8 20 20 00 	mv r4,r1
+     b78:	44 20 00 07 	be r1,r0,b94 <float32_to_int32_round_to_zero+0x90>
+     b7c:	78 02 00 00 	mvhi r2,0x0
+     b80:	38 42 27 50 	ori r2,r2,0x2750
+     b84:	28 41 00 00 	lw r1,(r2+0)
+     b88:	34 04 00 00 	mvi r4,0
+     b8c:	38 21 00 01 	ori r1,r1,0x1
+     b90:	58 41 00 00 	sw (r2+0),r1
+    if ( (bits32) ( aSig<<( shiftCount & 31 ) ) ) {
+        float_exception_flags |= float_flag_inexact;
+    }
+    return aSign ? - z : z;
+
+}
+     b94:	b8 80 08 00 	mv r1,r4
+     b98:	c3 a0 00 00 	ret
+    }
+    else if ( aExp <= 0x7E ) {
+        if ( aExp | aSig ) float_exception_flags |= float_flag_inexact;
+        return 0;
+    }
+    aSig = ( aSig | 0x00800000 )<<8;
+     b9c:	78 01 00 80 	mvhi r1,0x80
+     ba0:	38 21 00 00 	ori r1,r1,0x0
+     ba4:	b8 c1 08 00 	or r1,r6,r1
+     ba8:	3c 21 00 08 	sli r1,r1,8
+    z = aSig>>( - shiftCount );
+     bac:	c8 04 10 00 	sub r2,r0,r4
+    if ( (bits32) ( aSig<<( shiftCount & 31 ) ) ) {
+     bb0:	bc 24 18 00 	sl r3,r1,r4
+    else if ( aExp <= 0x7E ) {
+        if ( aExp | aSig ) float_exception_flags |= float_flag_inexact;
+        return 0;
+    }
+    aSig = ( aSig | 0x00800000 )<<8;
+    z = aSig>>( - shiftCount );
+     bb4:	80 22 20 00 	sru r4,r1,r2
+    if ( (bits32) ( aSig<<( shiftCount & 31 ) ) ) {
+     bb8:	44 60 00 06 	be r3,r0,bd0 <float32_to_int32_round_to_zero+0xcc>
+        float_exception_flags |= float_flag_inexact;
+     bbc:	78 02 00 00 	mvhi r2,0x0
+     bc0:	38 42 27 50 	ori r2,r2,0x2750
+     bc4:	28 41 00 00 	lw r1,(r2+0)
+     bc8:	38 21 00 01 	ori r1,r1,0x1
+     bcc:	58 41 00 00 	sw (r2+0),r1
+    }
+    return aSign ? - z : z;
+     bd0:	44 e0 ff f1 	be r7,r0,b94 <float32_to_int32_round_to_zero+0x90>
+     bd4:	c8 04 20 00 	sub r4,r0,r4
+
+}
+     bd8:	b8 80 08 00 	mv r1,r4
+     bdc:	c3 a0 00 00 	ret
+    aSig = ( aSig | 0x00800000 )<<8;
+    z = aSig>>( - shiftCount );
+    if ( (bits32) ( aSig<<( shiftCount & 31 ) ) ) {
+        float_exception_flags |= float_flag_inexact;
+    }
+    return aSign ? - z : z;
+     be0:	78 04 7f ff 	mvhi r4,0x7fff
+     be4:	38 84 ff ff 	ori r4,r4,0xffff
+     be8:	e3 ff ff eb 	bi b94 <float32_to_int32_round_to_zero+0x90>
+
+00000bec <float32_round_to_int>:
+operation is performed according to the IEC/IEEE Standard for Binary
+Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_round_to_int( float32 a )
+{
+     bec:	37 9c ff fc 	addi sp,sp,-4
+     bf0:	5b 9d 00 04 	sw (sp+4),ra
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+     bf4:	00 22 00 17 	srui r2,r1,23
+    bits32 lastBitMask, roundBitsMask;
+    int8 roundingMode;
+    float32 z;
+
+    aExp = extractFloat32Exp( a );
+    if ( 0x96 <= aExp ) {
+     bf8:	34 03 00 95 	mvi r3,149
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+     bfc:	20 44 00 ff 	andi r4,r2,0xff
+operation is performed according to the IEC/IEEE Standard for Binary
+Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_round_to_int( float32 a )
+{
+     c00:	b8 20 28 00 	mv r5,r1
+    bits32 lastBitMask, roundBitsMask;
+    int8 roundingMode;
+    float32 z;
+
+    aExp = extractFloat32Exp( a );
+    if ( 0x96 <= aExp ) {
+     c04:	4c 64 00 07 	bge r3,r4,c20 <float32_round_to_int+0x34>
+        if ( ( aExp == 0xFF ) && extractFloat32Frac( a ) ) {
+     c08:	34 02 00 ff 	mvi r2,255
+     c0c:	44 82 00 34 	be r4,r2,cdc <float32_round_to_int+0xf0>
+    }
+    z &= ~ roundBitsMask;
+    if ( z != a ) float_exception_flags |= float_flag_inexact;
+    return z;
+
+}
+     c10:	b8 a0 08 00 	mv r1,r5
+     c14:	2b 9d 00 04 	lw ra,(sp+4)
+     c18:	37 9c 00 04 	addi sp,sp,4
+     c1c:	c3 a0 00 00 	ret
+        if ( ( aExp == 0xFF ) && extractFloat32Frac( a ) ) {
+            return propagateFloat32NaN( a, a );
+        }
+        return a;
+    }
+    if ( aExp <= 0x7E ) {
+     c20:	34 07 00 7e 	mvi r7,126
+     c24:	48 87 00 13 	bg r4,r7,c70 <float32_round_to_int+0x84>
+        if ( (bits32) ( a<<1 ) == 0 ) return a;
+     c28:	b4 21 08 00 	add r1,r1,r1
+     c2c:	44 20 ff f9 	be r1,r0,c10 <float32_round_to_int+0x24>
+        float_exception_flags |= float_flag_inexact;
+     c30:	78 03 00 00 	mvhi r3,0x0
+     c34:	38 63 27 50 	ori r3,r3,0x2750
+     c38:	28 62 00 00 	lw r2,(r3+0)
+        aSign = extractFloat32Sign( a );
+        switch ( float_rounding_mode ) {
+     c3c:	78 01 00 00 	mvhi r1,0x0
+     c40:	38 21 27 4c 	ori r1,r1,0x274c
+     c44:	28 26 00 00 	lw r6,(r1+0)
+        }
+        return a;
+    }
+    if ( aExp <= 0x7E ) {
+        if ( (bits32) ( a<<1 ) == 0 ) return a;
+        float_exception_flags |= float_flag_inexact;
+     c48:	38 42 00 01 	ori r2,r2,0x1
+     c4c:	58 62 00 00 	sw (r3+0),r2
+        aSign = extractFloat32Sign( a );
+        switch ( float_rounding_mode ) {
+     c50:	34 01 00 02 	mvi r1,2
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+     c54:	00 a2 00 1f 	srui r2,r5,31
+    }
+    if ( aExp <= 0x7E ) {
+        if ( (bits32) ( a<<1 ) == 0 ) return a;
+        float_exception_flags |= float_flag_inexact;
+        aSign = extractFloat32Sign( a );
+        switch ( float_rounding_mode ) {
+     c58:	44 c1 00 41 	be r6,r1,d5c <float32_round_to_int+0x170>
+     c5c:	34 01 00 03 	mvi r1,3
+     c60:	44 c1 00 3a 	be r6,r1,d48 <float32_round_to_int+0x15c>
+     c64:	44 c0 00 2f 	be r6,r0,d20 <float32_round_to_int+0x134>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+     c68:	3c 45 00 1f 	sli r5,r2,31
+     c6c:	e3 ff ff e9 	bi c10 <float32_round_to_int+0x24>
+    }
+    lastBitMask = 1;
+    lastBitMask <<= 0x96 - aExp;
+    roundBitsMask = lastBitMask - 1;
+    z = a;
+    roundingMode = float_rounding_mode;
+     c70:	78 01 00 00 	mvhi r1,0x0
+     c74:	38 21 27 4c 	ori r1,r1,0x274c
+            return aSign ? 0x80000000 : 0x3F800000;
+        }
+        return packFloat32( aSign, 0, 0 );
+    }
+    lastBitMask = 1;
+    lastBitMask <<= 0x96 - aExp;
+     c78:	34 02 00 96 	mvi r2,150
+     c7c:	c8 44 10 00 	sub r2,r2,r4
+    roundBitsMask = lastBitMask - 1;
+    z = a;
+    roundingMode = float_rounding_mode;
+     c80:	28 24 00 00 	lw r4,(r1+0)
+            return aSign ? 0x80000000 : 0x3F800000;
+        }
+        return packFloat32( aSign, 0, 0 );
+    }
+    lastBitMask = 1;
+    lastBitMask <<= 0x96 - aExp;
+     c84:	34 01 00 01 	mvi r1,1
+     c88:	bc 22 18 00 	sl r3,r1,r2
+    roundBitsMask = lastBitMask - 1;
+     c8c:	34 67 ff ff 	addi r7,r3,-1
+    z = a;
+    roundingMode = float_rounding_mode;
+    if ( roundingMode == float_round_nearest_even ) {
+     c90:	44 80 00 1b 	be r4,r0,cfc <float32_round_to_int+0x110>
+        z += lastBitMask>>1;
+        if ( ( z & roundBitsMask ) == 0 ) z &= ~ lastBitMask;
+    }
+    else if ( roundingMode != float_round_to_zero ) {
+     c94:	44 81 00 21 	be r4,r1,d18 <float32_round_to_int+0x12c>
+        if ( extractFloat32Sign( z ) ^ ( roundingMode == float_round_up ) ) {
+     c98:	64 82 00 02 	cmpei r2,r4,2
+     c9c:	00 a1 00 1f 	srui r1,r5,31
+            z += roundBitsMask;
+     ca0:	b4 e5 30 00 	add r6,r7,r5
+    if ( roundingMode == float_round_nearest_even ) {
+        z += lastBitMask>>1;
+        if ( ( z & roundBitsMask ) == 0 ) z &= ~ lastBitMask;
+    }
+    else if ( roundingMode != float_round_to_zero ) {
+        if ( extractFloat32Sign( z ) ^ ( roundingMode == float_round_up ) ) {
+     ca4:	44 41 00 1d 	be r2,r1,d18 <float32_round_to_int+0x12c>
+            z += roundBitsMask;
+        }
+    }
+    z &= ~ roundBitsMask;
+     ca8:	a4 e0 08 00 	not r1,r7
+     cac:	a0 c1 18 00 	and r3,r6,r1
+    if ( z != a ) float_exception_flags |= float_flag_inexact;
+     cb0:	44 65 ff d8 	be r3,r5,c10 <float32_round_to_int+0x24>
+     cb4:	78 02 00 00 	mvhi r2,0x0
+     cb8:	38 42 27 50 	ori r2,r2,0x2750
+     cbc:	28 41 00 00 	lw r1,(r2+0)
+     cc0:	b8 60 28 00 	mv r5,r3
+     cc4:	38 21 00 01 	ori r1,r1,0x1
+     cc8:	58 41 00 00 	sw (r2+0),r1
+    return z;
+
+}
+     ccc:	b8 a0 08 00 	mv r1,r5
+     cd0:	2b 9d 00 04 	lw ra,(sp+4)
+     cd4:	37 9c 00 04 	addi sp,sp,4
+     cd8:	c3 a0 00 00 	ret
+    int8 roundingMode;
+    float32 z;
+
+    aExp = extractFloat32Exp( a );
+    if ( 0x96 <= aExp ) {
+        if ( ( aExp == 0xFF ) && extractFloat32Frac( a ) ) {
+     cdc:	78 02 00 7f 	mvhi r2,0x7f
+     ce0:	38 42 ff ff 	ori r2,r2,0xffff
+     ce4:	a0 22 10 00 	and r2,r1,r2
+     ce8:	44 40 ff ca 	be r2,r0,c10 <float32_round_to_int+0x24>
+            return propagateFloat32NaN( a, a );
+     cec:	b8 20 10 00 	mv r2,r1
+     cf0:	fb ff fe 6f 	calli 6ac <propagateFloat32NaN>
+     cf4:	b8 20 28 00 	mv r5,r1
+     cf8:	e3 ff ff c6 	bi c10 <float32_round_to_int+0x24>
+    lastBitMask <<= 0x96 - aExp;
+    roundBitsMask = lastBitMask - 1;
+    z = a;
+    roundingMode = float_rounding_mode;
+    if ( roundingMode == float_round_nearest_even ) {
+        z += lastBitMask>>1;
+     cfc:	80 61 08 00 	sru r1,r3,r1
+     d00:	b4 25 30 00 	add r6,r1,r5
+        if ( ( z & roundBitsMask ) == 0 ) z &= ~ lastBitMask;
+     d04:	a0 c7 10 00 	and r2,r6,r7
+     d08:	5c 44 ff e8 	bne r2,r4,ca8 <float32_round_to_int+0xbc>
+     d0c:	a4 60 08 00 	not r1,r3
+     d10:	a0 c1 30 00 	and r6,r6,r1
+     d14:	e3 ff ff e5 	bi ca8 <float32_round_to_int+0xbc>
+    }
+    else if ( roundingMode != float_round_to_zero ) {
+        if ( extractFloat32Sign( z ) ^ ( roundingMode == float_round_up ) ) {
+            z += roundBitsMask;
+     d18:	b8 a0 30 00 	mv r6,r5
+     d1c:	e3 ff ff e3 	bi ca8 <float32_round_to_int+0xbc>
+        if ( (bits32) ( a<<1 ) == 0 ) return a;
+        float_exception_flags |= float_flag_inexact;
+        aSign = extractFloat32Sign( a );
+        switch ( float_rounding_mode ) {
+         case float_round_nearest_even:
+            if ( ( aExp == 0x7E ) && extractFloat32Frac( a ) ) {
+     d20:	5c 87 ff d2 	bne r4,r7,c68 <float32_round_to_int+0x7c>
+     d24:	78 01 00 7f 	mvhi r1,0x7f
+     d28:	38 21 ff ff 	ori r1,r1,0xffff
+     d2c:	a0 a1 08 00 	and r1,r5,r1
+     d30:	44 20 ff ce 	be r1,r0,c68 <float32_round_to_int+0x7c>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+     d34:	3c 42 00 1f 	sli r2,r2,31
+     d38:	78 01 3f 80 	mvhi r1,0x3f80
+     d3c:	38 21 00 00 	ori r1,r1,0x0
+     d40:	b4 41 28 00 	add r5,r2,r1
+     d44:	e3 ff ff b3 	bi c10 <float32_round_to_int+0x24>
+            if ( ( aExp == 0x7E ) && extractFloat32Frac( a ) ) {
+                return packFloat32( aSign, 0x7F, 0 );
+            }
+            break;
+         case float_round_down:
+            return aSign ? 0xBF800000 : 0;
+     d48:	b8 40 28 00 	mv r5,r2
+     d4c:	44 40 ff b1 	be r2,r0,c10 <float32_round_to_int+0x24>
+     d50:	78 05 bf 80 	mvhi r5,0xbf80
+     d54:	38 a5 00 00 	ori r5,r5,0x0
+     d58:	e3 ff ff ae 	bi c10 <float32_round_to_int+0x24>
+         case float_round_up:
+            return aSign ? 0x80000000 : 0x3F800000;
+     d5c:	5c 40 00 04 	bne r2,r0,d6c <float32_round_to_int+0x180>
+     d60:	78 05 3f 80 	mvhi r5,0x3f80
+     d64:	38 a5 00 00 	ori r5,r5,0x0
+     d68:	e3 ff ff aa 	bi c10 <float32_round_to_int+0x24>
+     d6c:	78 05 80 00 	mvhi r5,0x8000
+     d70:	38 a5 00 00 	ori r5,r5,0x0
+     d74:	e3 ff ff a7 	bi c10 <float32_round_to_int+0x24>
+
+00000d78 <addFloat32Sigs>:
+addition is performed according to the IEC/IEEE Standard for Binary
+Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+static float32 addFloat32Sigs( float32 a, float32 b, flag zSign )
+{
+     d78:	37 9c ff fc 	addi sp,sp,-4
+     d7c:	5b 9d 00 04 	sw (sp+4),ra
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+     d80:	00 26 00 17 	srui r6,r1,23
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    expDiff = aExp - bExp;
+    aSig <<= 6;
+     d84:	00 47 00 17 	srui r7,r2,23
+     d88:	78 04 00 7f 	mvhi r4,0x7f
+     d8c:	38 84 ff ff 	ori r4,r4,0xffff
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+     d90:	20 c6 00 ff 	andi r6,r6,0xff
+     d94:	20 e7 00 ff 	andi r7,r7,0xff
+    aExp = extractFloat32Exp( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    expDiff = aExp - bExp;
+    aSig <<= 6;
+    bSig <<= 6;
+     d98:	a0 44 28 00 	and r5,r2,r4
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    expDiff = aExp - bExp;
+     d9c:	c8 c7 48 00 	sub r9,r6,r7
+    aSig <<= 6;
+     da0:	a0 24 20 00 	and r4,r1,r4
+     da4:	3c 8a 00 06 	sli r10,r4,6
+addition is performed according to the IEC/IEEE Standard for Binary
+Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+static float32 addFloat32Sigs( float32 a, float32 b, flag zSign )
+{
+     da8:	b8 20 40 00 	mv r8,r1
+     dac:	b8 60 e8 00 	mv ra,r3
+    aExp = extractFloat32Exp( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    expDiff = aExp - bExp;
+    aSig <<= 6;
+    bSig <<= 6;
+     db0:	3c a4 00 06 	sli r4,r5,6
+    if ( 0 < expDiff ) {
+     db4:	4c 09 00 1b 	bge r0,r9,e20 <addFloat32Sigs+0xa8>
+        if ( aExp == 0xFF ) {
+     db8:	34 03 00 ff 	mvi r3,255
+     dbc:	44 c3 00 15 	be r6,r3,e10 <addFloat32Sigs+0x98>
+            if ( aSig ) return propagateFloat32NaN( a, b );
+            return a;
+        }
+        if ( bExp == 0 ) {
+     dc0:	5c e0 00 21 	bne r7,r0,e44 <addFloat32Sigs+0xcc>
+            --expDiff;
+     dc4:	35 29 ff ff 	addi r9,r9,-1
+     dc8:	78 08 20 00 	mvhi r8,0x2000
+*/
+INLINE void shift32RightJamming( bits32 a, int16 count, bits32 *zPtr )
+{
+    bits32 z;
+
+    if ( count == 0 ) {
+     dcc:	5d 27 00 22 	bne r9,r7,e54 <addFloat32Sigs+0xdc>
+     dd0:	78 08 20 00 	mvhi r8,0x2000
+        zSig = 0x40000000 + aSig + bSig;
+        zExp = aExp;
+        goto roundAndPack;
+    }
+    aSig |= 0x20000000;
+    zSig = ( aSig + bSig )<<1;
+     dd4:	39 08 00 00 	ori r8,r8,0x0
+     dd8:	b9 48 08 00 	or r1,r10,r8
+     ddc:	b4 24 18 00 	add r3,r1,r4
+     de0:	b4 63 08 00 	add r1,r3,r3
+    --zExp;
+    if ( (sbits32) zSig < 0 ) {
+     de4:	48 01 00 03 	bg r0,r1,df0 <addFloat32Sigs+0x78>
+        zExp = aExp;
+        goto roundAndPack;
+    }
+    aSig |= 0x20000000;
+    zSig = ( aSig + bSig )<<1;
+    --zExp;
+     de8:	34 c6 ff ff 	addi r6,r6,-1
+     dec:	b8 20 18 00 	mv r3,r1
+    if ( (sbits32) zSig < 0 ) {
+        zSig = aSig + bSig;
+        ++zExp;
+    }
+ roundAndPack:
+    return roundAndPackFloat32( zSign, zExp, zSig );
+     df0:	bb a0 08 00 	mv r1,ra
+     df4:	b8 c0 10 00 	mv r2,r6
+     df8:	fb ff fe 5c 	calli 768 <roundAndPackFloat32>
+     dfc:	b8 20 40 00 	mv r8,r1
+
+}
+     e00:	b9 00 08 00 	mv r1,r8
+     e04:	2b 9d 00 04 	lw ra,(sp+4)
+     e08:	37 9c 00 04 	addi sp,sp,4
+     e0c:	c3 a0 00 00 	ret
+    expDiff = aExp - bExp;
+    aSig <<= 6;
+    bSig <<= 6;
+    if ( 0 < expDiff ) {
+        if ( aExp == 0xFF ) {
+            if ( aSig ) return propagateFloat32NaN( a, b );
+     e10:	45 40 ff fc 	be r10,r0,e00 <addFloat32Sigs+0x88>
+        shift32RightJamming( aSig, - expDiff, &aSig );
+        zExp = bExp;
+    }
+    else {
+        if ( aExp == 0xFF ) {
+            if ( aSig | bSig ) return propagateFloat32NaN( a, b );
+     e14:	fb ff fe 26 	calli 6ac <propagateFloat32NaN>
+     e18:	b8 20 40 00 	mv r8,r1
+     e1c:	e3 ff ff f9 	bi e00 <addFloat32Sigs+0x88>
+            bSig |= 0x20000000;
+        }
+        shift32RightJamming( bSig, expDiff, &bSig );
+        zExp = aExp;
+    }
+    else if ( expDiff < 0 ) {
+     e20:	5d 20 00 1a 	bne r9,r0,e88 <addFloat32Sigs+0x110>
+        }
+        shift32RightJamming( aSig, - expDiff, &aSig );
+        zExp = bExp;
+    }
+    else {
+        if ( aExp == 0xFF ) {
+     e24:	34 03 00 ff 	mvi r3,255
+     e28:	44 c3 00 15 	be r6,r3,e7c <addFloat32Sigs+0x104>
+            if ( aSig | bSig ) return propagateFloat32NaN( a, b );
+            return a;
+        }
+        if ( aExp == 0 ) return packFloat32( zSign, 0, ( aSig + bSig )>>6 );
+     e2c:	44 c0 00 28 	be r6,r0,ecc <addFloat32Sigs+0x154>
+        zSig = 0x40000000 + aSig + bSig;
+     e30:	78 01 40 00 	mvhi r1,0x4000
+     e34:	38 21 00 00 	ori r1,r1,0x0
+     e38:	b5 41 08 00 	add r1,r10,r1
+     e3c:	b4 24 18 00 	add r3,r1,r4
+     e40:	e3 ff ff ec 	bi df0 <addFloat32Sigs+0x78>
+        }
+        if ( bExp == 0 ) {
+            --expDiff;
+        }
+        else {
+            bSig |= 0x20000000;
+     e44:	78 08 20 00 	mvhi r8,0x2000
+     e48:	b9 00 08 00 	mv r1,r8
+     e4c:	38 21 00 00 	ori r1,r1,0x0
+     e50:	b8 81 20 00 	or r4,r4,r1
+        z = a;
+    }
+    else if ( count < 32 ) {
+     e54:	34 01 00 1f 	mvi r1,31
+     e58:	49 21 00 07 	bg r9,r1,e74 <addFloat32Sigs+0xfc>
+        z = ( a>>count ) | ( ( a<<( ( - count ) & 31 ) ) != 0 );
+     e5c:	c8 09 08 00 	sub r1,r0,r9
+     e60:	bc 81 08 00 	sl r1,r4,r1
+     e64:	80 89 10 00 	sru r2,r4,r9
+     e68:	7c 21 00 00 	cmpnei r1,r1,0
+     e6c:	b8 22 20 00 	or r4,r1,r2
+     e70:	e3 ff ff d9 	bi dd4 <addFloat32Sigs+0x5c>
+    }
+    else {
+        z = ( a != 0 );
+     e74:	7c 84 00 00 	cmpnei r4,r4,0
+     e78:	e3 ff ff d7 	bi dd4 <addFloat32Sigs+0x5c>
+        shift32RightJamming( aSig, - expDiff, &aSig );
+        zExp = bExp;
+    }
+    else {
+        if ( aExp == 0xFF ) {
+            if ( aSig | bSig ) return propagateFloat32NaN( a, b );
+     e7c:	b8 8a 18 00 	or r3,r4,r10
+     e80:	44 60 ff e0 	be r3,r0,e00 <addFloat32Sigs+0x88>
+     e84:	e3 ff ff e4 	bi e14 <addFloat32Sigs+0x9c>
+        }
+        shift32RightJamming( bSig, expDiff, &bSig );
+        zExp = aExp;
+    }
+    else if ( expDiff < 0 ) {
+        if ( bExp == 0xFF ) {
+     e88:	34 03 00 ff 	mvi r3,255
+     e8c:	44 e3 00 18 	be r7,r3,eec <addFloat32Sigs+0x174>
+            if ( bSig ) return propagateFloat32NaN( a, b );
+            return packFloat32( zSign, 0xFF, 0 );
+        }
+        if ( aExp == 0 ) {
+     e90:	44 c0 00 14 	be r6,r0,ee0 <addFloat32Sigs+0x168>
+            ++expDiff;
+        }
+        else {
+            aSig |= 0x20000000;
+     e94:	78 08 20 00 	mvhi r8,0x2000
+     e98:	b9 00 08 00 	mv r1,r8
+     e9c:	38 21 00 00 	ori r1,r1,0x0
+     ea0:	b9 41 50 00 	or r10,r10,r1
+        }
+        shift32RightJamming( aSig, - expDiff, &aSig );
+     ea4:	c8 09 10 00 	sub r2,r0,r9
+            return a;
+        }
+        if ( aExp == 0 ) return packFloat32( zSign, 0, ( aSig + bSig )>>6 );
+        zSig = 0x40000000 + aSig + bSig;
+        zExp = aExp;
+        goto roundAndPack;
+     ea8:	b8 e0 30 00 	mv r6,r7
+*/
+INLINE void shift32RightJamming( bits32 a, int16 count, bits32 *zPtr )
+{
+    bits32 z;
+
+    if ( count == 0 ) {
+     eac:	44 40 ff ca 	be r2,r0,dd4 <addFloat32Sigs+0x5c>
+        z = a;
+    }
+    else if ( count < 32 ) {
+     eb0:	34 01 00 1f 	mvi r1,31
+     eb4:	48 41 00 14 	bg r2,r1,f04 <addFloat32Sigs+0x18c>
+        z = ( a>>count ) | ( ( a<<( ( - count ) & 31 ) ) != 0 );
+     eb8:	bd 49 08 00 	sl r1,r10,r9
+     ebc:	81 42 10 00 	sru r2,r10,r2
+     ec0:	7c 21 00 00 	cmpnei r1,r1,0
+     ec4:	b8 22 50 00 	or r10,r1,r2
+     ec8:	e3 ff ff c3 	bi dd4 <addFloat32Sigs+0x5c>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+     ecc:	b4 8a 08 00 	add r1,r4,r10
+     ed0:	00 21 00 06 	srui r1,r1,6
+     ed4:	3f a2 00 1f 	sli r2,ra,31
+     ed8:	b4 22 40 00 	add r8,r1,r2
+     edc:	e3 ff ff c9 	bi e00 <addFloat32Sigs+0x88>
+        if ( bExp == 0xFF ) {
+            if ( bSig ) return propagateFloat32NaN( a, b );
+            return packFloat32( zSign, 0xFF, 0 );
+        }
+        if ( aExp == 0 ) {
+            ++expDiff;
+     ee0:	35 29 00 01 	addi r9,r9,1
+     ee4:	78 08 20 00 	mvhi r8,0x2000
+     ee8:	e3 ff ff ef 	bi ea4 <addFloat32Sigs+0x12c>
+        shift32RightJamming( bSig, expDiff, &bSig );
+        zExp = aExp;
+    }
+    else if ( expDiff < 0 ) {
+        if ( bExp == 0xFF ) {
+            if ( bSig ) return propagateFloat32NaN( a, b );
+     eec:	5c 80 ff ca 	bne r4,r0,e14 <addFloat32Sigs+0x9c>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+     ef0:	3f a2 00 1f 	sli r2,ra,31
+     ef4:	78 01 7f 80 	mvhi r1,0x7f80
+     ef8:	38 21 00 00 	ori r1,r1,0x0
+     efc:	b4 41 40 00 	add r8,r2,r1
+     f00:	e3 ff ff c0 	bi e00 <addFloat32Sigs+0x88>
+    }
+    else {
+        z = ( a != 0 );
+     f04:	7d 4a 00 00 	cmpnei r10,r10,0
+     f08:	e3 ff ff b3 	bi dd4 <addFloat32Sigs+0x5c>
+
+00000f0c <subFloat32Sigs>:
+result is a NaN.  The subtraction is performed according to the IEC/IEEE
+Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+static float32 subFloat32Sigs( float32 a, float32 b, flag zSign )
+{
+     f0c:	37 9c ff fc 	addi sp,sp,-4
+     f10:	5b 9d 00 04 	sw (sp+4),ra
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+     f14:	00 26 00 17 	srui r6,r1,23
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    expDiff = aExp - bExp;
+    aSig <<= 7;
+     f18:	00 47 00 17 	srui r7,r2,23
+     f1c:	78 04 00 7f 	mvhi r4,0x7f
+     f20:	38 84 ff ff 	ori r4,r4,0xffff
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+     f24:	20 c6 00 ff 	andi r6,r6,0xff
+     f28:	20 e7 00 ff 	andi r7,r7,0xff
+    aExp = extractFloat32Exp( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    expDiff = aExp - bExp;
+    aSig <<= 7;
+    bSig <<= 7;
+     f2c:	a0 44 28 00 	and r5,r2,r4
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    expDiff = aExp - bExp;
+     f30:	c8 c7 48 00 	sub r9,r6,r7
+    aSig <<= 7;
+     f34:	a0 24 20 00 	and r4,r1,r4
+result is a NaN.  The subtraction is performed according to the IEC/IEEE
+Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+static float32 subFloat32Sigs( float32 a, float32 b, flag zSign )
+{
+     f38:	b8 20 40 00 	mv r8,r1
+     f3c:	b8 60 50 00 	mv r10,r3
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    expDiff = aExp - bExp;
+    aSig <<= 7;
+     f40:	3c 84 00 07 	sli r4,r4,7
+    bSig <<= 7;
+     f44:	3c a5 00 07 	sli r5,r5,7
+    if ( 0 < expDiff ) goto aExpBigger;
+     f48:	49 20 00 0f 	bg r9,r0,f84 <subFloat32Sigs+0x78>
+    if ( expDiff < 0 ) goto bExpBigger;
+     f4c:	5d 20 00 3b 	bne r9,r0,1038 <subFloat32Sigs+0x12c>
+    if ( aExp == 0xFF ) {
+     f50:	34 03 00 ff 	mvi r3,255
+     f54:	44 c3 00 30 	be r6,r3,1014 <subFloat32Sigs+0x108>
+        if ( aSig | bSig ) return propagateFloat32NaN( a, b );
+        float_raise( float_flag_invalid );
+        return float32_default_nan;
+    }
+    if ( aExp == 0 ) {
+     f58:	5c c0 00 03 	bne r6,r0,f64 <subFloat32Sigs+0x58>
+     f5c:	34 06 00 01 	mvi r6,1
+     f60:	b8 c0 38 00 	mv r7,r6
+        aExp = 1;
+        bExp = 1;
+    }
+    if ( bSig < aSig ) goto aBigger;
+     f64:	54 85 00 10 	bgu r4,r5,fa4 <subFloat32Sigs+0x98>
+    if ( aSig < bSig ) goto bBigger;
+     f68:	54 a4 00 45 	bgu r5,r4,107c <subFloat32Sigs+0x170>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+     f6c:	78 01 00 00 	mvhi r1,0x0
+     f70:	38 21 27 4c 	ori r1,r1,0x274c
+     f74:	28 22 00 00 	lw r2,(r1+0)
+     f78:	64 42 00 03 	cmpei r2,r2,3
+     f7c:	3c 48 00 1f 	sli r8,r2,31
+     f80:	e0 00 00 0f 	bi fbc <subFloat32Sigs+0xb0>
+    zSig = bSig - aSig;
+    zExp = bExp;
+    zSign ^= 1;
+    goto normalizeRoundAndPack;
+ aExpBigger:
+    if ( aExp == 0xFF ) {
+     f84:	34 03 00 ff 	mvi r3,255
+     f88:	44 c3 00 11 	be r6,r3,fcc <subFloat32Sigs+0xc0>
+        if ( aSig ) return propagateFloat32NaN( a, b );
+        return a;
+    }
+    if ( bExp == 0 ) {
+     f8c:	5c e0 00 14 	bne r7,r0,fdc <subFloat32Sigs+0xd0>
+        --expDiff;
+     f90:	35 29 ff ff 	addi r9,r9,-1
+     f94:	78 08 40 00 	mvhi r8,0x4000
+*/
+INLINE void shift32RightJamming( bits32 a, int16 count, bits32 *zPtr )
+{
+    bits32 z;
+
+    if ( count == 0 ) {
+     f98:	5d 27 00 15 	bne r9,r7,fec <subFloat32Sigs+0xe0>
+    }
+    else {
+        bSig |= 0x40000000;
+    }
+    shift32RightJamming( bSig, expDiff, &bSig );
+    aSig |= 0x40000000;
+     f9c:	39 08 00 00 	ori r8,r8,0x0
+     fa0:	b8 88 20 00 	or r4,r4,r8
+ aBigger:
+    zSig = aSig - bSig;
+     fa4:	c8 85 18 00 	sub r3,r4,r5
+     fa8:	b8 c0 10 00 	mv r2,r6
+    zExp = aExp;
+ normalizeRoundAndPack:
+    --zExp;
+    return normalizeRoundAndPackFloat32( zSign, zExp, zSig );
+     fac:	b9 40 08 00 	mv r1,r10
+     fb0:	34 42 ff ff 	addi r2,r2,-1
+     fb4:	fb ff fe 51 	calli 8f8 <normalizeRoundAndPackFloat32>
+     fb8:	b8 20 40 00 	mv r8,r1
+
+}
+     fbc:	b9 00 08 00 	mv r1,r8
+     fc0:	2b 9d 00 04 	lw ra,(sp+4)
+     fc4:	37 9c 00 04 	addi sp,sp,4
+     fc8:	c3 a0 00 00 	ret
+    zExp = bExp;
+    zSign ^= 1;
+    goto normalizeRoundAndPack;
+ aExpBigger:
+    if ( aExp == 0xFF ) {
+        if ( aSig ) return propagateFloat32NaN( a, b );
+     fcc:	44 80 ff fc 	be r4,r0,fbc <subFloat32Sigs+0xb0>
+     fd0:	fb ff fd b7 	calli 6ac <propagateFloat32NaN>
+     fd4:	b8 20 40 00 	mv r8,r1
+     fd8:	e3 ff ff f9 	bi fbc <subFloat32Sigs+0xb0>
+    }
+    if ( bExp == 0 ) {
+        --expDiff;
+    }
+    else {
+        bSig |= 0x40000000;
+     fdc:	78 08 40 00 	mvhi r8,0x4000
+     fe0:	b9 00 08 00 	mv r1,r8
+     fe4:	38 21 00 00 	ori r1,r1,0x0
+     fe8:	b8 a1 28 00 	or r5,r5,r1
+        z = a;
+    }
+    else if ( count < 32 ) {
+     fec:	34 01 00 1f 	mvi r1,31
+     ff0:	49 21 00 07 	bg r9,r1,100c <subFloat32Sigs+0x100>
+        z = ( a>>count ) | ( ( a<<( ( - count ) & 31 ) ) != 0 );
+     ff4:	c8 09 08 00 	sub r1,r0,r9
+     ff8:	bc a1 08 00 	sl r1,r5,r1
+     ffc:	80 a9 10 00 	sru r2,r5,r9
+    1000:	7c 21 00 00 	cmpnei r1,r1,0
+    1004:	b8 22 28 00 	or r5,r1,r2
+    1008:	e3 ff ff e5 	bi f9c <subFloat32Sigs+0x90>
+    }
+    else {
+        z = ( a != 0 );
+    100c:	7c a5 00 00 	cmpnei r5,r5,0
+    1010:	e3 ff ff e3 	bi f9c <subFloat32Sigs+0x90>
+    aSig <<= 7;
+    bSig <<= 7;
+    if ( 0 < expDiff ) goto aExpBigger;
+    if ( expDiff < 0 ) goto bExpBigger;
+    if ( aExp == 0xFF ) {
+        if ( aSig | bSig ) return propagateFloat32NaN( a, b );
+    1014:	b8 a4 18 00 	or r3,r5,r4
+    1018:	5c 60 ff ee 	bne r3,r0,fd0 <subFloat32Sigs+0xc4>
+    101c:	78 02 00 00 	mvhi r2,0x0
+    1020:	38 42 27 50 	ori r2,r2,0x2750
+    1024:	28 41 00 00 	lw r1,(r2+0)
+    1028:	34 08 ff ff 	mvi r8,-1
+    102c:	38 21 00 10 	ori r1,r1,0x10
+    1030:	58 41 00 00 	sw (r2+0),r1
+    1034:	e3 ff ff e2 	bi fbc <subFloat32Sigs+0xb0>
+    }
+    if ( bSig < aSig ) goto aBigger;
+    if ( aSig < bSig ) goto bBigger;
+    return packFloat32( float_rounding_mode == float_round_down, 0, 0 );
+ bExpBigger:
+    if ( bExp == 0xFF ) {
+    1038:	34 03 00 ff 	mvi r3,255
+    103c:	44 e3 00 17 	be r7,r3,1098 <subFloat32Sigs+0x18c>
+        if ( bSig ) return propagateFloat32NaN( a, b );
+        return packFloat32( zSign ^ 1, 0xFF, 0 );
+    }
+    if ( aExp == 0 ) {
+    1040:	44 c0 00 13 	be r6,r0,108c <subFloat32Sigs+0x180>
+        ++expDiff;
+    }
+    else {
+        aSig |= 0x40000000;
+    1044:	78 08 40 00 	mvhi r8,0x4000
+    1048:	b9 00 08 00 	mv r1,r8
+    104c:	38 21 00 00 	ori r1,r1,0x0
+    1050:	b8 81 20 00 	or r4,r4,r1
+    }
+    shift32RightJamming( aSig, - expDiff, &aSig );
+    1054:	c8 09 10 00 	sub r2,r0,r9
+*/
+INLINE void shift32RightJamming( bits32 a, int16 count, bits32 *zPtr )
+{
+    bits32 z;
+
+    if ( count == 0 ) {
+    1058:	44 40 00 07 	be r2,r0,1074 <subFloat32Sigs+0x168>
+        z = a;
+    }
+    else if ( count < 32 ) {
+    105c:	34 01 00 1f 	mvi r1,31
+    1060:	48 41 00 15 	bg r2,r1,10b4 <subFloat32Sigs+0x1a8>
+        z = ( a>>count ) | ( ( a<<( ( - count ) & 31 ) ) != 0 );
+    1064:	bc 89 08 00 	sl r1,r4,r9
+    1068:	80 82 10 00 	sru r2,r4,r2
+    106c:	7c 21 00 00 	cmpnei r1,r1,0
+    1070:	b8 22 20 00 	or r4,r1,r2
+    bSig |= 0x40000000;
+    1074:	39 08 00 00 	ori r8,r8,0x0
+    1078:	b8 a8 28 00 	or r5,r5,r8
+ bBigger:
+    zSig = bSig - aSig;
+    107c:	c8 a4 18 00 	sub r3,r5,r4
+    zExp = bExp;
+    zSign ^= 1;
+    1080:	19 4a 00 01 	xori r10,r10,0x1
+    1084:	b8 e0 10 00 	mv r2,r7
+    1088:	e3 ff ff c9 	bi fac <subFloat32Sigs+0xa0>
+    if ( bExp == 0xFF ) {
+        if ( bSig ) return propagateFloat32NaN( a, b );
+        return packFloat32( zSign ^ 1, 0xFF, 0 );
+    }
+    if ( aExp == 0 ) {
+        ++expDiff;
+    108c:	35 29 00 01 	addi r9,r9,1
+    1090:	78 08 40 00 	mvhi r8,0x4000
+    1094:	e3 ff ff f0 	bi 1054 <subFloat32Sigs+0x148>
+    if ( bSig < aSig ) goto aBigger;
+    if ( aSig < bSig ) goto bBigger;
+    return packFloat32( float_rounding_mode == float_round_down, 0, 0 );
+ bExpBigger:
+    if ( bExp == 0xFF ) {
+        if ( bSig ) return propagateFloat32NaN( a, b );
+    1098:	5c a0 ff ce 	bne r5,r0,fd0 <subFloat32Sigs+0xc4>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    109c:	19 42 00 01 	xori r2,r10,0x1
+    10a0:	3c 42 00 1f 	sli r2,r2,31
+    10a4:	78 01 7f 80 	mvhi r1,0x7f80
+    10a8:	38 21 00 00 	ori r1,r1,0x0
+    10ac:	b4 41 40 00 	add r8,r2,r1
+    10b0:	e3 ff ff c3 	bi fbc <subFloat32Sigs+0xb0>
+    }
+    else {
+        z = ( a != 0 );
+    10b4:	7c 84 00 00 	cmpnei r4,r4,0
+    10b8:	e3 ff ff ef 	bi 1074 <subFloat32Sigs+0x168>
+
+000010bc <float32_add>:
+and `b'.  The operation is performed according to the IEC/IEEE Standard for
+Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_add( float32 a, float32 b )
+{
+    10bc:	37 9c ff fc 	addi sp,sp,-4
+    10c0:	5b 9d 00 04 	sw (sp+4),ra
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+    10c4:	00 24 00 1f 	srui r4,r1,31
+{
+    flag aSign, bSign;
+
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign == bSign ) {
+    10c8:	00 43 00 1f 	srui r3,r2,31
+    10cc:	44 83 00 06 	be r4,r3,10e4 <float32_add+0x28>
+        return addFloat32Sigs( a, b, aSign );
+    }
+    else {
+        return subFloat32Sigs( a, b, aSign );
+    10d0:	b8 80 18 00 	mv r3,r4
+    10d4:	fb ff ff 8e 	calli f0c <subFloat32Sigs>
+    }
+
+}
+    10d8:	2b 9d 00 04 	lw ra,(sp+4)
+    10dc:	37 9c 00 04 	addi sp,sp,4
+    10e0:	c3 a0 00 00 	ret
+    flag aSign, bSign;
+
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign == bSign ) {
+        return addFloat32Sigs( a, b, aSign );
+    10e4:	b8 80 18 00 	mv r3,r4
+    10e8:	fb ff ff 24 	calli d78 <addFloat32Sigs>
+    }
+    else {
+        return subFloat32Sigs( a, b, aSign );
+    }
+
+}
+    10ec:	2b 9d 00 04 	lw ra,(sp+4)
+    10f0:	37 9c 00 04 	addi sp,sp,4
+    10f4:	c3 a0 00 00 	ret
+
+000010f8 <float32_sub>:
+`a' and `b'.  The operation is performed according to the IEC/IEEE Standard
+for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_sub( float32 a, float32 b )
+{
+    10f8:	37 9c ff fc 	addi sp,sp,-4
+    10fc:	5b 9d 00 04 	sw (sp+4),ra
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+    1100:	00 24 00 1f 	srui r4,r1,31
+{
+    flag aSign, bSign;
+
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign == bSign ) {
+    1104:	00 43 00 1f 	srui r3,r2,31
+    1108:	44 83 00 06 	be r4,r3,1120 <float32_sub+0x28>
+        return subFloat32Sigs( a, b, aSign );
+    }
+    else {
+        return addFloat32Sigs( a, b, aSign );
+    110c:	b8 80 18 00 	mv r3,r4
+    1110:	fb ff ff 1a 	calli d78 <addFloat32Sigs>
+    }
+
+}
+    1114:	2b 9d 00 04 	lw ra,(sp+4)
+    1118:	37 9c 00 04 	addi sp,sp,4
+    111c:	c3 a0 00 00 	ret
+    flag aSign, bSign;
+
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign == bSign ) {
+        return subFloat32Sigs( a, b, aSign );
+    1120:	b8 80 18 00 	mv r3,r4
+    1124:	fb ff ff 7a 	calli f0c <subFloat32Sigs>
+    }
+    else {
+        return addFloat32Sigs( a, b, aSign );
+    }
+
+}
+    1128:	2b 9d 00 04 	lw ra,(sp+4)
+    112c:	37 9c 00 04 	addi sp,sp,4
+    1130:	c3 a0 00 00 	ret
+
+00001134 <float32_mul>:
+`a' and `b'.  The operation is performed according to the IEC/IEEE Standard
+for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_mul( float32 a, float32 b )
+{
+    1134:	37 9c ff f4 	addi sp,sp,-12
+    1138:	5b 8b 00 0c 	sw (sp+12),r11
+    113c:	5b 8c 00 08 	sw (sp+8),r12
+    1140:	5b 9d 00 04 	sw (sp+4),ra
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    1144:	00 24 00 17 	srui r4,r1,23
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    1148:	78 03 00 7f 	mvhi r3,0x7f
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    114c:	00 46 00 17 	srui r6,r2,23
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    1150:	38 63 ff ff 	ori r3,r3,0xffff
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    1154:	20 8a 00 ff 	andi r10,r4,0xff
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    1158:	98 22 28 00 	xor r5,r1,r2
+    if ( aExp == 0xFF ) {
+    115c:	34 09 00 ff 	mvi r9,255
+`a' and `b'.  The operation is performed according to the IEC/IEEE Standard
+for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_mul( float32 a, float32 b )
+{
+    1160:	b8 20 38 00 	mv r7,r1
+    1164:	b8 40 40 00 	mv r8,r2
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    1168:	a0 43 58 00 	and r11,r2,r3
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    116c:	a0 c9 20 00 	and r4,r6,r9
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    1170:	00 ac 00 1f 	srui r12,r5,31
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    1174:	a0 23 e8 00 	and ra,r1,r3
+    aSign = extractFloat32Sign( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    if ( aExp == 0xFF ) {
+    1178:	45 49 00 61 	be r10,r9,12fc <float32_mul+0x1c8>
+            float_raise( float_flag_invalid );
+            return float32_default_nan;
+        }
+        return packFloat32( zSign, 0xFF, 0 );
+    }
+    if ( bExp == 0xFF ) {
+    117c:	44 89 00 51 	be r4,r9,12c0 <float32_mul+0x18c>
+            float_raise( float_flag_invalid );
+            return float32_default_nan;
+        }
+        return packFloat32( zSign, 0xFF, 0 );
+    }
+    if ( aExp == 0 ) {
+    1180:	5d 40 00 13 	bne r10,r0,11cc <float32_mul+0x98>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    1184:	3d 85 00 1f 	sli r5,r12,31
+            return float32_default_nan;
+        }
+        return packFloat32( zSign, 0xFF, 0 );
+    }
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return packFloat32( zSign, 0, 0 );
+    1188:	47 aa 00 48 	be ra,r10,12a8 <float32_mul+0x174>
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+    118c:	38 01 ff ff 	mvu r1,0xffff
+    1190:	50 3d 00 77 	bgeu r1,ra,136c <float32_mul+0x238>
+    1194:	bb a0 18 00 	mv r3,ra
+    1198:	34 02 00 08 	mvi r2,8
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+        shiftCount += 8;
+        a <<= 8;
+    119c:	3c 63 00 08 	sli r3,r3,8
+    11a0:	34 45 ff f8 	addi r5,r2,-8
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    11a4:	00 63 00 18 	srui r3,r3,24
+    11a8:	78 01 00 00 	mvhi r1,0x0
+    11ac:	3c 63 00 02 	sli r3,r3,2
+    11b0:	38 21 22 f8 	ori r1,r1,0x22f8
+    11b4:	b4 23 08 00 	add r1,r1,r3
+    11b8:	28 22 00 00 	lw r2,(r1+0)
+    *zSigPtr = aSig<<shiftCount;
+    *zExpPtr = 1 - shiftCount;
+    11bc:	34 01 00 01 	mvi r1,1
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    11c0:	b4 a2 10 00 	add r2,r5,r2
+    *zSigPtr = aSig<<shiftCount;
+    11c4:	bf a2 e8 00 	sl ra,ra,r2
+    *zExpPtr = 1 - shiftCount;
+    11c8:	c8 22 50 00 	sub r10,r1,r2
+    }
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return packFloat32( zSign, 0, 0 );
+        normalizeFloat32Subnormal( aSig, &aExp, &aSig );
+    }
+    if ( bExp == 0 ) {
+    11cc:	5c 80 00 13 	bne r4,r0,1218 <float32_mul+0xe4>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    11d0:	3d 85 00 1f 	sli r5,r12,31
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return packFloat32( zSign, 0, 0 );
+        normalizeFloat32Subnormal( aSig, &aExp, &aSig );
+    }
+    if ( bExp == 0 ) {
+        if ( bSig == 0 ) return packFloat32( zSign, 0, 0 );
+    11d4:	45 64 00 35 	be r11,r4,12a8 <float32_mul+0x174>
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+    11d8:	38 01 ff ff 	mvu r1,0xffff
+    11dc:	50 2b 00 6a 	bgeu r1,r11,1384 <float32_mul+0x250>
+    11e0:	b9 60 18 00 	mv r3,r11
+    11e4:	34 02 00 08 	mvi r2,8
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+        shiftCount += 8;
+        a <<= 8;
+    11e8:	3c 63 00 08 	sli r3,r3,8
+    11ec:	34 44 ff f8 	addi r4,r2,-8
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    11f0:	00 63 00 18 	srui r3,r3,24
+    11f4:	78 01 00 00 	mvhi r1,0x0
+    11f8:	3c 63 00 02 	sli r3,r3,2
+    11fc:	38 21 22 f8 	ori r1,r1,0x22f8
+    1200:	b4 23 08 00 	add r1,r1,r3
+    1204:	28 22 00 00 	lw r2,(r1+0)
+    *zSigPtr = aSig<<shiftCount;
+    *zExpPtr = 1 - shiftCount;
+    1208:	34 01 00 01 	mvi r1,1
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    120c:	b4 82 10 00 	add r2,r4,r2
+    *zSigPtr = aSig<<shiftCount;
+    1210:	bd 62 58 00 	sl r11,r11,r2
+    *zExpPtr = 1 - shiftCount;
+    1214:	c8 22 20 00 	sub r4,r1,r2
+    if ( bExp == 0 ) {
+        if ( bSig == 0 ) return packFloat32( zSign, 0, 0 );
+        normalizeFloat32Subnormal( bSig, &bExp, &bSig );
+    }
+    zExp = aExp + bExp - 0x7F;
+    aSig = ( aSig | 0x00800000 )<<7;
+    1218:	78 01 00 80 	mvhi r1,0x80
+    121c:	38 21 00 00 	ori r1,r1,0x0
+    bSig = ( bSig | 0x00800000 )<<8;
+    1220:	b9 61 10 00 	or r2,r11,r1
+    if ( bExp == 0 ) {
+        if ( bSig == 0 ) return packFloat32( zSign, 0, 0 );
+        normalizeFloat32Subnormal( bSig, &bExp, &bSig );
+    }
+    zExp = aExp + bExp - 0x7F;
+    aSig = ( aSig | 0x00800000 )<<7;
+    1224:	bb a1 08 00 	or r1,ra,r1
+    1228:	3c 21 00 07 	sli r1,r1,7
+    bSig = ( bSig | 0x00800000 )<<8;
+    122c:	3c 42 00 08 	sli r2,r2,8
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    1230:	00 3d 00 10 	srui ra,r1,16
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    1234:	00 4b 00 10 	srui r11,r2,16
+
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    1238:	20 29 ff ff 	andi r9,r1,0xffff
+    123c:	20 48 ff ff 	andi r8,r2,0xffff
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    1240:	89 69 18 00 	mul r3,r11,r9
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    1244:	89 1d 10 00 	mul r2,r8,ra
+    }
+    if ( bExp == 0 ) {
+        if ( bSig == 0 ) return packFloat32( zSign, 0, 0 );
+        normalizeFloat32Subnormal( bSig, &bExp, &bSig );
+    }
+    zExp = aExp + bExp - 0x7F;
+    1248:	35 41 ff 81 	addi r1,r10,-127
+    124c:	b4 24 30 00 	add r6,r1,r4
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    1250:	b4 62 08 00 	add r1,r3,r2
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1254:	54 41 00 36 	bgu r2,r1,132c <float32_mul+0x1f8>
+    1258:	34 07 00 00 	mvi r7,0
+
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    125c:	89 09 18 00 	mul r3,r8,r9
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    zMiddleA <<= 16;
+    1260:	3c 22 00 10 	sli r2,r1,16
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1264:	89 7d 20 00 	mul r4,r11,ra
+    zMiddleA <<= 16;
+    z1 += zMiddleA;
+    1268:	b4 43 18 00 	add r3,r2,r3
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    126c:	00 21 00 10 	srui r1,r1,16
+    1270:	f4 43 10 00 	cmpgu r2,r2,r3
+    1274:	b4 24 08 00 	add r1,r1,r4
+    1278:	b4 22 08 00 	add r1,r1,r2
+    aSig = ( aSig | 0x00800000 )<<7;
+    bSig = ( bSig | 0x00800000 )<<8;
+    mul32To64( aSig, bSig, &zSig0, &zSig1 );
+    zSig0 |= ( zSig1 != 0 );
+    127c:	7c 63 00 00 	cmpnei r3,r3,0
+    1280:	b4 27 08 00 	add r1,r1,r7
+    1284:	b8 23 18 00 	or r3,r1,r3
+    if ( 0 <= (sbits32) ( zSig0<<1 ) ) {
+    1288:	b4 63 08 00 	add r1,r3,r3
+    128c:	48 01 00 03 	bg r0,r1,1298 <float32_mul+0x164>
+        zSig0 <<= 1;
+        --zExp;
+    1290:	34 c6 ff ff 	addi r6,r6,-1
+    1294:	b8 20 18 00 	mv r3,r1
+    }
+    return roundAndPackFloat32( zSign, zExp, zSig0 );
+    1298:	b9 80 08 00 	mv r1,r12
+    129c:	b8 c0 10 00 	mv r2,r6
+    12a0:	fb ff fd 32 	calli 768 <roundAndPackFloat32>
+    12a4:	b8 20 28 00 	mv r5,r1
+
+}
+    12a8:	b8 a0 08 00 	mv r1,r5
+    12ac:	2b 9d 00 04 	lw ra,(sp+4)
+    12b0:	2b 8b 00 0c 	lw r11,(sp+12)
+    12b4:	2b 8c 00 08 	lw r12,(sp+8)
+    12b8:	37 9c 00 0c 	addi sp,sp,12
+    12bc:	c3 a0 00 00 	ret
+            return float32_default_nan;
+        }
+        return packFloat32( zSign, 0xFF, 0 );
+    }
+    if ( bExp == 0xFF ) {
+        if ( bSig ) return propagateFloat32NaN( a, b );
+    12c0:	5d 60 00 28 	bne r11,r0,1360 <float32_mul+0x22c>
+        if ( ( aExp | aSig ) == 0 ) {
+    12c4:	b9 5d 08 00 	or r1,r10,ra
+    12c8:	5c 2b 00 14 	bne r1,r11,1318 <float32_mul+0x1e4>
+    12cc:	78 02 00 00 	mvhi r2,0x0
+    12d0:	38 42 27 50 	ori r2,r2,0x2750
+    12d4:	28 41 00 00 	lw r1,(r2+0)
+    12d8:	34 05 ff ff 	mvi r5,-1
+    12dc:	38 21 00 10 	ori r1,r1,0x10
+    12e0:	58 41 00 00 	sw (r2+0),r1
+        zSig0 <<= 1;
+        --zExp;
+    }
+    return roundAndPackFloat32( zSign, zExp, zSig0 );
+
+}
+    12e4:	b8 a0 08 00 	mv r1,r5
+    12e8:	2b 9d 00 04 	lw ra,(sp+4)
+    12ec:	2b 8b 00 0c 	lw r11,(sp+12)
+    12f0:	2b 8c 00 08 	lw r12,(sp+8)
+    12f4:	37 9c 00 0c 	addi sp,sp,12
+    12f8:	c3 a0 00 00 	ret
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    if ( aExp == 0xFF ) {
+        if ( aSig || ( ( bExp == 0xFF ) && bSig ) ) {
+    12fc:	5f a0 00 0f 	bne ra,r0,1338 <float32_mul+0x204>
+    1300:	e4 89 10 00 	cmpe r2,r4,r9
+    1304:	7d 61 00 00 	cmpnei r1,r11,0
+    1308:	a0 41 10 00 	and r2,r2,r1
+    130c:	5c 5d 00 0b 	bne r2,ra,1338 <float32_mul+0x204>
+            return propagateFloat32NaN( a, b );
+        }
+        if ( ( bExp | bSig ) == 0 ) {
+    1310:	b8 8b 08 00 	or r1,r4,r11
+    1314:	44 22 ff ee 	be r1,r2,12cc <float32_mul+0x198>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    1318:	3d 82 00 1f 	sli r2,r12,31
+    131c:	78 01 7f 80 	mvhi r1,0x7f80
+    1320:	38 21 00 00 	ori r1,r1,0x0
+    1324:	b4 41 28 00 	add r5,r2,r1
+    1328:	e3 ff ff e0 	bi 12a8 <float32_mul+0x174>
+    132c:	78 07 00 01 	mvhi r7,0x1
+    1330:	38 e7 00 00 	ori r7,r7,0x0
+    1334:	e3 ff ff ca 	bi 125c <float32_mul+0x128>
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    if ( aExp == 0xFF ) {
+        if ( aSig || ( ( bExp == 0xFF ) && bSig ) ) {
+            return propagateFloat32NaN( a, b );
+    1338:	b8 e0 08 00 	mv r1,r7
+    133c:	b9 00 10 00 	mv r2,r8
+    1340:	fb ff fc db 	calli 6ac <propagateFloat32NaN>
+    1344:	b8 20 28 00 	mv r5,r1
+        zSig0 <<= 1;
+        --zExp;
+    }
+    return roundAndPackFloat32( zSign, zExp, zSig0 );
+
+}
+    1348:	b8 a0 08 00 	mv r1,r5
+    134c:	2b 9d 00 04 	lw ra,(sp+4)
+    1350:	2b 8b 00 0c 	lw r11,(sp+12)
+    1354:	2b 8c 00 08 	lw r12,(sp+8)
+    1358:	37 9c 00 0c 	addi sp,sp,12
+    135c:	c3 a0 00 00 	ret
+            return float32_default_nan;
+        }
+        return packFloat32( zSign, 0xFF, 0 );
+    }
+    if ( bExp == 0xFF ) {
+        if ( bSig ) return propagateFloat32NaN( a, b );
+    1360:	fb ff fc d3 	calli 6ac <propagateFloat32NaN>
+    1364:	b8 20 28 00 	mv r5,r1
+    1368:	e3 ff ff d0 	bi 12a8 <float32_mul+0x174>
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+    136c:	78 01 00 ff 	mvhi r1,0xff
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    1370:	3f a3 00 10 	sli r3,ra,16
+    }
+    if ( a < 0x1000000 ) {
+    1374:	38 21 ff ff 	ori r1,r1,0xffff
+    1378:	50 23 00 09 	bgeu r1,r3,139c <float32_mul+0x268>
+    137c:	34 05 00 08 	mvi r5,8
+    1380:	e3 ff ff 89 	bi 11a4 <float32_mul+0x70>
+    1384:	78 01 00 ff 	mvhi r1,0xff
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    1388:	3d 63 00 10 	sli r3,r11,16
+    }
+    if ( a < 0x1000000 ) {
+    138c:	38 21 ff ff 	ori r1,r1,0xffff
+    1390:	50 23 00 05 	bgeu r1,r3,13a4 <float32_mul+0x270>
+    1394:	34 04 00 08 	mvi r4,8
+    1398:	e3 ff ff 96 	bi 11f0 <float32_mul+0xbc>
+    139c:	34 02 00 18 	mvi r2,24
+    13a0:	e3 ff ff 7f 	bi 119c <float32_mul+0x68>
+    13a4:	34 02 00 18 	mvi r2,24
+    13a8:	e3 ff ff 90 	bi 11e8 <float32_mul+0xb4>
+
+000013ac <float32_div>:
+by the corresponding value `b'.  The operation is performed according to
+the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_div( float32 a, float32 b )
+{
+    13ac:	37 9c ff ec 	addi sp,sp,-20
+    13b0:	5b 8b 00 14 	sw (sp+20),r11
+    13b4:	5b 8c 00 10 	sw (sp+16),r12
+    13b8:	5b 8d 00 0c 	sw (sp+12),r13
+    13bc:	5b 8e 00 08 	sw (sp+8),r14
+    13c0:	5b 9d 00 04 	sw (sp+4),ra
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    13c4:	00 26 00 17 	srui r6,r1,23
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    13c8:	78 03 00 7f 	mvhi r3,0x7f
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    13cc:	00 47 00 17 	srui r7,r2,23
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    13d0:	38 63 ff ff 	ori r3,r3,0xffff
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    13d4:	98 22 40 00 	xor r8,r1,r2
+    if ( aExp == 0xFF ) {
+    13d8:	34 09 00 ff 	mvi r9,255
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    13dc:	20 c6 00 ff 	andi r6,r6,0xff
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    13e0:	a0 43 50 00 	and r10,r2,r3
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    13e4:	a0 e9 38 00 	and r7,r7,r9
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    13e8:	01 0e 00 1f 	srui r14,r8,31
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    13ec:	a0 23 28 00 	and r5,r1,r3
+    aSign = extractFloat32Sign( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    if ( aExp == 0xFF ) {
+    13f0:	44 c9 00 73 	be r6,r9,15bc <float32_div+0x210>
+            float_raise( float_flag_invalid );
+            return float32_default_nan;
+        }
+        return packFloat32( zSign, 0xFF, 0 );
+    }
+    if ( bExp == 0xFF ) {
+    13f4:	44 e9 00 58 	be r7,r9,1554 <float32_div+0x1a8>
+        if ( bSig ) return propagateFloat32NaN( a, b );
+        return packFloat32( zSign, 0, 0 );
+    }
+    if ( bExp == 0 ) {
+    13f8:	5c e0 00 12 	bne r7,r0,1440 <float32_div+0x94>
+        if ( bSig == 0 ) {
+    13fc:	45 47 00 7e 	be r10,r7,15f4 <float32_div+0x248>
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+    1400:	38 01 ff ff 	mvu r1,0xffff
+    1404:	50 2a 00 9a 	bgeu r1,r10,166c <float32_div+0x2c0>
+    1408:	b9 40 18 00 	mv r3,r10
+    140c:	34 02 00 08 	mvi r2,8
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+        shiftCount += 8;
+        a <<= 8;
+    1410:	3c 63 00 08 	sli r3,r3,8
+    1414:	34 44 ff f8 	addi r4,r2,-8
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    1418:	00 63 00 18 	srui r3,r3,24
+    141c:	78 01 00 00 	mvhi r1,0x0
+    1420:	3c 63 00 02 	sli r3,r3,2
+    1424:	38 21 22 f8 	ori r1,r1,0x22f8
+    1428:	b4 23 08 00 	add r1,r1,r3
+    142c:	28 22 00 00 	lw r2,(r1+0)
+    *zSigPtr = aSig<<shiftCount;
+    *zExpPtr = 1 - shiftCount;
+    1430:	34 01 00 01 	mvi r1,1
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    1434:	b4 82 10 00 	add r2,r4,r2
+    *zSigPtr = aSig<<shiftCount;
+    1438:	bd 42 50 00 	sl r10,r10,r2
+    *zExpPtr = 1 - shiftCount;
+    143c:	c8 22 38 00 	sub r7,r1,r2
+            float_raise( float_flag_divbyzero );
+            return packFloat32( zSign, 0xFF, 0 );
+        }
+        normalizeFloat32Subnormal( bSig, &bExp, &bSig );
+    }
+    if ( aExp == 0 ) {
+    1440:	5c c0 00 13 	bne r6,r0,148c <float32_div+0xe0>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    1444:	3d c4 00 1f 	sli r4,r14,31
+            return packFloat32( zSign, 0xFF, 0 );
+        }
+        normalizeFloat32Subnormal( bSig, &bExp, &bSig );
+    }
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return packFloat32( zSign, 0, 0 );
+    1448:	44 a6 00 45 	be r5,r6,155c <float32_div+0x1b0>
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+    144c:	38 01 ff ff 	mvu r1,0xffff
+    1450:	50 25 00 8d 	bgeu r1,r5,1684 <float32_div+0x2d8>
+    1454:	b8 a0 18 00 	mv r3,r5
+    1458:	34 02 00 08 	mvi r2,8
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+        shiftCount += 8;
+        a <<= 8;
+    145c:	3c 63 00 08 	sli r3,r3,8
+    1460:	34 44 ff f8 	addi r4,r2,-8
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    1464:	00 63 00 18 	srui r3,r3,24
+    1468:	78 01 00 00 	mvhi r1,0x0
+    146c:	3c 63 00 02 	sli r3,r3,2
+    1470:	38 21 22 f8 	ori r1,r1,0x22f8
+    1474:	b4 23 08 00 	add r1,r1,r3
+    1478:	28 22 00 00 	lw r2,(r1+0)
+    *zSigPtr = aSig<<shiftCount;
+    *zExpPtr = 1 - shiftCount;
+    147c:	34 01 00 01 	mvi r1,1
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    1480:	b4 82 10 00 	add r2,r4,r2
+    *zSigPtr = aSig<<shiftCount;
+    1484:	bc a2 28 00 	sl r5,r5,r2
+    *zExpPtr = 1 - shiftCount;
+    1488:	c8 22 30 00 	sub r6,r1,r2
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return packFloat32( zSign, 0, 0 );
+        normalizeFloat32Subnormal( aSig, &aExp, &aSig );
+    }
+    zExp = aExp - bExp + 0x7D;
+    aSig = ( aSig | 0x00800000 )<<7;
+    148c:	78 01 00 80 	mvhi r1,0x80
+    1490:	38 21 00 00 	ori r1,r1,0x0
+    1494:	b8 a1 10 00 	or r2,r5,r1
+    1498:	3c 4c 00 07 	sli r12,r2,7
+    bSig = ( bSig | 0x00800000 )<<8;
+    149c:	b9 41 08 00 	or r1,r10,r1
+    14a0:	3c 2b 00 08 	sli r11,r1,8
+    }
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return packFloat32( zSign, 0, 0 );
+        normalizeFloat32Subnormal( aSig, &aExp, &aSig );
+    }
+    zExp = aExp - bExp + 0x7D;
+    14a4:	c8 c7 10 00 	sub r2,r6,r7
+    aSig = ( aSig | 0x00800000 )<<7;
+    bSig = ( bSig | 0x00800000 )<<8;
+    if ( bSig <= ( aSig + aSig ) ) {
+    14a8:	b5 8c 08 00 	add r1,r12,r12
+    }
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return packFloat32( zSign, 0, 0 );
+        normalizeFloat32Subnormal( aSig, &aExp, &aSig );
+    }
+    zExp = aExp - bExp + 0x7D;
+    14ac:	34 4d 00 7d 	addi r13,r2,125
+    aSig = ( aSig | 0x00800000 )<<7;
+    bSig = ( bSig | 0x00800000 )<<8;
+    if ( bSig <= ( aSig + aSig ) ) {
+    14b0:	55 61 00 03 	bgu r11,r1,14bc <float32_div+0x110>
+        aSig >>= 1;
+    14b4:	01 8c 00 01 	srui r12,r12,1
+        ++zExp;
+    14b8:	35 ad 00 01 	addi r13,r13,1
+    }
+    zSig = estimateDiv64To32( aSig, 0, bSig );
+    14bc:	34 02 00 00 	mvi r2,0
+    14c0:	b9 80 08 00 	mv r1,r12
+    14c4:	b9 60 18 00 	mv r3,r11
+    14c8:	fb ff fc 0c 	calli 4f8 <estimateDiv64To32>
+    14cc:	b8 20 38 00 	mv r7,r1
+    if ( ( zSig & 0x3F ) <= 2 ) {
+    14d0:	20 22 00 3f 	andi r2,r1,0x3f
+    14d4:	34 01 00 02 	mvi r1,2
+    14d8:	54 41 00 2c 	bgu r2,r1,1588 <float32_div+0x1dc>
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    14dc:	00 e9 00 10 	srui r9,r7,16
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    14e0:	01 68 00 10 	srui r8,r11,16
+
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    14e4:	21 64 ff ff 	andi r4,r11,0xffff
+    14e8:	20 e3 ff ff 	andi r3,r7,0xffff
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    14ec:	89 24 10 00 	mul r2,r9,r4
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    14f0:	88 68 08 00 	mul r1,r3,r8
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    14f4:	b4 41 28 00 	add r5,r2,r1
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    14f8:	54 25 00 5a 	bgu r1,r5,1660 <float32_div+0x2b4>
+    14fc:	34 06 00 00 	mvi r6,0
+
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    1500:	88 64 18 00 	mul r3,r3,r4
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    zMiddleA <<= 16;
+    1504:	3c a2 00 10 	sli r2,r5,16
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1508:	89 28 08 00 	mul r1,r9,r8
+    zMiddleA <<= 16;
+    z1 += zMiddleA;
+    150c:	b4 43 18 00 	add r3,r2,r3
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1510:	00 a5 00 10 	srui r5,r5,16
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+    *z0Ptr = a0 - b0 - ( a1 < b1 );
+    1514:	7c 64 00 00 	cmpnei r4,r3,0
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1518:	c9 81 08 00 	sub r1,r12,r1
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+    *z0Ptr = a0 - b0 - ( a1 < b1 );
+    151c:	f4 43 10 00 	cmpgu r2,r2,r3
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1520:	c8 25 08 00 	sub r1,r1,r5
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+    *z0Ptr = a0 - b0 - ( a1 < b1 );
+    1524:	c8 24 08 00 	sub r1,r1,r4
+    1528:	c8 22 08 00 	sub r1,r1,r2
+    152c:	c8 26 10 00 	sub r2,r1,r6
+INLINE void
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+    1530:	c8 03 18 00 	sub r3,r0,r3
+        mul32To64( bSig, zSig, &term0, &term1 );
+        sub64( aSig, 0, term0, term1, &rem0, &rem1 );
+        while ( (sbits32) rem0 < 0 ) {
+    1534:	4c 40 00 13 	bge r2,r0,1580 <float32_div+0x1d4>
+ add64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+    bits32 z1;
+
+    z1 = a1 + b1;
+    1538:	b4 6b 20 00 	add r4,r3,r11
+    *z1Ptr = z1;
+    *z0Ptr = a0 + b0 + ( z1 < a1 );
+    153c:	f4 64 08 00 	cmpgu r1,r3,r4
+            --zSig;
+    1540:	34 e7 ff ff 	addi r7,r7,-1
+    1544:	b4 41 10 00 	add r2,r2,r1
+    }
+    zSig = estimateDiv64To32( aSig, 0, bSig );
+    if ( ( zSig & 0x3F ) <= 2 ) {
+        mul32To64( bSig, zSig, &term0, &term1 );
+        sub64( aSig, 0, term0, term1, &rem0, &rem1 );
+        while ( (sbits32) rem0 < 0 ) {
+    1548:	b8 80 18 00 	mv r3,r4
+    154c:	4c 40 00 0c 	bge r2,r0,157c <float32_div+0x1d0>
+    1550:	e3 ff ff fa 	bi 1538 <float32_div+0x18c>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    1554:	3d c4 00 1f 	sli r4,r14,31
+            return float32_default_nan;
+        }
+        return packFloat32( zSign, 0xFF, 0 );
+    }
+    if ( bExp == 0xFF ) {
+        if ( bSig ) return propagateFloat32NaN( a, b );
+    1558:	5d 40 00 38 	bne r10,r0,1638 <float32_div+0x28c>
+        }
+        zSig |= ( rem1 != 0 );
+    }
+    return roundAndPackFloat32( zSign, zExp, zSig );
+
+}
+    155c:	b8 80 08 00 	mv r1,r4
+    1560:	2b 9d 00 04 	lw ra,(sp+4)
+    1564:	2b 8b 00 14 	lw r11,(sp+20)
+    1568:	2b 8c 00 10 	lw r12,(sp+16)
+    156c:	2b 8d 00 0c 	lw r13,(sp+12)
+    1570:	2b 8e 00 08 	lw r14,(sp+8)
+    1574:	37 9c 00 14 	addi sp,sp,20
+    1578:	c3 a0 00 00 	ret
+    }
+    zSig = estimateDiv64To32( aSig, 0, bSig );
+    if ( ( zSig & 0x3F ) <= 2 ) {
+        mul32To64( bSig, zSig, &term0, &term1 );
+        sub64( aSig, 0, term0, term1, &rem0, &rem1 );
+        while ( (sbits32) rem0 < 0 ) {
+    157c:	b8 80 18 00 	mv r3,r4
+            --zSig;
+            add64( rem0, rem1, 0, bSig, &rem0, &rem1 );
+        }
+        zSig |= ( rem1 != 0 );
+    1580:	7c 61 00 00 	cmpnei r1,r3,0
+    1584:	b8 e1 38 00 	or r7,r7,r1
+    }
+    return roundAndPackFloat32( zSign, zExp, zSig );
+    1588:	b9 c0 08 00 	mv r1,r14
+    158c:	b9 a0 10 00 	mv r2,r13
+    1590:	b8 e0 18 00 	mv r3,r7
+    1594:	fb ff fc 75 	calli 768 <roundAndPackFloat32>
+    1598:	b8 20 20 00 	mv r4,r1
+
+}
+    159c:	b8 80 08 00 	mv r1,r4
+    15a0:	2b 9d 00 04 	lw ra,(sp+4)
+    15a4:	2b 8b 00 14 	lw r11,(sp+20)
+    15a8:	2b 8c 00 10 	lw r12,(sp+16)
+    15ac:	2b 8d 00 0c 	lw r13,(sp+12)
+    15b0:	2b 8e 00 08 	lw r14,(sp+8)
+    15b4:	37 9c 00 14 	addi sp,sp,20
+    15b8:	c3 a0 00 00 	ret
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    if ( aExp == 0xFF ) {
+        if ( aSig ) return propagateFloat32NaN( a, b );
+    15bc:	5c a0 00 1f 	bne r5,r0,1638 <float32_div+0x28c>
+        if ( bExp == 0xFF ) {
+    15c0:	44 e6 00 1d 	be r7,r6,1634 <float32_div+0x288>
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    15c4:	3d c2 00 1f 	sli r2,r14,31
+    15c8:	78 01 7f 80 	mvhi r1,0x7f80
+    15cc:	38 21 00 00 	ori r1,r1,0x0
+    15d0:	b4 41 20 00 	add r4,r2,r1
+        }
+        zSig |= ( rem1 != 0 );
+    }
+    return roundAndPackFloat32( zSign, zExp, zSig );
+
+}
+    15d4:	b8 80 08 00 	mv r1,r4
+    15d8:	2b 9d 00 04 	lw ra,(sp+4)
+    15dc:	2b 8b 00 14 	lw r11,(sp+20)
+    15e0:	2b 8c 00 10 	lw r12,(sp+16)
+    15e4:	2b 8d 00 0c 	lw r13,(sp+12)
+    15e8:	2b 8e 00 08 	lw r14,(sp+8)
+    15ec:	37 9c 00 14 	addi sp,sp,20
+    15f0:	c3 a0 00 00 	ret
+        if ( bSig ) return propagateFloat32NaN( a, b );
+        return packFloat32( zSign, 0, 0 );
+    }
+    if ( bExp == 0 ) {
+        if ( bSig == 0 ) {
+            if ( ( aExp | aSig ) == 0 ) {
+    15f4:	b8 c5 08 00 	or r1,r6,r5
+    15f8:	5c 2a 00 29 	bne r1,r10,169c <float32_div+0x2f0>
+    15fc:	78 02 00 00 	mvhi r2,0x0
+    1600:	38 42 27 50 	ori r2,r2,0x2750
+    1604:	28 41 00 00 	lw r1,(r2+0)
+    1608:	34 04 ff ff 	mvi r4,-1
+    160c:	38 21 00 10 	ori r1,r1,0x10
+    1610:	58 41 00 00 	sw (r2+0),r1
+        }
+        zSig |= ( rem1 != 0 );
+    }
+    return roundAndPackFloat32( zSign, zExp, zSig );
+
+}
+    1614:	b8 80 08 00 	mv r1,r4
+    1618:	2b 9d 00 04 	lw ra,(sp+4)
+    161c:	2b 8b 00 14 	lw r11,(sp+20)
+    1620:	2b 8c 00 10 	lw r12,(sp+16)
+    1624:	2b 8d 00 0c 	lw r13,(sp+12)
+    1628:	2b 8e 00 08 	lw r14,(sp+8)
+    162c:	37 9c 00 14 	addi sp,sp,20
+    1630:	c3 a0 00 00 	ret
+    bSign = extractFloat32Sign( b );
+    zSign = aSign ^ bSign;
+    if ( aExp == 0xFF ) {
+        if ( aSig ) return propagateFloat32NaN( a, b );
+        if ( bExp == 0xFF ) {
+            if ( bSig ) return propagateFloat32NaN( a, b );
+    1634:	45 40 ff f2 	be r10,r0,15fc <float32_div+0x250>
+            return float32_default_nan;
+        }
+        return packFloat32( zSign, 0xFF, 0 );
+    }
+    if ( bExp == 0xFF ) {
+        if ( bSig ) return propagateFloat32NaN( a, b );
+    1638:	fb ff fc 1d 	calli 6ac <propagateFloat32NaN>
+    163c:	b8 20 20 00 	mv r4,r1
+        }
+        zSig |= ( rem1 != 0 );
+    }
+    return roundAndPackFloat32( zSign, zExp, zSig );
+
+}
+    1640:	b8 80 08 00 	mv r1,r4
+    1644:	2b 9d 00 04 	lw ra,(sp+4)
+    1648:	2b 8b 00 14 	lw r11,(sp+20)
+    164c:	2b 8c 00 10 	lw r12,(sp+16)
+    1650:	2b 8d 00 0c 	lw r13,(sp+12)
+    1654:	2b 8e 00 08 	lw r14,(sp+8)
+    1658:	37 9c 00 14 	addi sp,sp,20
+    165c:	c3 a0 00 00 	ret
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1660:	78 06 00 01 	mvhi r6,0x1
+    1664:	38 c6 00 00 	ori r6,r6,0x0
+    1668:	e3 ff ff a6 	bi 1500 <float32_div+0x154>
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+    166c:	78 01 00 ff 	mvhi r1,0xff
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    1670:	3d 43 00 10 	sli r3,r10,16
+    }
+    if ( a < 0x1000000 ) {
+    1674:	38 21 ff ff 	ori r1,r1,0xffff
+    1678:	50 23 00 13 	bgeu r1,r3,16c4 <float32_div+0x318>
+    167c:	34 04 00 08 	mvi r4,8
+    1680:	e3 ff ff 66 	bi 1418 <float32_div+0x6c>
+    1684:	78 01 00 ff 	mvhi r1,0xff
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    1688:	3c a3 00 10 	sli r3,r5,16
+    }
+    if ( a < 0x1000000 ) {
+    168c:	38 21 ff ff 	ori r1,r1,0xffff
+    1690:	50 23 00 0f 	bgeu r1,r3,16cc <float32_div+0x320>
+    1694:	34 04 00 08 	mvi r4,8
+    1698:	e3 ff ff 73 	bi 1464 <float32_div+0xb8>
+    }
+    if ( bExp == 0 ) {
+        if ( bSig == 0 ) {
+            if ( ( aExp | aSig ) == 0 ) {
+                float_raise( float_flag_invalid );
+                return float32_default_nan;
+    169c:	78 03 00 00 	mvhi r3,0x0
+    16a0:	38 63 27 50 	ori r3,r3,0x2750
+    16a4:	28 62 00 00 	lw r2,(r3+0)
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    16a8:	3d c4 00 1f 	sli r4,r14,31
+    16ac:	78 01 7f 80 	mvhi r1,0x7f80
+    }
+    if ( bExp == 0 ) {
+        if ( bSig == 0 ) {
+            if ( ( aExp | aSig ) == 0 ) {
+                float_raise( float_flag_invalid );
+                return float32_default_nan;
+    16b0:	38 42 00 02 	ori r2,r2,0x2
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    16b4:	38 21 00 00 	ori r1,r1,0x0
+    }
+    if ( bExp == 0 ) {
+        if ( bSig == 0 ) {
+            if ( ( aExp | aSig ) == 0 ) {
+                float_raise( float_flag_invalid );
+                return float32_default_nan;
+    16b8:	58 62 00 00 	sw (r3+0),r2
+significand.
+-------------------------------------------------------------------------------
+*/
+INLINE float32 packFloat32( flag zSign, int16 zExp, bits32 zSig )
+{
+    return ( ( (bits32) zSign )<<31 ) + ( ( (bits32) zExp )<<23 ) + zSig;
+    16bc:	b4 81 20 00 	add r4,r4,r1
+    16c0:	e3 ff ff a7 	bi 155c <float32_div+0x1b0>
+    16c4:	34 02 00 18 	mvi r2,24
+    16c8:	e3 ff ff 52 	bi 1410 <float32_div+0x64>
+    16cc:	34 02 00 18 	mvi r2,24
+    16d0:	e3 ff ff 63 	bi 145c <float32_div+0xb0>
+
+000016d4 <float32_rem>:
+with respect to the corresponding value `b'.  The operation is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_rem( float32 a, float32 b )
+{
+    16d4:	37 9c ff d8 	addi sp,sp,-40
+    16d8:	5b 8b 00 28 	sw (sp+40),r11
+    16dc:	5b 8c 00 24 	sw (sp+36),r12
+    16e0:	5b 8d 00 20 	sw (sp+32),r13
+    16e4:	5b 8e 00 1c 	sw (sp+28),r14
+    16e8:	5b 8f 00 18 	sw (sp+24),r15
+    16ec:	5b 90 00 14 	sw (sp+20),r16
+    16f0:	5b 91 00 10 	sw (sp+16),r17
+    16f4:	5b 92 00 0c 	sw (sp+12),r18
+    16f8:	5b 93 00 08 	sw (sp+8),r19
+    16fc:	5b 9d 00 04 	sw (sp+4),ra
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    1700:	00 23 00 17 	srui r3,r1,23
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    1704:	78 04 00 7f 	mvhi r4,0x7f
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    1708:	00 45 00 17 	srui r5,r2,23
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    170c:	38 84 ff ff 	ori r4,r4,0xffff
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    1710:	20 67 00 ff 	andi r7,r3,0xff
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    if ( aExp == 0xFF ) {
+    1714:	34 03 00 ff 	mvi r3,255
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    1718:	a0 44 40 00 	and r8,r2,r4
+with respect to the corresponding value `b'.  The operation is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_rem( float32 a, float32 b )
+{
+    171c:	b8 20 80 00 	mv r16,r1
+    1720:	b8 40 30 00 	mv r6,r2
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    1724:	a0 a3 88 00 	and r17,r5,r3
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    1728:	a0 24 20 00 	and r4,r1,r4
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    if ( aExp == 0xFF ) {
+    172c:	44 e3 00 82 	be r7,r3,1934 <float32_rem+0x260>
+            return propagateFloat32NaN( a, b );
+        }
+        float_raise( float_flag_invalid );
+        return float32_default_nan;
+    }
+    if ( bExp == 0xFF ) {
+    1730:	46 23 00 16 	be r17,r3,1788 <float32_rem+0xb4>
+        if ( bSig ) return propagateFloat32NaN( a, b );
+        return a;
+    }
+    if ( bExp == 0 ) {
+    1734:	5e 20 00 29 	bne r17,r0,17d8 <float32_rem+0x104>
+        if ( bSig == 0 ) {
+    1738:	5d 11 00 18 	bne r8,r17,1798 <float32_rem+0xc4>
+    173c:	78 02 00 00 	mvhi r2,0x0
+    1740:	38 42 27 50 	ori r2,r2,0x2750
+    1744:	28 41 00 00 	lw r1,(r2+0)
+    1748:	34 10 ff ff 	mvi r16,-1
+    174c:	38 21 00 10 	ori r1,r1,0x10
+    1750:	58 41 00 00 	sw (r2+0),r1
+    }
+    zSign = ( (sbits32) aSig < 0 );
+    if ( zSign ) aSig = - aSig;
+    return normalizeRoundAndPackFloat32( aSign ^ zSign, bExp, aSig );
+
+}
+    1754:	ba 00 08 00 	mv r1,r16
+    1758:	2b 9d 00 04 	lw ra,(sp+4)
+    175c:	2b 8b 00 28 	lw r11,(sp+40)
+    1760:	2b 8c 00 24 	lw r12,(sp+36)
+    1764:	2b 8d 00 20 	lw r13,(sp+32)
+    1768:	2b 8e 00 1c 	lw r14,(sp+28)
+    176c:	2b 8f 00 18 	lw r15,(sp+24)
+    1770:	2b 90 00 14 	lw r16,(sp+20)
+    1774:	2b 91 00 10 	lw r17,(sp+16)
+    1778:	2b 92 00 0c 	lw r18,(sp+12)
+    177c:	2b 93 00 08 	lw r19,(sp+8)
+    1780:	37 9c 00 28 	addi sp,sp,40
+    1784:	c3 a0 00 00 	ret
+        }
+        float_raise( float_flag_invalid );
+        return float32_default_nan;
+    }
+    if ( bExp == 0xFF ) {
+        if ( bSig ) return propagateFloat32NaN( a, b );
+    1788:	45 00 ff f3 	be r8,r0,1754 <float32_rem+0x80>
+    178c:	fb ff fb c8 	calli 6ac <propagateFloat32NaN>
+    1790:	b8 20 80 00 	mv r16,r1
+    1794:	e3 ff ff f0 	bi 1754 <float32_rem+0x80>
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+    1798:	38 01 ff ff 	mvu r1,0xffff
+    179c:	50 28 00 8c 	bgeu r1,r8,19cc <float32_rem+0x2f8>
+    17a0:	b9 00 18 00 	mv r3,r8
+    17a4:	34 02 00 08 	mvi r2,8
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+        shiftCount += 8;
+        a <<= 8;
+    17a8:	3c 63 00 08 	sli r3,r3,8
+    17ac:	34 45 ff f8 	addi r5,r2,-8
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    17b0:	00 63 00 18 	srui r3,r3,24
+    17b4:	78 01 00 00 	mvhi r1,0x0
+    17b8:	3c 63 00 02 	sli r3,r3,2
+    17bc:	38 21 22 f8 	ori r1,r1,0x22f8
+    17c0:	b4 23 08 00 	add r1,r1,r3
+    17c4:	28 22 00 00 	lw r2,(r1+0)
+    *zSigPtr = aSig<<shiftCount;
+    *zExpPtr = 1 - shiftCount;
+    17c8:	34 01 00 01 	mvi r1,1
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    17cc:	b4 a2 10 00 	add r2,r5,r2
+    *zSigPtr = aSig<<shiftCount;
+    17d0:	bd 02 40 00 	sl r8,r8,r2
+    *zExpPtr = 1 - shiftCount;
+    17d4:	c8 22 88 00 	sub r17,r1,r2
+            float_raise( float_flag_invalid );
+            return float32_default_nan;
+        }
+        normalizeFloat32Subnormal( bSig, &bExp, &bSig );
+    }
+    if ( aExp == 0 ) {
+    17d8:	5c e0 00 12 	bne r7,r0,1820 <float32_rem+0x14c>
+        if ( aSig == 0 ) return a;
+    17dc:	44 87 ff de 	be r4,r7,1754 <float32_rem+0x80>
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+    17e0:	38 01 ff ff 	mvu r1,0xffff
+    17e4:	50 24 00 74 	bgeu r1,r4,19b4 <float32_rem+0x2e0>
+    17e8:	b8 80 18 00 	mv r3,r4
+    17ec:	34 02 00 08 	mvi r2,8
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+        shiftCount += 8;
+        a <<= 8;
+    17f0:	3c 63 00 08 	sli r3,r3,8
+    17f4:	34 45 ff f8 	addi r5,r2,-8
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    17f8:	00 63 00 18 	srui r3,r3,24
+    17fc:	78 01 00 00 	mvhi r1,0x0
+    1800:	3c 63 00 02 	sli r3,r3,2
+    1804:	38 21 22 f8 	ori r1,r1,0x22f8
+    1808:	b4 23 08 00 	add r1,r1,r3
+    180c:	28 22 00 00 	lw r2,(r1+0)
+    *zSigPtr = aSig<<shiftCount;
+    *zExpPtr = 1 - shiftCount;
+    1810:	34 01 00 01 	mvi r1,1
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    1814:	b4 a2 10 00 	add r2,r5,r2
+    *zSigPtr = aSig<<shiftCount;
+    1818:	bc 82 20 00 	sl r4,r4,r2
+    *zExpPtr = 1 - shiftCount;
+    181c:	c8 22 38 00 	sub r7,r1,r2
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return a;
+        normalizeFloat32Subnormal( aSig, &aExp, &aSig );
+    }
+    expDiff = aExp - bExp;
+    aSig = ( aSig | 0x00800000 )<<8;
+    1820:	78 02 00 80 	mvhi r2,0x80
+    1824:	b8 40 08 00 	mv r1,r2
+    1828:	38 21 00 00 	ori r1,r1,0x0
+    182c:	b8 81 08 00 	or r1,r4,r1
+    }
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return a;
+        normalizeFloat32Subnormal( aSig, &aExp, &aSig );
+    }
+    expDiff = aExp - bExp;
+    1830:	c8 f1 98 00 	sub r19,r7,r17
+    aSig = ( aSig | 0x00800000 )<<8;
+    1834:	3c 2c 00 08 	sli r12,r1,8
+    bSig = ( bSig | 0x00800000 )<<8;
+    if ( expDiff < 0 ) {
+    1838:	4e 60 00 04 	bge r19,r0,1848 <float32_rem+0x174>
+        if ( expDiff < -1 ) return a;
+    183c:	34 01 ff ff 	mvi r1,-1
+    1840:	5e 61 ff c5 	bne r19,r1,1754 <float32_rem+0x80>
+        aSig >>= 1;
+    1844:	01 8c 00 01 	srui r12,r12,1
+        if ( aSig == 0 ) return a;
+        normalizeFloat32Subnormal( aSig, &aExp, &aSig );
+    }
+    expDiff = aExp - bExp;
+    aSig = ( aSig | 0x00800000 )<<8;
+    bSig = ( bSig | 0x00800000 )<<8;
+    1848:	38 42 00 00 	ori r2,r2,0x0
+    184c:	b9 02 08 00 	or r1,r8,r2
+    1850:	3c 2d 00 08 	sli r13,r1,8
+    if ( expDiff < 0 ) {
+        if ( expDiff < -1 ) return a;
+        aSig >>= 1;
+    }
+    q = ( bSig <= aSig );
+    1854:	f1 8d 28 00 	cmpgeu r5,r12,r13
+    if ( q ) aSig -= bSig;
+    1858:	44 a0 00 02 	be r5,r0,1860 <float32_rem+0x18c>
+    185c:	c9 8d 60 00 	sub r12,r12,r13
+    expDiff -= 32;
+    1860:	36 6f ff e0 	addi r15,r19,-32
+    while ( 0 < expDiff ) {
+    1864:	01 ae 00 02 	srui r14,r13,2
+    1868:	b9 e0 58 00 	mv r11,r15
+        q = estimateDiv64To32( aSig, 0, bSig );
+        q = ( 2 < q ) ? q - 2 : 0;
+    186c:	34 12 00 02 	mvi r18,2
+        aSig >>= 1;
+    }
+    q = ( bSig <= aSig );
+    if ( q ) aSig -= bSig;
+    expDiff -= 32;
+    while ( 0 < expDiff ) {
+    1870:	49 e0 00 02 	bg r15,r0,1878 <float32_rem+0x1a4>
+    1874:	e0 00 00 14 	bi 18c4 <float32_rem+0x1f0>
+        q = estimateDiv64To32( aSig, 0, bSig );
+    1878:	b9 80 08 00 	mv r1,r12
+    187c:	34 02 00 00 	mvi r2,0
+    1880:	b9 a0 18 00 	mv r3,r13
+    1884:	fb ff fb 1d 	calli 4f8 <estimateDiv64To32>
+        q = ( 2 < q ) ? q - 2 : 0;
+    1888:	34 25 ff fe 	addi r5,r1,-2
+    188c:	89 c5 10 00 	mul r2,r14,r5
+    1890:	34 0c 00 00 	mvi r12,0
+    1894:	54 32 00 26 	bgu r1,r18,192c <float32_rem+0x258>
+    1898:	b9 80 28 00 	mv r5,r12
+        aSig = - ( ( bSig>>2 ) * q );
+        expDiff -= 30;
+    189c:	35 6b ff e2 	addi r11,r11,-30
+        aSig >>= 1;
+    }
+    q = ( bSig <= aSig );
+    if ( q ) aSig -= bSig;
+    expDiff -= 32;
+    while ( 0 < expDiff ) {
+    18a0:	49 60 ff f6 	bg r11,r0,1878 <float32_rem+0x1a4>
+with respect to the corresponding value `b'.  The operation is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_rem( float32 a, float32 b )
+{
+    18a4:	34 02 00 1e 	mvi r2,30
+    18a8:	36 61 ff df 	addi r1,r19,-33
+    18ac:	8c 22 08 00 	divu r1,r1,r2
+    18b0:	35 e3 ff e2 	addi r3,r15,-30
+    18b4:	3c 22 00 05 	sli r2,r1,5
+    18b8:	b4 21 08 00 	add r1,r1,r1
+    18bc:	c8 22 08 00 	sub r1,r1,r2
+    18c0:	b4 61 78 00 	add r15,r3,r1
+        q = estimateDiv64To32( aSig, 0, bSig );
+        q = ( 2 < q ) ? q - 2 : 0;
+        aSig = - ( ( bSig>>2 ) * q );
+        expDiff -= 30;
+    }
+    expDiff += 32;
+    18c4:	35 eb 00 20 	addi r11,r15,32
+        q >>= 32 - expDiff;
+        bSig >>= 2;
+        aSig = ( ( aSig>>1 )<<( expDiff - 1 ) ) - bSig * q;
+    }
+    else {
+        aSig >>= 2;
+    18c8:	01 83 00 02 	srui r3,r12,2
+        q = ( 2 < q ) ? q - 2 : 0;
+        aSig = - ( ( bSig>>2 ) * q );
+        expDiff -= 30;
+    }
+    expDiff += 32;
+    if ( 0 < expDiff ) {
+    18cc:	4c 0b 00 0e 	bge r0,r11,1904 <float32_rem+0x230>
+        q = estimateDiv64To32( aSig, 0, bSig );
+    18d0:	34 02 00 00 	mvi r2,0
+    18d4:	b9 a0 18 00 	mv r3,r13
+    18d8:	b9 80 08 00 	mv r1,r12
+    18dc:	fb ff fb 07 	calli 4f8 <estimateDiv64To32>
+    18e0:	b8 20 10 00 	mv r2,r1
+        q = ( 2 < q ) ? q - 2 : 0;
+    18e4:	34 01 00 02 	mvi r1,2
+    18e8:	54 41 00 2e 	bgu r2,r1,19a0 <float32_rem+0x2cc>
+    18ec:	34 05 00 00 	mvi r5,0
+    18f0:	b8 a0 18 00 	mv r3,r5
+        q >>= 32 - expDiff;
+        bSig >>= 2;
+        aSig = ( ( aSig>>1 )<<( expDiff - 1 ) ) - bSig * q;
+    18f4:	01 81 00 01 	srui r1,r12,1
+    18f8:	35 62 ff ff 	addi r2,r11,-1
+    18fc:	bc 22 08 00 	sl r1,r1,r2
+    1900:	c8 23 18 00 	sub r3,r1,r3
+    }
+    else {
+        aSig >>= 2;
+    1904:	c8 0e 30 00 	sub r6,r0,r14
+    1908:	c8 6e 10 00 	sub r2,r3,r14
+        bSig >>= 2;
+    }
+    do {
+        alternateASig = aSig;
+        ++q;
+    190c:	b8 40 38 00 	mv r7,r2
+    1910:	b4 46 10 00 	add r2,r2,r6
+        aSig -= bSig;
+    } while ( 0 <= (sbits32) aSig );
+    1914:	b4 4e 08 00 	add r1,r2,r14
+        aSig >>= 2;
+        bSig >>= 2;
+    }
+    do {
+        alternateASig = aSig;
+        ++q;
+    1918:	34 a5 00 01 	addi r5,r5,1
+    191c:	b4 c3 20 00 	add r4,r6,r3
+        aSig -= bSig;
+    } while ( 0 <= (sbits32) aSig );
+    1920:	48 01 00 0f 	bg r0,r1,195c <float32_rem+0x288>
+    1924:	b8 80 18 00 	mv r3,r4
+    1928:	e3 ff ff f9 	bi 190c <float32_rem+0x238>
+    q = ( bSig <= aSig );
+    if ( q ) aSig -= bSig;
+    expDiff -= 32;
+    while ( 0 < expDiff ) {
+        q = estimateDiv64To32( aSig, 0, bSig );
+        q = ( 2 < q ) ? q - 2 : 0;
+    192c:	c8 02 60 00 	sub r12,r0,r2
+    1930:	e3 ff ff db 	bi 189c <float32_rem+0x1c8>
+    aSign = extractFloat32Sign( a );
+    bSig = extractFloat32Frac( b );
+    bExp = extractFloat32Exp( b );
+    bSign = extractFloat32Sign( b );
+    if ( aExp == 0xFF ) {
+        if ( aSig || ( ( bExp == 0xFF ) && bSig ) ) {
+    1934:	5c 80 00 05 	bne r4,r0,1948 <float32_rem+0x274>
+    1938:	e6 23 08 00 	cmpe r1,r17,r3
+    193c:	7d 02 00 00 	cmpnei r2,r8,0
+    1940:	a0 22 08 00 	and r1,r1,r2
+    1944:	44 24 ff 7e 	be r1,r4,173c <float32_rem+0x68>
+            return propagateFloat32NaN( a, b );
+    1948:	ba 00 08 00 	mv r1,r16
+    194c:	b8 c0 10 00 	mv r2,r6
+    1950:	fb ff fb 57 	calli 6ac <propagateFloat32NaN>
+    1954:	b8 20 80 00 	mv r16,r1
+    1958:	e3 ff ff 7f 	bi 1754 <float32_rem+0x80>
+    do {
+        alternateASig = aSig;
+        ++q;
+        aSig -= bSig;
+    } while ( 0 <= (sbits32) aSig );
+    sigMean = aSig + alternateASig;
+    195c:	b4 64 30 00 	add r6,r3,r4
+    if ( ( sigMean < 0 ) || ( ( sigMean == 0 ) && ( q & 1 ) ) ) {
+    1960:	48 06 00 04 	bg r0,r6,1970 <float32_rem+0x29c>
+    1964:	5c c0 00 0d 	bne r6,r0,1998 <float32_rem+0x2c4>
+    1968:	20 a1 00 01 	andi r1,r5,0x1
+    196c:	44 26 00 0b 	be r1,r6,1998 <float32_rem+0x2c4>
+    1970:	b8 60 38 00 	mv r7,r3
+        aSig = alternateASig;
+    }
+    zSign = ( (sbits32) aSig < 0 );
+    1974:	00 e4 00 1f 	srui r4,r7,31
+    if ( zSign ) aSig = - aSig;
+    1978:	44 80 00 02 	be r4,r0,1980 <float32_rem+0x2ac>
+    197c:	c8 03 18 00 	sub r3,r0,r3
+    return normalizeRoundAndPackFloat32( aSign ^ zSign, bExp, aSig );
+    1980:	02 01 00 1f 	srui r1,r16,31
+    1984:	ba 20 10 00 	mv r2,r17
+    1988:	98 81 08 00 	xor r1,r4,r1
+    198c:	fb ff fb db 	calli 8f8 <normalizeRoundAndPackFloat32>
+    1990:	b8 20 80 00 	mv r16,r1
+    1994:	e3 ff ff 70 	bi 1754 <float32_rem+0x80>
+        alternateASig = aSig;
+        ++q;
+        aSig -= bSig;
+    } while ( 0 <= (sbits32) aSig );
+    sigMean = aSig + alternateASig;
+    if ( ( sigMean < 0 ) || ( ( sigMean == 0 ) && ( q & 1 ) ) ) {
+    1998:	b8 80 18 00 	mv r3,r4
+    199c:	e3 ff ff f6 	bi 1974 <float32_rem+0x2a0>
+        expDiff -= 30;
+    }
+    expDiff += 32;
+    if ( 0 < expDiff ) {
+        q = estimateDiv64To32( aSig, 0, bSig );
+        q = ( 2 < q ) ? q - 2 : 0;
+    19a0:	34 42 ff fe 	addi r2,r2,-2
+    19a4:	c8 0b 08 00 	sub r1,r0,r11
+    19a8:	80 41 28 00 	sru r5,r2,r1
+    19ac:	88 ae 18 00 	mul r3,r5,r14
+    19b0:	e3 ff ff d1 	bi 18f4 <float32_rem+0x220>
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+    19b4:	78 01 00 ff 	mvhi r1,0xff
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    19b8:	3c 83 00 10 	sli r3,r4,16
+    }
+    if ( a < 0x1000000 ) {
+    19bc:	38 21 ff ff 	ori r1,r1,0xffff
+    19c0:	50 23 00 09 	bgeu r1,r3,19e4 <float32_rem+0x310>
+    19c4:	34 05 00 08 	mvi r5,8
+    19c8:	e3 ff ff 8c 	bi 17f8 <float32_rem+0x124>
+    19cc:	78 01 00 ff 	mvhi r1,0xff
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    19d0:	3d 03 00 10 	sli r3,r8,16
+    }
+    if ( a < 0x1000000 ) {
+    19d4:	38 21 ff ff 	ori r1,r1,0xffff
+    19d8:	50 23 00 05 	bgeu r1,r3,19ec <float32_rem+0x318>
+    19dc:	34 05 00 08 	mvi r5,8
+    19e0:	e3 ff ff 74 	bi 17b0 <float32_rem+0xdc>
+    19e4:	34 02 00 18 	mvi r2,24
+    19e8:	e3 ff ff 82 	bi 17f0 <float32_rem+0x11c>
+    19ec:	34 02 00 18 	mvi r2,24
+    19f0:	e3 ff ff 6e 	bi 17a8 <float32_rem+0xd4>
+
+000019f4 <float32_sqrt>:
+The operation is performed according to the IEC/IEEE Standard for Binary
+Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_sqrt( float32 a )
+{
+    19f4:	37 9c ff ec 	addi sp,sp,-20
+    19f8:	5b 8b 00 14 	sw (sp+20),r11
+    19fc:	5b 8c 00 10 	sw (sp+16),r12
+    1a00:	5b 8d 00 0c 	sw (sp+12),r13
+    1a04:	5b 8e 00 08 	sw (sp+8),r14
+    1a08:	5b 9d 00 04 	sw (sp+4),ra
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    1a0c:	00 22 00 17 	srui r2,r1,23
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    1a10:	78 03 00 7f 	mvhi r3,0x7f
+    1a14:	38 63 ff ff 	ori r3,r3,0xffff
+-------------------------------------------------------------------------------
+*/
+INLINE int16 extractFloat32Exp( float32 a )
+{
+
+    return ( a>>23 ) & 0xFF;
+    1a18:	20 4c 00 ff 	andi r12,r2,0xff
+    bits32 term0, term1;
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    if ( aExp == 0xFF ) {
+    1a1c:	34 02 00 ff 	mvi r2,255
+-------------------------------------------------------------------------------
+*/
+INLINE bits32 extractFloat32Frac( float32 a )
+{
+
+    return a & 0x007FFFFF;
+    1a20:	a0 23 28 00 	and r5,r1,r3
+The operation is performed according to the IEC/IEEE Standard for Binary
+Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+float32 float32_sqrt( float32 a )
+{
+    1a24:	b8 20 20 00 	mv r4,r1
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+    1a28:	00 23 00 1f 	srui r3,r1,31
+    bits32 term0, term1;
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    if ( aExp == 0xFF ) {
+    1a2c:	45 82 00 55 	be r12,r2,1b80 <float32_sqrt+0x18c>
+        if ( aSig ) return propagateFloat32NaN( a, 0 );
+        if ( ! aSign ) return a;
+        float_raise( float_flag_invalid );
+        return float32_default_nan;
+    }
+    if ( aSign ) {
+    1a30:	44 60 00 11 	be r3,r0,1a74 <float32_sqrt+0x80>
+        if ( ( aExp | aSig ) == 0 ) return a;
+    1a34:	b9 85 08 00 	or r1,r12,r5
+    1a38:	44 20 00 07 	be r1,r0,1a54 <float32_sqrt+0x60>
+    1a3c:	78 02 00 00 	mvhi r2,0x0
+    1a40:	38 42 27 50 	ori r2,r2,0x2750
+    1a44:	28 41 00 00 	lw r1,(r2+0)
+    1a48:	34 04 ff ff 	mvi r4,-1
+    1a4c:	38 21 00 10 	ori r1,r1,0x10
+    1a50:	58 41 00 00 	sw (r2+0),r1
+        }
+    }
+    shift32RightJamming( zSig, 1, &zSig );
+    return roundAndPackFloat32( 0, zExp, zSig );
+
+}
+    1a54:	b8 80 08 00 	mv r1,r4
+    1a58:	2b 9d 00 04 	lw ra,(sp+4)
+    1a5c:	2b 8b 00 14 	lw r11,(sp+20)
+    1a60:	2b 8c 00 10 	lw r12,(sp+16)
+    1a64:	2b 8d 00 0c 	lw r13,(sp+12)
+    1a68:	2b 8e 00 08 	lw r14,(sp+8)
+    1a6c:	37 9c 00 14 	addi sp,sp,20
+    1a70:	c3 a0 00 00 	ret
+    if ( aSign ) {
+        if ( ( aExp | aSig ) == 0 ) return a;
+        float_raise( float_flag_invalid );
+        return float32_default_nan;
+    }
+    if ( aExp == 0 ) {
+    1a74:	5d 83 00 13 	bne r12,r3,1ac0 <float32_sqrt+0xcc>
+        if ( aSig == 0 ) return 0;
+    1a78:	b8 a0 20 00 	mv r4,r5
+    1a7c:	44 ac ff f6 	be r5,r12,1a54 <float32_sqrt+0x60>
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+    1a80:	38 01 ff ff 	mvu r1,0xffff
+    1a84:	50 25 00 86 	bgeu r1,r5,1c9c <float32_sqrt+0x2a8>
+    1a88:	b8 a0 18 00 	mv r3,r5
+    1a8c:	34 02 00 08 	mvi r2,8
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+        shiftCount += 8;
+        a <<= 8;
+    1a90:	3c 63 00 08 	sli r3,r3,8
+    1a94:	34 44 ff f8 	addi r4,r2,-8
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    1a98:	00 63 00 18 	srui r3,r3,24
+    1a9c:	78 01 00 00 	mvhi r1,0x0
+    1aa0:	3c 63 00 02 	sli r3,r3,2
+    1aa4:	38 21 22 f8 	ori r1,r1,0x22f8
+    1aa8:	b4 23 08 00 	add r1,r1,r3
+    1aac:	28 22 00 00 	lw r2,(r1+0)
+    *zSigPtr = aSig<<shiftCount;
+    *zExpPtr = 1 - shiftCount;
+    1ab0:	34 01 00 01 	mvi r1,1
+static void
+ normalizeFloat32Subnormal( bits32 aSig, int16 *zExpPtr, bits32 *zSigPtr )
+{
+    int8 shiftCount;
+
+    shiftCount = countLeadingZeros32( aSig ) - 8;
+    1ab4:	b4 82 10 00 	add r2,r4,r2
+    *zSigPtr = aSig<<shiftCount;
+    1ab8:	bc a2 28 00 	sl r5,r5,r2
+    *zExpPtr = 1 - shiftCount;
+    1abc:	c8 22 60 00 	sub r12,r1,r2
+    if ( aExp == 0 ) {
+        if ( aSig == 0 ) return 0;
+        normalizeFloat32Subnormal( aSig, &aExp, &aSig );
+    }
+    zExp = ( ( aExp - 0x7F )>>1 ) + 0x7E;
+    aSig = ( aSig | 0x00800000 )<<8;
+    1ac0:	78 01 00 80 	mvhi r1,0x80
+    1ac4:	38 21 00 00 	ori r1,r1,0x0
+    1ac8:	b8 a1 08 00 	or r1,r5,r1
+    1acc:	3c 2d 00 08 	sli r13,r1,8
+    };
+    int8 index;
+    bits32 z;
+
+    index = ( a>>27 ) & 15;
+    if ( aExp & 1 ) {
+    1ad0:	21 8e 00 01 	andi r14,r12,0x1
+        0x0200, 0x0179, 0x0109, 0x00AF, 0x0068, 0x0034, 0x0012, 0x0002
+    };
+    int8 index;
+    bits32 z;
+
+    index = ( a>>27 ) & 15;
+    1ad4:	01 a1 00 1b 	srui r1,r13,27
+    1ad8:	20 23 00 0f 	andi r3,r1,0xf
+    if ( aExp & 1 ) {
+    1adc:	5d c0 00 2c 	bne r14,r0,1b8c <float32_sqrt+0x198>
+        z = 0x4000 + ( a>>17 ) - sqrtOddAdjustments[ index ];
+        z = ( ( a / z )<<14 ) + ( z<<15 );
+        a >>= 1;
+    }
+    else {
+        z = 0x8000 + ( a>>17 ) - sqrtEvenAdjustments[ index ];
+    1ae0:	78 01 00 00 	mvhi r1,0x0
+    1ae4:	b4 63 10 00 	add r2,r3,r3
+    1ae8:	38 21 26 f8 	ori r1,r1,0x26f8
+    1aec:	b4 22 08 00 	add r1,r1,r2
+    1af0:	2c 23 00 00 	lhu r3,(r1+0)
+    1af4:	01 a2 00 11 	srui r2,r13,17
+    1af8:	38 01 80 00 	mvu r1,0x8000
+    1afc:	b4 41 10 00 	add r2,r2,r1
+    1b00:	c8 43 10 00 	sub r2,r2,r3
+        z = a / z + z;
+    1b04:	8d a2 08 00 	divu r1,r13,r2
+        z = ( 0x20000 <= z ) ? 0xFFFF8000 : ( z<<15 );
+    1b08:	78 03 00 01 	mvhi r3,0x1
+        z = ( ( a / z )<<14 ) + ( z<<15 );
+        a >>= 1;
+    }
+    else {
+        z = 0x8000 + ( a>>17 ) - sqrtEvenAdjustments[ index ];
+        z = a / z + z;
+    1b0c:	b4 22 08 00 	add r1,r1,r2
+        z = ( 0x20000 <= z ) ? 0xFFFF8000 : ( z<<15 );
+    1b10:	38 63 ff ff 	ori r3,r3,0xffff
+    1b14:	3c 2b 00 0f 	sli r11,r1,15
+    1b18:	50 61 00 02 	bgeu r3,r1,1b20 <float32_sqrt+0x12c>
+    1b1c:	34 0b 80 00 	mvi r11,-32768
+        if ( z <= a ) return (bits32) ( ( (sbits32) a )>>1 );
+    1b20:	b9 a0 20 00 	mv r4,r13
+    1b24:	55 6d 00 27 	bgu r11,r13,1bc0 <float32_sqrt+0x1cc>
+    1b28:	15 a1 00 01 	sri r1,r13,1
+    zSig = estimateSqrt32( aExp, aSig ) + 2;
+    1b2c:	34 26 00 02 	addi r6,r1,2
+    if ( ( zSig & 0x7F ) <= 5 ) {
+    1b30:	20 c2 00 7f 	andi r2,r6,0x7f
+    1b34:	34 01 00 05 	mvi r1,5
+    1b38:	50 22 00 2a 	bgeu r1,r2,1be0 <float32_sqrt+0x1ec>
+    1b3c:	00 c2 00 01 	srui r2,r6,1
+    1b40:	20 c1 00 01 	andi r1,r6,0x1
+    1b44:	b8 22 18 00 	or r3,r1,r2
+            }
+            zSig |= ( ( rem0 | rem1 ) != 0 );
+        }
+    }
+    shift32RightJamming( zSig, 1, &zSig );
+    return roundAndPackFloat32( 0, zExp, zSig );
+    1b48:	35 82 ff 81 	addi r2,r12,-127
+    1b4c:	14 42 00 01 	sri r2,r2,1
+    1b50:	34 01 00 00 	mvi r1,0
+    1b54:	34 42 00 7e 	addi r2,r2,126
+    1b58:	fb ff fb 04 	calli 768 <roundAndPackFloat32>
+    1b5c:	b8 20 20 00 	mv r4,r1
+
+}
+    1b60:	b8 80 08 00 	mv r1,r4
+    1b64:	2b 9d 00 04 	lw ra,(sp+4)
+    1b68:	2b 8b 00 14 	lw r11,(sp+20)
+    1b6c:	2b 8c 00 10 	lw r12,(sp+16)
+    1b70:	2b 8d 00 0c 	lw r13,(sp+12)
+    1b74:	2b 8e 00 08 	lw r14,(sp+8)
+    1b78:	37 9c 00 14 	addi sp,sp,20
+    1b7c:	c3 a0 00 00 	ret
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    if ( aExp == 0xFF ) {
+        if ( aSig ) return propagateFloat32NaN( a, 0 );
+    1b80:	5c a0 00 43 	bne r5,r0,1c8c <float32_sqrt+0x298>
+        if ( ! aSign ) return a;
+    1b84:	5c 65 ff ae 	bne r3,r5,1a3c <float32_sqrt+0x48>
+    1b88:	e3 ff ff b3 	bi 1a54 <float32_sqrt+0x60>
+    int8 index;
+    bits32 z;
+
+    index = ( a>>27 ) & 15;
+    if ( aExp & 1 ) {
+        z = 0x4000 + ( a>>17 ) - sqrtOddAdjustments[ index ];
+    1b8c:	78 02 00 00 	mvhi r2,0x0
+    1b90:	b4 63 08 00 	add r1,r3,r3
+    1b94:	38 42 27 18 	ori r2,r2,0x2718
+    1b98:	b4 41 10 00 	add r2,r2,r1
+    1b9c:	2c 43 00 00 	lhu r3,(r2+0)
+    1ba0:	01 a1 00 11 	srui r1,r13,17
+        z = ( ( a / z )<<14 ) + ( z<<15 );
+        a >>= 1;
+    1ba4:	01 a4 00 01 	srui r4,r13,1
+    int8 index;
+    bits32 z;
+
+    index = ( a>>27 ) & 15;
+    if ( aExp & 1 ) {
+        z = 0x4000 + ( a>>17 ) - sqrtOddAdjustments[ index ];
+    1ba8:	34 21 40 00 	addi r1,r1,16384
+    1bac:	c8 23 08 00 	sub r1,r1,r3
+        z = ( ( a / z )<<14 ) + ( z<<15 );
+    1bb0:	8d a1 10 00 	divu r2,r13,r1
+    1bb4:	3c 21 00 0f 	sli r1,r1,15
+    1bb8:	3c 42 00 0e 	sli r2,r2,14
+    1bbc:	b4 41 58 00 	add r11,r2,r1
+        z = 0x8000 + ( a>>17 ) - sqrtEvenAdjustments[ index ];
+        z = a / z + z;
+        z = ( 0x20000 <= z ) ? 0xFFFF8000 : ( z<<15 );
+        if ( z <= a ) return (bits32) ( ( (sbits32) a )>>1 );
+    }
+    return ( ( estimateDiv64To32( a, 0, z ) )>>1 ) + ( z>>1 );
+    1bc0:	34 02 00 00 	mvi r2,0
+    1bc4:	b8 80 08 00 	mv r1,r4
+    1bc8:	b9 60 18 00 	mv r3,r11
+    1bcc:	fb ff fa 4b 	calli 4f8 <estimateDiv64To32>
+    1bd0:	00 21 00 01 	srui r1,r1,1
+    1bd4:	01 62 00 01 	srui r2,r11,1
+    1bd8:	b4 41 08 00 	add r1,r2,r1
+    1bdc:	e3 ff ff d4 	bi 1b2c <float32_sqrt+0x138>
+    }
+    zExp = ( ( aExp - 0x7F )>>1 ) + 0x7E;
+    aSig = ( aSig | 0x00800000 )<<8;
+    zSig = estimateSqrt32( aExp, aSig ) + 2;
+    if ( ( zSig & 0x7F ) <= 5 ) {
+        if ( zSig < 2 ) {
+    1be0:	34 01 00 01 	mvi r1,1
+    1be4:	54 c1 00 04 	bgu r6,r1,1bf4 <float32_sqrt+0x200>
+    1be8:	78 03 7f ff 	mvhi r3,0x7fff
+    1bec:	38 63 ff ff 	ori r3,r3,0xffff
+    1bf0:	e3 ff ff d6 	bi 1b48 <float32_sqrt+0x154>
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    1bf4:	00 c3 00 10 	srui r3,r6,16
+
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    1bf8:	20 c4 ff ff 	andi r4,r6,0xffff
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    1bfc:	88 64 08 00 	mul r1,r3,r4
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    1c00:	b4 21 28 00 	add r5,r1,r1
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1c04:	54 25 00 2c 	bgu r1,r5,1cb4 <float32_sqrt+0x2c0>
+    1c08:	34 07 00 00 	mvi r7,0
+
+    aLow = a;
+    aHigh = a>>16;
+    bLow = b;
+    bHigh = b>>16;
+    z1 = ( (bits32) aLow ) * bLow;
+    1c0c:	88 84 20 00 	mul r4,r4,r4
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    zMiddleA <<= 16;
+    1c10:	3c a2 00 10 	sli r2,r5,16
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1c14:	88 63 18 00 	mul r3,r3,r3
+    1c18:	81 ae 08 00 	sru r1,r13,r14
+    zMiddleA <<= 16;
+    z1 += zMiddleA;
+    1c1c:	b4 44 20 00 	add r4,r2,r4
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1c20:	00 a5 00 10 	srui r5,r5,16
+    1c24:	c8 23 08 00 	sub r1,r1,r3
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+    *z0Ptr = a0 - b0 - ( a1 < b1 );
+    1c28:	f4 44 10 00 	cmpgu r2,r2,r4
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1c2c:	c8 25 08 00 	sub r1,r1,r5
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+    *z0Ptr = a0 - b0 - ( a1 < b1 );
+    1c30:	7c 83 00 00 	cmpnei r3,r4,0
+    1c34:	c8 22 08 00 	sub r1,r1,r2
+    1c38:	c8 23 08 00 	sub r1,r1,r3
+    1c3c:	c8 27 28 00 	sub r5,r1,r7
+INLINE void
+ sub64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+
+    *z1Ptr = a1 - b1;
+    1c40:	c8 04 18 00 	sub r3,r0,r4
+        }
+        else {
+            aSig >>= aExp & 1;
+            mul32To64( zSig, zSig, &term0, &term1 );
+            sub64( aSig, 0, term0, term1, &rem0, &rem1 );
+            while ( (sbits32) rem0 < 0 ) {
+    1c44:	4c a0 00 0b 	bge r5,r0,1c70 <float32_sqrt+0x27c>
+                --zSig;
+    1c48:	34 c6 ff ff 	addi r6,r6,-1
+ add64(
+     bits32 a0, bits32 a1, bits32 b0, bits32 b1, bits32 *z0Ptr, bits32 *z1Ptr )
+{
+    bits32 z1;
+
+    z1 = a1 + b1;
+    1c4c:	b4 c6 08 00 	add r1,r6,r6
+    1c50:	38 21 00 01 	ori r1,r1,0x1
+        }
+        else {
+            aSig >>= aExp & 1;
+            mul32To64( zSig, zSig, &term0, &term1 );
+            sub64( aSig, 0, term0, term1, &rem0, &rem1 );
+            while ( (sbits32) rem0 < 0 ) {
+    1c54:	b8 60 10 00 	mv r2,r3
+    1c58:	b4 23 18 00 	add r3,r1,r3
+    *z1Ptr = z1;
+    *z0Ptr = a0 + b0 + ( z1 < a1 );
+    1c5c:	f4 43 10 00 	cmpgu r2,r2,r3
+    1c60:	00 c1 00 1f 	srui r1,r6,31
+    1c64:	b4 22 08 00 	add r1,r1,r2
+    1c68:	b4 a1 28 00 	add r5,r5,r1
+    1c6c:	48 05 ff f7 	bg r0,r5,1c48 <float32_sqrt+0x254>
+                --zSig;
+                shortShift64Left( 0, zSig, 1, &term0, &term1 );
+                term1 |= 1;
+                add64( rem0, rem1, term0, term1, &rem0, &rem1 );
+            }
+            zSig |= ( ( rem0 | rem1 ) != 0 );
+    1c70:	b8 a3 08 00 	or r1,r5,r3
+    1c74:	7c 21 00 00 	cmpnei r1,r1,0
+    1c78:	b8 26 08 00 	or r1,r1,r6
+    1c7c:	00 22 00 01 	srui r2,r1,1
+    1c80:	20 21 00 01 	andi r1,r1,0x1
+    1c84:	b8 22 18 00 	or r3,r1,r2
+    1c88:	e3 ff ff b0 	bi 1b48 <float32_sqrt+0x154>
+
+    aSig = extractFloat32Frac( a );
+    aExp = extractFloat32Exp( a );
+    aSign = extractFloat32Sign( a );
+    if ( aExp == 0xFF ) {
+        if ( aSig ) return propagateFloat32NaN( a, 0 );
+    1c8c:	34 02 00 00 	mvi r2,0
+    1c90:	fb ff fa 87 	calli 6ac <propagateFloat32NaN>
+    1c94:	b8 20 20 00 	mv r4,r1
+    1c98:	e3 ff ff 6f 	bi 1a54 <float32_sqrt+0x60>
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+    1c9c:	78 01 00 ff 	mvhi r1,0xff
+    int8 shiftCount;
+      
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    1ca0:	3c a3 00 10 	sli r3,r5,16
+    }
+    if ( a < 0x1000000 ) {
+    1ca4:	38 21 ff ff 	ori r1,r1,0xffff
+    1ca8:	50 23 00 06 	bgeu r1,r3,1cc0 <float32_sqrt+0x2cc>
+    1cac:	34 04 00 08 	mvi r4,8
+    1cb0:	e3 ff ff 7a 	bi 1a98 <float32_sqrt+0xa4>
+    z1 = ( (bits32) aLow ) * bLow;
+    zMiddleA = ( (bits32) aLow ) * bHigh;
+    zMiddleB = ( (bits32) aHigh ) * bLow;
+    z0 = ( (bits32) aHigh ) * bHigh;
+    zMiddleA += zMiddleB;
+    z0 += ( ( (bits32) ( zMiddleA < zMiddleB ) )<<16 ) + ( zMiddleA>>16 );
+    1cb4:	78 07 00 01 	mvhi r7,0x1
+    1cb8:	38 e7 00 00 	ori r7,r7,0x0
+    1cbc:	e3 ff ff d4 	bi 1c0c <float32_sqrt+0x218>
+    shiftCount = 0;
+    if ( a < 0x10000 ) {
+        shiftCount += 16;
+        a <<= 16;
+    }
+    if ( a < 0x1000000 ) {
+    1cc0:	34 02 00 18 	mvi r2,24
+    1cc4:	e3 ff ff 73 	bi 1a90 <float32_sqrt+0x9c>
+
+00001cc8 <float32_eq>:
+corresponding value `b', and 0 otherwise.  The comparison is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_eq( float32 a, float32 b )
+{
+    1cc8:	b8 20 20 00 	mv r4,r1
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1ccc:	00 21 00 17 	srui r1,r1,23
+corresponding value `b', and 0 otherwise.  The comparison is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_eq( float32 a, float32 b )
+{
+    1cd0:	b8 40 28 00 	mv r5,r2
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1cd4:	20 21 00 ff 	andi r1,r1,0xff
+    1cd8:	34 02 00 ff 	mvi r2,255
+    1cdc:	44 22 00 0c 	be r1,r2,1d0c <float32_eq+0x44>
+    1ce0:	00 a1 00 17 	srui r1,r5,23
+    1ce4:	34 02 00 ff 	mvi r2,255
+    1ce8:	20 21 00 ff 	andi r1,r1,0xff
+    1cec:	44 22 00 16 	be r1,r2,1d44 <float32_eq+0x7c>
+        if ( float32_is_signaling_nan( a ) || float32_is_signaling_nan( b ) ) {
+            float_raise( float_flag_invalid );
+        }
+        return 0;
+    }
+    return ( a == b ) || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    1cf0:	34 03 00 01 	mvi r3,1
+    1cf4:	44 85 00 04 	be r4,r5,1d04 <float32_eq+0x3c>
+    1cf8:	b8 a4 08 00 	or r1,r5,r4
+    1cfc:	b4 21 08 00 	add r1,r1,r1
+    1d00:	64 23 00 00 	cmpei r3,r1,0
+
+}
+    1d04:	b8 60 08 00 	mv r1,r3
+    1d08:	c3 a0 00 00 	ret
+-------------------------------------------------------------------------------
+*/
+flag float32_eq( float32 a, float32 b )
+{
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1d0c:	78 01 00 7f 	mvhi r1,0x7f
+    1d10:	38 21 ff ff 	ori r1,r1,0xffff
+    1d14:	a0 81 08 00 	and r1,r4,r1
+    1d18:	44 20 ff f2 	be r1,r0,1ce0 <float32_eq+0x18>
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+    1d1c:	00 81 00 16 	srui r1,r4,22
+    1d20:	34 02 01 fe 	mvi r2,510
+    1d24:	20 21 01 ff 	andi r1,r1,0x1ff
+    1d28:	44 22 00 0f 	be r1,r2,1d64 <float32_eq+0x9c>
+        if ( float32_is_signaling_nan( a ) || float32_is_signaling_nan( b ) ) {
+            float_raise( float_flag_invalid );
+        }
+        return 0;
+    }
+    return ( a == b ) || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    1d2c:	00 a1 00 16 	srui r1,r5,22
+    1d30:	34 02 01 fe 	mvi r2,510
+    1d34:	20 21 01 ff 	andi r1,r1,0x1ff
+    1d38:	44 22 00 17 	be r1,r2,1d94 <float32_eq+0xcc>
+    1d3c:	34 03 00 00 	mvi r3,0
+    1d40:	e3 ff ff f1 	bi 1d04 <float32_eq+0x3c>
+-------------------------------------------------------------------------------
+*/
+flag float32_eq( float32 a, float32 b )
+{
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1d44:	78 01 00 7f 	mvhi r1,0x7f
+    1d48:	38 21 ff ff 	ori r1,r1,0xffff
+    1d4c:	a0 a1 08 00 	and r1,r5,r1
+    1d50:	44 20 ff e8 	be r1,r0,1cf0 <float32_eq+0x28>
+    1d54:	00 81 00 16 	srui r1,r4,22
+    1d58:	34 02 01 fe 	mvi r2,510
+    1d5c:	20 21 01 ff 	andi r1,r1,0x1ff
+    1d60:	5c 22 ff f3 	bne r1,r2,1d2c <float32_eq+0x64>
+    1d64:	78 01 00 3f 	mvhi r1,0x3f
+    1d68:	38 21 ff ff 	ori r1,r1,0xffff
+    1d6c:	a0 81 08 00 	and r1,r4,r1
+    1d70:	44 20 ff ef 	be r1,r0,1d2c <float32_eq+0x64>
+-------------------------------------------------------------------------------
+*/
+void float_raise( int8 flags )
+{
+
+    float_exception_flags |= flags;
+    1d74:	78 02 00 00 	mvhi r2,0x0
+    1d78:	38 42 27 50 	ori r2,r2,0x2750
+    1d7c:	28 41 00 00 	lw r1,(r2+0)
+    1d80:	34 03 00 00 	mvi r3,0
+    1d84:	38 21 00 10 	ori r1,r1,0x10
+    1d88:	58 41 00 00 	sw (r2+0),r1
+        }
+        return 0;
+    }
+    return ( a == b ) || ( (bits32) ( ( a | b )<<1 ) == 0 );
+
+}
+    1d8c:	b8 60 08 00 	mv r1,r3
+    1d90:	c3 a0 00 00 	ret
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+    1d94:	78 01 00 3f 	mvhi r1,0x3f
+    1d98:	38 21 ff ff 	ori r1,r1,0xffff
+    1d9c:	a0 a1 08 00 	and r1,r5,r1
+    1da0:	5c 20 ff f5 	bne r1,r0,1d74 <float32_eq+0xac>
+        if ( float32_is_signaling_nan( a ) || float32_is_signaling_nan( b ) ) {
+            float_raise( float_flag_invalid );
+        }
+        return 0;
+    }
+    return ( a == b ) || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    1da4:	34 03 00 00 	mvi r3,0
+    1da8:	e3 ff ff d7 	bi 1d04 <float32_eq+0x3c>
+
+00001dac <float32_le>:
+performed according to the IEC/IEEE Standard for Binary Floating-point
+Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_le( float32 a, float32 b )
+{
+    1dac:	b8 20 28 00 	mv r5,r1
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1db0:	00 21 00 17 	srui r1,r1,23
+performed according to the IEC/IEEE Standard for Binary Floating-point
+Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_le( float32 a, float32 b )
+{
+    1db4:	b8 40 20 00 	mv r4,r2
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1db8:	20 21 00 ff 	andi r1,r1,0xff
+    1dbc:	34 02 00 ff 	mvi r2,255
+    1dc0:	44 22 00 14 	be r1,r2,1e10 <float32_le+0x64>
+    1dc4:	00 81 00 17 	srui r1,r4,23
+    1dc8:	34 02 00 ff 	mvi r2,255
+    1dcc:	20 21 00 ff 	andi r1,r1,0xff
+    1dd0:	44 22 00 1c 	be r1,r2,1e40 <float32_le+0x94>
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+    1dd4:	00 a2 00 1f 	srui r2,r5,31
+        float_raise( float_flag_invalid );
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    1dd8:	00 81 00 1f 	srui r1,r4,31
+    1ddc:	44 41 00 07 	be r2,r1,1df8 <float32_le+0x4c>
+    1de0:	5c 40 00 09 	bne r2,r0,1e04 <float32_le+0x58>
+    1de4:	b8 85 08 00 	or r1,r4,r5
+    1de8:	b4 21 08 00 	add r1,r1,r1
+    1dec:	64 23 00 00 	cmpei r3,r1,0
+    return ( a == b ) || ( aSign ^ ( a < b ) );
+
+}
+    1df0:	b8 60 08 00 	mv r1,r3
+    1df4:	c3 a0 00 00 	ret
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    return ( a == b ) || ( aSign ^ ( a < b ) );
+    1df8:	f4 85 08 00 	cmpgu r1,r4,r5
+    1dfc:	fc 22 18 00 	cmpne r3,r1,r2
+    1e00:	5c a4 ff fc 	bne r5,r4,1df0 <float32_le+0x44>
+    1e04:	34 03 00 01 	mvi r3,1
+
+}
+    1e08:	b8 60 08 00 	mv r1,r3
+    1e0c:	c3 a0 00 00 	ret
+*/
+flag float32_le( float32 a, float32 b )
+{
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1e10:	78 01 00 7f 	mvhi r1,0x7f
+    1e14:	38 21 ff ff 	ori r1,r1,0xffff
+    1e18:	a0 a1 08 00 	and r1,r5,r1
+    1e1c:	44 20 ff ea 	be r1,r0,1dc4 <float32_le+0x18>
+-------------------------------------------------------------------------------
+*/
+void float_raise( int8 flags )
+{
+
+    float_exception_flags |= flags;
+    1e20:	78 02 00 00 	mvhi r2,0x0
+    1e24:	38 42 27 50 	ori r2,r2,0x2750
+    1e28:	28 41 00 00 	lw r1,(r2+0)
+    1e2c:	34 03 00 00 	mvi r3,0
+    1e30:	38 21 00 10 	ori r1,r1,0x10
+    1e34:	58 41 00 00 	sw (r2+0),r1
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    return ( a == b ) || ( aSign ^ ( a < b ) );
+
+}
+    1e38:	b8 60 08 00 	mv r1,r3
+    1e3c:	c3 a0 00 00 	ret
+*/
+flag float32_le( float32 a, float32 b )
+{
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1e40:	78 01 00 7f 	mvhi r1,0x7f
+    1e44:	38 21 ff ff 	ori r1,r1,0xffff
+    1e48:	a0 81 08 00 	and r1,r4,r1
+    1e4c:	44 20 ff e2 	be r1,r0,1dd4 <float32_le+0x28>
+    1e50:	78 02 00 00 	mvhi r2,0x0
+    1e54:	38 42 27 50 	ori r2,r2,0x2750
+    1e58:	28 41 00 00 	lw r1,(r2+0)
+    1e5c:	34 03 00 00 	mvi r3,0
+    1e60:	38 21 00 10 	ori r1,r1,0x10
+    1e64:	58 41 00 00 	sw (r2+0),r1
+    1e68:	e3 ff ff f4 	bi 1e38 <float32_le+0x8c>
+
+00001e6c <float32_lt>:
+the corresponding value `b', and 0 otherwise.  The comparison is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_lt( float32 a, float32 b )
+{
+    1e6c:	b8 20 28 00 	mv r5,r1
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1e70:	00 21 00 17 	srui r1,r1,23
+the corresponding value `b', and 0 otherwise.  The comparison is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_lt( float32 a, float32 b )
+{
+    1e74:	b8 40 20 00 	mv r4,r2
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1e78:	20 21 00 ff 	andi r1,r1,0xff
+    1e7c:	34 02 00 ff 	mvi r2,255
+    1e80:	44 22 00 11 	be r1,r2,1ec4 <float32_lt+0x58>
+    1e84:	00 81 00 17 	srui r1,r4,23
+    1e88:	34 02 00 ff 	mvi r2,255
+    1e8c:	20 21 00 ff 	andi r1,r1,0xff
+    1e90:	44 22 00 19 	be r1,r2,1ef4 <float32_lt+0x88>
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+    1e94:	00 a2 00 1f 	srui r2,r5,31
+        float_raise( float_flag_invalid );
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign && ( (bits32) ( ( a | b )<<1 ) != 0 );
+    1e98:	00 81 00 1f 	srui r1,r4,31
+    1e9c:	44 41 00 1d 	be r2,r1,1f10 <float32_lt+0xa4>
+    1ea0:	5c 40 00 04 	bne r2,r0,1eb0 <float32_lt+0x44>
+    return ( a != b ) && ( aSign ^ ( a < b ) );
+    1ea4:	34 03 00 00 	mvi r3,0
+
+}
+    1ea8:	b8 60 08 00 	mv r1,r3
+    1eac:	c3 a0 00 00 	ret
+        float_raise( float_flag_invalid );
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign && ( (bits32) ( ( a | b )<<1 ) != 0 );
+    1eb0:	b8 85 08 00 	or r1,r4,r5
+    1eb4:	b4 21 08 00 	add r1,r1,r1
+    1eb8:	7c 23 00 00 	cmpnei r3,r1,0
+    return ( a != b ) && ( aSign ^ ( a < b ) );
+
+}
+    1ebc:	b8 60 08 00 	mv r1,r3
+    1ec0:	c3 a0 00 00 	ret
+*/
+flag float32_lt( float32 a, float32 b )
+{
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1ec4:	78 01 00 7f 	mvhi r1,0x7f
+    1ec8:	38 21 ff ff 	ori r1,r1,0xffff
+    1ecc:	a0 a1 08 00 	and r1,r5,r1
+    1ed0:	44 20 ff ed 	be r1,r0,1e84 <float32_lt+0x18>
+    1ed4:	78 02 00 00 	mvhi r2,0x0
+    1ed8:	38 42 27 50 	ori r2,r2,0x2750
+    1edc:	28 41 00 00 	lw r1,(r2+0)
+    1ee0:	34 03 00 00 	mvi r3,0
+    1ee4:	38 21 00 10 	ori r1,r1,0x10
+    1ee8:	58 41 00 00 	sw (r2+0),r1
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign && ( (bits32) ( ( a | b )<<1 ) != 0 );
+    return ( a != b ) && ( aSign ^ ( a < b ) );
+
+}
+    1eec:	b8 60 08 00 	mv r1,r3
+    1ef0:	c3 a0 00 00 	ret
+*/
+flag float32_lt( float32 a, float32 b )
+{
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1ef4:	78 01 00 7f 	mvhi r1,0x7f
+    1ef8:	38 21 ff ff 	ori r1,r1,0xffff
+    1efc:	a0 81 08 00 	and r1,r4,r1
+    1f00:	5c 20 ff f5 	bne r1,r0,1ed4 <float32_lt+0x68>
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+    1f04:	00 a2 00 1f 	srui r2,r5,31
+        float_raise( float_flag_invalid );
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign && ( (bits32) ( ( a | b )<<1 ) != 0 );
+    1f08:	00 81 00 1f 	srui r1,r4,31
+    1f0c:	5c 41 ff e5 	bne r2,r1,1ea0 <float32_lt+0x34>
+    return ( a != b ) && ( aSign ^ ( a < b ) );
+    1f10:	f4 85 08 00 	cmpgu r1,r4,r5
+    1f14:	fc 22 18 00 	cmpne r3,r1,r2
+    1f18:	44 a4 ff e3 	be r5,r4,1ea4 <float32_lt+0x38>
+
+}
+    1f1c:	b8 60 08 00 	mv r1,r3
+    1f20:	c3 a0 00 00 	ret
+
+00001f24 <float32_eq_signaling>:
+if either operand is a NaN.  Otherwise, the comparison is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_eq_signaling( float32 a, float32 b )
+{
+    1f24:	b8 20 28 00 	mv r5,r1
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1f28:	00 21 00 17 	srui r1,r1,23
+if either operand is a NaN.  Otherwise, the comparison is performed
+according to the IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_eq_signaling( float32 a, float32 b )
+{
+    1f2c:	b8 40 20 00 	mv r4,r2
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1f30:	20 21 00 ff 	andi r1,r1,0xff
+    1f34:	34 02 00 ff 	mvi r2,255
+    1f38:	44 22 00 0c 	be r1,r2,1f68 <float32_eq_signaling+0x44>
+    1f3c:	00 81 00 17 	srui r1,r4,23
+    1f40:	34 02 00 ff 	mvi r2,255
+    1f44:	20 21 00 ff 	andi r1,r1,0xff
+    1f48:	44 22 00 14 	be r1,r2,1f98 <float32_eq_signaling+0x74>
+         || ( ( extractFloat32Exp( b ) == 0xFF ) && extractFloat32Frac( b ) )
+       ) {
+        float_raise( float_flag_invalid );
+        return 0;
+    }
+    return ( a == b ) || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    1f4c:	34 03 00 01 	mvi r3,1
+    1f50:	44 a4 00 04 	be r5,r4,1f60 <float32_eq_signaling+0x3c>
+    1f54:	b8 85 08 00 	or r1,r4,r5
+    1f58:	b4 21 08 00 	add r1,r1,r1
+    1f5c:	64 23 00 00 	cmpei r3,r1,0
+
+}
+    1f60:	b8 60 08 00 	mv r1,r3
+    1f64:	c3 a0 00 00 	ret
+-------------------------------------------------------------------------------
+*/
+flag float32_eq_signaling( float32 a, float32 b )
+{
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1f68:	78 01 00 7f 	mvhi r1,0x7f
+    1f6c:	38 21 ff ff 	ori r1,r1,0xffff
+    1f70:	a0 a1 08 00 	and r1,r5,r1
+    1f74:	44 20 ff f2 	be r1,r0,1f3c <float32_eq_signaling+0x18>
+    1f78:	78 02 00 00 	mvhi r2,0x0
+    1f7c:	38 42 27 50 	ori r2,r2,0x2750
+    1f80:	28 41 00 00 	lw r1,(r2+0)
+    1f84:	34 03 00 00 	mvi r3,0
+    1f88:	38 21 00 10 	ori r1,r1,0x10
+    1f8c:	58 41 00 00 	sw (r2+0),r1
+        float_raise( float_flag_invalid );
+        return 0;
+    }
+    return ( a == b ) || ( (bits32) ( ( a | b )<<1 ) == 0 );
+
+}
+    1f90:	b8 60 08 00 	mv r1,r3
+    1f94:	c3 a0 00 00 	ret
+-------------------------------------------------------------------------------
+*/
+flag float32_eq_signaling( float32 a, float32 b )
+{
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1f98:	78 01 00 7f 	mvhi r1,0x7f
+    1f9c:	38 21 ff ff 	ori r1,r1,0xffff
+    1fa0:	a0 81 08 00 	and r1,r4,r1
+    1fa4:	44 20 ff ea 	be r1,r0,1f4c <float32_eq_signaling+0x28>
+    1fa8:	78 02 00 00 	mvhi r2,0x0
+    1fac:	38 42 27 50 	ori r2,r2,0x2750
+    1fb0:	28 41 00 00 	lw r1,(r2+0)
+    1fb4:	34 03 00 00 	mvi r3,0
+    1fb8:	38 21 00 10 	ori r1,r1,0x10
+    1fbc:	58 41 00 00 	sw (r2+0),r1
+    1fc0:	e3 ff ff f4 	bi 1f90 <float32_eq_signaling+0x6c>
+
+00001fc4 <float32_le_quiet>:
+cause an exception.  Otherwise, the comparison is performed according to the
+IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_le_quiet( float32 a, float32 b )
+{
+    1fc4:	b8 20 18 00 	mv r3,r1
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1fc8:	00 21 00 17 	srui r1,r1,23
+cause an exception.  Otherwise, the comparison is performed according to the
+IEC/IEEE Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_le_quiet( float32 a, float32 b )
+{
+    1fcc:	b8 40 28 00 	mv r5,r2
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    1fd0:	20 21 00 ff 	andi r1,r1,0xff
+    1fd4:	34 02 00 ff 	mvi r2,255
+    1fd8:	44 22 00 14 	be r1,r2,2028 <float32_le_quiet+0x64>
+    1fdc:	00 a1 00 17 	srui r1,r5,23
+    1fe0:	34 02 00 ff 	mvi r2,255
+    1fe4:	20 21 00 ff 	andi r1,r1,0xff
+    1fe8:	44 22 00 1f 	be r1,r2,2064 <float32_le_quiet+0xa0>
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+    1fec:	00 62 00 1f 	srui r2,r3,31
+        }
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    1ff0:	00 a1 00 1f 	srui r1,r5,31
+    1ff4:	44 41 00 07 	be r2,r1,2010 <float32_le_quiet+0x4c>
+    1ff8:	5c 40 00 09 	bne r2,r0,201c <float32_le_quiet+0x58>
+    1ffc:	b8 a3 08 00 	or r1,r5,r3
+    2000:	b4 21 08 00 	add r1,r1,r1
+    2004:	64 24 00 00 	cmpei r4,r1,0
+    return ( a == b ) || ( aSign ^ ( a < b ) );
+
+}
+    2008:	b8 80 08 00 	mv r1,r4
+    200c:	c3 a0 00 00 	ret
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    return ( a == b ) || ( aSign ^ ( a < b ) );
+    2010:	f4 a3 08 00 	cmpgu r1,r5,r3
+    2014:	fc 22 20 00 	cmpne r4,r1,r2
+    2018:	5c 65 ff fc 	bne r3,r5,2008 <float32_le_quiet+0x44>
+    201c:	34 04 00 01 	mvi r4,1
+
+}
+    2020:	b8 80 08 00 	mv r1,r4
+    2024:	c3 a0 00 00 	ret
+*/
+flag float32_le_quiet( float32 a, float32 b )
+{
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    2028:	78 01 00 7f 	mvhi r1,0x7f
+    202c:	38 21 ff ff 	ori r1,r1,0xffff
+    2030:	a0 61 08 00 	and r1,r3,r1
+    2034:	44 20 ff ea 	be r1,r0,1fdc <float32_le_quiet+0x18>
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+    2038:	00 61 00 16 	srui r1,r3,22
+    203c:	34 02 01 fe 	mvi r2,510
+    2040:	20 21 01 ff 	andi r1,r1,0x1ff
+    2044:	44 22 00 10 	be r1,r2,2084 <float32_le_quiet+0xc0>
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    return ( a == b ) || ( aSign ^ ( a < b ) );
+    2048:	00 a1 00 16 	srui r1,r5,22
+    204c:	34 02 01 fe 	mvi r2,510
+    2050:	20 21 01 ff 	andi r1,r1,0x1ff
+    2054:	44 22 00 18 	be r1,r2,20b4 <float32_le_quiet+0xf0>
+    2058:	34 04 00 00 	mvi r4,0
+
+}
+    205c:	b8 80 08 00 	mv r1,r4
+    2060:	c3 a0 00 00 	ret
+*/
+flag float32_le_quiet( float32 a, float32 b )
+{
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    2064:	78 01 00 7f 	mvhi r1,0x7f
+    2068:	38 21 ff ff 	ori r1,r1,0xffff
+    206c:	a0 a1 08 00 	and r1,r5,r1
+    2070:	44 20 ff df 	be r1,r0,1fec <float32_le_quiet+0x28>
+    2074:	00 61 00 16 	srui r1,r3,22
+    2078:	34 02 01 fe 	mvi r2,510
+    207c:	20 21 01 ff 	andi r1,r1,0x1ff
+    2080:	5c 22 ff f2 	bne r1,r2,2048 <float32_le_quiet+0x84>
+    2084:	78 01 00 3f 	mvhi r1,0x3f
+    2088:	38 21 ff ff 	ori r1,r1,0xffff
+    208c:	a0 61 08 00 	and r1,r3,r1
+    2090:	44 20 ff ee 	be r1,r0,2048 <float32_le_quiet+0x84>
+-------------------------------------------------------------------------------
+*/
+void float_raise( int8 flags )
+{
+
+    float_exception_flags |= flags;
+    2094:	78 02 00 00 	mvhi r2,0x0
+    2098:	38 42 27 50 	ori r2,r2,0x2750
+    209c:	28 41 00 00 	lw r1,(r2+0)
+    20a0:	34 04 00 00 	mvi r4,0
+    20a4:	38 21 00 10 	ori r1,r1,0x10
+    20a8:	58 41 00 00 	sw (r2+0),r1
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    return ( a == b ) || ( aSign ^ ( a < b ) );
+
+}
+    20ac:	b8 80 08 00 	mv r1,r4
+    20b0:	c3 a0 00 00 	ret
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+    20b4:	78 01 00 3f 	mvhi r1,0x3f
+    20b8:	38 21 ff ff 	ori r1,r1,0xffff
+    20bc:	a0 a1 08 00 	and r1,r5,r1
+    20c0:	5c 20 ff f5 	bne r1,r0,2094 <float32_le_quiet+0xd0>
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign || ( (bits32) ( ( a | b )<<1 ) == 0 );
+    return ( a == b ) || ( aSign ^ ( a < b ) );
+    20c4:	34 04 00 00 	mvi r4,0
+    20c8:	e3 ff ff e5 	bi 205c <float32_le_quiet+0x98>
+
+000020cc <float32_lt_quiet>:
+exception.  Otherwise, the comparison is performed according to the IEC/IEEE
+Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_lt_quiet( float32 a, float32 b )
+{
+    20cc:	b8 20 20 00 	mv r4,r1
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    20d0:	00 21 00 17 	srui r1,r1,23
+exception.  Otherwise, the comparison is performed according to the IEC/IEEE
+Standard for Binary Floating-point Arithmetic.
+-------------------------------------------------------------------------------
+*/
+flag float32_lt_quiet( float32 a, float32 b )
+{
+    20d4:	b8 40 28 00 	mv r5,r2
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    20d8:	20 21 00 ff 	andi r1,r1,0xff
+    20dc:	34 02 00 ff 	mvi r2,255
+    20e0:	44 22 00 14 	be r1,r2,2130 <float32_lt_quiet+0x64>
+    20e4:	00 a1 00 17 	srui r1,r5,23
+    20e8:	34 02 00 ff 	mvi r2,255
+    20ec:	20 21 00 ff 	andi r1,r1,0xff
+    20f0:	44 22 00 28 	be r1,r2,2190 <float32_lt_quiet+0xc4>
+-------------------------------------------------------------------------------
+*/
+INLINE flag extractFloat32Sign( float32 a )
+{
+
+    return a>>31;
+    20f4:	00 82 00 1f 	srui r2,r4,31
+        }
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign && ( (bits32) ( ( a | b )<<1 ) != 0 );
+    20f8:	00 a1 00 1f 	srui r1,r5,31
+    20fc:	44 41 00 07 	be r2,r1,2118 <float32_lt_quiet+0x4c>
+    2100:	44 40 00 09 	be r2,r0,2124 <float32_lt_quiet+0x58>
+    2104:	b8 a4 08 00 	or r1,r5,r4
+    2108:	b4 21 08 00 	add r1,r1,r1
+    210c:	7c 23 00 00 	cmpnei r3,r1,0
+    return ( a != b ) && ( aSign ^ ( a < b ) );
+
+}
+    2110:	b8 60 08 00 	mv r1,r3
+    2114:	c3 a0 00 00 	ret
+        return 0;
+    }
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign && ( (bits32) ( ( a | b )<<1 ) != 0 );
+    return ( a != b ) && ( aSign ^ ( a < b ) );
+    2118:	f4 a4 08 00 	cmpgu r1,r5,r4
+    211c:	fc 22 18 00 	cmpne r3,r1,r2
+    2120:	5c 85 ff fc 	bne r4,r5,2110 <float32_lt_quiet+0x44>
+    2124:	34 03 00 00 	mvi r3,0
+
+}
+    2128:	b8 60 08 00 	mv r1,r3
+    212c:	c3 a0 00 00 	ret
+*/
+flag float32_lt_quiet( float32 a, float32 b )
+{
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    2130:	78 01 00 7f 	mvhi r1,0x7f
+    2134:	38 21 ff ff 	ori r1,r1,0xffff
+    2138:	a0 81 08 00 	and r1,r4,r1
+    213c:	44 20 ff ea 	be r1,r0,20e4 <float32_lt_quiet+0x18>
+    2140:	00 81 00 16 	srui r1,r4,22
+    2144:	34 02 01 fe 	mvi r2,510
+    2148:	20 21 01 ff 	andi r1,r1,0x1ff
+    214c:	44 22 00 19 	be r1,r2,21b0 <float32_lt_quiet+0xe4>
+-------------------------------------------------------------------------------
+*/
+void float_raise( int8 flags )
+{
+
+    float_exception_flags |= flags;
+    2150:	00 a1 00 16 	srui r1,r5,22
+    2154:	34 02 01 fe 	mvi r2,510
+    2158:	20 21 01 ff 	andi r1,r1,0x1ff
+    215c:	5c 22 ff f2 	bne r1,r2,2124 <float32_lt_quiet+0x58>
+    2160:	78 01 00 3f 	mvhi r1,0x3f
+    2164:	38 21 ff ff 	ori r1,r1,0xffff
+    2168:	a0 a1 08 00 	and r1,r5,r1
+    216c:	44 20 ff ee 	be r1,r0,2124 <float32_lt_quiet+0x58>
+    2170:	78 02 00 00 	mvhi r2,0x0
+    2174:	38 42 27 50 	ori r2,r2,0x2750
+    2178:	28 41 00 00 	lw r1,(r2+0)
+    217c:	34 03 00 00 	mvi r3,0
+    2180:	38 21 00 10 	ori r1,r1,0x10
+    2184:	58 41 00 00 	sw (r2+0),r1
+    aSign = extractFloat32Sign( a );
+    bSign = extractFloat32Sign( b );
+    if ( aSign != bSign ) return aSign && ( (bits32) ( ( a | b )<<1 ) != 0 );
+    return ( a != b ) && ( aSign ^ ( a < b ) );
+
+}
+    2188:	b8 60 08 00 	mv r1,r3
+    218c:	c3 a0 00 00 	ret
+*/
+flag float32_lt_quiet( float32 a, float32 b )
+{
+    flag aSign, bSign;
+
+    if (    ( ( extractFloat32Exp( a ) == 0xFF ) && extractFloat32Frac( a ) )
+    2190:	78 01 00 7f 	mvhi r1,0x7f
+    2194:	38 21 ff ff 	ori r1,r1,0xffff
+    2198:	a0 a1 08 00 	and r1,r5,r1
+    219c:	44 20 ff d6 	be r1,r0,20f4 <float32_lt_quiet+0x28>
+-------------------------------------------------------------------------------
+*/
+flag float32_is_signaling_nan( float32 a )
+{
+
+    return ( ( ( a>>22 ) & 0x1FF ) == 0x1FE ) && ( a & 0x003FFFFF );
+    21a0:	00 81 00 16 	srui r1,r4,22
+    21a4:	34 02 01 fe 	mvi r2,510
+    21a8:	20 21 01 ff 	andi r1,r1,0x1ff
+    21ac:	5c 22 ff e9 	bne r1,r2,2150 <float32_lt_quiet+0x84>
+    21b0:	78 01 00 3f 	mvhi r1,0x3f
+    21b4:	38 21 ff ff 	ori r1,r1,0xffff
+    21b8:	a0 81 08 00 	and r1,r4,r1
+    21bc:	44 20 ff e5 	be r1,r0,2150 <float32_lt_quiet+0x84>
+    21c0:	e3 ff ff ec 	bi 2170 <float32_lt_quiet+0xa4>
+
+000021c4 <float32_abs>:
+-------------------------------------------------------------------------------
+This is an abs function
+-------------------------------------------------------------------------------
+*/
+float32 float32_abs(float32 a)
+{
+    21c4:	37 9c ff fc 	addi sp,sp,-4
+    21c8:	5b 9d 00 04 	sw (sp+4),ra
+    21cc:	b8 20 10 00 	mv r2,r1
+	if ( extractFloat32Sign( a )){
+    21d0:	4c 20 00 05 	bge r1,r0,21e4 <float32_abs+0x20>
+	return float32_mul( a, 0xBF800000 ) ;
+    21d4:	78 02 bf 80 	mvhi r2,0xbf80
+    21d8:	38 42 00 00 	ori r2,r2,0x0
+    21dc:	fb ff fb d6 	calli 1134 <float32_mul>
+    21e0:	b8 20 10 00 	mv r2,r1
+	}
+	else {
+	return a;
+	}
+}
+    21e4:	b8 40 08 00 	mv r1,r2
+    21e8:	2b 9d 00 04 	lw ra,(sp+4)
+    21ec:	37 9c 00 04 	addi sp,sp,4
+    21f0:	c3 a0 00 00 	ret
+
+000021f4 <float32_artan>:
+That formula was taken from equation 7
+http://www.iro.umontreal.ca/~mignotte/IFT2425/Documents/EfficientApproximationArctgFunction.pdf
+-------------------------------------------------------------------------------
+*/
+float32 float32_artan( float32 x )
+{
+    21f4:	37 9c ff f8 	addi sp,sp,-8
+    21f8:	5b 8b 00 08 	sw (sp+8),r11
+    21fc:	5b 9d 00 04 	sw (sp+4),ra
+    2200:	b8 20 58 00 	mv r11,r1
+return	float32_mul(x,float32_add(0x3F490FD8,float32_mul(0x3E8BC6A8,float32_sub(0x3F800000,float32_abs(x)))));
+    2204:	fb ff ff f0 	calli 21c4 <float32_abs>
+    2208:	b8 20 10 00 	mv r2,r1
+    220c:	78 01 3f 80 	mvhi r1,0x3f80
+    2210:	38 21 00 00 	ori r1,r1,0x0
+    2214:	fb ff fb b9 	calli 10f8 <float32_sub>
+    2218:	b8 20 10 00 	mv r2,r1
+    221c:	78 01 3e 8b 	mvhi r1,0x3e8b
+    2220:	38 21 c6 a8 	ori r1,r1,0xc6a8
+    2224:	fb ff fb c4 	calli 1134 <float32_mul>
+    2228:	b8 20 10 00 	mv r2,r1
+    222c:	78 01 3f 49 	mvhi r1,0x3f49
+    2230:	38 21 0f d8 	ori r1,r1,0xfd8
+    2234:	fb ff fb a2 	calli 10bc <float32_add>
+    2238:	b8 20 10 00 	mv r2,r1
+    223c:	b9 60 08 00 	mv r1,r11
+    2240:	fb ff fb bd 	calli 1134 <float32_mul>
+}
+    2244:	2b 9d 00 04 	lw ra,(sp+4)
+    2248:	2b 8b 00 08 	lw r11,(sp+8)
+    224c:	37 9c 00 08 	addi sp,sp,8
+    2250:	c3 a0 00 00 	ret
+
+00002254 <float32_pow2>:
+-------------------------------------------------------------------------------
+This is the square function
+-------------------------------------------------------------------------------
+*/
+float32 float32_pow2( float32 a)
+{
+    2254:	37 9c ff fc 	addi sp,sp,-4
+    2258:	5b 9d 00 04 	sw (sp+4),ra
+	return float32_mul(a,a);
+    225c:	b8 20 10 00 	mv r2,r1
+    2260:	fb ff fb b5 	calli 1134 <float32_mul>
+}
+    2264:	2b 9d 00 04 	lw ra,(sp+4)
+    2268:	37 9c 00 04 	addi sp,sp,4
+    226c:	c3 a0 00 00 	ret
+
+00002270 <float32_filterKom>:
+// - oldAngle: 	Previous measured angle
+// - AGy:		Gyroscope angle
+// - AAc:		Accelerometer angle
+// - dt:		time
+//-----------------------------------------------------------------------
+float32 float32_filterKom(float32 oldAngle, float32 AGy, float32 AAc, float32 dt){
+    2270:	37 9c ff f0 	addi sp,sp,-16
+    2274:	5b 8b 00 10 	sw (sp+16),r11
+    2278:	5b 8c 00 0c 	sw (sp+12),r12
+    227c:	5b 8d 00 08 	sw (sp+8),r13
+    2280:	5b 9d 00 04 	sw (sp+4),ra
+    2284:	b8 40 58 00 	mv r11,r2
+	//Filter: newAngle= 0.98 *(oldAngle + AGy * dt) + 0.02 * AAc
+	dt = float32_mul(dt, 0x322BCC77); //0,00000001
+    2288:	78 02 32 2b 	mvhi r2,0x322b
+// - oldAngle: 	Previous measured angle
+// - AGy:		Gyroscope angle
+// - AAc:		Accelerometer angle
+// - dt:		time
+//-----------------------------------------------------------------------
+float32 float32_filterKom(float32 oldAngle, float32 AGy, float32 AAc, float32 dt){
+    228c:	b8 20 60 00 	mv r12,r1
+	//Filter: newAngle= 0.98 *(oldAngle + AGy * dt) + 0.02 * AAc
+	dt = float32_mul(dt, 0x322BCC77); //0,00000001
+    2290:	38 42 cc 77 	ori r2,r2,0xcc77
+    2294:	b8 80 08 00 	mv r1,r4
+// - oldAngle: 	Previous measured angle
+// - AGy:		Gyroscope angle
+// - AAc:		Accelerometer angle
+// - dt:		time
+//-----------------------------------------------------------------------
+float32 float32_filterKom(float32 oldAngle, float32 AGy, float32 AAc, float32 dt){
+    2298:	b8 60 68 00 	mv r13,r3
+	//Filter: newAngle= 0.98 *(oldAngle + AGy * dt) + 0.02 * AAc
+	dt = float32_mul(dt, 0x322BCC77); //0,00000001
+    229c:	fb ff fb a6 	calli 1134 <float32_mul>
+    22a0:	b8 20 10 00 	mv r2,r1
+	float32 newAngle = float32_mul(AGy, dt);
+    22a4:	b9 60 08 00 	mv r1,r11
+    22a8:	fb ff fb a3 	calli 1134 <float32_mul>
+	newAngle = float32_add(newAngle, oldAngle);
+    22ac:	b9 80 10 00 	mv r2,r12
+    22b0:	fb ff fb 83 	calli 10bc <float32_add>
+	newAngle = float32_mul(newAngle, alfa);
+    22b4:	78 02 3f 4c 	mvhi r2,0x3f4c
+    22b8:	38 42 cc cd 	ori r2,r2,0xcccd
+    22bc:	fb ff fb 9e 	calli 1134 <float32_mul>
+	float32 temp = float32_mul(AAc, beta);
+    22c0:	78 02 3e 4c 	mvhi r2,0x3e4c
+float32 float32_filterKom(float32 oldAngle, float32 AGy, float32 AAc, float32 dt){
+	//Filter: newAngle= 0.98 *(oldAngle + AGy * dt) + 0.02 * AAc
+	dt = float32_mul(dt, 0x322BCC77); //0,00000001
+	float32 newAngle = float32_mul(AGy, dt);
+	newAngle = float32_add(newAngle, oldAngle);
+	newAngle = float32_mul(newAngle, alfa);
+    22c4:	b8 20 58 00 	mv r11,r1
+	float32 temp = float32_mul(AAc, beta);
+    22c8:	38 42 cc cd 	ori r2,r2,0xcccd
+    22cc:	b9 a0 08 00 	mv r1,r13
+    22d0:	fb ff fb 99 	calli 1134 <float32_mul>
+    22d4:	b8 20 10 00 	mv r2,r1
+	return float32_add(newAngle, temp);
+    22d8:	b9 60 08 00 	mv r1,r11
+    22dc:	fb ff fb 78 	calli 10bc <float32_add>
+}
+    22e0:	2b 9d 00 04 	lw ra,(sp+4)
+    22e4:	2b 8b 00 10 	lw r11,(sp+16)
+    22e8:	2b 8c 00 0c 	lw r12,(sp+12)
+    22ec:	2b 8d 00 08 	lw r13,(sp+8)
+    22f0:	37 9c 00 10 	addi sp,sp,16
+    22f4:	c3 a0 00 00 	ret

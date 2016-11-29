@@ -1,0 +1,41 @@
+[*]
+[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
+[*] Thu Nov 24 12:48:37 2016
+[*]
+[dumpfile] "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix/simulation/system_tb.vcd"
+[dumpfile_mtime] "Thu Nov 24 12:43:43 2016"
+[dumpfile_size] 375464723
+[savefile] "/home/nixtropy/Documentos/Digital_II_NC/UNDron/UNDron_matrix/PWM.sav"
+[timestart] 0
+[size] 1307 744
+[pos] -1 -1
+*-30.348118 364810000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] system_tb.
+[treeopen] system_tb.uut.
+[treeopen] system_tb.uut.i2c0.
+[treeopen] system_tb.uut.pwm0.
+[treeopen] system_tb.uut.uart0.
+[sst_width] 217
+[signals_width] 174
+[sst_expanded] 1
+[sst_vpaned_height] 456
+@200
+-PWM_0
+@28
+system_tb.uut.pwm0.pwm0.ena
+system_tb.uut.pwm0.pwm0.duty[8:0]
+system_tb.uut.pwm0.pwm0.pwm_out
+@200
+-PWM_1
+@28
+system_tb.uut.pwm0.pwm1.pwm_out
+@200
+-PWM_2
+@28
+system_tb.uut.pwm0.pwm2.pwm_out
+@200
+-PWM_3
+@28
+system_tb.uut.pwm0.pwm3.pwm_out
+[pattern_trace] 1
+[pattern_trace] 0
